@@ -1,0 +1,12 @@
+.main-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    -unity-text-align: middle-center;
+    -unity-font: url("project://database/Assets/Framework/Res/UI/Fonts/Dosis/Dosis-Regular.ttf?fileID=12800000&guid=06b5e36c81f2bcd46acfca665d852834&type=3#Dosis-Regular");
+}

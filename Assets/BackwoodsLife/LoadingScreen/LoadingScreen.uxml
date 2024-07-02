@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Framework/Res/UI/USS/main.uss?fileID=7433441132597879392&amp;guid=ded51bb9d01edb0408b0a90e67083594&amp;type=3#main" />
+    <ui:VisualElement name="main-container" class="main-container">
+        <ui:VisualElement style="flex-grow: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background-color: rgba(98, 98, 98, 0.14); padding-top: 33px; padding-right: 33px; padding-bottom: 33px; padding-left: 33px; font-size: 18px;">
+            <ui:Label tabindex="-1" text="I&apos;m loading screen" parse-escape-sequences="true" display-tooltip-when-elided="true" name="header-label" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
