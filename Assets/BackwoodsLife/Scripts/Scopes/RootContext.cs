@@ -9,13 +9,15 @@
 // using Game.Scripts.Prefabs.Extractable;
 // using Game.Scripts.Providers.AssetProvider;
 // using Game.Scripts.Scriptable;
+
+using BackwoodsLife.Scripts.Managers.DB;
+using Game.Scripts.Managers.DataBase;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.EventSystems;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Scripts.Scope
+namespace BackwoodsLife.Scripts.Scopes
 {
     // TODO Refactor in contexts
     public class RootContext : LifetimeScope
@@ -60,8 +62,8 @@ namespace Game.Scripts.Scope
 
             // Services
             // builder.Register(typeof(AssetProvider), Lifetime.Singleton).As<IAssetProvider>();
-            // builder.Register(typeof(DBManager), Lifetime.Singleton).As<IDBManager>();
-            // builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();
+            builder.Register(typeof(DBManager), Lifetime.Singleton).As<IDBManager>();
+            builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();
             // builder.Register(typeof(SaveAndLoadManager), Lifetime.Singleton).As<ISaveAndLoadManager>();
             // builder.Register<FollowSystem>(Lifetime.Singleton).AsSelf();
             //

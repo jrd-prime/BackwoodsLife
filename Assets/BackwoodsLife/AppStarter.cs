@@ -1,23 +1,24 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using BackwoodsLife.Scripts.Managers.DB;
+using Cysharp.Threading.Tasks;
 using Game.Scripts.Boostrap;
-// using Game.Scripts.Managers.Audio;
-// using Game.Scripts.Managers.DataBase;
-using Game.Scripts.Managers.GameScene;
-// using Game.Scripts.Managers.SaveLoad;
-// using Game.Scripts.Providers.AssetProvider;
-using Game.Scripts.UI.Boostrap;
-using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Scripts
+// using Game.Scripts.Managers.Audio;
+// using Game.Scripts.Managers.SaveLoad;
+// using Game.Scripts.Providers.AssetProvider;
+
+namespace BackwoodsLife
 {
     // TODO auth, cloud db
     public sealed class AppStarter : IInitializable
     {
         private IObjectResolver _container;
+
         private ILoader _loader;
+
         // private IAudioManager _audioManager;
         // private IAssetProvider _assetProvider;
         // private ISaveAndLoadManager _saveAndLoadManager;
@@ -29,10 +30,11 @@ namespace Game.Scripts
         private void Construct(IObjectResolver container)
         {
             _container = container;
+            Debug.LogWarning("inj " + container);
             _loader = _container.Resolve<ILoader>();
             // _audioManager = _container.Resolve<IAudioManager>();
             // _assetProvider = _container.Resolve<IAssetProvider>();
-            // _dbManager = _container.Resolve<IDBManager>();
+            _dbManager = _container.Resolve<IDBManager>();
             // _saveAndLoadManager = _container.Resolve<ISaveAndLoadManager>();
             _loadingScreenViewModel = _container.Resolve<LoadingScreenViewModel>();
             _gameSceneManager = _container.Resolve<GameSceneManager>();

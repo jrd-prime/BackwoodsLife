@@ -1,9 +1,10 @@
 ﻿using Game.Scripts.Boostrap;
 using R3;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Scripts.UI.Boostrap
+namespace BackwoodsLife
 {
     public class LoadingScreenViewModel : IInitializable
     {
@@ -13,6 +14,7 @@ namespace Game.Scripts.UI.Boostrap
 
         public void Initialize()
         {
+            Debug.LogWarning("Init view model");
             // Подписываемся на модель
             _model.Header.Subscribe(x => HeaderView.Value = x);
         }

@@ -1,11 +1,9 @@
 ﻿using Game.Scripts.Boostrap;
-using Game.Scripts.Managers.GameScene;
-using Game.Scripts.UI.Boostrap;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Scripts.Scope
+namespace BackwoodsLife.Scripts.Scopes
 {
     public class BoostrapContext : LifetimeScope
     {
@@ -24,9 +22,6 @@ namespace Game.Scripts.Scope
 
             // ViewModels
             builder.Register<LoadingScreenViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-
-            // View
-            builder.RegisterComponent(loadingScreenView);
 
             // Entry points
             builder.RegisterEntryPoint<AppStarter>();

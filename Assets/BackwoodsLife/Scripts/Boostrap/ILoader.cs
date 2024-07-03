@@ -1,5 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
-using Game.Scripts.UI.Boostrap;
+﻿using BackwoodsLife;
+using Cysharp.Threading.Tasks;
 
 namespace Game.Scripts.Boostrap
 {

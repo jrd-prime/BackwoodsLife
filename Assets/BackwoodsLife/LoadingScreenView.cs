@@ -1,14 +1,17 @@
 ﻿// using Game.Scripts.Helpers;
+
+using System;
+using Game.Scripts.UI;
 using R3;
+using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
 
-namespace Game.Scripts.UI.Boostrap
+namespace BackwoodsLife
 {
-    public class LoadingScreenView :UIView
+    public class LoadingScreenView : UIView
     {
         private LoadingScreenViewModel _viewModel;
-
         private VisualElement _root;
 
         [Inject]
@@ -19,7 +22,7 @@ namespace Game.Scripts.UI.Boostrap
 
         private void Awake()
         {
-            // _root = gameObject.GetComponent<UIDocument>().rootVisualElement;
+            _root = gameObject.GetComponent<UIDocument>().rootVisualElement;
             // UIHelper.SetDefaultCanvasSize(ref _root);
 
             var header = _root.Q<Label>("header-label");

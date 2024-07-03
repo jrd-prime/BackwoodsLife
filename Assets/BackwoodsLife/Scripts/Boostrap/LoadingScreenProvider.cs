@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using BackwoodsLife;
 // using Game.Scripts.Providers.AssetProvider;
-using Game.Scripts.UI.Boostrap;
 using UnityEngine;
 using VContainer;
 

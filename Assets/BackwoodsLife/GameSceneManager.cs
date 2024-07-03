@@ -1,15 +1,15 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Scripts.Boostrap;
-// using Game.Scripts.Managers.SaveLoad;
-// using Game.Scripts.Player;
-// using Game.Scripts.Providers.AssetProvider;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using VContainer;
+// using Game.Scripts.Managers.SaveLoad;
+// using Game.Scripts.Player;
+// using Game.Scripts.Providers.AssetProvider;
 
-namespace Game.Scripts.Managers.GameScene
+namespace BackwoodsLife
 {
     public class GameSceneManager : MonoBehaviour, ILoadingOperation
     {
@@ -18,6 +18,7 @@ namespace Game.Scripts.Managers.GameScene
         public Scene GameScene { get; private set; }
 
         private SceneInstance _gameSceneInstance;
+
         private IObjectResolver _container;
         // private ISaveAndLoadManager _saveAndLoadManager;
         // private IAssetProvider _assetProvider;
