@@ -59,7 +59,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
 
         private void Update()
         {
-            moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
+            moveDirection = new Vector3(moveInput.x, 0, moveInput.y * -1f);
             transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
         }
     }
