@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.LoadingScreen;
+using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine.Assertions;
-using UniTask = Cysharp.Threading.Tasks.UniTask;
 
 namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {

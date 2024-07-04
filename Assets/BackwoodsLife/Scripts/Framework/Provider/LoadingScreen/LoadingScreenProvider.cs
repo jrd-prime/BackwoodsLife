@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.LoadingScreen;
+using BackwoodsLife.Scripts.Gameplay.UI.LoadingScreen;
 using UnityEngine;
 using VContainer;
 
 // using Game.Scripts.Providers.AssetProvider;
 
-namespace BackwoodsLife.Scripts.Framework.Bootstrap
+namespace BackwoodsLife.Scripts.Framework.Provider.LoadingScreen
 {
     public interface ILoadingOperation
     {

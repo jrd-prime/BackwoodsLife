@@ -1,6 +1,8 @@
 ﻿using BackwoodsLife.Scripts.Data.LoadingScreen;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
 using BackwoodsLife.Scripts.Framework.Manager.GameScene;
+using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
+using BackwoodsLife.Scripts.Gameplay.UI.LoadingScreen;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

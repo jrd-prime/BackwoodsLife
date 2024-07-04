@@ -1,4 +1,5 @@
 ﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
+using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Assertions;

@@ -6,7 +6,7 @@ using R3;
 using UnityEngine.UIElements;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework.Bootstrap
+namespace BackwoodsLife.Scripts.Gameplay.UI.LoadingScreen
 {
     public class LoadingScreenView : UIView
     {
