@@ -71,6 +71,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
         {
             var position = obj.ReadValue<Vector2>();
 
+            // Debug.LogWarning(position);
             if (IsPointerOverUI(position)) return;
 
 
