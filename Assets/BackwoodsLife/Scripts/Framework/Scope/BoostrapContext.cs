@@ -1,4 +1,5 @@
-﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
+﻿using BackwoodsLife.Scripts.Data.LoadingScreen;
+using BackwoodsLife.Scripts.Framework.Bootstrap;
 using BackwoodsLife.Scripts.Framework.Manager.GameScene;
 using UnityEngine;
 using VContainer;

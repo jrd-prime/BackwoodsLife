@@ -3,7 +3,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace BackwoodsLife.Scripts.Framework.Bootstrap
+namespace BackwoodsLife.Scripts.Data.LoadingScreen
 {
     public class LoadingScreenViewModel : IInitializable
     {
