@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Scripts.UI
+namespace BackwoodsLife.UI
 {
     public abstract class UIView : MonoBehaviour 
     {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife;
-// using Game.Scripts.Providers.AssetProvider;
 using UnityEngine;
 using VContainer;
 
-namespace Game.Scripts.Boostrap
+// using Game.Scripts.Providers.AssetProvider;
+
+namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
     public interface ILoadingOperation
     {

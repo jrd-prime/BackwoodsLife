@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace Game.Scripts.Boostrap
+namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
     /// <summary>
     /// Интерфейс для модели LoadingScreen

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Scripts.Boostrap;
+using BackwoodsLife.Scripts.Framework.Bootstrap;
 
-namespace BackwoodsLife.Scripts.Managers.DB
+namespace BackwoodsLife.Scripts.Framework.Manager.DB
 {
     public interface IDBManager : ILoadingOperation
     {

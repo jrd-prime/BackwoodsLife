@@ -10,14 +10,13 @@
 // using Game.Scripts.Providers.AssetProvider;
 // using Game.Scripts.Scriptable;
 
-using BackwoodsLife.Scripts.Managers.DB;
-using Game.Scripts.Managers.DataBase;
+using BackwoodsLife.Scripts.Framework.Manager.DB;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
 using VContainer.Unity;
 
-namespace BackwoodsLife.Scripts.Scopes
+namespace BackwoodsLife.Scripts.Framework.Scope
 {
     // TODO Refactor in contexts
     public class RootContext : LifetimeScope

@@ -1,6 +1,7 @@
-﻿using BackwoodsLife.Scripts.Managers.DB;
+﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
+using BackwoodsLife.Scripts.Framework.Manager.DB;
+using BackwoodsLife.Scripts.Framework.Manager.GameScene;
 using Cysharp.Threading.Tasks;
-using Game.Scripts.Boostrap;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
@@ -10,7 +11,7 @@ using VContainer.Unity;
 // using Game.Scripts.Managers.SaveLoad;
 // using Game.Scripts.Providers.AssetProvider;
 
-namespace BackwoodsLife
+namespace BackwoodsLife.Scripts
 {
     // TODO auth, cloud db
     public sealed class AppStarter : IInitializable
@@ -32,12 +33,12 @@ namespace BackwoodsLife
             _container = container;
             Debug.LogWarning("inj " + container);
             _loader = _container.Resolve<ILoader>();
-            // _audioManager = _container.Resolve<IAudioManager>();
-            // _assetProvider = _container.Resolve<IAssetProvider>();
             _dbManager = _container.Resolve<IDBManager>();
-            // _saveAndLoadManager = _container.Resolve<ISaveAndLoadManager>();
             _loadingScreenViewModel = _container.Resolve<LoadingScreenViewModel>();
             _gameSceneManager = _container.Resolve<GameSceneManager>();
+            // _audioManager = _container.Resolve<IAudioManager>();
+            // _assetProvider = _container.Resolve<IAssetProvider>();
+            // _saveAndLoadManager = _container.Resolve<ISaveAndLoadManager>();
         }
 
         public async void Initialize()
@@ -56,8 +57,8 @@ namespace BackwoodsLife
             //  Add and initialize services
             // _loader.AddServiceToInitialize(_audioManager);
             // _loader.AddServiceToInitialize(_assetProvider);
-            _loader.AddServiceToInitialize(_dbManager);
             // _loader.AddServiceToInitialize(_saveAndLoadManager);
+            _loader.AddServiceToInitialize(_dbManager);
             _loader.AddServiceToInitialize(_gameSceneManager);
             await _loader.StartServicesInitializationAsync(_loadingScreenViewModel);
 

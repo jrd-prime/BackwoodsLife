@@ -3,11 +3,12 @@
 // using Game.Scripts.Player.Interface;
 // using Game.Scripts.Player.StateMachine;
 // using Game.Scripts.Systems;
+
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Scripts.Scope
+namespace BackwoodsLife.Scripts.Framework.Scope
 {
     public class GameSceneContext : LifetimeScope
     {

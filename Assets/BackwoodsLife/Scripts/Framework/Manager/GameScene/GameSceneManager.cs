@@ -1,15 +1,16 @@
-﻿using Cysharp.Threading.Tasks;
-using Game.Scripts.Boostrap;
+﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using VContainer;
+
 // using Game.Scripts.Managers.SaveLoad;
 // using Game.Scripts.Player;
 // using Game.Scripts.Providers.AssetProvider;
 
-namespace BackwoodsLife
+namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
 {
     public class GameSceneManager : MonoBehaviour, ILoadingOperation
     {

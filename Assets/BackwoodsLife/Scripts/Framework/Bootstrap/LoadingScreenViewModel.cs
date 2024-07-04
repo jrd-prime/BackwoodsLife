@@ -1,10 +1,9 @@
-﻿using Game.Scripts.Boostrap;
-using R3;
+﻿using R3;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace BackwoodsLife
+namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
     public class LoadingScreenViewModel : IInitializable
     {

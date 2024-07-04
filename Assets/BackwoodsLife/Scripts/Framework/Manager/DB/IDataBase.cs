@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Game.Scripts.Managers.DataBase
+namespace BackwoodsLife.Scripts.Framework.Manager.DB
 {
     public interface IDataBase
     {

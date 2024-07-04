@@ -1,7 +1,6 @@
-﻿using BackwoodsLife;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 
-namespace Game.Scripts.Boostrap
+namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
     public interface ILoader
     {

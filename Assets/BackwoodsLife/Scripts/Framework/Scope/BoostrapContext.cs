@@ -1,9 +1,10 @@
-﻿using Game.Scripts.Boostrap;
+﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
+using BackwoodsLife.Scripts.Framework.Manager.GameScene;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace BackwoodsLife.Scripts.Scopes
+namespace BackwoodsLife.Scripts.Framework.Scope
 {
     public class BoostrapContext : LifetimeScope
     {

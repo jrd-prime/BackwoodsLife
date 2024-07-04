@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife;
 using R3;
 using UnityEngine.Assertions;
 using UniTask = Cysharp.Threading.Tasks.UniTask;
 
-namespace Game.Scripts.Boostrap
+namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
     /// <summary>
     /// Выступает в качестве инициализатора <see cref="ILoadingOperation"/> сервисов и модели для LoadingScreen

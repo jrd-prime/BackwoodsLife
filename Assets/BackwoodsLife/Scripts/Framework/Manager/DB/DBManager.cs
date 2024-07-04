@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Scripts.Managers.DataBase;
-using R3;
 using UnityEngine;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Managers.DB
+namespace BackwoodsLife.Scripts.Framework.Manager.DB
 {
     public class DBManager : IDBManager
     {

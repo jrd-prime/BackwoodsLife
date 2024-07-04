@@ -1,8 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
-using Game.Scripts.Managers.DataBase;
 using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Managers.DB
+namespace BackwoodsLife.Scripts.Framework.Manager.DB
 {
     public class DataBase : IDataBase
     {
