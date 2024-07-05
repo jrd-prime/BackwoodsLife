@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.LoadingScreen;
+using BackwoodsLife.Scripts.Framework.Bootstrap;
 using BackwoodsLife.Scripts.Gameplay.UI.LoadingScreen;
 using UnityEngine;
 using VContainer;
@@ -8,11 +9,7 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Provider.LoadingScreen
 {
-    public interface ILoadingOperation
-    {
-        public void ServiceInitialization();
-        string Description { get; }
-    }
+   
 
     public class LoadingScreenProvider
     {

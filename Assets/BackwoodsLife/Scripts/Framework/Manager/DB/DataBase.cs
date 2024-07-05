@@ -7,13 +7,13 @@ namespace BackwoodsLife.Scripts.Framework.Manager.DB
     {
         public UniTask<bool> Connect()
         {
-            Debug.LogWarning("DefaultDataBase FAKE Connect");
+            Debug.LogWarning($"DB fake connect");
             return UniTask.FromResult(true);
         }
 
         public bool HasPlayerId(string playerId)
         {
-            Debug.LogWarning(" DefaultDataBase HasPlayerId()");
+            Debug.LogWarning(" DB HasPlayerId()");
             return true;
         }
     }

@@ -2,7 +2,7 @@
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Player;
 using R3;
-using UnityEngine;
+using UnityEngine.Assertions;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,7 +13,7 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
         public ReactiveProperty<int> MonoMemoryUsageView { get; } = new();
         public ReactiveProperty<int> GraphicsMemoryUsageView { get; } = new();
 
-        private CompositeDisposable _disposable = new();
+        private readonly CompositeDisposable _disposable = new();
         private DebugMemoryAndEtcModel _model;
         private FollowSystem _followSystem;
 
@@ -26,7 +26,8 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
 
         public void Initialize()
         {
-            Debug.LogWarning("Init debug");
+            Assert.IsNotNull(_model, $"{_model.GetType()} is null.");
+
             _model.MonoMemory.Subscribe(x => MonoMemoryUsageView.Value = x).AddTo(_disposable);
             _model.GraphicsMemory.Subscribe(x => GraphicsMemoryUsageView.Value = x).AddTo(_disposable);
         }
@@ -36,6 +37,12 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
             _disposable?.Dispose();
         }
 
-        public void FollowTarget(IPlayerViewModel playerViewModel) => _followSystem.SetTarget(playerViewModel);
+        public void FollowTarget(IPlayerViewModel playerViewModel)
+        {
+            Assert.IsNotNull(_followSystem, $"{_followSystem.GetType()} is null.");
+            Assert.IsNotNull(playerViewModel, $"{playerViewModel.GetType()} is null.");
+
+            _followSystem.SetTarget(playerViewModel);
+        }
     }
 }

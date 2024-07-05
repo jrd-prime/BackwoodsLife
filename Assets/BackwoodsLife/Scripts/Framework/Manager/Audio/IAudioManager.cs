@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
+﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.Audio
 {

@@ -38,7 +38,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
         [Inject]
         private void Construct(EventSystem eventSystem)
         {
-            Debug.LogWarning("CONSTRUCT INPUT");
             _event = eventSystem;
         }
 
@@ -49,11 +48,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
 
             _gameInputActions.UI.TouchPosition.performed += OnTouchData;
             // _gameInputActions.UI.Click.performed += OnTouchData;
-        }
-
-        private void OnTouchch(InputAction.CallbackContext obj)
-        {
-            Debug.LogWarning("OJO NWSBSDIFS ODJF PSDFKS DKF ++++==== " + obj);
         }
 
         private bool IsPointerOverUI(Vector2 position)
@@ -84,18 +78,11 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
             // Perform the raycast
             if (Physics.Raycast(ray, out hit))
             {
-                // Debug.LogWarning("COLLAL LA LLA LA LA L = " + hit.collider);
-
-
                 // UnityEngine.Debug.Log("Touched object: " + hit.collider.name);
                 // UnityEngine.Debug.LogWarning("hti point " + hit.point);
                 // UnityEngine.Debug.LogWarning("collider layer = " + hit.collider.gameObject.layer);
 
-
                 var layer = hit.collider.gameObject.layer;
-
-                // Debug.LogWarning(" L AY E R !!!! ====   " + layer);
-
 
                 if (position == Vector2.zero) return;
 
@@ -106,36 +93,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
             }
         }
 
-        private void OnTouch(InputAction.CallbackContext obj)
-        {
-//             var o = obj.ReadValue<Vector2>();
-//
-//             // Debug.LogWarning("??????? 2222      ?????" + o);
-//             TouchV2.Value = o;
-// //TODO inject camera
-//             Ray ray = UnityEngine.Camera.main.ScreenPointToRay(o);
-//             RaycastHit hit;
-//
-//             // Perform the raycast
-//             if (Physics.Raycast(ray, out hit))
-//             {
-//                 // Debug.Log("Touched object: " + hit.collider.name);
-//                 // Debug.LogWarning("hti point " + hit.point);
-//                 // Debug.LogWarning("collider layer = " + hit.collider.gameObject.layer);
-//
-//                 // Debug.LogWarning(JLayers.Ground);
-//                 var layer = hit.collider.gameObject.layer;
-//
-//                 if (layer == (int)JLayers.Ground)
-//                 {
-//                     // move player???
-//                 }
-//
-//                 // Implement your logic for interacting with the touched object
-//                 HandleTouch(hit);
-//             }
-        }
-
         private void HandleTouch(RaycastHit hit)
         {
             // Example logic: Change color of the touched object
@@ -144,11 +101,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
             // {
             //     renderer.material.color = Color.gray;
             // }
-        }
-
-        private void OnSinClick(InputAction.CallbackContext obj)
-        {
-            // Debug.LogWarning("On single click" + obj.ReadValueAsObject());
         }
     }
 }

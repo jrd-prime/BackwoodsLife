@@ -10,7 +10,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.LogWarning("GameSceneContext Config");
+            Debug.LogWarning("GameSceneContext");
 
             // builder.Register<NavMeshManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 

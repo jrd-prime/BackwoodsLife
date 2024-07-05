@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.LoadingScreen;
-using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
@@ -25,14 +24,18 @@ namespace BackwoodsLife.Scripts.Framework.Bootstrap
 
         public async UniTask StartServicesInitializationAsync()
         {
+            var count = 0; //TODO remove
+
             foreach (var service in _loadingQueue)
             {
-                Debug.LogWarning("Initializing " + service);
+                Debug.LogWarning(
+                    $"\t<color=cyan>{count++}/{_loadingQueue.Count} / Init Service: {service.GetType().Name}</color>"); //TODO remove
                 Header.Value = service.Description;
                 service.ServiceInitialization();
-                await UniTask.Delay(100);
+                await UniTask.Delay(1000);
             }
 
+            Debug.LogWarning($"\t<color=cyan>Services initialized.</color>"); //TODO remove
             await UniTask.CompletedTask;
         }
     }

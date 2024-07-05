@@ -7,7 +7,7 @@ using VContainer.Unity;
 namespace BackwoodsLife.Scripts.Data.Player
 {
     /// <summary>
-    /// Модель данных игрока
+    /// Player data model
     /// </summary>
     public class PlayerModel : IData, IInitializable, IDisposable
     {
@@ -22,7 +22,7 @@ namespace BackwoodsLife.Scripts.Data.Player
 
         public void Initialize()
         {
-            Debug.LogWarning("player model init");
+            // Debug.LogWarning("player model init");
         }
 
         public void Dispose()
