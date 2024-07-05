@@ -1,4 +1,4 @@
-﻿namespace Game.Scripts.Player.Const
+﻿namespace BackwoodsLife.Scripts.Data.Player
 {
     public static class PlayerConst
     {

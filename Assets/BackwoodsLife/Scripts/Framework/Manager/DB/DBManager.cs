@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Player;
+using R3;
 using UnityEngine;
 using VContainer;
 
@@ -7,20 +9,16 @@ namespace BackwoodsLife.Scripts.Framework.Manager.DB
 {
     public class DBManager : IDBManager
     {
+        public string Description => "DefaultDBManager";
+        public bool IsInitialized { get; private set; }
+        public bool IsHasData { get; private set; } //TODO remove?
+
         private IDataBase _dataBase;
 
-        public bool IsHasData { get; private set; } //TODO remove?
-        public bool IsInitialized { get; private set; }
-
-
         [Inject]
-        private void Construct(IDataBase dataBase)
-        {
-            _dataBase = dataBase;
-        }
+        private void Construct(IDataBase dataBase) => _dataBase = dataBase;
 
         public bool IsHasDataFor(string playerId) => _dataBase.HasPlayerId(playerId);
-
 
         public Dictionary<Type, object> GenerateAndGetForPlayerId(string playerId)
         {
@@ -28,40 +26,28 @@ namespace BackwoodsLife.Scripts.Framework.Manager.DB
             return null;
         }
 
-
         public async void ServiceInitialization()
         {
-            var isDbConnected = await _dataBase.Connect();
-
-            // конект к дб
-            if (isDbConnected)
-            {
-                Debug.LogWarning("db connected");
-            }
+            if (await _dataBase.Connect())
+                IsInitialized = true;
             else
-            {
-                Debug.LogWarning("db not connected");
-            }
-
-            IsInitialized = true;
+                throw new Exception("<color=red>DB not connected</color>");
         }
-
-        public string Description => "DefaultDBManager";
 
         public Dictionary<Type, object> LoadAllData(string playerId)
         {
-            // TODO REMOVE
-            Debug.LogWarning("RETURN FAKE DATA FROM " + this);
-            return new Dictionary<Type, object>
+            Debug.LogWarning("Return fake data from DB. PlayerId: " + playerId); // TODO remove
+
+            var fakeData = new Dictionary<Type, object>();
+            var fakePlayerModel = new PlayerModel
             {
-                // {
-                    // typeof(PlayerModel), new PlayerModel
-                    // {
-                    //     Position = new ReactiveProperty<Vector3>(new Vector3(-4, 0, -4)),
-                    //     Rotation = new ReactiveProperty<Vector3>(new Vector3(0, -135, 0))
-                    // }
-                // }
+                Position = new ReactiveProperty<Vector3>(new Vector3(-4, 0, -4)),
+                Rotation = new ReactiveProperty<Vector3>(new Vector3(0, -135, 0))
             };
+
+            fakeData.Add(typeof(PlayerModel), fakePlayerModel);
+
+            return fakeData;
         }
     }
 }

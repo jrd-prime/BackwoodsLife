@@ -1,21 +1,10 @@
-// using Game.Scripts.Helpers.JDebug;
-// using Game.Scripts.Helpers.JDebug.MemoryEtc;
-// using Game.Scripts.Managers.Audio;
-// using Game.Scripts.Managers.Camera;
-// using Game.Scripts.Managers.DataBase;
-// using Game.Scripts.Managers.Input;
-// using Game.Scripts.Managers.Pools;
-// using Game.Scripts.Managers.SaveLoad;
-// using Game.Scripts.Prefabs.Extractable;
-// using Game.Scripts.Providers.AssetProvider;
-// using Game.Scripts.Scriptable;
-
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
 using BackwoodsLife.Scripts.Framework.Manager.Audio;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using BackwoodsLife.Scripts.Framework.Manager.Input;
+using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -63,7 +52,6 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(audioManager).As<IAudioManager>();
             builder.RegisterComponent(audioProvider).As<IAudioProvider>();
             builder.RegisterComponent(audioSourceProvider).As<IAudioSourceProvider>();
-
             builder.RegisterComponent(eventSystem).AsSelf();
 
 
@@ -71,7 +59,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.Register(typeof(AssetProvider), Lifetime.Singleton).As<IAssetProvider>();
             builder.Register(typeof(DBManager), Lifetime.Singleton).As<IDBManager>();
             builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();
-            // builder.Register(typeof(SaveAndLoadManager), Lifetime.Singleton).As<ISaveAndLoadManager>();
+            builder.Register(typeof(SaveAndLoadManager), Lifetime.Singleton).As<ISaveAndLoadManager>();
             builder.Register<FollowSystem>(Lifetime.Singleton).AsSelf();
 
 

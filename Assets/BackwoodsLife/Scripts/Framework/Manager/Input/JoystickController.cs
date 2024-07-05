@@ -47,7 +47,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
             moveInput = (position - joystickCenter) / (joystickRing.layout.width / 2);
             moveInput = Vector2.ClampMagnitude(moveInput, 1.0f);
 
-            Debug.LogWarning(moveInput);
+            // Debug.LogWarning(moveInput);
             // joystickHandle.transform.position = position;
         }
 

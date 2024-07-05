@@ -1,56 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
-using Game.Scripts.Player.Const;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
 
-namespace Game.Scripts.Managers.SaveLoad
+namespace BackwoodsLife.Scripts.Framework.Manager.SaveLoad
 {
     public sealed class SaveAndLoadManager : ISaveAndLoadManager
     {
+        public string Description => "SaveAndLoadManager";
         public string PlayerId { get; private set; }
 
         private IDBManager _dbManager;
         private Dictionary<Type, object> _cache = new();
 
         [Inject]
-        private void Construct(IDBManager dbManager)
-        {
-            _dbManager = dbManager;
-        }
+        private void Construct(IDBManager dbManager) => _dbManager = dbManager;
 
         public void ServiceInitialization()
         {
             Assert.IsNotNull(_dbManager, "DBManager is null!");
-            Assert.IsTrue(_dbManager.IsInitialized, "DBManager is not initialized");
+            Assert.IsTrue(_dbManager.IsInitialized,
+                "DBManager is not initialized. Ensure that it is initialized before SaveAndLoadManager");
 
-            // Получаем или создаем идентификатор игрока на текущем устройстве в префсах
+            // Get or create the player identifier on the current device in PlayerPrefs
             PlayerId = PlayerPrefsHelper.GetOrSetPlayerId(PlayerConst.PlayerIdPrefsKey);
 
             /*
-             * Инициализируем сервис.
-             * Загружаем данные из базы данных
-             * Если это первый запуск, то что делаем?
+             * Initialize the service.
+             * Load data from the database.
+             * If this is the first launch, what should we do?
              */
 
-            // Если есть данные в базе по идентификатору, то загружаем их
-            if (_dbManager.IsHasDataFor(PlayerId))
-            {
-                Debug.LogWarning("DataBase has data for " + PlayerId);
-                _cache = _dbManager.LoadAllData(PlayerId);
-            }
-            else
-            {
-                // Если нету, то генерируем запись для текущего идентификатора
-                Debug.LogWarning("DataBase has no data for " + PlayerId);
-                _cache = _dbManager.GenerateAndGetForPlayerId(PlayerId);
-            }
+            // If there is data in the database for the identifier, load it. If not, generate a record for the current identifier
+            _cache = _dbManager.IsHasDataFor(PlayerId)
+                ? _dbManager.LoadAllData(PlayerId)
+                : _dbManager.GenerateAndGetForPlayerId(PlayerId);
         }
-
-        public string Description => "SaveAndLoadManager";
 
         public void Load()
         {
@@ -58,11 +47,8 @@ namespace Game.Scripts.Managers.SaveLoad
         }
 
         /// <summary>
-        /// Возвращает объект из своего кэша. Объект, который был загружен из базы данных при инициализации сервиса 
+        /// Returns an object from its cache. An object that was loaded from the database during the service initialization.
         /// </summary>
-        public T Get<T>() where T : IData
-        {
-            return (T)_cache[typeof(T)];
-        }
+        public T Get<T>() where T : IData => (T)_cache[typeof(T)];
     }
 }

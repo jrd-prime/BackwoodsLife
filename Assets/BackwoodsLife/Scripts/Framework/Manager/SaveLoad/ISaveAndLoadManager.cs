@@ -1,7 +1,6 @@
 ﻿using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
 
-
-namespace Game.Scripts.Managers.SaveLoad
+namespace BackwoodsLife.Scripts.Framework.Manager.SaveLoad
 {
     public interface ISaveAndLoadManager : ILoadingOperation
     {

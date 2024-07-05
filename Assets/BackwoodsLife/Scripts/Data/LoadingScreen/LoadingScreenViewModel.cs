@@ -1,5 +1,5 @@
 ﻿using R3;
-using UnityEngine;
+using UnityEngine.Assertions;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,7 +13,8 @@ namespace BackwoodsLife.Scripts.Data.LoadingScreen
 
         public void Initialize()
         {
-            Debug.LogWarning("Init view model");
+            Assert.IsNotNull(_model, $"{typeof(ILoadingScreenModel)} is null.");
+
             // Подписываемся на модель
             _model.Header.Subscribe(x => HeaderView.Value = x);
         }

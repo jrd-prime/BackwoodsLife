@@ -3,12 +3,13 @@ using BackwoodsLife.Scripts.Data.LoadingScreen;
 using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
 using Cysharp.Threading.Tasks;
 using R3;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
     /// <summary>
-    /// Выступает в качестве инициализатора <see cref="ILoadingOperation"/> сервисов и модели для LoadingScreen
+    /// Serves as the initializer for <see cref="ILoadingOperation"/> services and the model for the LoadingScreen
     /// </summary>
     public sealed class Loader : ILoader, ILoadingScreenModel
     {
@@ -22,11 +23,11 @@ namespace BackwoodsLife.Scripts.Framework.Bootstrap
             _loadingQueue.Enqueue(service);
         }
 
-        public async UniTask StartServicesInitializationAsync(LoadingScreenViewModel viewModel)
+        public async UniTask StartServicesInitializationAsync()
         {
             foreach (var service in _loadingQueue)
             {
-                // Debug.LogWarning("StartServicesInitializationAsync: " + service.Description);
+                Debug.LogWarning("Initializing " + service);
                 Header.Value = service.Description;
                 service.ServiceInitialization();
                 await UniTask.Delay(100);
