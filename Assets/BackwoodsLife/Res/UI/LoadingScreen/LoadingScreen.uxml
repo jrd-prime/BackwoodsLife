@@ -1,8 +1,14 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Framework/Res/UI/USS/main.uss?fileID=7433441132597879392&amp;guid=ded51bb9d01edb0408b0a90e67083594&amp;type=3#main" />
-    <ui:VisualElement name="main-container" class="main-container">
-        <ui:VisualElement style="flex-grow: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background-color: rgba(98, 98, 98, 0.14); padding-top: 33px; padding-right: 33px; padding-bottom: 33px; padding-left: 33px; font-size: 18px;">
-            <ui:Label tabindex="-1" text="I&apos;m loading screen" parse-escape-sequences="true" display-tooltip-when-elided="true" name="header-label" />
+    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/main.uss?fileID=7433441132597879392&amp;guid=ded51bb9d01edb0408b0a90e67083594&amp;type=3#main" />
+    <ui:VisualElement name="main-container" class="main-container" style="background-color: rgba(159, 186, 143, 0.4);">
+        <ui:VisualElement name="header-container" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 75%; align-items: center; justify-content: center; align-self: center;">
+            <ui:Label tabindex="-1" text="Backwood Life" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 25px; -unity-font: url(&apos;project://database/Assets/BackwoodsLife/Res/Fonts/Dosis/Dosis-ExtraBold.ttf?fileID=12800000&amp;guid=fb7f4c98d7727d14d8d102e86829e603&amp;type=3#Dosis-ExtraBold&apos;); -unity-font-style: bold;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="img-container" style="flex-grow: 1; position: absolute; left: 0; right: 0; top: 25%; bottom: 15%;">
+            <ui:VisualElement name="img" style="flex-grow: 1; position: absolute; top: 0; bottom: 0; align-items: center; align-self: center; justify-content: center; width: 30%; height: 100%; background-image: url(&apos;project://database/Assets/BackwoodsLife/Res/UI/LoadingScreen/LoadingScreenImage.png?fileID=2800000&amp;guid=21c4b815667e4a6429b37eb31d4d9a08&amp;type=3#LoadingScreenImage&apos;);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="loading-container" style="flex-grow: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background-color: rgba(159, 186, 143, 0); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 18px; position: absolute; left: 0; right: 0; bottom: 0; top: 85%; align-self: center; justify-content: center; align-items: center;">
+            <ui:Label tabindex="-1" text="I&apos;m loading screen" parse-escape-sequences="true" display-tooltip-when-elided="true" name="header-label" style="font-size: 16px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

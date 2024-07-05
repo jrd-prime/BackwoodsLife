@@ -318,6 +318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563876640606684031, guid: 8ea78aa72f500e340b1344c1ee8bd8b4,
         type: 3}
+      propertyPath: m_SortingOrder
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563876640606684031, guid: 8ea78aa72f500e340b1344c1ee8bd8b4,
+        type: 3}
       propertyPath: m_PanelSettings
       value: 
       objectReference: {fileID: 11400000, guid: 784c96e435ecf8f49a34a213f3103a8f,

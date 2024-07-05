@@ -4,6 +4,6 @@ namespace BackwoodsLife.Scripts.Data.LoadingScreen
 {
     public interface ILoadingScreenModel
     {
-        public ReactiveProperty<string> Header { get; }
+        public ReactiveProperty<string> LoadingText { get; }
     }
 }

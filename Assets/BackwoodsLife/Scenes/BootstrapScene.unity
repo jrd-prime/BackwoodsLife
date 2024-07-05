@@ -220,6 +220,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5069052679786466688, guid: af71861480a79464587e6336f587971f,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 7307548381332177782, guid: af71861480a79464587e6336f587971f,
         type: 3}
       propertyPath: m_LocalPosition.x

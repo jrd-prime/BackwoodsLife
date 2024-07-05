@@ -16,7 +16,7 @@ namespace BackwoodsLife.Scripts.Data.LoadingScreen
             Assert.IsNotNull(_model, $"{typeof(ILoadingScreenModel)} is null.");
 
             // Подписываемся на модель
-            _model.Header.Subscribe(x => HeaderView.Value = x);
+            _model.LoadingText.Subscribe(x => HeaderView.Value = x);
         }
     }
 }

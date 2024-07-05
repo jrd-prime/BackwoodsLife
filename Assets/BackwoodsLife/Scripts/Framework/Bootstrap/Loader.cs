@@ -14,7 +14,7 @@ namespace BackwoodsLife.Scripts.Framework.Bootstrap
     {
         private readonly Queue<ILoadingOperation> _loadingQueue = new();
 
-        public ReactiveProperty<string> Header { get; } = new("Default");
+        public ReactiveProperty<string> LoadingText { get; } = new("Default");
 
         public void AddServiceToInitialize(ILoadingOperation service)
         {
@@ -30,7 +30,7 @@ namespace BackwoodsLife.Scripts.Framework.Bootstrap
             {
                 Debug.LogWarning(
                     $"\t<color=cyan>{count++}/{_loadingQueue.Count} / Init Service: {service.GetType().Name}</color>"); //TODO remove
-                Header.Value = service.Description;
+                LoadingText.Value = $"Loading: {service.Description}..";
                 service.ServiceInitialization();
                 await UniTask.Delay(1000);
             }
