@@ -24,6 +24,10 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.LoadingScreen
             _root = gameObject.GetComponent<UIDocument>().rootVisualElement;
             // UIHelper.SetDefaultCanvasSize(ref _root);
 
+#if UNITY_EDITOR
+            _root.style.opacity = 0.1f;
+#endif
+
             var header = _root.Q<Label>("header-label");
 
             // Подписываемся на вьюмодель
