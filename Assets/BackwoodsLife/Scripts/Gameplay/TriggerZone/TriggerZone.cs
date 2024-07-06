@@ -1,4 +1,5 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Data.InteractableObjectsData;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.TriggerZone
@@ -14,7 +15,27 @@ namespace BackwoodsLife.Scripts.Gameplay.TriggerZone
                 Debug.Log("Игрок вошел в зону триггера!");
                 // Добавьте здесь другие действия, которые вы хотите выполнить
 
-                Debug.LogWarning(other.gameObject.transform.parent.name);
+                // Проверяем, что other не null
+                if (other != null)
+                {
+                    // Получаем родительский объект текущего объекта
+                    Transform parentTransform = transform.parent;
+
+                    if (parentTransform != null)
+                    {
+                        Debug.LogWarning(transform.parent.name);
+                        var intt = transform.parent.GetComponent<Interactable>();
+                        intt.OnInteract();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Текущий объект не имеет родителя.");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Объект, вызвавший триггер, не существует.");
+                }
             }
         }
     }

@@ -9,14 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03e47a12da8e4b6c9ed39f5877d4aa81, type: 3}
-  m_Name: Bonfire_lvl1
+  m_Script: {fileID: 11500000, guid: 92a583aa58244a77896c259708480299, type: 3}
+  m_Name: StaticInteractableConfig
   m_EditorClassIdentifier: 
-  assetReference:
-    m_AssetGUID: 80c6246fef9bfeb44b8696127cef6560
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  Name: Bonfire_lvl1
-  Upgardable: 1
-  UpgradeLevel: 1
+  StaticInteractables:
+  - {fileID: 11400000, guid: 10710c3b3b788de4ca9a792198a2aba7, type: 2}

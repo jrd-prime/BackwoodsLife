@@ -50,5 +50,17 @@ namespace BackwoodsLife.Scripts.Framework.Manager.SaveLoad
         /// Returns an object from its cache. An object that was loaded from the database during the service initialization.
         /// </summary>
         public T Get<T>() where T : IData => (T)_cache[typeof(T)];
+
+        public void Set<T>(object instance) where T : IData
+        {
+            _cache.TryAdd(typeof(T), instance);
+            Debug.LogWarning("Saved to cache: " + typeof(T).Name);
+        }
+
+        public void Set(object instance)
+        {
+            _cache.TryAdd(instance.GetType(), instance);
+            Debug.LogWarning("Saved to cache: " + instance.GetType().Name);
+        }
     }
 }

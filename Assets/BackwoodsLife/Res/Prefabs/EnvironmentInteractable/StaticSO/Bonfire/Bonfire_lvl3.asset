@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03e47a12da8e4b6c9ed39f5877d4aa81, type: 3}
-  m_Name: Mushroom_lvl1
+  m_Name: Bonfire_lvl3
   m_EditorClassIdentifier: 
-  AssetReference:
-    m_AssetGUID: 8dddcb942b660be4d8096e9f7611f55e
+  assetReference:
+    m_AssetGUID: 80c6246fef9bfeb44b8696127cef6560
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  Name: Mushroom_lvl1
-  worldPosition: 2
-  InteractableObjectType: 2
-  Upgardable: 0
-  UpgradeLevel: 0
+  Name: Bonfire_lvl3
+  Upgardable: 1
+  UpgradeLevel: 3
