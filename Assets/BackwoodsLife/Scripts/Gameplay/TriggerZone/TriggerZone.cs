@@ -13,6 +13,8 @@ namespace BackwoodsLife.Scripts.Gameplay.TriggerZone
                 // Действие, которое произойдет при входе игрока в зону триггера
                 Debug.Log("Игрок вошел в зону триггера!");
                 // Добавьте здесь другие действия, которые вы хотите выполнить
+
+                Debug.LogWarning(other.gameObject.transform.parent.name);
             }
         }
     }
