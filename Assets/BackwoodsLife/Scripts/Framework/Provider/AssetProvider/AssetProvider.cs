@@ -28,7 +28,23 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
             return Addressables.InstantiateAsync(assetId, parent);
         }
 
+        public async UniTask<GameObject> InstantiateAsync(AssetReference assetId)
+        {
+            // await CheckAsset(assetId);
+            var handle = Addressables.InstantiateAsync(assetId);
+            return await handle.Task;
+        }
+
         private async UniTask CheckAsset(string assetId)
+        {
+            var locationsHandle = Addressables.LoadResourceLocationsAsync(assetId, typeof(SceneInstance));
+            await locationsHandle.Task;
+
+            if (locationsHandle.Status != AsyncOperationStatus.Succeeded || locationsHandle.Result.Count <= 0)
+                throw new NullReferenceException($"{assetId} not exist in addressables!");
+        }
+
+        private async UniTask CheckAsset(AssetReference assetId)
         {
             var locationsHandle = Addressables.LoadResourceLocationsAsync(assetId, typeof(SceneInstance));
             await locationsHandle.Task;

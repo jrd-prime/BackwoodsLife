@@ -1,10 +1,11 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Data.InteractableObjectsData.Bonfire;
 using R3;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace BackwoodsLife.Scripts.Data.InteractableObjectsData.Bonfire
+namespace BackwoodsLife.Scripts.Framework.InteractableObjectsData.Bonfire
 {
     public class BonfireViewModel : IInitializable
     {

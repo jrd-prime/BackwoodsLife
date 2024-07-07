@@ -1,5 +1,6 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.InteractableObjectsData;
+using BackwoodsLife.Scripts.Gameplay.InteractableObjects;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.TriggerZone
@@ -25,6 +26,13 @@ namespace BackwoodsLife.Scripts.Gameplay.TriggerZone
                     {
                         Debug.LogWarning(transform.parent.name);
                         var intt = transform.parent.GetComponent<Interactable>();
+
+                        if (intt == null)
+                        {
+                            throw new NullReferenceException(
+                                $"Interactable is null: {transform.parent.name}. You must set to object Interactable component. ");
+                        }
+
                         intt.OnInteract();
                     }
                     else

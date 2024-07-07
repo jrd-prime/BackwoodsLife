@@ -1,5 +1,6 @@
 ﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
 using BackwoodsLife.Scripts.Framework.Manager.Audio;
+using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using BackwoodsLife.Scripts.Framework.Manager.GameScene;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
@@ -16,6 +17,7 @@ namespace BackwoodsLife.Scripts
     public sealed class AppStarter : IInitializable
     {
         private ILoader _loader;
+        private IConfigManager _configManager;
         private IAudioManager _audioManager;
         private IAssetProvider _assetProvider;
         private ISaveAndLoadManager _saveAndLoadManager;
@@ -26,6 +28,7 @@ namespace BackwoodsLife.Scripts
         private void Construct(IObjectResolver container)
         {
             _loader = container.Resolve<ILoader>();
+            _configManager = container.Resolve<IConfigManager>();
             _dbManager = container.Resolve<IDBManager>();
             _gameSceneManager = container.Resolve<GameSceneManager>();
             _audioManager = container.Resolve<IAudioManager>();
@@ -48,6 +51,7 @@ namespace BackwoodsLife.Scripts
             _gameSceneManager.GameSceneLoadingTask = gameSceneTask;
 
             // Adding and initializing services
+            _loader.AddServiceToInitialize(_configManager);
             _loader.AddServiceToInitialize(_audioManager);
             _loader.AddServiceToInitialize(_assetProvider);
             _loader.AddServiceToInitialize(_dbManager);

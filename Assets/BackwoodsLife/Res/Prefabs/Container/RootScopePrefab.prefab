@@ -58,6 +58,8 @@ MonoBehaviour:
   cameraController: {fileID: 3007967449607948808}
   audioManager: {fileID: 9066086263725906187}
   eventSystem: {fileID: 8039700075144334406}
+  sMainConfigurations: {fileID: 11400000, guid: 4eb0b503a40ddc740a478eacd3330ee8,
+    type: 2}
 --- !u!1001 &1406272716495603427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,12 +131,12 @@ PrefabInstance:
     - target: {fileID: 9097220083348649871, guid: 5635399b18521534d8fabba5eb03e9d2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9097220083348649871, guid: 5635399b18521534d8fabba5eb03e9d2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 9097220083348649871, guid: 5635399b18521534d8fabba5eb03e9d2,
         type: 3}

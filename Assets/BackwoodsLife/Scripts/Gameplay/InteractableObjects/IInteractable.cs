@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Data.InteractableObjectsData
+namespace BackwoodsLife.Scripts.Gameplay.InteractableObjects
 {
     public abstract class Interactable : MonoBehaviour
     {

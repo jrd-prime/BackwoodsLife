@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Data.InteractableObjectsData
+namespace BackwoodsLife.Scripts.Gameplay.InteractableObjects.Bonfire
 {
     public class BonfireView : Interactable
     {

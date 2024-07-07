@@ -1,14 +1,19 @@
+using System.Collections.Generic;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
 using BackwoodsLife.Scripts.Framework.Manager.Audio;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
+using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using BackwoodsLife.Scripts.Framework.Manager.Input;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
+using BackwoodsLife.Scripts.Framework.Scriptable;
+using BackwoodsLife.Scripts.Framework.Scriptable.Configuration;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -21,11 +26,8 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private DebugMemoryAndEtcView debugMemoryAndEtcView;
         [SerializeField] private CameraController cameraController;
         [SerializeField] private AudioManager audioManager;
-
         [SerializeField] private EventSystem eventSystem;
-        // [SerializeField] private ResourceManager resourceManager;
-        // [SerializeField] private ExtractableResourcesConfigProvider extractableResourcesConfigProvider;
-
+        [FormerlySerializedAs("sMainConfiguration")] [SerializeField] private SMainConfigurations sMainConfigurations;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -43,6 +45,8 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             var audioProvider = Check(audioManager.GetComponentInChildren<AudioProvider>());
             var audioSourceProvider = Check(audioManager.GetComponentInChildren<AudioSourceProvider>());
 
+            builder.RegisterInstance(sMainConfigurations);
+            
 
             // builder.RegisterComponent(resourceManager).AsSelf();
             // builder.RegisterComponent(extractableResourcesConfigProvider).AsSelf();
@@ -56,6 +60,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
 
             // Services
+            builder.Register<ConfigManager>(Lifetime.Singleton).As<IConfigManager>();
             builder.Register(typeof(AssetProvider), Lifetime.Singleton).As<IAssetProvider>();
             builder.Register(typeof(DBManager), Lifetime.Singleton).As<IDBManager>();
             builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();

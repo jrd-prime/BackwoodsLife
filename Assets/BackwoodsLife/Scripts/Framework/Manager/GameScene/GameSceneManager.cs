@@ -1,8 +1,14 @@
 ﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
+using BackwoodsLife.Scripts.Framework.Manager.Configuration;
+using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
+using BackwoodsLife.Scripts.Framework.Scriptable;
+using BackwoodsLife.Scripts.Framework.Scriptable.Interactable.Types;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Assertions;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using VContainer;
@@ -22,14 +28,18 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
         private SceneInstance _gameSceneInstance;
 
         private IObjectResolver _container;
+
+        private IConfigManager _configManager;
+
         // private ISaveAndLoadManager _saveAndLoadManager;
-        // private IAssetProvider _assetProvider;
+        private IAssetProvider _assetProvider;
 
         [Inject]
         private void Construct(IObjectResolver container)
         {
             _container = container;
-            // _assetProvider = _container.Resolve<IAssetProvider>();
+            _configManager = container.Resolve<IConfigManager>();
+            _assetProvider = _container.Resolve<IAssetProvider>();
             // _saveAndLoadManager = _container.Resolve<ISaveAndLoadManager>();
         }
 
@@ -41,11 +51,56 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
             Assert.IsTrue(_gameSceneInstance.Scene.isLoaded, "Failed to load game scene");
             GameScene = _gameSceneInstance.Scene;
             await SetupPlayerAsync();
+            await SetupStaticObjectsAsync();
         }
 
         private async UniTask SetupPlayerAsync()
         {
             Debug.LogWarning("SETUP PLAYER");
+            // var playerObj = FindObjectOfType<PlayerView>();
+            // var playerData = _saveAndLoadManager.Get<PlayerModel>();
+
+            // Debug.LogWarning($"player data = {playerData.Position} {playerData.Rotation}");
+            await UniTask.CompletedTask;
+        }
+
+        private async UniTask SetupStaticObjectsAsync()
+        {
+            Debug.LogWarning("SetupStaticObjectsAsync");
+            var a = _configManager.GetConfig<SStaticInteractableObjectsList>();
+            Debug.LogWarning(a);
+
+            foreach (var av in a.staticInteractables)
+            {
+                Debug.LogWarning($"av = {av}");
+
+                var position = av.spawnPosition;
+                if (position == Vector3.zero)
+                {
+                    Debug.LogWarning("POSITION NOT SET");
+                }
+
+                AssetReferenceGameObject prefab;
+                
+                if (av.upgardable)
+                {
+                    // get prefab lvl from save
+                    prefab = av.lelvels[1].assetReference;
+                }
+                else
+                {
+                    prefab = av.mainLevel.assetReference;
+                }
+                
+                var obj = await _assetProvider.InstantiateAsync(prefab);
+
+
+                var go = obj;
+                Debug.LogWarning($"go = {go} {go.transform.position}");
+                go.transform.position = position;
+            }
+
+
             // var playerObj = FindObjectOfType<PlayerView>();
             // var playerData = _saveAndLoadManager.Get<PlayerModel>();
 
