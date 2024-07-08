@@ -1,6 +1,5 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Player;
-using BackwoodsLife.Scripts.Framework.Player;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;

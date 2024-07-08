@@ -1,9 +1,7 @@
 ﻿using System;
-using BackwoodsLife.Scripts.Data.InteractableObjectsData;
-using BackwoodsLife.Scripts.Gameplay.InteractableObjects;
 using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Gameplay.TriggerZone
+namespace BackwoodsLife.Scripts.Gameplay.InteractableObjects
 {
     public class TriggerZone : MonoBehaviour
     {

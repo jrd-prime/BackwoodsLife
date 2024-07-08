@@ -1,6 +1,6 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
-using BackwoodsLife.Scripts.Framework.Player;
+using BackwoodsLife.Scripts.Gameplay.Player;
 using R3;
 using UnityEngine.Assertions;
 using VContainer;

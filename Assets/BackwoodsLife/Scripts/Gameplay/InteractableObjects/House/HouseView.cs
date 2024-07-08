@@ -1,7 +1,6 @@
-﻿using BackwoodsLife.Scripts.Data.InteractableObjectsData;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Gameplay.InteractableObjects
+namespace BackwoodsLife.Scripts.Gameplay.InteractableObjects.House
 {
     public class HouseView : Interactable
     {

@@ -1,5 +1,5 @@
-﻿using BackwoodsLife.Scripts.Framework.Player;
-using BackwoodsLife.Scripts.Framework.Scope;
+﻿using BackwoodsLife.Scripts.Framework.Scope;
+using BackwoodsLife.Scripts.Gameplay.Player;
 using R3;
 using UnityEngine;
 using UnityEngine.UIElements;

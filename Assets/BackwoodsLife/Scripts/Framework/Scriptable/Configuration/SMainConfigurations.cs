@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Framework.Scriptable.Interactable.Types;
+﻿using BackwoodsLife.Scripts.Framework.Scriptable.Interactable.Config;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Framework.Scriptable.Configuration

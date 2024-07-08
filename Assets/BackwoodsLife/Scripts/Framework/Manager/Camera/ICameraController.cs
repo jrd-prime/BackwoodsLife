@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Framework.Player;
+﻿using BackwoodsLife.Scripts.Gameplay.Player;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.Camera
 {

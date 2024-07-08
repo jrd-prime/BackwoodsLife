@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Framework.Player;
+﻿using BackwoodsLife.Scripts.Gameplay.Player;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;

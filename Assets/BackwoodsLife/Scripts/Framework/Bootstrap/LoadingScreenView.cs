@@ -1,12 +1,11 @@
 ﻿// using Game.Scripts.Helpers;
 
-using BackwoodsLife.Scripts.Data.LoadingScreen;
-using BackwoodsLife.UI;
+using BackwoodsLife.Res.UI;
 using R3;
 using UnityEngine.UIElements;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Gameplay.UI.LoadingScreen
+namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
     public class LoadingScreenView : UIView
     {

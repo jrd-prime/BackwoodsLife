@@ -15,7 +15,7 @@ MonoBehaviour:
   name: House_main
   worldPosition: 1
   interactableObjectType: 1
-  spawnPosition: {x: 6, y: 0, z: 9}
+  spawnPosition: {x: 10, y: 0, z: 9}
   upgardable: 0
   maxLevel: 0
   mainLevel: {fileID: 11400000, guid: 6b1af4a2e099b1a4b80f0082cb0c8109, type: 2}

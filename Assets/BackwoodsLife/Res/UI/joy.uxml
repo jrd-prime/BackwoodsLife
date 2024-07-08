@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/joy.uss?fileID=7433441132597879392&amp;guid=b29ae84d4fa5c964d981d454b1901a97&amp;type=3#joy" />
-    <ui:VisualElement name="joystick-container" style="flex-grow: 1; width: 150px; height: 150px; align-items: auto; justify-content: flex-start; align-self: auto; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; position: absolute; right: auto; bottom: auto; top: auto; left: auto; background-color: rgba(219, 187, 187, 0.82);">
-        <ui:VisualElement name="joystick-ring" class="joystick-ring" style="flex-grow: 1; background-color: rgb(135, 107, 107); border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; left: 0; top: 0; right: 0; bottom: 0; align-items: center; justify-content: center; position: absolute; align-self: center; width: 150px; height: 150px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
-            <ui:VisualElement name="joystick-handle" class="joystick-handle" style="flex-grow: 0; position: absolute; width: 50px; height: 50px; background-color: rgba(106, 60, 60, 0.87); align-items: auto; justify-content: flex-start; align-self: auto; left: auto; top: auto;" />
-        </ui:VisualElement>
-    </ui:VisualElement>
-</ui:UXML>

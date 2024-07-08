@@ -3,7 +3,7 @@ using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
 using BackwoodsLife.Scripts.Framework.Scriptable;
-using BackwoodsLife.Scripts.Framework.Scriptable.Interactable.Types;
+using BackwoodsLife.Scripts.Framework.Scriptable.Interactable.Config;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

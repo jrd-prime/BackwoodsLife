@@ -4,7 +4,7 @@ using R3;
 using UnityEngine;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework.Player
+namespace BackwoodsLife.Scripts.Gameplay.Player
 {
     public class PlayerViewModel : IPlayerViewModel
     {

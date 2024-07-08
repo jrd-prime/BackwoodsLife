@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace BackwoodsLife.Scripts.Data.LoadingScreen
+namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
     public interface ILoadingScreenModel
     {

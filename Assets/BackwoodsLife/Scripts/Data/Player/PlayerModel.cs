@@ -9,7 +9,7 @@ namespace BackwoodsLife.Scripts.Data.Player
     /// <summary>
     /// Player data model
     /// </summary>
-    public class PlayerModel : IData, IInitializable, IDisposable
+    public class PlayerModel : IData, IInitializable, IDisposable, IDataModel
     {
         public ReactiveProperty<Vector3> Position { get; set; } = new();
         public ReactiveProperty<Vector3> Rotation { get; set; } = new();

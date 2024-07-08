@@ -1,5 +1,5 @@
 ﻿using BackwoodsLife.Scripts.Data.Player;
-using BackwoodsLife.Scripts.Framework.Player;
+using BackwoodsLife.Scripts.Gameplay.Player;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

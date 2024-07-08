@@ -3,7 +3,7 @@ using R3;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace BackwoodsLife.Scripts.Framework.Player
+namespace BackwoodsLife.Scripts.Gameplay.Player
 {
     public interface IPlayerViewModel : IInitializable, IDisposable, ITickable
     {

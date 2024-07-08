@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 90db8ef980ed3444fa630eaf9d119dd9
   m_SerializeEntries:
-  - m_GUID: 70c9745d9256b8e409443dd94ebd40c1
-    m_Address: GameScene
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9a2a72e69e58b574caff060a24ccb02a
     m_Address: GroundMaterial
     m_ReadOnly: 0
