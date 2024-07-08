@@ -1,77 +1,57 @@
-﻿using BackwoodsLife.Res.UI;
+﻿using System;
+using BackwoodsLife.Res.UI;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UIElements;
+using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.UI.Joystick
 {
     public class JoystickView : UIView
     {
-        public float moveSpeed = 5f;
-        private Vector2 _moveInput;
-        private Vector3 _moveDirection;
+        [SerializeField] private float screenOffsetX = 600f;
+        [SerializeField] private float screenOffsetY = 190f;
+        [SerializeField] private float centerX = 75f;
+        [SerializeField] private float centerY = 75f;
 
-        private VisualElement _joystickHandle;
-        private VisualElement _joystickRing;
+        private JoystickViewModel _viewModel;
+        private VisualElement _root;
 
-        private readonly Vector3 _handleOffset = new(600, 190, 0);
-        private readonly Vector3 _handleCenter = new(75, 75, 0);
-        private Vector3 _offset;
+        [Inject]
+        private void Construct(JoystickViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
 
         private void OnEnable()
         {
-            var root = GetComponent<UIDocument>().rootVisualElement;
-            _joystickHandle = root.Q<VisualElement>("joystick-handle");
-            _joystickRing = root.Q<VisualElement>("joystick-ring");
+            Assert.IsNotNull(_viewModel,
+                $"ViewModel is null. Ensure that \"{this}\" is added to auto-injection in GameSceneContext prefab");
 
-            root.RegisterCallback<PointerDownEvent>(OnPointerDown);
-            root.RegisterCallback<PointerMoveEvent>(OnPointerMove);
-            root.RegisterCallback<PointerUpEvent>(OnPointerUp);
-            root.RegisterCallback<PointerOutEvent>(OnPointerCancel);
+            _root = GetComponent<UIDocument>().rootVisualElement;
+            var joystickHandle = _root.Q<VisualElement>(UIName.JoystickHandle);
+            var joystickRing = _root.Q<VisualElement>(UIName.JoystickRing);
 
-            _offset = _handleOffset + _handleCenter;
+            _viewModel.SetScreenOffset(new Vector3(screenOffsetX, screenOffsetY, 0) + new Vector3(centerX, centerY, 0));
+            _viewModel.SetJoystickVisual(joystickHandle, joystickRing);
+
+            _root.RegisterCallback<PointerDownEvent>(OnPointerDown);
+            _root.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+            _root.RegisterCallback<PointerUpEvent>(OnPointerUp);
+            _root.RegisterCallback<PointerOutEvent>(OnPointerCancel);
         }
 
-        private void OnPointerCancel(PointerOutEvent evt) 
+        private void OnPointerCancel(PointerOutEvent evt) => _viewModel.OnOutEvent(evt);
+        private void OnPointerDown(PointerDownEvent evt) => _viewModel.OnDownEvent(evt);
+        private void OnPointerMove(PointerMoveEvent evt) => _viewModel.OnMoveEvent(evt);
+        private void OnPointerUp(PointerUpEvent evt) => _viewModel.OnUpEvent(evt);
+
+        private void OnDestroy()
         {
-            Debug.LogWarning("POINTER CANCEL");
-        }
-
-        private void OnPointerDown(PointerDownEvent evt)
-        {
-            UpdateJoystickPosition(evt.position);
-        }
-
-        private void OnPointerMove(PointerMoveEvent evt)
-        {
-            UpdateJoystickPosition(evt.position);
-        }
-
-        private void OnPointerUp(PointerUpEvent evt)
-        {
-            ResetJoystickPosition();
-        }
-
-        private void UpdateJoystickPosition(Vector3 position)
-        {
-            var po = position - _offset;
-
-            Debug.LogWarning($"pos: {po}");
-            _joystickHandle.transform.position = po;
-
-            _moveInput = po / (_joystickRing.layout.width / 2);
-            _moveInput = Vector2.ClampMagnitude(_moveInput, 1.0f);
-        }
-
-        private void ResetJoystickPosition()
-        {
-            _moveInput = Vector2.zero;
-            _joystickHandle.transform.position = Vector2.zero;
-        }
-
-        private void Update()
-        {
-            _moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y * -1f);
-            transform.Translate(_moveDirection * moveSpeed * Time.deltaTime, Space.World);
+            _root.UnregisterCallback<PointerDownEvent>(OnPointerDown);
+            _root.UnregisterCallback<PointerMoveEvent>(OnPointerMove);
+            _root.UnregisterCallback<PointerUpEvent>(OnPointerUp);
+            _root.UnregisterCallback<PointerOutEvent>(OnPointerCancel);
         }
     }
 }

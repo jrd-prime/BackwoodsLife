@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0efe7e3ee6b44ecdbec91b09fba01d7b, type: 3}
   m_Name: MainConfiguration
   m_EditorClassIdentifier: 
+  characterConfiguration: {fileID: 11400000, guid: 0caa8a7d20288344a81d7ad91e3819be,
+    type: 2}
   staticInteractableObjectsList: {fileID: 11400000, guid: 2b7227c26d2b50944b0932227c13c2c8,
     type: 2}
   nonStaticInteractableObjectsList: {fileID: 11400000, guid: aa6b4204984f4584e8cf6fac101ba5ff,

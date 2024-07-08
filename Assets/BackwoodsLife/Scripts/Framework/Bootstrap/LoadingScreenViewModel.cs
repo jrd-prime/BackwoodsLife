@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
-    public class LoadingScreenViewModel : IInitializable
+    public class LoadingScreenViewModel : IViewModel
     {
         [Inject] private ILoadingScreenModel _model;
 

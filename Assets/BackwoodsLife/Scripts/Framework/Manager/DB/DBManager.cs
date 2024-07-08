@@ -42,7 +42,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.DB
             var fakePlayerModel = new PlayerModel
             {
                 Position = new ReactiveProperty<Vector3>(new Vector3(-4, 0, -4)),
-                Rotation = new ReactiveProperty<Vector3>(new Vector3(0, -135, 0))
+                Rotation = new ReactiveProperty<Quaternion>(new Quaternion())
             };
 
             fakeData.Add(typeof(PlayerModel), fakePlayerModel);

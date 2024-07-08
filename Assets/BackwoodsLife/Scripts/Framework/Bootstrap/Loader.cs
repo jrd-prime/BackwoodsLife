@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
@@ -27,11 +28,18 @@ namespace BackwoodsLife.Scripts.Framework.Bootstrap
 
             foreach (var service in _loadingQueue)
             {
-                Debug.LogWarning(
-                    $"\t<color=cyan>{count++}/{_loadingQueue.Count} / Init Service: {service.GetType().Name}</color>"); //TODO remove
-                LoadingText.Value = $"Loading: {service.Description}..";
-                service.ServiceInitialization();
-                await UniTask.Delay(100);
+                try
+                {
+                    Debug.LogWarning(
+                        $"\t<color=cyan>{count++}/{_loadingQueue.Count} / Init Service: {service.GetType().Name}</color>"); //TODO remove
+                    LoadingText.Value = $"Loading: {service.Description}..";
+                    service.ServiceInitialization();
+                    await UniTask.Delay(100);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Failed to initialize {service.GetType().Name}: {ex.Message}");
+                }
             }
 
             Debug.LogWarning($"\t<color=cyan>Services initialized.</color>"); //TODO remove

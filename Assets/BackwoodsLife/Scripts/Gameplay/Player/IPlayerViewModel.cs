@@ -1,14 +1,16 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Framework;
 using R3;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace BackwoodsLife.Scripts.Gameplay.Player
 {
-    public interface IPlayerViewModel : IInitializable, IDisposable, ITickable
+    public interface IPlayerViewModel : IViewModel, IDisposable, ITickable
     {
         /// <summary>Позиция из модели</summary>
         public ReadOnlyReactiveProperty<Vector3> PlayerPosition { get; }
+        public ReadOnlyReactiveProperty<Quaternion> PlayerRotation { get; }
 
         public ReactiveProperty<Vector3> CurrentPosition { get; }
 
@@ -25,7 +27,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         public void SetAnimation(string animationName);
         void MoveToPosition(Vector3 position);
-        void SetObjectForGathering(GameObject obj);
         void SetModelPosition(Vector3 transformPosition);
     }
 }

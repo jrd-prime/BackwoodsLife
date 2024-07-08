@@ -60,7 +60,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
 
             // Services
-            builder.Register<ConfigManager>(Lifetime.Singleton).As<IConfigManager>();
+            builder.Register<ConfigManager>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register(typeof(AssetProvider), Lifetime.Singleton).As<IAssetProvider>();
             builder.Register(typeof(DBManager), Lifetime.Singleton).As<IDBManager>();
             builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();

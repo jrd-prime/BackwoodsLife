@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Helpers;
+using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -62,5 +63,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.SaveLoad
             _cache.TryAdd(instance.GetType(), instance);
             Debug.LogWarning("Saved to cache: " + instance.GetType().Name);
         }
+
     }
 }

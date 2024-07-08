@@ -1,4 +1,5 @@
-﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
+﻿using System;
+using BackwoodsLife.Scripts.Framework.Bootstrap;
 using BackwoodsLife.Scripts.Framework.Manager.Audio;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
@@ -6,6 +7,7 @@ using BackwoodsLife.Scripts.Framework.Manager.GameScene;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using VContainer;
@@ -57,7 +59,9 @@ namespace BackwoodsLife.Scripts
             _loader.AddServiceToInitialize(_dbManager);
             _loader.AddServiceToInitialize(_saveAndLoadManager);
             _loader.AddServiceToInitialize(_gameSceneManager);
+
             await _loader.StartServicesInitializationAsync();
+
 
             // TODO FadeOut loading screen view 
             // Unloading current scene

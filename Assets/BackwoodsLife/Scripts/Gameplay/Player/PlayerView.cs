@@ -1,5 +1,4 @@
-﻿using System;
-using BackwoodsLife.Scripts.Data.Player;
+﻿using BackwoodsLife.Scripts.Data.Player;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -10,6 +9,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
     [RequireComponent(typeof(Rigidbody), typeof(Animator))]
     public class PlayerView : MonoBehaviour
     {
+
         private IPlayerViewModel _viewModel;
         private readonly CompositeDisposable _disposables = new();
 
@@ -21,14 +21,19 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         private void Awake()
         {
+            
+            
             _animator = gameObject.GetComponent<Animator>();
 
             Assert.IsNotNull(_viewModel,
                 $"ViewModel is null. Ensure that \"{this}\" is added to auto-injection in GameSceneContext prefab");
 
             _viewModel.PlayerPosition
-                .Skip(1)
-                .Subscribe(PlayerPositionHandler)
+                .Subscribe(PositionHandler)
+                .AddTo(_disposables);
+
+            _viewModel.PlayerRotation
+                .Subscribe(RotationHandler)
                 .AddTo(_disposables);
 
             _viewModel.PlayAnimationByName
@@ -38,15 +43,11 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
                 .AddTo(_disposables);
         }
 
-        private void PlayerPositionHandler(Vector3 position)
-        {
-            throw new NotImplementedException();
-        }
+        private void PositionHandler(Vector3 position) =>
+            transform.position = new Vector3(position.x, transform.position.y, position.z);
 
-        private void FixedUpdate()
-        {
-            _viewModel.SetModelPosition(transform.position);
-        }
+        private void RotationHandler(Quaternion position) => transform.rotation = position;
+
 
         private void StartAnimation(string x)
         {
