@@ -26,6 +26,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         /// </summary>
         public ReactiveProperty<bool> DestinationReached { get; }
 
+        Rigidbody Rigidbody { get; set; }
+        Animator Animator { get; set; }
+
         public void SetAnimation(string animationName);
         void MoveToPosition(Vector3 position);
         void SetModelPosition(Vector3 transformPosition);

@@ -23,19 +23,27 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReactiveProperty<Vector3> MoveDirection { get; } = new();
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
         public ReactiveProperty<bool> DestinationReached { get; } = new(false);
+        
+        public Rigidbody Rigidbody { get; set; }
+        public Animator Animator { get; set; }
 
         private CompositeDisposable _disposables = new();
         private PlayerModel _playerModel;
         private IInput _input;
+        private Vector3 previousDirection = Vector3.zero;
         private Vector3 _direction = Vector3.zero;
         // private PlayerIdle _playerIdle;
 
         private JoystickModel _joystick;
 
+        public Vector3 moveDirection { get; private set; }
         private float _moveSpeed;
         private float _rotateSpeedInDeg;
         private IConfigManager _configManager;
         private FollowSystem _followSystem;
+
+        public bool recievedNewDirection { get; set; }
+
 
         [Inject]
         private void Construct(PlayerModel playerModel, JoystickModel joystickModel, IInput input,
@@ -59,23 +67,53 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
             _moveSpeed = characterConfiguration.moveSpeed;
             _rotateSpeedInDeg = characterConfiguration.rotateSpeedInDeg;
 
-            Debug.LogWarning("INIT VIEWMODEL");
             _joystick.MoveDirection
                 // .Skip(1)
                 .Subscribe(SetDirection)
                 .AddTo(_disposables);
         }
 
+        public void FixedTick()
+        {
+            if (recievedNewDirection)
+            {
+                Debug.LogWarning("Fixed tick");
+
+                var newPosition = PlayerPosition.CurrentValue + moveDirection * (5f * Time.fixedDeltaTime);
+                
+                _playerModel.SetPosition();
+                _playerModel.SetRoration();
+                PlayerPosition += ;
+
+                recievedNewDirection = false;
+            }
+            
+            
+            _rigidbody.position += moveDirection * (5f * Time.fixedDeltaTime);
+            if (moveDirection.sqrMagnitude > 0)
+            {
+                // We create a Quaternion, the type of variable we use to represent rotations and
+                // we use Quaternion.LookRotation to look at our moveInput vector which always points
+                // towards the moving direction, and we say that we want to rotate the Vector3.up (Y axis).
+                Quaternion rotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+
+                // Then we pass that rotation to our Rigidbody rot using Quaternion.Lerp which is a method
+                // to interpolate between two quaternions by a given time. In our case we use as the first
+                // Quaternion the _Rigidbody.rotation and as a second Quaternion our previously calculated rotation,
+                // then we add time by writing Time.fixedDeltaTime (fixed cuz we are in the method FixedUpdate)
+                // and we multiply that by a rotationRate to make it go faster or slower.
+                _rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, rotation, Time.fixedDeltaTime * 100);
+            }
+        }
 
         private void SetDirection(Vector3 direction)
         {
+            recievedNewDirection = true;
+            moveDirection = direction;
             _direction = direction;
             MoveDirection.Value = direction;
-
-            _playerModel.SetPosition();
-            _playerModel.SetRoration();
-
         }
+
 
         public void Dispose() => _disposables.Dispose();
 
@@ -103,10 +141,5 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public void SetAnimation(string animationName) => PlayAnimationByName.Value = animationName;
         public void MoveToPosition(Vector3 position) => _playerModel.Position.Value = position;
         public void SetModelPosition(Vector3 transformPosition) => CurrentPosition.Value = transformPosition;
-
-        public void FixedTick()
-        {
-            Debug.LogWarning("Fixed tick");
-        }
     }
 }

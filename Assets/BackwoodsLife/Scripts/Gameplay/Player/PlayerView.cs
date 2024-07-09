@@ -26,6 +26,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         {
             _rigidbody = GetComponent<Rigidbody>();
             _animator = gameObject.GetComponent<Animator>();
+            
+            _viewModel.Rigidbody = _rigidbody;
+            _viewModel.Animator =_animator;
 
             Assert.IsNotNull(_viewModel,
                 $"ViewModel is null. Ensure that \"{this}\" is added to auto-injection in GameSceneContext prefab");
@@ -52,13 +55,11 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private void PositionHandler(Vector3 position)
         {
             _rigidbody.position = position;
-            moveDirection = position;
         }
 
         private void RotationHandler(Quaternion rotationQuaternion)
         {
             _rigidbody.rotation = rotationQuaternion;
-            rotateDirection = rotationQuaternion;
         }
 
         private void FixedUpdate()
