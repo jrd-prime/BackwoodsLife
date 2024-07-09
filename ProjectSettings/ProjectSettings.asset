@@ -142,6 +142,9 @@ PlayerSettings:
   bundleVersion: 1.0.2
   preloadedAssets:
   - {fileID: 11400000, guid: 024ea5c56bb988a4ba801b452b11cf00, type: 2}
+  - {fileID: -6064677166168002105, guid: 8c655cdf2e07c0d43923ffe044ca61cc, type: 2}
+  - {fileID: 11400000, guid: a671e93e68b440d4b894b26a9c788f8a, type: 2}
+  - {fileID: 11400000, guid: 2f622d1980ea0d84b902def33b28c6b7, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -847,7 +850,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 3
-  activeInputHandler: 2
+  activeInputHandler: 1
   windowsGamepadBackendHint: 0
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0

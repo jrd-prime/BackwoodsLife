@@ -26,8 +26,8 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Joystick
 
         public void OnOutEvent(PointerOutEvent evt)
         {
-            Debug.LogWarning("POINTER CANCEL");
             _model.MoveDirection.Value = Vector3.zero;
+            ResetJoystickPosition();
         }
 
         public void OnDownEvent(PointerDownEvent evt) => UpdateJoystickPosition(evt.position);
