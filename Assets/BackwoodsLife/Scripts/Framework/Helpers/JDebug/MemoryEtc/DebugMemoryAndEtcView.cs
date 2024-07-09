@@ -12,8 +12,7 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
         private DebugMemoryAndEtcViewModel _viewModel;
         private CompositeDisposable _disposable = new();
 
-        private Button btnFollow;
-        private Button btnExit;
+        private Button _btnExit;
 
         [Inject]
         private void Construct(DebugMemoryAndEtcViewModel viewModel)
@@ -29,22 +28,13 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
             mono.text = "default";
             var graph = root.Q<Label>("graph");
             graph.text = "default";
-            btnFollow = root.Q<Button>("btn-follow");
-            btnFollow.text = "Follow/Unfollow";
 
-            btnExit = root.Q<Button>("btn-exit");
+            _btnExit = root.Q<Button>("btn-exit");
 
             _viewModel.MonoMemoryUsageView.Subscribe(x => mono.text = $"Heap: {x} MB").AddTo(_disposable);
             _viewModel.GraphicsMemoryUsageView.Subscribe(x => graph.text = $"Graphics: {x} MB").AddTo(_disposable);
 
-            btnFollow.clicked += () =>
-            {
-                var player = FindObjectOfType<GameSceneContext>().GetComponent<GameSceneContext>();
-                var a = player.Container.Resolve<IPlayerViewModel>();
-                _viewModel.FollowTarget(a);
-            };
-
-            btnExit.clicked += () =>
+            _btnExit.clicked += () =>
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;

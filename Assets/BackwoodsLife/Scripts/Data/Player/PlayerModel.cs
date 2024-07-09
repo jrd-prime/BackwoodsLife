@@ -10,8 +10,8 @@ namespace BackwoodsLife.Scripts.Data.Player
     /// </summary>
     public class PlayerModel : IInitializable, IDisposable, IDataModel
     {
-        public ReactiveProperty<Vector3> Position { get; set; } = new();
-        public ReactiveProperty<Quaternion> Rotation { get; set; } = new();
+        public ReactiveProperty<Vector3> Position { get; } = new();
+        public ReactiveProperty<Quaternion> Rotation { get; } = new();
 
         public void Initialize()
         {
@@ -22,6 +22,16 @@ namespace BackwoodsLife.Scripts.Data.Player
         {
             Position.Dispose();
             Rotation.Dispose();
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            Position.Value = position;
+        }
+
+        public void SetRoration(Quaternion rotation)
+        {
+            Rotation.Value = rotation;
         }
     }
 }

@@ -39,9 +39,6 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
 
         public void FollowTarget(IPlayerViewModel playerViewModel)
         {
-            Assert.IsNotNull(_followSystem, $"{_followSystem.GetType()} is null.");
-            Assert.IsNotNull(playerViewModel, $"{playerViewModel.GetType()} is null.");
-
             _followSystem.SetTarget(playerViewModel);
         }
     }

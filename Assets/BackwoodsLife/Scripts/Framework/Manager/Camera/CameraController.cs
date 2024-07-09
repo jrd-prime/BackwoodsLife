@@ -25,6 +25,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Camera
 
         public void RemoveTarget()
         {
+            Debug.LogWarning("RemoveFollowTarget " + _targetViewModel);
             _targetViewModel = null;
             _subscribe?.Dispose();
         }
@@ -32,7 +33,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Camera
         private void SubscribeToTargetPosition(IPlayerViewModel target)
         {
             _targetViewModel = target;
-            _targetViewModel.CurrentPosition
+            _targetViewModel.PlayerPosition
                 .Subscribe(x => transform.DOMove(x, 1f).SetEase(Ease.OutQuad))
                 .AddTo(_subscribe);
         }

@@ -1,4 +1,5 @@
-﻿using BackwoodsLife.Scripts.Data.Player;
+﻿using System;
+using BackwoodsLife.Scripts.Data.Player;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -9,26 +10,31 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
     [RequireComponent(typeof(Rigidbody), typeof(Animator))]
     public class PlayerView : MonoBehaviour
     {
-
         private IPlayerViewModel _viewModel;
         private readonly CompositeDisposable _disposables = new();
 
         // Components
         private Animator _animator;
+        private Rigidbody _rigidbody;
+        private Vector3 moveDirection;
+        private Quaternion rotateDirection;
 
         [Inject]
         private void Construct(IPlayerViewModel viewModel) => _viewModel = viewModel;
 
         private void Awake()
         {
-            
-            
+            _rigidbody = GetComponent<Rigidbody>();
             _animator = gameObject.GetComponent<Animator>();
 
             Assert.IsNotNull(_viewModel,
                 $"ViewModel is null. Ensure that \"{this}\" is added to auto-injection in GameSceneContext prefab");
 
-            _viewModel.PlayerPosition
+            // _viewModel.PlayerPosition
+            //     .Subscribe(PositionHandler)
+            //     .AddTo(_disposables);
+
+            _viewModel.MoveDirection
                 .Subscribe(PositionHandler)
                 .AddTo(_disposables);
 
@@ -43,11 +49,36 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
                 .AddTo(_disposables);
         }
 
-        private void PositionHandler(Vector3 position) =>
-            transform.position = new Vector3(position.x, transform.position.y, position.z);
+        private void PositionHandler(Vector3 position)
+        {
+            _rigidbody.position = position;
+            moveDirection = position;
+        }
 
-        private void RotationHandler(Quaternion position) => transform.rotation = position;
+        private void RotationHandler(Quaternion rotationQuaternion)
+        {
+            _rigidbody.rotation = rotationQuaternion;
+            rotateDirection = rotationQuaternion;
+        }
 
+        private void FixedUpdate()
+        {
+            _rigidbody.position += moveDirection * (5f * Time.fixedDeltaTime);
+            if (moveDirection.sqrMagnitude > 0)
+            {
+                // We create a Quaternion, the type of variable we use to represent rotations and
+                // we use Quaternion.LookRotation to look at our moveInput vector which always points
+                // towards the moving direction, and we say that we want to rotate the Vector3.up (Y axis).
+                Quaternion rotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+
+                // Then we pass that rotation to our Rigidbody rot using Quaternion.Lerp which is a method
+                // to interpolate between two quaternions by a given time. In our case we use as the first
+                // Quaternion the _Rigidbody.rotation and as a second Quaternion our previously calculated rotation,
+                // then we add time by writing Time.fixedDeltaTime (fixed cuz we are in the method FixedUpdate)
+                // and we multiply that by a rotationRate to make it go faster or slower.
+                _rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, rotation, Time.fixedDeltaTime * 100);
+            }
+        }
 
         private void StartAnimation(string x)
         {

@@ -1,5 +1,6 @@
 ﻿using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework;
+using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.Input;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
@@ -9,15 +10,17 @@ using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
+using VContainer.Unity;
 
 namespace BackwoodsLife.Scripts.Gameplay.Player
 {
-    public class PlayerViewModel : IPlayerViewModel
+    public class PlayerViewModel : IPlayerViewModel, IFixedTickable
     {
         public ReadOnlyReactiveProperty<Vector3> PlayerPosition => _playerModel.Position;
         public ReadOnlyReactiveProperty<Quaternion> PlayerRotation => _playerModel.Rotation;
 
         public ReactiveProperty<Vector3> CurrentPosition { get; } = new();
+        public ReactiveProperty<Vector3> MoveDirection { get; } = new();
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
         public ReactiveProperty<bool> DestinationReached { get; } = new(false);
 
@@ -31,21 +34,26 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         private float _moveSpeed;
         private float _rotateSpeedInDeg;
-        private IConfigManager configManager;
+        private IConfigManager _configManager;
+        private FollowSystem _followSystem;
 
         [Inject]
         private void Construct(PlayerModel playerModel, JoystickModel joystickModel, IInput input,
-            IConfigManager saveAndLoadManager)
+            IConfigManager saveAndLoadManager, FollowSystem followSystem)
         {
             _playerModel = playerModel;
             _input = input;
             _joystick = joystickModel;
-            configManager = saveAndLoadManager;
+            _configManager = saveAndLoadManager;
+            _followSystem = followSystem;
         }
 
         public void Initialize()
         {
-            var characterConfiguration = configManager.GetConfig<SCharacterConfiguration>();
+            Assert.IsNotNull(_followSystem, $"{_followSystem.GetType()} is null.");
+            _followSystem.SetTarget(this);
+
+            var characterConfiguration = _configManager.GetConfig<SCharacterConfiguration>();
             Assert.IsNotNull(characterConfiguration, "Character configuration not found!");
 
             _moveSpeed = characterConfiguration.moveSpeed;
@@ -56,6 +64,17 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
                 // .Skip(1)
                 .Subscribe(SetDirection)
                 .AddTo(_disposables);
+        }
+
+
+        private void SetDirection(Vector3 direction)
+        {
+            _direction = direction;
+            MoveDirection.Value = direction;
+
+            _playerModel.SetPosition();
+            _playerModel.SetRoration();
+
         }
 
         public void Dispose() => _disposables.Dispose();
@@ -80,11 +99,14 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
             }
         }
 
-        private void SetDirection(Vector3 direction) => _direction = direction;
-
 
         public void SetAnimation(string animationName) => PlayAnimationByName.Value = animationName;
         public void MoveToPosition(Vector3 position) => _playerModel.Position.Value = position;
         public void SetModelPosition(Vector3 transformPosition) => CurrentPosition.Value = transformPosition;
+
+        public void FixedTick()
+        {
+            Debug.LogWarning("Fixed tick");
+        }
     }
 }

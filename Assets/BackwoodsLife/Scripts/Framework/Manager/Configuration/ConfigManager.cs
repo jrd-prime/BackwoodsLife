@@ -40,10 +40,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 
         public void ServiceInitialization()
         {
-            foreach (var config in ConfigsCache)
-            {
-                Debug.LogWarning(config.GetType());
-            }
         }
     }
 }

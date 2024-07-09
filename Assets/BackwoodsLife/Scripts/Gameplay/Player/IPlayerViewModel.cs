@@ -14,6 +14,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         public ReactiveProperty<Vector3> CurrentPosition { get; }
 
+        public ReactiveProperty<Vector3> MoveDirection { get; }
         /// <summary>
         /// <c>PlayerView</c> подписан на это св-во и запускает анимацию при изменении значения
         /// </summary>
