@@ -33,7 +33,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Camera
         private void SubscribeToTargetPosition(IPlayerViewModel target)
         {
             _targetViewModel = target;
-            _targetViewModel.PlayerPosition
+            _targetViewModel.Position
                 .Subscribe(x => transform.DOMove(x, 1f).SetEase(Ease.OutQuad))
                 .AddTo(_subscribe);
         }

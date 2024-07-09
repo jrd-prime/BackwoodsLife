@@ -13,79 +13,73 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private IPlayerViewModel _viewModel;
         private readonly CompositeDisposable _disposables = new();
 
-        // Components
-        private Animator _animator;
-        private Rigidbody _rigidbody;
-        private Vector3 moveDirection;
-        private Quaternion rotateDirection;
-
         [Inject]
         private void Construct(IPlayerViewModel viewModel) => _viewModel = viewModel;
 
         private void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
-            _animator = gameObject.GetComponent<Animator>();
-            
-            _viewModel.Rigidbody = _rigidbody;
-            _viewModel.Animator =_animator;
+            rb = GetComponent<Rigidbody>();
+            animator = gameObject.GetComponent<Animator>();
 
             Assert.IsNotNull(_viewModel,
                 $"ViewModel is null. Ensure that \"{this}\" is added to auto-injection in GameSceneContext prefab");
 
-            // _viewModel.PlayerPosition
-            //     .Subscribe(PositionHandler)
+            _viewModel.MoveDirection.Subscribe(x => { dir = x; }).AddTo(_disposables);
+
+            var fixdt = Time.fixedDeltaTime;
+            Debug.Log(fixdt);
+
+            Observable.Interval(TimeSpan.FromSeconds(fixdt))
+                .Subscribe(_ =>
+                {
+                    Debug.Log("New position: " + _viewModel.MoveDirection.Value);
+                    rb.position += _viewModel.MoveDirection.Value * 10f;
+                    // Debug.Log($"{_joystick.MoveDirection.Value} di");
+                    // _direction = _joystick.MoveDirection.Value;
+                    // MoveDirection.Value = _joystick.MoveDirection.Value;
+                    // Тут можно обновлять ваше состояние или выполнять другие действия
+                })
+                .AddTo(_disposables);
+
+
+            // _viewModel.Position
+            //     .Subscribe(delta =>
+            //     {
+            //         Debug.LogWarning("New position: " + delta);
+            //         rb.position += delta;
+            //     })
             //     .AddTo(_disposables);
 
-            _viewModel.MoveDirection
-                .Subscribe(PositionHandler)
-                .AddTo(_disposables);
-
-            _viewModel.PlayerRotation
-                .Subscribe(RotationHandler)
-                .AddTo(_disposables);
-
-            _viewModel.PlayAnimationByName
-                .Skip(1)
-                // .DistinctUntilChanged()
-                .Subscribe(StartAnimation)
-                .AddTo(_disposables);
+            // _viewModel.Rotation
+            //     .Skip(1)
+            //     .Subscribe(rotation =>
+            //     {
+            //         Debug.LogWarning("New rotation: " + rotation);
+            //         rb.rotation = rotation;
+            //     })
+            //     .AddTo(_disposables);
+            //
+            // _viewModel.PlayAnimationByName
+            //     .Skip(1)
+            //     // .DistinctUntilChanged()
+            //     .Subscribe(x =>
+            //     {
+            //         Debug.LogWarning("<color=cyan>Start Animation >>> " + x + "</color>");
+            //         animator.CrossFade(x, PlayerConst.AnimationCrossFade);
+            //     })
+            //     .AddTo(_disposables);
         }
 
-        private void PositionHandler(Vector3 position)
-        {
-            _rigidbody.position = position;
-        }
+        public Animator animator { get; set; }
 
-        private void RotationHandler(Quaternion rotationQuaternion)
-        {
-            _rigidbody.rotation = rotationQuaternion;
-        }
+        public Rigidbody rb { get; set; }
 
-        private void FixedUpdate()
-        {
-            _rigidbody.position += moveDirection * (5f * Time.fixedDeltaTime);
-            if (moveDirection.sqrMagnitude > 0)
-            {
-                // We create a Quaternion, the type of variable we use to represent rotations and
-                // we use Quaternion.LookRotation to look at our moveInput vector which always points
-                // towards the moving direction, and we say that we want to rotate the Vector3.up (Y axis).
-                Quaternion rotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+        // private void FixedUpdate()
+        // {
+        //     rb.position += dir * 0.1f;
+        // }
 
-                // Then we pass that rotation to our Rigidbody rot using Quaternion.Lerp which is a method
-                // to interpolate between two quaternions by a given time. In our case we use as the first
-                // Quaternion the _Rigidbody.rotation and as a second Quaternion our previously calculated rotation,
-                // then we add time by writing Time.fixedDeltaTime (fixed cuz we are in the method FixedUpdate)
-                // and we multiply that by a rotationRate to make it go faster or slower.
-                _rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, rotation, Time.fixedDeltaTime * 100);
-            }
-        }
-
-        private void StartAnimation(string x)
-        {
-            Debug.LogWarning("<color=cyan>Start Animation >>> " + x + "</color>");
-            _animator.CrossFade(x, PlayerConst.AnimationCrossFade);
-        }
+        public Vector3 dir { get; set; }
 
         private void OnDestroy() => _disposables.Dispose();
     }

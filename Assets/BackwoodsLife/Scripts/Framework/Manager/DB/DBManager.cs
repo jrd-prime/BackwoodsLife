@@ -39,11 +39,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.DB
             Debug.LogWarning("Return fake data from DB. PlayerId: " + playerId); // TODO remove
 
             var fakeData = new Dictionary<Type, object>();
-            var fakePlayerModel = new PlayerModel
-            {
-                Position = new ReactiveProperty<Vector3>(new Vector3(-4, 0, -4)),
-                Rotation = new ReactiveProperty<Quaternion>(new Quaternion())
-            };
+            var fakePlayerModel = new PlayerModel();
+            fakePlayerModel.SetPosition(new Vector3(-4, 0, -4));
+            fakePlayerModel.SetRoration(new Quaternion());
 
             fakeData.Add(typeof(PlayerModel), fakePlayerModel);
 

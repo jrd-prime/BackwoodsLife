@@ -6,15 +6,19 @@ using VContainer.Unity;
 
 namespace BackwoodsLife.Scripts.Gameplay.Player
 {
-    public interface IPlayerViewModel : IViewModel, IDisposable, ITickable
+    public interface IPlayerViewModel : IViewModel, IDisposable, IFixedTickable
     {
-        /// <summary>Позиция из модели</summary>
-        public ReadOnlyReactiveProperty<Vector3> PlayerPosition { get; }
-        public ReadOnlyReactiveProperty<Quaternion> PlayerRotation { get; }
+        /// <summary>Position from model</summary>
+        public ReadOnlyReactiveProperty<Vector3> Position { get; }
+
+        /// <summary>Rotation from model</summary>
+        public ReadOnlyReactiveProperty<Quaternion> Rotation { get; }
+
 
         public ReactiveProperty<Vector3> CurrentPosition { get; }
 
         public ReactiveProperty<Vector3> MoveDirection { get; }
+
         /// <summary>
         /// <c>PlayerView</c> подписан на это св-во и запускает анимацию при изменении значения
         /// </summary>
@@ -26,8 +30,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         /// </summary>
         public ReactiveProperty<bool> DestinationReached { get; }
 
-        Rigidbody Rigidbody { get; set; }
-        Animator Animator { get; set; }
 
         public void SetAnimation(string animationName);
         void MoveToPosition(Vector3 position);

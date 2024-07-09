@@ -139,12 +139,17 @@ PrefabInstance:
     - target: {fileID: 1264170747356316523, guid: 38de798b6feca9c4780f6fdf3fa288dd,
         type: 3}
       propertyPath: m_Drag
-      value: 159.27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1264170747356316523, guid: 38de798b6feca9c4780f6fdf3fa288dd,
         type: 3}
       propertyPath: m_Constraints
-      value: 32
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264170747356316523, guid: 38de798b6feca9c4780f6fdf3fa288dd,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3065223708380324432, guid: 38de798b6feca9c4780f6fdf3fa288dd,
         type: 3}
