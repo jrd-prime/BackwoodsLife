@@ -41,7 +41,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.DB
             var fakeData = new Dictionary<Type, object>();
             var fakePlayerModel = new PlayerModel();
             fakePlayerModel.SetPosition(new Vector3(-4, 0, -4));
-            fakePlayerModel.SetRoration(new Quaternion());
+            fakePlayerModel.SetRotation(new Quaternion());
 
             fakeData.Add(typeof(PlayerModel), fakePlayerModel);
 

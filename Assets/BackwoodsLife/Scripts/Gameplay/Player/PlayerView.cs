@@ -1,5 +1,4 @@
 ﻿using System;
-using BackwoodsLife.Scripts.Data.Player;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -12,53 +11,35 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
     {
         private IPlayerViewModel _viewModel;
         private readonly CompositeDisposable _disposables = new();
+        private float moveSpeed;
+        private float rotationSpeed;
 
         [Inject]
         private void Construct(IPlayerViewModel viewModel) => _viewModel = viewModel;
+
+
+        public Animator animator { get; set; }
+
+        public Rigidbody rb { get; set; }
+
+        public Vector3 moveDirection { get; set; }
+        public Quaternion rot { get; set; }
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
             animator = gameObject.GetComponent<Animator>();
+            moveSpeed = _viewModel.MoveSpeed;
+            rotationSpeed = _viewModel.RotationSpeed;
+
 
             Assert.IsNotNull(_viewModel,
                 $"ViewModel is null. Ensure that \"{this}\" is added to auto-injection in GameSceneContext prefab");
 
-            _viewModel.MoveDirection.Subscribe(x => { dir = x; }).AddTo(_disposables);
-
-            var fixdt = Time.fixedDeltaTime;
-            Debug.Log(fixdt);
-
-            Observable.Interval(TimeSpan.FromSeconds(fixdt))
-                .Subscribe(_ =>
-                {
-                    Debug.Log("New position: " + _viewModel.MoveDirection.Value);
-                    rb.position += _viewModel.MoveDirection.Value * 10f;
-                    // Debug.Log($"{_joystick.MoveDirection.Value} di");
-                    // _direction = _joystick.MoveDirection.Value;
-                    // MoveDirection.Value = _joystick.MoveDirection.Value;
-                    // Тут можно обновлять ваше состояние или выполнять другие действия
-                })
+            _viewModel.MoveDirection
+                .Subscribe(newDirection => { moveDirection = newDirection; })
                 .AddTo(_disposables);
 
-
-            // _viewModel.Position
-            //     .Subscribe(delta =>
-            //     {
-            //         Debug.LogWarning("New position: " + delta);
-            //         rb.position += delta;
-            //     })
-            //     .AddTo(_disposables);
-
-            // _viewModel.Rotation
-            //     .Skip(1)
-            //     .Subscribe(rotation =>
-            //     {
-            //         Debug.LogWarning("New rotation: " + rotation);
-            //         rb.rotation = rotation;
-            //     })
-            //     .AddTo(_disposables);
-            //
             // _viewModel.PlayAnimationByName
             //     .Skip(1)
             //     // .DistinctUntilChanged()
@@ -70,16 +51,25 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
             //     .AddTo(_disposables);
         }
 
-        public Animator animator { get; set; }
+        private void FixedUpdate()
+        {
+            if (moveDirection == Vector3.zero) return;
+            Move();
+        }
 
-        public Rigidbody rb { get; set; }
+        private void Move()
+        {
+            rb.position += moveDirection * moveSpeed;
+            _viewModel.SetModelPosition(rb.position);
+            
+            if (moveDirection.sqrMagnitude > 0)
+            {
+                var rotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+                rb.rotation = Quaternion.Lerp(rb.rotation, rotation, Time.fixedDeltaTime * rotationSpeed);
+                _viewModel.SetModelRotation(rb.rotation);
+            }
+        }
 
-        // private void FixedUpdate()
-        // {
-        //     rb.position += dir * 0.1f;
-        // }
-
-        public Vector3 dir { get; set; }
 
         private void OnDestroy() => _disposables.Dispose();
     }

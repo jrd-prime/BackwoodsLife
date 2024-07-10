@@ -1,5 +1,6 @@
 ﻿using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Framework.Scriptable.Configuration
 {
@@ -9,6 +10,6 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable.Configuration
     public class SCharacterConfiguration : ScriptableObject
     {
         [Range(0.1f, 100f)] public float moveSpeed = 5f;
-        [Range(45f, 270f)] public float rotateSpeedInDeg = 180f;
+        [FormerlySerializedAs("rotateSpeedInDeg")] [Range(45f, 270f)] public float rotationSpeed = 180f;
     }
 }
