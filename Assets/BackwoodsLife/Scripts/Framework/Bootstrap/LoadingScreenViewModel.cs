@@ -1,7 +1,6 @@
 ﻿using R3;
 using UnityEngine.Assertions;
 using VContainer;
-using VContainer.Unity;
 
 namespace BackwoodsLife.Scripts.Framework.Bootstrap
 {
