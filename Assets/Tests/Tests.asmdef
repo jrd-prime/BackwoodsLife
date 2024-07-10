@@ -15,7 +15,9 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "nunit.framework.dll",
-        "R3.dll"
+        "R3.dll",
+        "Moq.dll",
+        "Moq.AutoMock.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [
