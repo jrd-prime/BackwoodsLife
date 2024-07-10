@@ -59,7 +59,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         private void Move()
         {
-            rb.position += moveDirection * moveSpeed;
+            rb.position += moveDirection * (moveSpeed * Time.fixedDeltaTime);
             _viewModel.SetModelPosition(rb.position);
             
             if (moveDirection.sqrMagnitude > 0)
