@@ -1,0 +1,91 @@
+.inventory-hud-container {
+    -unity-text-outline-color: rgb(128, 128, 128);
+    width: 96px;
+    min-height: 128px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    background-color: rgba(0, 0, 0, 0);
+    align-items: auto;
+    align-self: center;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.inventory-hud-item-container {
+    flex-grow: 0;
+    width: 80px;
+    height: 32px;
+    background-color: rgb(254, 254, 222);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    align-items: center;
+    align-self: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 8px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 2px;
+    border-left-width: 0;
+    border-bottom-color: rgb(190, 181, 139);
+    border-left-color: rgb(190, 181, 139);
+    border-right-color: rgb(190, 181, 139);
+    border-top-color: rgb(190, 181, 139);
+    min-width: auto;
+}
+
+.i-hud-item-icon {
+    flex-grow: 0;
+    height: 22px;
+    width: 22px;
+    background-color: rgba(56, 56, 56, 0);
+    align-items: flex-start;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    position: absolute;
+    left: 6px;
+    background-image: url("project://database/Assets/BackwoodsLife/Res/UI/Inventory/wood-icon.png?fileID=2800000&guid=b5050fb8b7b7ccd47be8d7e819966f74&type=3#wood-icon");
+    top: 4px;
+}
+
+.i-hud-item-label {
+    position: absolute;
+    left: auto;
+    width: 44px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    height: 24px;
+    align-items: auto;
+    align-self: center;
+    justify-content: center;
+    overflow: hidden;
+    -unity-text-align: middle-right;
+    -unity-font-style: bold;
+    -unity-font: url("project://database/Assets/BackwoodsLife/Res/Fonts/Dosis/Dosis-Bold.ttf?fileID=12800000&guid=22ec7a19c145b4a4788639f48c32710b&type=3#Dosis-Bold");
+    font-size: 16px;
+    top: 3px;
+    right: 6px;
+    background-color: rgba(63, 63, 63, 0);
+    color: rgb(55, 55, 55);
+}
