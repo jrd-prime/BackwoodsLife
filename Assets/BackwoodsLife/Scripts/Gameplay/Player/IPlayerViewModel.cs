@@ -13,15 +13,15 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         /// <summary>Rotation from model</summary>
         public ReadOnlyReactiveProperty<Quaternion> Rotation { get; }
 
+        /// <summary>MoveDirection from Joystick</summary>
         public ReadOnlyReactiveProperty<Vector3> MoveDirection { get; }
+        public ReadOnlyReactiveProperty<float> MoveSpeed { get; }
+        public ReadOnlyReactiveProperty<float> RotationSpeed { get; }
 
         /// <summary>
         /// <c>PlayerView</c> подписан на это св-во и запускает анимацию при изменении значения
         /// </summary>
         public ReactiveProperty<string> PlayAnimationByName { get; }
-
-        public float MoveSpeed { get; }
-        public float RotationSpeed { get; }
 
 
         public void SetAnimation(string animationName);

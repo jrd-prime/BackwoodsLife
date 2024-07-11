@@ -13,8 +13,8 @@ namespace Tests
         public ReadOnlyReactiveProperty<Quaternion> Rotation => _model.Rotation;
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _model.MoveDirection;
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
-        public float MoveSpeed { get; }
-        public float RotationSpeed { get; }
+        public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
+        public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
 
         public void Initialize()
         {
@@ -23,8 +23,8 @@ namespace Tests
         public PlayerViewModelMock(PlayerModel model, float moveSpeed, float rotationSpeed)
         {
             _model = model;
-            MoveSpeed = moveSpeed;
-            RotationSpeed = rotationSpeed;
+            _model.SetMoveSpeed(moveSpeed);
+            _model.SetRotationSpeed(rotationSpeed);
         }
 
         public void SetAnimation(string animationName)

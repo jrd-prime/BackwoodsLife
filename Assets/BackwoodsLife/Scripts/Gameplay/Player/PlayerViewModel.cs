@@ -15,10 +15,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReadOnlyReactiveProperty<Vector3> Position => _model.Position;
         public ReadOnlyReactiveProperty<Quaternion> Rotation => _model.Rotation;
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _model.MoveDirection;
+        public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
+        public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
-
-        public float MoveSpeed { get; private set; }
-        public float RotationSpeed { get; private set; }
 
         private IConfigManager _configManager;
         private PlayerModel _model;
@@ -44,8 +43,8 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
             var characterConfiguration = _configManager.GetConfig<SCharacterConfiguration>();
             Assert.IsNotNull(characterConfiguration, "Character configuration not found!");
 
-            MoveSpeed = characterConfiguration.moveSpeed;
-            RotationSpeed = characterConfiguration.rotationSpeed;
+            _model.SetMoveSpeed(characterConfiguration.moveSpeed);
+            _model.SetRotationSpeed(characterConfiguration.rotationSpeed);
 
             Subscribe();
         }

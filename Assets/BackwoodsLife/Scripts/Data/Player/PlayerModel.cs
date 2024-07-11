@@ -12,10 +12,14 @@ namespace BackwoodsLife.Scripts.Data.Player
         public ReactiveProperty<Vector3> Position { get; } = new();
         public ReactiveProperty<Quaternion> Rotation { get; } = new();
         public ReactiveProperty<Vector3> MoveDirection { get; } = new();
+        public ReactiveProperty<float> MoveSpeed { get; } = new();
+        public ReactiveProperty<float> RotationSpeed { get; } = new();
 
         public void SetPosition(Vector3 position) => Position.Value = position;
         public void SetRotation(Quaternion rotation) => Rotation.Value = rotation;
         public void SetMoveDirection(Vector3 moveDirection) => MoveDirection.Value = moveDirection;
+        public void SetMoveSpeed(float value) => MoveSpeed.Value = value;
+        public void SetRotationSpeed(float value) => RotationSpeed.Value = value;
 
         public void Dispose()
         {

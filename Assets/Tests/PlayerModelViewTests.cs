@@ -95,7 +95,7 @@ namespace Tests
         public void MoveSpeed_ShouldBeInitialized()
         {
             // Arrange & Act
-            var moveSpeed = _viewModel.MoveSpeed;
+            var moveSpeed = _model.MoveSpeed.Value;
 
             // Assert
             Assert.AreEqual(5f, moveSpeed);
@@ -105,7 +105,7 @@ namespace Tests
         public void RotationSpeed_ShouldBeInitialized()
         {
             // Arrange & Act
-            var rotationSpeed = _viewModel.RotationSpeed;
+            var rotationSpeed = _model.RotationSpeed.Value;
 
             // Assert
             Assert.AreEqual(10f, rotationSpeed);
