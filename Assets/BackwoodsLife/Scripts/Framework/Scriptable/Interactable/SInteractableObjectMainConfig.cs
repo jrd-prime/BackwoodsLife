@@ -6,11 +6,13 @@ using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Framework.Scriptable.Interactable
 {
-    public enum InteractableObjectType
+    public enum EInteractableObjectType
     {
         NotSet,
         Building,
-        Gatherable
+        Gatherable,
+        Resource,
+        Food
     }
 
     public enum WorldPosition
@@ -26,7 +28,7 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable.Interactable
     {
         [ReadOnly] public string name;
         public WorldPosition worldPosition = WorldPosition.NotSet;
-        public InteractableObjectType interactableObjectType = InteractableObjectType.NotSet;
+        [FormerlySerializedAs("interactableObjectType")] public EInteractableObjectType eInteractableObjectType = EInteractableObjectType.NotSet;
         public Vector3 spawnPosition;
         public bool upgardable;
 
@@ -39,9 +41,7 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable.Interactable
         private void OnValidate()
         {
             name = ((Object)this).name;
-            Assert.AreNotEqual(worldPosition, WorldPosition.NotSet,
-                $"WorldPosition must be set. ScriptableObject: {((Object)this).name}");
-            Assert.AreNotEqual(interactableObjectType, InteractableObjectType.NotSet,
+            Assert.AreNotEqual(eInteractableObjectType, EInteractableObjectType.NotSet,
                 $"InteractableObjectType must be set. ScriptableObject: {((Object)this).name}");
         }
     }

@@ -17,7 +17,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Camera
 
         public void SetFollowTarget(IPlayerViewModel target)
         {
-            Debug.LogWarning("SetFollowTarget " + target);
+            Debug.Log("SetFollowTarget " + target);
 
             if (_targetViewModel != null) _subscribe?.Dispose();
             SubscribeToTargetPosition(target);
@@ -25,7 +25,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Camera
 
         public void RemoveTarget()
         {
-            Debug.LogWarning("RemoveFollowTarget " + _targetViewModel);
+            Debug.Log("RemoveFollowTarget " + _targetViewModel);
             _targetViewModel = null;
             _subscribe?.Dispose();
         }

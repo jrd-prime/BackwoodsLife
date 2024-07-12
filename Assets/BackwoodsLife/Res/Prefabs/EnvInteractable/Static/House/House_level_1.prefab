@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4491440047986317658}
   - component: {fileID: -7914001899322375128}
   m_Layer: 6
-  m_Name: House
+  m_Name: House_level_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e21236fa9e845b0bae11742996caa4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableObjectConfig: {fileID: 11400000, guid: 6b1af4a2e099b1a4b80f0082cb0c8109,
+    type: 2}
 --- !u!54 &4491440047986317658
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,4 +1,7 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Framework;
+using BackwoodsLife.Scripts.Framework.Helpers;
+using BackwoodsLife.Scripts.Gameplay.Environment.Interactable;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.InteractableObjects
@@ -8,40 +11,39 @@ namespace BackwoodsLife.Scripts.Gameplay.InteractableObjects
         private void OnTriggerEnter(Collider other)
         {
             // Проверяем, что объект, вошедший в зону триггера, находится на слое Player
-            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            if (other.gameObject.layer != (int)JLayers.Player) return;
+
+            Debug.Log($"Игрок вошел в зону триггера! {name}");
+
+            if (other != null)
             {
-                // Действие, которое произойдет при входе игрока в зону триггера
-                Debug.Log("Игрок вошел в зону триггера!");
-                // Добавьте здесь другие действия, которые вы хотите выполнить
+                Transform parentTransform = transform.parent;
 
-                // Проверяем, что other не null
-                if (other != null)
+                if (parentTransform != null)
                 {
-                    // Получаем родительский объект текущего объекта
-                    Transform parentTransform = transform.parent;
+                    Debug.LogWarning(transform.parent.name);
+                    var interactable = transform.parent.GetComponent<NewInteractable>();
 
-                    if (parentTransform != null)
+                    if (interactable == null)
                     {
-                        Debug.LogWarning(transform.parent.name);
-                        var intt = transform.parent.GetComponent<Interactable>();
-
-                        if (intt == null)
-                        {
-                            throw new NullReferenceException(
-                                $"Interactable is null: {transform.parent.name}. You must set to object Interactable component. ");
-                        }
-
-                        intt.OnInteract();
+                        throw new NullReferenceException(
+                            $"Interactable is null on {parentTransform.name} prefab. You must set to object Interactable component. ");
                     }
-                    else
-                    {
-                        Debug.LogWarning("Текущий объект не имеет родителя.");
-                    }
+
+                    var a = other.GetComponent<PlayerInteractSystem>();
+
+                    a.Interact(ref interactable);
+
+                    // _collectSystem.Collect(interactable);
                 }
                 else
                 {
-                    Debug.LogWarning("Объект, вызвавший триггер, не существует.");
+                    Debug.LogWarning("Текущий объект не имеет родителя.");
                 }
+            }
+            else
+            {
+                Debug.LogWarning("Объект, вызвавший триггер, не существует.");
             }
         }
     }

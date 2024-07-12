@@ -14,7 +14,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.LogWarning("BoostrapContext");
+            Debug.Log("BoostrapContext");
             // Services
             builder.Register<LoadingScreenProvider>(Lifetime.Singleton).AsSelf();
             builder.RegisterComponent(gameSceneManager);

@@ -2,7 +2,8 @@
 {
     public enum JLayers
     {
+        Player = 3,
         Ground = 31,
-        Gatherable = 30
+        Gatherable = 30,
     }
 }

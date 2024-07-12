@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c69371075e44653b5a85e3f9868317a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableObjectConfig: {fileID: 11400000, guid: 2e05b773702ee434bbf6db011d60de45,
+    type: 2}
 --- !u!1001 &1441839233640703607
 PrefabInstance:
   m_ObjectHideFlags: 0

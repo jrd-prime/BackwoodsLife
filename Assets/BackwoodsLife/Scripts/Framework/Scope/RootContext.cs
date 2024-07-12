@@ -6,10 +6,12 @@ using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using BackwoodsLife.Scripts.Framework.Manager.Input;
+using BackwoodsLife.Scripts.Framework.Manager.Inventory;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using BackwoodsLife.Scripts.Framework.Scriptable;
 using BackwoodsLife.Scripts.Framework.Scriptable.Configuration;
+using BackwoodsLife.Scripts.Gameplay.InteractableObjects;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
@@ -27,11 +29,13 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private CameraController cameraController;
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private EventSystem eventSystem;
-        [FormerlySerializedAs("sMainConfiguration")] [SerializeField] private SMainConfigurations sMainConfigurations;
+
+        [FormerlySerializedAs("sMainConfiguration")] [SerializeField]
+        private SMainConfigurations sMainConfigurations;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.LogWarning("RootContext");
+            Debug.Log("RootContext");
 
             // Check(servicesConfig);
             Check(cameraController);
@@ -46,7 +50,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             var audioSourceProvider = Check(audioManager.GetComponentInChildren<AudioSourceProvider>());
 
             builder.RegisterInstance(sMainConfigurations);
-            
+
 
             // builder.RegisterComponent(resourceManager).AsSelf();
             // builder.RegisterComponent(extractableResourcesConfigProvider).AsSelf();
@@ -65,6 +69,9 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.Register(typeof(DBManager), Lifetime.Singleton).As<IDBManager>();
             builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();
             builder.Register(typeof(SaveAndLoadManager), Lifetime.Singleton).As<ISaveAndLoadManager>();
+            builder.Register<InventoryManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+
+            // Systems
             builder.Register<FollowSystem>(Lifetime.Singleton).AsSelf();
 
 

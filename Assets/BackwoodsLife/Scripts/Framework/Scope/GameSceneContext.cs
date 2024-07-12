@@ -1,4 +1,5 @@
 ﻿using BackwoodsLife.Scripts.Data.Player;
+using BackwoodsLife.Scripts.Gameplay.InteractableObjects;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.LogWarning("GameSceneContext");
+            Debug.Log("GameSceneContext");
 
             // builder.Register<NavMeshManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
@@ -19,6 +20,8 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             // builder.Register<PlayerStateMachine>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<PlayerViewModel>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<JoystickViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+
+            builder.Register<CollectSystem>(Lifetime.Singleton).AsSelf();
 
             // Systems
             // builder.Register<GroundSystem>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

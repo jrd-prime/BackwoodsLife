@@ -45,7 +45,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
 
         public async void ServiceInitialization()
         {
-            Debug.LogWarning("GAME SCENE LOADING TASK = " + GameSceneLoadingTask);
+            Debug.Log("GAME SCENE LOADING TASK = " + GameSceneLoadingTask);
 
             _gameSceneInstance = await GameSceneLoadingTask;
             Assert.IsTrue(_gameSceneInstance.Scene.isLoaded, "Failed to load game scene");
@@ -56,7 +56,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
 
         private async UniTask SetupPlayerAsync()
         {
-            Debug.LogWarning("SETUP PLAYER");
+            Debug.Log("SETUP PLAYER");
             // var playerObj = FindObjectOfType<PlayerView>();
             // var playerData = _saveAndLoadManager.Get<PlayerModel>();
 
@@ -66,13 +66,13 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
 
         private async UniTask SetupStaticObjectsAsync()
         {
-            Debug.LogWarning("SetupStaticObjectsAsync");
+            Debug.Log("SetupStaticObjectsAsync");
             var a = _configManager.GetConfig<SStaticInteractableObjectsList>();
-            Debug.LogWarning(a);
+            Debug.Log(a);
 
             foreach (var av in a.staticInteractables)
             {
-                Debug.LogWarning($"av = {av}");
+                Debug.Log($"av = {av}");
 
                 var position = av.spawnPosition;
                 if (position == Vector3.zero)

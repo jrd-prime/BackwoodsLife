@@ -22,7 +22,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.DB
 
         public Dictionary<Type, object> GenerateAndGetForPlayerId(string playerId)
         {
-            Debug.LogWarning("DefaultDBManager GenerateAndGetForPlayerId()");
+            Debug.Log("DefaultDBManager GenerateAndGetForPlayerId()");
             return null;
         }
 
@@ -36,7 +36,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.DB
 
         public Dictionary<Type, object> LoadAllData(string playerId)
         {
-            Debug.LogWarning("Return fake data from DB. PlayerId: " + playerId); // TODO remove
+            Debug.Log("Return fake data from DB. PlayerId: " + playerId); // TODO remove
 
             var fakeData = new Dictionary<Type, object>();
             var fakePlayerModel = new PlayerModel();

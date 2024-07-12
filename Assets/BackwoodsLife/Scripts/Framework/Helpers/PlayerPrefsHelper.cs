@@ -9,13 +9,13 @@ namespace BackwoodsLife.Scripts.Framework.Helpers
         {
             if (PlayerPrefs.HasKey(key))
             {
-                Debug.LogWarning("GetOrSetPlayerId() - player id already exists");
-                Debug.LogWarning(PlayerPrefs.GetString(key) + " - player id");
+                Debug.Log("GetOrSetPlayerId() - player id already exists. " + PlayerPrefs.GetString(key) +
+                          " - player id");
                 return PlayerPrefs.GetString(key);
             }
 
             var value = ChangeNameHelper.GenerateGuid();
-            Debug.LogWarning("GetOrSetPlayerId() - new player id: " + value);
+            Debug.Log("GetOrSetPlayerId() - new player id: " + value);
             PlayerPrefs.SetString(key, value);
             return value;
         }

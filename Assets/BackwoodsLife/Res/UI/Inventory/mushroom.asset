@@ -19,4 +19,12 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  objectType: 2
+  objectType: 3
+  maxStackSize: 20
+  canBeSold: 1
+  sellPrice: 1
+  foodStaminaRegen: 3
+  foodEffect: 0
+  foodEffectDuration: 0
+  canBeCooked: 1
+  cookingTime: 5

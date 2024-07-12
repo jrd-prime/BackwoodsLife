@@ -1,4 +1,5 @@
 ﻿using BackwoodsLife.Scripts.Data.Inventory.JObjects;
+using BackwoodsLife.Scripts.Data.Inventory.JObjects.FoodObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable
     [CreateAssetMenu(fileName = "name", menuName = "BLScriptable/Stored Objects/New FOOD config", order = 100)]
     public class SFoodObjectConfig : SCommonData
     {
+        public EFoodType foodType = EFoodType.None;
         [Title("Food Stats")] [Range(0, 100)] public float foodStaminaRegen = 1;
         [Title("Food Effect")] public FoodEffect foodEffect = FoodEffect.None;
 
@@ -31,6 +33,8 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable
         [Range(10f, 100f)] public float poisonDamage = 10;
          */
     }
+
+ 
 
     public enum FoodEffect
     {
