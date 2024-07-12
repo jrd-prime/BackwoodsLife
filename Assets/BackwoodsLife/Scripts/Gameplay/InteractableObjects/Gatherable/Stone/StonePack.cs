@@ -1,6 +1,4 @@
-﻿using BackwoodsLife.Scripts.Data.Inventory.JObjects.ResourceObjects;
-using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Framework.Scriptable.Interactable;
+﻿using BackwoodsLife.Scripts.Framework.Scriptable.Interactable;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.InteractableObjects.Gatherable.Stone

@@ -9,10 +9,8 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable.Interactable
     public enum EInteractableObjectType
     {
         NotSet,
-        Building,
-        Gatherable,
-        Resource,
-        Food
+        Usable,
+        Collectable
     }
 
     public enum WorldPosition

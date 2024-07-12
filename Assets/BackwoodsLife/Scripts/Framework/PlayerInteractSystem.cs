@@ -1,6 +1,7 @@
-﻿using BackwoodsLife.Scripts.Framework.Scriptable.Interactable;
+﻿using System;
+using BackwoodsLife.Scripts.Framework.Scriptable.Interactable;
+using BackwoodsLife.Scripts.Gameplay.Environment;
 using BackwoodsLife.Scripts.Gameplay.Environment.Interactable;
-using BackwoodsLife.Scripts.Gameplay.InteractableObjects;
 using UnityEngine;
 using VContainer;
 
@@ -17,21 +18,19 @@ namespace BackwoodsLife.Scripts.Framework
             Debug.LogWarning($"collectSystem:{_collectSystem}");
         }
 
-        public void Collect(CollectRange interactableCollectRange)
-        {
-            Debug.LogWarning($"collectSystem:{_collectSystem}");
-
-        }
-
         public void Interact(ref NewInteractable interactable)
         {
-            if (!interactable.HasRequirements)
+            switch (interactable.InteractableType)
             {
-                if (interactable.Collectable)
-                {
-                    _collectSystem.Collect(ref interactable);
-                }
-                
+                case EInteractableObjectType.Collectable:
+                    var sInteractableCollectableData = interactable.data as SInteractableCollectableData;
+                    _collectSystem.Collect(sInteractableCollectableData);
+                    break;
+                case EInteractableObjectType.Usable:
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }
