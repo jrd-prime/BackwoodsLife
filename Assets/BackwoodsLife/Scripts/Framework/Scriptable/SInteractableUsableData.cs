@@ -9,6 +9,6 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable
     public class SInteractableUsableData : SInteractableObjectData
     {
         public override EInteractableObjectType InteractableType { get; protected set; }
-        public EBuildingType BuildingType { get; protected set; }
+        public EBuilding building { get; protected set; }
     }
 }

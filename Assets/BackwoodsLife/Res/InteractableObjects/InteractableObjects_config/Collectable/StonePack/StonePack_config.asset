@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24eddfb947e946fd892a5e6546e269c6, type: 3}
   m_Name: StonePack_config
   m_EditorClassIdentifier: 
-  interactableType: 2
+  interactableType: 1
   objectType: 2
-  toolType: 0
+  tool: 0
   resourceType: 3
   foodType: 0
   collectableData: {fileID: 11400000, guid: 7b9d220e78ca89248b9ec1be0e585f89, type: 2}

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using BackwoodsLife.Scripts.Gameplay.NewLook;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Framework.Scriptable
@@ -8,12 +10,8 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable
     public class SCollectableData : ScriptableObject
     {
         public CollectRange collectRange;
+   
     }
-
-    [Serializable]
-    public struct CollectRange
-    {
-        public int min;
-        public int max;
-    }
+    
+    
 }

@@ -1,6 +1,6 @@
 ﻿namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types
 {
-    public enum EBuildingType
+    public enum EBuilding
     {
         None = 0,
     }

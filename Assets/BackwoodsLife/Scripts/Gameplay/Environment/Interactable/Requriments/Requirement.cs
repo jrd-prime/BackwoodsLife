@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types;
+using BackwoodsLife.Scripts.Gameplay.NewLook;
 using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Requriments
@@ -8,12 +9,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Requriments
     [Serializable]
     public struct Requirement
     {
-        [FormerlySerializedAs("requiredTool")] public List<RequiredTool> tool;
-
-        [FormerlySerializedAs("requiredSkill")]
+        public List<RequiredResource> resource;
+        public List<RequiredTool> tool;
         public List<RequiredSkill> skill;
-
-        [FormerlySerializedAs("requiredBuilding")]
         public List<RequiredBuilding> building;
     }
 
@@ -22,25 +20,32 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Requriments
     }
 
     [Serializable]
+    public struct RequiredResource : IRequirement
+    {
+        public EResource type;
+        public int amount;
+    }
+
+    [Serializable]
     public struct RequiredBuilding : IRequirement
     {
-        public EBuildingType Type;
-        public int MinLevel;
+        public EBuilding type;
+        public int minLevel;
     }
 
 
     [Serializable]
     public struct RequiredSkill : IRequirement
     {
-        public ESkillType Type;
-        public int MinLevel;
+        public ESkill type;
+        public int minLevel;
     }
 
 
     [Serializable]
     public struct RequiredTool : IRequirement
     {
-        public EToolType Type;
-        public int MinLevel;
+        public ETool type;
+        public int minLevel;
     }
 }

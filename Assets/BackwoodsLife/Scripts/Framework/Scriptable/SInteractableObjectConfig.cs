@@ -4,6 +4,7 @@ using BackwoodsLife.Scripts.Gameplay.Environment;
 using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 //TODO add checks
 namespace BackwoodsLife.Scripts.Framework.Scriptable
@@ -17,8 +18,8 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable
         [ShowIf("@interactableType == EInteractableObjectType.Collectable")]
         public PlayerObjectType objectType = PlayerObjectType.None;
 
-        [ShowIf("@objectType == PlayerObjectType.Tool")]
-        public EToolType toolType = EToolType.None;
+        [FormerlySerializedAs("toolType")] [ShowIf("@objectType == PlayerObjectType.Tool")]
+        public ETool tool = ETool.None;
 
         [ShowIf("@objectType == PlayerObjectType.Resource")]
         public EResourceType resourceType = EResourceType.None;

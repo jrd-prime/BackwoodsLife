@@ -1,9 +1,9 @@
 ﻿namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types
 {
-    public enum ESkillType
+    public enum ETool
     {
         None = 0,
-        Gathering = 1,
-        Mining = 2
+        Knife = 1,
+        Axe = 2
     }
 }

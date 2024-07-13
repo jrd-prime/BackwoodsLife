@@ -22,7 +22,7 @@ namespace BackwoodsLife.Scripts.Framework.Systems
 
         public void Collect(ref SInteractableObjectConfig obj)
         {
-            Debug.LogWarning("Collect ADD");
+            Debug.LogWarning("COLLECT");
             var data = obj.collectableData;
             var amount = RandomCollector.GetRandom(data.collectRange.min, data.collectRange.max);
             _inventoryManager.IncreaseResource(obj.resourceType, amount);
@@ -30,15 +30,6 @@ namespace BackwoodsLife.Scripts.Framework.Systems
             {
                 new() { Type = obj.resourceType, Amount = amount },
                 new() { Type = EResourceType.Wood, Amount = amount * 2 }
-            });
-
-            Debug.LogWarning("Collect REMOVE");
-            _inventoryManager.DecreaseResource(obj.resourceType, amount);
-
-            _inventoryManager.DecreaseResources(new List<InventoryElement>
-            {
-                new() { Type = obj.resourceType, Amount = 33 },
-                new() { Type = EResourceType.Wood, Amount = 22 }
             });
         }
     }
