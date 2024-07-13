@@ -24,9 +24,14 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable.Interactable
         order = 100)]
     public class SInteractableObjectMainConfig : ScriptableObject
     {
-        [ReadOnly] public string name;
+        [FormerlySerializedAs("name")] [ReadOnly]
+        public string objName;
+
         public WorldPosition worldPosition = WorldPosition.NotSet;
-        [FormerlySerializedAs("interactableObjectType")] public EInteractableObjectType eInteractableObjectType = EInteractableObjectType.NotSet;
+
+        [FormerlySerializedAs("interactableObjectType")]
+        public EInteractableObjectType eInteractableObjectType = EInteractableObjectType.NotSet;
+
         public Vector3 spawnPosition;
         public bool upgardable;
 
@@ -38,7 +43,7 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable.Interactable
 
         private void OnValidate()
         {
-            name = ((Object)this).name;
+            objName = ((Object)this).name;
             Assert.AreNotEqual(eInteractableObjectType, EInteractableObjectType.NotSet,
                 $"InteractableObjectType must be set. ScriptableObject: {((Object)this).name}");
         }

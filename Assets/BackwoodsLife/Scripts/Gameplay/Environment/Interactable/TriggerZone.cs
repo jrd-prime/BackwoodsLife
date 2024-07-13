@@ -24,16 +24,14 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
                     var interactable = transform.parent.GetComponent<InteractableObj>();
 
                     if (interactable == null)
-                    {
                         throw new NullReferenceException(
                             $"Interactable is null on {parentTransform.name} prefab. You must set to object Interactable component. ");
-                    }
+                    
+                    var playerInteractSystem = other.GetComponent<PlayerInteractSystem>();
+                    if (playerInteractSystem == null)
+                        throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
 
-                    var a = other.GetComponent<PlayerInteractSystem>();
-
-                    a.Interact(ref interactable);
-
-                    // _collectSystem.Collect(interactable);
+                    playerInteractSystem.Interact(ref interactable);
                 }
                 else
                 {

@@ -4,6 +4,7 @@
     {
         None = 0,
         Stick = 1,
-        Stone = 2
+        Wood = 2,
+        Stone = 3,
     }
 }

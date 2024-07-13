@@ -1,6 +1,6 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Framework.Scriptable.Interactable;
-using BackwoodsLife.Scripts.Gameplay.Environment;
+using BackwoodsLife.Scripts.Framework.Systems;
 using BackwoodsLife.Scripts.Gameplay.Environment.Interactable;
 using UnityEngine;
 using VContainer;
@@ -15,7 +15,6 @@ namespace BackwoodsLife.Scripts.Framework
         private void Construct(CollectSystem collectSystem)
         {
             _collectSystem = collectSystem;
-            Debug.LogWarning($"collectSystem:{_collectSystem}");
         }
 
         public void Interact(ref InteractableObj interactableObj)
@@ -23,8 +22,7 @@ namespace BackwoodsLife.Scripts.Framework
             switch (interactableObj.data.interactableType)
             {
                 case EInteractableObjectType.Collectable:
-                    // var sInteractableCollectableData = interactable.data as SCollectableData;
-                    // _collectSystem.Collect(sInteractableCollectableData);
+                    _collectSystem.Collect(ref interactableObj.data);
                     break;
                 case EInteractableObjectType.Usable:
 

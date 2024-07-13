@@ -1,6 +1,6 @@
 ﻿// using Game.Scripts.Helpers;
 
-using BackwoodsLife.Res.UI;
+using BackwoodsLife.Scripts.Gameplay.UI;
 using R3;
 using UnityEngine.UIElements;
 using VContainer;

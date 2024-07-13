@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
 using BackwoodsLife.Scripts.Framework.Manager.Audio;
@@ -73,6 +74,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             // Systems
             builder.Register<FollowSystem>(Lifetime.Singleton).AsSelf();
 
+            builder.Register<InventoryModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<DebugMemoryAndEtcModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             // ViewModel

@@ -1,4 +1,5 @@
-﻿using R3;
+﻿using BackwoodsLife.Scripts.Gameplay.UI;
+using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
@@ -6,7 +7,7 @@ using VContainer;
 namespace BackwoodsLife.Scripts.Gameplay.Player
 {
     [RequireComponent(typeof(Rigidbody), typeof(Animator))]
-    public class PlayerView : MonoBehaviour
+    public class PlayerView : UIView
     {
         private IPlayerViewModel _viewModel;
         private readonly CompositeDisposable _disposables = new();

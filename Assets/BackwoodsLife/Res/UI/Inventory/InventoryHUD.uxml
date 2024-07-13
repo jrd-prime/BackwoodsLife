@@ -1,17 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="tpl_inventory-hud-item-container" src="project://database/Assets/BackwoodsLife/Res/UI/Inventory/tpl_inventory-hud-item-container.uxml?fileID=9197481963319205126&amp;guid=2a46479560552a947bd093b7e9dfb499&amp;type=3#tpl_inventory-hud-item-container" />
     <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/inventory.uss?fileID=7433441132597879392&amp;guid=26dfa1f17d03ef6449e4ac62c770560d&amp;type=3#inventory" />
     <ui:VisualElement name="inventory-hud-container" class="inventory-hud-container">
-        <ui:VisualElement name="inventory-hud-item-container" class="inventory-hud-item-container">
-            <ui:VisualElement name="i-hud-item-icon" class="i-hud-item-icon" />
-            <ui:Label tabindex="-1" text="9999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="i-hud-item-label" class="i-hud-item-label" style="color: rgb(107, 100, 93);" />
-        </ui:VisualElement>
-        <ui:VisualElement name="inventory-hud-item-container" class="inventory-hud-item-container">
-            <ui:VisualElement name="i-hud-item-icon" class="i-hud-item-icon" />
-            <ui:Label tabindex="-1" text="9999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="i-hud-item-label" class="i-hud-item-label" style="color: rgb(107, 100, 93);" />
-        </ui:VisualElement>
-        <ui:VisualElement name="inventory-hud-item-container" class="inventory-hud-item-container">
-            <ui:VisualElement name="i-hud-item-icon" class="i-hud-item-icon" />
-            <ui:Label tabindex="-1" text="9999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="i-hud-item-label" class="i-hud-item-label" style="color: rgb(107, 100, 93);" />
-        </ui:VisualElement>
+        <ui:Instance template="tpl_inventory-hud-item-container" name="tpl_inventory-hud-item-container" />
     </ui:VisualElement>
 </ui:UXML>

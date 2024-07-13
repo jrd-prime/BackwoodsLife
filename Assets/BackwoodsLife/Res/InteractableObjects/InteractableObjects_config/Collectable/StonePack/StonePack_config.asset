@@ -15,10 +15,12 @@ MonoBehaviour:
   interactableType: 2
   objectType: 2
   toolType: 0
-  resourceType: 2
+  resourceType: 3
   foodType: 0
   collectableData: {fileID: 11400000, guid: 7b9d220e78ca89248b9ec1be0e585f89, type: 2}
   hasLevels: 0
   defaultLevelData: {fileID: 11400000, guid: bd541d451910da444bcb1a4ba9bc39bd, type: 2}
   levelsData: []
   inStorageData: {fileID: 11400000, guid: daf05dd15be2d65488c65db20d1821ec, type: 2}
+  fixedWorldPosition: 0
+  fixedPosition: {x: 0, y: 0, z: 0}

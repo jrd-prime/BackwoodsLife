@@ -1,13 +1,12 @@
-﻿using System;
-using BackwoodsLife.Scripts.Framework.Bootstrap;
+﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
 using BackwoodsLife.Scripts.Framework.Manager.Audio;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using BackwoodsLife.Scripts.Framework.Manager.GameScene;
+using BackwoodsLife.Scripts.Framework.Manager.Inventory;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using VContainer;
@@ -25,6 +24,7 @@ namespace BackwoodsLife.Scripts
         private ISaveAndLoadManager _saveAndLoadManager;
         private ILoadingOperation _dbManager;
         private GameSceneManager _gameSceneManager;
+        private InventoryManager _inventoryManager;
 
         [Inject]
         private void Construct(IObjectResolver container)
@@ -33,6 +33,7 @@ namespace BackwoodsLife.Scripts
             _configManager = container.Resolve<IConfigManager>();
             _dbManager = container.Resolve<IDBManager>();
             _gameSceneManager = container.Resolve<GameSceneManager>();
+            _inventoryManager = container.Resolve<InventoryManager>();
             _audioManager = container.Resolve<IAudioManager>();
             _assetProvider = container.Resolve<IAssetProvider>();
             _saveAndLoadManager = container.Resolve<ISaveAndLoadManager>();
@@ -59,6 +60,7 @@ namespace BackwoodsLife.Scripts
             _loader.AddServiceToInitialize(_dbManager);
             _loader.AddServiceToInitialize(_saveAndLoadManager);
             _loader.AddServiceToInitialize(_gameSceneManager);
+            _loader.AddServiceToInitialize(_inventoryManager);
 
             await _loader.StartServicesInitializationAsync();
 

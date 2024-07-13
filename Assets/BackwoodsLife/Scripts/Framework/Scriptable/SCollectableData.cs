@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Framework.Scriptable
 {
@@ -9,9 +10,10 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable
         public CollectRange collectRange;
     }
 
+    [Serializable]
     public struct CollectRange
     {
-        public int Min;
-        public int Max;
+        public int min;
+        public int max;
     }
 }

@@ -77,7 +77,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
                 var position = av.fixedPosition;
                 if (position == Vector3.zero)
                 {
-                    Debug.LogWarning("POSITION NOT SET for " + av.name);
+                    Debug.Log("POSITION NOT SET for " + av.name);
                 }
 
                 AssetReferenceGameObject prefab;
@@ -96,7 +96,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
 
 
                 var go = obj;
-                Debug.LogWarning($"go = {go} {go.transform.position}");
+                Debug.Log($"go = {go} {go.transform.position}");
                 go.transform.position = position;
             }
 
