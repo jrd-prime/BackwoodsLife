@@ -1,5 +1,4 @@
 ﻿using BackwoodsLife.Scripts.Data.Player;
-using BackwoodsLife.Scripts.Gameplay.InteractableObjects;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using UnityEngine;

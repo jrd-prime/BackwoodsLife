@@ -8,6 +8,6 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable.Interactable.Config
         order = 2)]
     public class SStaticInteractableObjectsList : ScriptableObject
     {
-        public List<SInteractableObjectMainConfig> staticInteractables;
+        public List<SInteractableObjectConfig> staticInteractables;
     }
 }

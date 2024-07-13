@@ -11,7 +11,6 @@ using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using BackwoodsLife.Scripts.Framework.Scriptable;
 using BackwoodsLife.Scripts.Framework.Scriptable.Configuration;
-using BackwoodsLife.Scripts.Gameplay.InteractableObjects;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;

@@ -74,24 +74,24 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
             {
                 Debug.Log($"av = {av}");
 
-                var position = av.spawnPosition;
+                var position = av.fixedPosition;
                 if (position == Vector3.zero)
                 {
-                    Debug.LogWarning("POSITION NOT SET");
+                    Debug.LogWarning("POSITION NOT SET for " + av.name);
                 }
 
                 AssetReferenceGameObject prefab;
-                
-                if (av.upgardable)
+
+                if (av.hasLevels)
                 {
                     // get prefab lvl from save
-                    prefab = av.lelvels[1].assetReference;
+                    prefab = av.levelsData[0].assetReference;
                 }
                 else
                 {
-                    prefab = av.mainLevel.assetReference;
+                    prefab = av.defaultLevelData.assetReference;
                 }
-                
+
                 var obj = await _assetProvider.InstantiateAsync(prefab);
 
 

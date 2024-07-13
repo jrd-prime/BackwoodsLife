@@ -1,5 +1,6 @@
 ﻿using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Manager.Inventory;
+using BackwoodsLife.Scripts.Framework.Scriptable;
 using BackwoodsLife.Scripts.Gameplay.Environment;
 using UnityEngine;
 using VContainer;
@@ -14,12 +15,12 @@ namespace BackwoodsLife.Scripts.Framework
             Debug.LogWarning($"inventoryManager:{inventoryManager}");
         }
 
-        public void Collect(SInteractableCollectableData obj)
+        public void Collect(SCollectableData obj)
         {
             // Debug.LogWarning($"collectRange:{collectRange}");
-            var amount = RandomCollector.GetRandom(obj.CollectRange.min, obj.CollectRange.max);
+            var amount = RandomCollector.GetRandom(obj.collectRange.Min, obj.collectRange.Max);
 
-            Debug.LogWarning($"collect  {amount} for {obj.ResourceType}");
+            // Debug.LogWarning($"collect  {amount} for {obj.resourceType}");
             // inventoryManager.AddResource(obj.ResourceType, amount);
         }
     }

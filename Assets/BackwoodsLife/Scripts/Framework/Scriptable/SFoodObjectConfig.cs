@@ -1,5 +1,4 @@
-﻿using BackwoodsLife.Scripts.Data.Inventory.JObjects;
-using BackwoodsLife.Scripts.Data.Inventory.JObjects.FoodObjects;
+﻿using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

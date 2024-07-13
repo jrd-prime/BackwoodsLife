@@ -18,13 +18,13 @@ namespace BackwoodsLife.Scripts.Framework
             Debug.LogWarning($"collectSystem:{_collectSystem}");
         }
 
-        public void Interact(ref NewInteractable interactable)
+        public void Interact(ref InteractableObj interactableObj)
         {
-            switch (interactable.InteractableType)
+            switch (interactableObj.data.interactableType)
             {
                 case EInteractableObjectType.Collectable:
-                    var sInteractableCollectableData = interactable.data as SInteractableCollectableData;
-                    _collectSystem.Collect(sInteractableCollectableData);
+                    // var sInteractableCollectableData = interactable.data as SCollectableData;
+                    // _collectSystem.Collect(sInteractableCollectableData);
                     break;
                 case EInteractableObjectType.Usable:
 
