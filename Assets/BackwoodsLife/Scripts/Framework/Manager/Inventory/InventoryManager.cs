@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BackwoodsLife.Scripts.Data.Enums;
+using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
 using UnityEngine;

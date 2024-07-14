@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE.Configuration;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
@@ -10,8 +11,6 @@ using BackwoodsLife.Scripts.Framework.Manager.Input;
 using BackwoodsLife.Scripts.Framework.Manager.Inventory;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
-using BackwoodsLife.Scripts.Framework.Scriptable;
-using BackwoodsLife.Scripts.Framework.Scriptable.Configuration;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;

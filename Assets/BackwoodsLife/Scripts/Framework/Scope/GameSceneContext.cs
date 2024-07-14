@@ -1,7 +1,7 @@
 ﻿using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Data.Player;
+using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Manager.Inventory;
-using BackwoodsLife.Scripts.Framework.Systems;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using UnityEngine;

@@ -1,7 +1,7 @@
-﻿using BackwoodsLife.Scripts.Data.Player;
+﻿using BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE.Configuration;
+using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
-using BackwoodsLife.Scripts.Framework.Scriptable.Configuration;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using R3;
 using UnityEngine;

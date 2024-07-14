@@ -1,9 +1,8 @@
-﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
+﻿using BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE.Interactable.Config;
+using BackwoodsLife.Scripts.Framework.Bootstrap;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using BackwoodsLife.Scripts.Framework.Provider.LoadingScreen;
-using BackwoodsLife.Scripts.Framework.Scriptable;
-using BackwoodsLife.Scripts.Framework.Scriptable.Interactable.Config;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -70,35 +69,35 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
             var a = _configManager.GetConfig<SStaticInteractableObjectsList>();
             Debug.Log(a);
 
-            foreach (var av in a.staticInteractables)
-            {
-                Debug.Log($"av = {av}");
-
-                var position = av.fixedPosition;
-                if (position == Vector3.zero)
-                {
-                    Debug.Log("POSITION NOT SET for " + av.name);
-                }
-
-                AssetReferenceGameObject prefab;
-
-                if (av.hasLevels)
-                {
-                    // get prefab lvl from save
-                    prefab = av.levelsData[0].assetReference;
-                }
-                else
-                {
-                    prefab = av.defaultLevelData.assetReference;
-                }
-
-                var obj = await _assetProvider.InstantiateAsync(prefab);
-
-
-                var go = obj;
-                Debug.Log($"go = {go} {go.transform.position}");
-                go.transform.position = position;
-            }
+            // foreach (var av in a.staticInteractables)
+            // {
+            //     Debug.Log($"av = {av}");
+            //
+            //     var position = av.fixedPosition;
+            //     if (position == Vector3.zero)
+            //     {
+            //         Debug.Log("POSITION NOT SET for " + av.name);
+            //     }
+            //
+            //     AssetReferenceGameObject prefab;
+            //
+            //     if (av.hasLevels)
+            //     {
+            //         // get prefab lvl from save
+            //         prefab = av.levelsData[0].assetReference;
+            //     }
+            //     else
+            //     {
+            //         prefab = av.defaultLevelData.assetReference;
+            //     }
+            //
+            //     var obj = await _assetProvider.InstantiateAsync(prefab);
+            //
+            //
+            //     var go = obj;
+            //     Debug.Log($"go = {go} {go.transform.position}");
+            //     go.transform.position = position;
+            // }
 
 
             // var playerObj = FindObjectOfType<PlayerView>();

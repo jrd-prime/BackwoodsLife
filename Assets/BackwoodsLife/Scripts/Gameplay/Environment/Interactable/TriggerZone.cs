@@ -1,8 +1,9 @@
-﻿using System;
-using BackwoodsLife.Scripts.Framework;
+﻿
+
+using System;
 using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Framework.Systems;
-using BackwoodsLife.Scripts.Gameplay.NewLook;
+using BackwoodsLife.Scripts.Framework.Interact.System;
+using BackwoodsLife.Scripts.Framework.Interact.Unit;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
@@ -29,7 +30,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
                         throw new NullReferenceException(
                             $"Interactable is null on {parentTransform.name} prefab. You must set to object Interactable component. ");
                     
-                    var playerInteractSystem = other.GetComponent<PlayerInteractSystem>();
+                    var playerInteractSystem = other.GetComponent<InteractSystem>();
                     if (playerInteractSystem == null)
                         throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
 
