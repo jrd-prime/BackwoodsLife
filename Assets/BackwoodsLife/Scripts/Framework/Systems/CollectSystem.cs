@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Manager.Inventory;
 using BackwoodsLife.Scripts.Framework.Scriptable;
 using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types;
+using BackwoodsLife.Scripts.Gameplay.NewLook;
 using UnityEngine;
 using VContainer;
 
@@ -20,17 +23,32 @@ namespace BackwoodsLife.Scripts.Framework.Systems
             _inventoryManager = inventoryManager;
         }
 
-        public void Collect(ref SInteractableObjectConfig obj)
+        public void Collect(ref SCollectable obj)
         {
             Debug.LogWarning("COLLECT");
-            var data = obj.collectableData;
-            var amount = RandomCollector.GetRandom(data.collectRange.min, data.collectRange.max);
-            _inventoryManager.IncreaseResource(obj.resourceType, amount);
-            _inventoryManager.IncreaseResource(new List<InventoryElement>
+            var data = obj.returnedCollectables;
+
+            switch (data.Count)
             {
-                new() { Type = obj.resourceType, Amount = amount },
-                new() { Type = EResourceType.Wood, Amount = amount * 2 }
-            });
+                case 1:
+                {
+                    var amount = RandomCollector.GetRandom(data[0].collectRange.min, data[0].collectRange.max);
+                    _inventoryManager.IncreaseResource(data[0].resourceType, amount);
+                    break;
+                }
+                case > 1:
+
+                    var newList = (
+                            from item in data
+                            let amount = RandomCollector.GetRandom(item.collectRange.min, item.collectRange.max)
+                            select new InventoryElement { Type = item.resourceType, Amount = amount })
+                        .ToList();
+
+                    _inventoryManager.IncreaseResource(newList);
+                    break;
+                default:
+                    throw new Exception("Incorrect collectable data. " + obj.name);
+            }
         }
     }
 }
