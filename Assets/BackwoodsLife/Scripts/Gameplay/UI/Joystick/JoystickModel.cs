@@ -14,6 +14,9 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Joystick
         public VisualElement JoystickHandle { get; private set; }
         public VisualElement JoystickRing { get; private set; }
 
+        public void Initialize()
+        {
+        }
 
         public void SetJoystickHandle(VisualElement joystickHandle)
         {

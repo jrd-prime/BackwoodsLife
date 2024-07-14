@@ -1,5 +1,5 @@
-﻿using BackwoodsLife.Scripts.Framework.Scriptable.Interactable;
-using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types;
+﻿using BackwoodsLife.Scripts.Data.Enums;
+using BackwoodsLife.Scripts.Framework.Scriptable.Interactable;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Framework.Scriptable

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Player;
-using BackwoodsLife.Scripts.Framework.Scriptable.Interactable;
 using BackwoodsLife.Scripts.Framework.Systems;
 using BackwoodsLife.Scripts.Gameplay.Environment.Interactable;
 using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Requriments;
@@ -53,7 +52,8 @@ namespace BackwoodsLife.Scripts.Framework
 
         private bool CheckRequirements(ref List<Requirement> requirements)
         {
-            return false;
+            //TODO
+            return true;
         }
     }
 }

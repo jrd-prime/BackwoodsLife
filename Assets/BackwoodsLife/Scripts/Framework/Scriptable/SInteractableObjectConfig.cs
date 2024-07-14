@@ -1,7 +1,6 @@
 ﻿using BackwoodsLife.Scripts.Framework.Scriptable.Interactable;
 using BackwoodsLife.Scripts.Framework.Scriptable.obj;
 using BackwoodsLife.Scripts.Gameplay.Environment;
-using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -15,17 +14,6 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable
     {
         public EInteractableObjectType interactableType = EInteractableObjectType.NotSet;
 
-        [ShowIf("@interactableType == EInteractableObjectType.Collectable")]
-        public PlayerObjectType objectType = PlayerObjectType.None;
-
-        [FormerlySerializedAs("toolType")] [ShowIf("@objectType == PlayerObjectType.Tool")]
-        public ETool tool = ETool.None;
-
-        [ShowIf("@objectType == PlayerObjectType.Resource")]
-        public EResourceType resourceType = EResourceType.None;
-
-        [ShowIf("@objectType == PlayerObjectType.Food")]
-        public EFoodType foodType = EFoodType.None;
 
         [ShowIf("@interactableType == EInteractableObjectType.Collectable")]
         public SCollectableData collectableData;

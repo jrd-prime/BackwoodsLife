@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types;
+using BackwoodsLife.Scripts.Data.Enums;
 using BackwoodsLife.Scripts.Gameplay.NewLook;
 using UnityEngine.Serialization;
 

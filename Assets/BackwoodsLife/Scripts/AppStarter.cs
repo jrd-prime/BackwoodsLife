@@ -59,8 +59,8 @@ namespace BackwoodsLife.Scripts
             _loader.AddServiceToInitialize(_assetProvider);
             _loader.AddServiceToInitialize(_dbManager);
             _loader.AddServiceToInitialize(_saveAndLoadManager);
-            _loader.AddServiceToInitialize(_gameSceneManager);
             _loader.AddServiceToInitialize(_inventoryManager);
+            _loader.AddServiceToInitialize(_gameSceneManager);
 
             await _loader.StartServicesInitializationAsync();
 

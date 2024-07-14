@@ -1,7 +1,8 @@
-﻿namespace BackwoodsLife.Scripts.Data
+﻿using VContainer.Unity;
+
+namespace BackwoodsLife.Scripts.Data
 {
-    public interface IDataModel
+    public interface IDataModel : IInitializable
     {
-        
     }
 }

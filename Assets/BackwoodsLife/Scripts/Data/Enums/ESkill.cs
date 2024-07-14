@@ -1,4 +1,4 @@
-﻿namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types
+﻿namespace BackwoodsLife.Scripts.Data.Enums
 {
     public enum ESkill
     {

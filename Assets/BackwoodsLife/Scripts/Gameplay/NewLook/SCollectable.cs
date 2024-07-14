@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Enums;
 using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Requriments;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -31,15 +32,7 @@ namespace BackwoodsLife.Scripts.Gameplay.NewLook
     [Serializable]
     public struct ReturnedCollectable
     {
-         public EResource resourceType;
+        public EResource resourceType;
         public CollectRange collectRange;
-    }
-
-    public enum EResource
-    {
-        None,
-        Stick,
-        Wood,
-        Stone
     }
 }

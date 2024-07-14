@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types;
 using R3;
 using UnityEngine;
 using VContainer.Unity;
@@ -12,27 +8,22 @@ namespace BackwoodsLife.Scripts.Data.Inventory
 {
     public struct InventoryElement
     {
-        public Enum Type;
+        public string Type;
         public int Amount;
     }
 
     public class InventoryModel : IInitializable
     {
-        private Dictionary<Enum, Int32> _inventory = new();
+        private Dictionary<string, int> _inventory = new();
         public ReactiveProperty<List<InventoryElement>> OnInventoryChanged = new();
         private List<InventoryElement> _tempList = new();
         private List<InventoryElement> _oneMoreList = new();
 
+        private Dictionary<string, int> _warehouseItems = new();
+
+
         public void Initialize()
         {
-            foreach (Enum t in Enum.GetValues(typeof(EResourceType)))
-            {
-                if (t is EResourceType.None) continue;
-
-                _inventory.Add(t, RandomCollector.GetRandom(0, 5));
-            }
-
-            // TODO load and initialize inventory data
             // TODO think about it
 
             _oneMoreList.Clear();
@@ -47,7 +38,7 @@ namespace BackwoodsLife.Scripts.Data.Inventory
             InventoryChanged(_oneMoreList);
         }
 
-        public void IncreaseResource(Enum elementType, int amount)
+        public void IncreaseResource(string elementType, int amount)
         {
             Debug.LogWarning($"AddResource {elementType} {amount}. Before {_inventory[elementType]}");
 
@@ -84,7 +75,7 @@ namespace BackwoodsLife.Scripts.Data.Inventory
             OnInventoryChanged.ForceNotify();
         }
 
-        public void DecreaseResource(Enum elementType, int amount)
+        public void DecreaseResource(string elementType, int amount)
         {
             Debug.LogWarning($"AddResource {elementType} {amount}. Before {_inventory[elementType]}");
 
@@ -111,9 +102,24 @@ namespace BackwoodsLife.Scripts.Data.Inventory
             return inventoryElements.All(element => _inventory[element.Type] >= element.Amount);
         }
 
-        public bool HasEnoughResource(Enum objResourceType, int amount)
+        public bool HasEnoughResource(string objResourceType, int amount)
         {
             return _inventory[objResourceType] >= amount;
         }
+
+        public void SetInitializedInventory(Dictionary<string, int> initItems)
+        {
+            _inventory = initItems;
+
+            var list = new List<InventoryElement>();
+            foreach (var item in initItems)
+            {
+                list.Add(new InventoryElement { Type = item.Key, Amount = item.Value });
+            }
+
+            InventoryChanged(list);
+        }
+
+        public Dictionary<string, int> GetInventoryData() => _inventory;
     }
 }

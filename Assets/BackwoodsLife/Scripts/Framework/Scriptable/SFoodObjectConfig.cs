@@ -1,13 +1,14 @@
-﻿using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Types;
+﻿using BackwoodsLife.Scripts.Data.Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Framework.Scriptable
 {
     [CreateAssetMenu(fileName = "name", menuName = "BLScriptable/Stored Objects/New FOOD config", order = 100)]
     public class SFoodObjectConfig : SCommonData
     {
-        public EFoodType foodType = EFoodType.None;
+        [FormerlySerializedAs("foodType")] public EFood food = EFood.None;
         [Title("Food Stats")] [Range(0, 100)] public float foodStaminaRegen = 1;
         [Title("Food Effect")] public FoodEffect foodEffect = FoodEffect.None;
 

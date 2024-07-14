@@ -8,5 +8,8 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Building.Bonfi
     {
         public ReactiveProperty<Vector3> Position { get; private set; } = new();
         public ReactiveProperty<int> Level { get; private set; } = new(0);
+        public void Initialize()
+        {
+        }
     }
 }

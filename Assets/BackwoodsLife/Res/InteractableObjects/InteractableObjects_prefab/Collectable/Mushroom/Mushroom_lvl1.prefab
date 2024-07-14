@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3447151347687358108}
   - component: {fileID: 1124219805771088692}
   - component: {fileID: 7373026993787199412}
+  - component: {fileID: -7994490006380983331}
   m_Layer: 0
   m_Name: Mushroom_lvl1
   m_TagString: Untagged
@@ -106,6 +107,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45900023, y: 0.5075997, z: 0.51329666}
   m_Center: {x: 0, y: 0.25379986, z: 0}
+--- !u!114 &-7994490006380983331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912446949801048910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682725af433942829c1a7a45ed1628ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: c6102b11481c0284d810bc93c0475fa2, type: 2}
 --- !u!1001 &5154550662355677051
 PrefabInstance:
   m_ObjectHideFlags: 0
