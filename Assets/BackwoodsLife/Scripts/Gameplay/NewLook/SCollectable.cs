@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BackwoodsLife.Scripts.Data.Enums;
+using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Requriments;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Gameplay.NewLook
 {
@@ -12,14 +13,20 @@ namespace BackwoodsLife.Scripts.Gameplay.NewLook
         menuName = "Backwoods Life Scripts/Interactables/Objects/New Collectable", order = 1)]
     public class SCollectable : SInteractableObject
     {
-        [Title("Collectable Details")] public List<ReturnedCollectable> returnedCollectables;
-
+        [ReadOnly] public bool hasRequirements;
+        [ReadOnly] public bool hasCollectable;
+        [Title("Collectable Details")] public List<ReturnCollectables> returnedCollectables;
         [Title("Requirements Details")] public List<Requirement> requirementsForCollecting;
 
         private void OnValidate()
         {
             interactableType = EInteractableObject.Collectable;
+            hasRequirements = HasRequirements();
+            hasCollectable = HasCollectable();
         }
+
+        private bool HasRequirements() => requirementsForCollecting.Any(JUtils.CheckStructWithListsForItems);
+        private bool HasCollectable() => returnedCollectables.Any(JUtils.CheckStructWithListsForItems);
     }
 
     [Serializable]
@@ -30,9 +37,16 @@ namespace BackwoodsLife.Scripts.Gameplay.NewLook
     }
 
     [Serializable]
-    public struct ReturnedCollectable
+    public struct ReturnCollectables
     {
-        public EResource resourceType;
+        public List<ReturnCollectableCustom<EResource>> returnResorces;
+        public List<ReturnCollectableCustom<EFood>> returnFood;
+    }
+
+    [Serializable]
+    public struct ReturnCollectableCustom<T> where T : Enum
+    {
+        public T collectableType;
         public CollectRange collectRange;
     }
 }

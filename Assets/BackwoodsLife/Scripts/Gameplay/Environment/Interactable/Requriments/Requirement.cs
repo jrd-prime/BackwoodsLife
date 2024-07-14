@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Enums;
 using BackwoodsLife.Scripts.Gameplay.NewLook;
+using Sirenix.OdinInspector;
 using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Requriments

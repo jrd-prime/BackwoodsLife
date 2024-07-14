@@ -1,6 +1,8 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Framework;
 using BackwoodsLife.Scripts.Framework.Helpers;
+using BackwoodsLife.Scripts.Framework.Systems;
+using BackwoodsLife.Scripts.Gameplay.NewLook;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
@@ -21,7 +23,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
                 if (parentTransform != null)
                 {
                     Debug.LogWarning(transform.parent.name);
-                    var interactable = transform.parent.GetComponent<InteractableObj>();
+                    var interactable = transform.parent.GetComponent<InteractableObject>();
 
                     if (interactable == null)
                         throw new NullReferenceException(

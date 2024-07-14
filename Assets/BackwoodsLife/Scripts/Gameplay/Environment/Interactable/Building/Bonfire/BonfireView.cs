@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using BackwoodsLife.Scripts.Gameplay.NewLook;
+using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Building.Bonfire
 {
-    public class BonfireView : InteractableObj
+    public class BonfireView : UsableAndUpgradable
     {
-        public  void OnInteract()
+        public void OnInteract()
         {
             Debug.LogWarning("<color=red>Bonfire interacted!</color>");
         }

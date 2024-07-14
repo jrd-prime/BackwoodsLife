@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 6701239710174816994}
   - component: {fileID: 5688504185203048600}
   m_Layer: 0
-  m_Name: Stick_01
+  m_Name: StickPack_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258f6f48e6ee4aa795108227eaf30a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 590be59cb7913a94c8d48ad1dfa2c3dd, type: 2}
 --- !u!1 &8565213362802298167
 GameObject:
   m_ObjectHideFlags: 0
