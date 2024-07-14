@@ -1,5 +1,8 @@
 ﻿namespace BackwoodsLife.Scripts.Gameplay.NewLook
 {
+    /// <summary>
+    /// Interactable object types
+    /// </summary>
     public enum EInteractableObject
     {
         Default = 0,

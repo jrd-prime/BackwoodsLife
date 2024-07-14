@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace BackwoodsLife.Scripts.Gameplay.NewLook
+namespace BackwoodsLife.Scripts.Gameplay.NewLook.Scriptables
 {
     public abstract class SInteractableObject : ScriptableObject
     {

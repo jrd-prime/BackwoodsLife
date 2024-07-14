@@ -15,8 +15,8 @@ namespace BackwoodsLife.Scripts.Framework.Scriptable
         public EInteractableObjectType interactableType = EInteractableObjectType.NotSet;
 
 
-        [ShowIf("@interactableType == EInteractableObjectType.Collectable")]
-        public SCollectableData collectableData;
+        // [ShowIf("@interactableType == EInteractableObjectType.Collectable")]
+        // public SCollectableData collectableData;
 
         #region HasUpgradeLevels
 

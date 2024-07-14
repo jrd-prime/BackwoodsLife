@@ -1,5 +1,5 @@
 ﻿using BackwoodsLife.Scripts.Framework.Systems;
-using BackwoodsLife.Scripts.Gameplay.NewLook;
+using BackwoodsLife.Scripts.Gameplay.NewLook.Scriptables;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable

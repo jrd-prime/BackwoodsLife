@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace BackwoodsLife.Scripts.Gameplay.NewLook
+namespace BackwoodsLife.Scripts.Gameplay.NewLook.Scriptables
 {
     [CreateAssetMenu(fileName = "name",
         menuName = "Backwoods Life Scripts/Interactables/Objects/New Usable", order = 1)]

@@ -4,7 +4,7 @@ using BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Requriments;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Gameplay.NewLook
+namespace BackwoodsLife.Scripts.Gameplay.NewLook.Scriptables
 {
     [CreateAssetMenu(fileName = "name",
         menuName = "Backwoods Life Scripts/Interactables/Objects/New Usable And Upgradable", order = 1)]
