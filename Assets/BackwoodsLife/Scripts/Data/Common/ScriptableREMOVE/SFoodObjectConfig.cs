@@ -8,7 +8,6 @@ namespace BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE
     [CreateAssetMenu(fileName = "name", menuName = "BLScriptable/Stored Objects/New FOOD config", order = 100)]
     public class SFoodObjectConfig : SCommonData
     {
-        [FormerlySerializedAs("foodType")] public EFood food = EFood.None;
         [Title("Food Stats")] [Range(0, 100)] public float foodStaminaRegen = 1;
         [Title("Food Effect")] public FoodEffect foodEffect = FoodEffect.None;
 
@@ -34,7 +33,6 @@ namespace BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE
          */
     }
 
- 
 
     public enum FoodEffect
     {

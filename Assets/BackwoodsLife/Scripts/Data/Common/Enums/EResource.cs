@@ -2,9 +2,8 @@
 {
     public enum EResource
     {
-        None = 0,
-        Stick = 1,
-        Wood = 2,
-        Stone = 3
+        Stick = 0,
+        Wood = 1,
+        Stone = 2
     }
 }

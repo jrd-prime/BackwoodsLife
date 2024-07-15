@@ -2,6 +2,6 @@
 {
     public enum EBuilding
     {
-        None = 0,
+        House = 0,
     }
 }

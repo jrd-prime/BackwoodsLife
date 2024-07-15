@@ -2,8 +2,7 @@
 {
     public enum ETool
     {
-        None = 0,
-        Knife = 1,
-        Axe = 2
+        Knife = 0,
+        Axe = 1
     }
 }

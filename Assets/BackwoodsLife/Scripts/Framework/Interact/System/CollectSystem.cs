@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Scriptables;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Manager.Inventory;
 using UnityEngine;

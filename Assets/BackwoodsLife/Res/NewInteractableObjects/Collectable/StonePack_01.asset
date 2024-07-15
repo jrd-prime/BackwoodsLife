@@ -20,5 +20,7 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   hasRequirements: 0
   hasCollectable: 0
+  returnableElements: []
+  requiredElements: []
   returnedCollectables: []
   requirementsForCollecting: []

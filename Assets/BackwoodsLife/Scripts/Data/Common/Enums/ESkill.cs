@@ -2,8 +2,7 @@
 {
     public enum ESkill
     {
-        None = 0,
-        Gathering = 1,
-        Mining = 2
+        Gathering = 0,
+        Mining = 1
     }
 }

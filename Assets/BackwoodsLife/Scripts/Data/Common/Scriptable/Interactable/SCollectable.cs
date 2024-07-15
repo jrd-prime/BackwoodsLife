@@ -38,9 +38,22 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
             hasCollectable = returnedCollectables.Any(JUtils.CheckStructWithListsForItems);
 
             if (hasCollectable)
+            {
                 JStructHelper.CompileReturnableElements(ref returnableElements, ref returnedCollectables);
+            }
+            else
+            {
+                returnableElements.Clear();
+            }
+
             if (hasRequirements)
+            {
                 JStructHelper.CompiledRequiredElements(ref requiredElements, ref requirementsForCollecting);
+            }
+            else
+            {
+                requiredElements.Clear();
+            }
         }
     }
 }
