@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE.Configuration
+namespace BackwoodsLife.Scripts.Data.Common.Scriptable.MainConfiguration
 {
     [CreateAssetMenu(fileName = "CharacterConfiguration",
         menuName = "BLScriptable/Configuration/Character Configuration",

@@ -1,4 +1,5 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Scriptables;
+﻿using BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable;
+using BackwoodsLife.Scripts.Data.Common.Scriptables;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
 {

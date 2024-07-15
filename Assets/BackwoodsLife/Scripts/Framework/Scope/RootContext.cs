@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE.Configuration;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.MainConfiguration;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
+using BackwoodsLife.Scripts.Framework.Interact.Unit.Custom;
 using BackwoodsLife.Scripts.Framework.Manager.Audio;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
@@ -60,7 +61,6 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(audioProvider).As<IAudioProvider>();
             builder.RegisterComponent(audioSourceProvider).As<IAudioSourceProvider>();
             builder.RegisterComponent(eventSystem).AsSelf();
-
 
             // Services
             builder.Register<ConfigManager>(Lifetime.Singleton).AsImplementedInterfaces();

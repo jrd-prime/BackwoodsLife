@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace BackwoodsLife.Scripts.Data.Common.Scriptables
+namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
 {
     public abstract class SInteractableObject : ScriptableObject
     {

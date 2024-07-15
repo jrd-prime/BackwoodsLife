@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE.Configuration
+namespace BackwoodsLife.Scripts.Data.Common.Scriptable.MainConfiguration
 {
     [CreateAssetMenu(fileName = "MainConfigurations", menuName = "BLScriptable/Configuration/MainConfigurations",
         order = 1)]

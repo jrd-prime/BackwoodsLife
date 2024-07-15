@@ -5,7 +5,7 @@ using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Data.Common.Scriptables
+namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
 {
     [CreateAssetMenu(fileName = "name",
         menuName = "Backwoods Life Scripts/Interactables/Objects/New Usable And Upgradable", order = 1)]
@@ -24,6 +24,6 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptables
     public struct UpgradeLevel
     {
         public int level;
-        public List<Requirement> requirementsForUpgrading;
+        public List<RequirementForCollect> requirementsForUpgrading;
     }
 }

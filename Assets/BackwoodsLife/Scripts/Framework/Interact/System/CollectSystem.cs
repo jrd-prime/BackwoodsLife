@@ -1,6 +1,9 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Scriptables;
+﻿using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.Scriptables;
+using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Manager.Inventory;
 using UnityEngine;
+using UnityEngine.Assertions;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.System
@@ -16,10 +19,12 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             _inventoryManager = inventoryManager;
         }
 
-        public void Collect(ref SCollectable obj)
+        public void Collect(ref List<InventoryElement> obj)
         {
             Debug.LogWarning("COLLECT");
-            // _inventoryManager.IncreaseResource(newList);
+            Assert.IsNotNull(_inventoryManager, "inventoryManager is null");
+            Assert.IsNotNull(obj, "obj is null");
+            _inventoryManager.IncreaseResource(obj);
         }
     }
 }

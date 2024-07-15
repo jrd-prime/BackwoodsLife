@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE.Configuration;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.MainConfiguration;
 using UnityEngine;
 using VContainer;
 

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using BackwoodsLife.Scripts.Data.Common.Structs;
 using R3;
 using UnityEngine;
 using VContainer.Unity;
@@ -10,6 +12,13 @@ namespace BackwoodsLife.Scripts.Data.Inventory
     {
         public string Type;
         public int Amount;
+    }
+
+    [Serializable]
+    public struct CollectableElement
+    {
+        public string Name;
+        public CollectRange Range;
     }
 
     public class InventoryModel : IInitializable
