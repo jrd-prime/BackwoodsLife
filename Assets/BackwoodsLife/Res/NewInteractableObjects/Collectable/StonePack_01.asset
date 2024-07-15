@@ -19,8 +19,18 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   hasRequirements: 0
-  hasCollectable: 0
-  returnableElements: []
+  isReturnCollectables: 1
+  returnableElements:
+  - Name: Stone
+    Range:
+      min: 1
+      max: 3
   requiredElements: []
-  returnedCollectables: []
+  returnedCollectables:
+  - returnResorces:
+    - type: 2
+      range:
+        min: 1
+        max: 3
+    returnFood: []
   requirementsForCollecting: []

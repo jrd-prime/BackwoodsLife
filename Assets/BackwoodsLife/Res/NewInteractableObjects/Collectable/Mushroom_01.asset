@@ -19,12 +19,18 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   hasRequirements: 0
-  hasCollectable: 1
+  isReturnCollectables: 1
+  returnableElements:
+  - Name: Mushroom
+    Range:
+      min: 1
+      max: 2
+  requiredElements: []
   returnedCollectables:
   - returnResorces: []
     returnFood:
-    - collectableType: 1
-      collectRange:
+    - type: 0
+      range:
         min: 1
         max: 2
   requirementsForCollecting: []
