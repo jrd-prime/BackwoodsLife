@@ -8,6 +8,7 @@ using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Helpers.Reflection;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
 {
@@ -23,7 +24,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
         /// <summary>
         /// Return at least one collectable? Automatically set onValidate
         /// </summary>
-        [ReadOnly] public bool hasCollectable;
+        [FormerlySerializedAs("hasCollectable")] [ReadOnly] public bool isReturnCollectables;
 
         [ReadOnly] public List<CollectableElement> returnableElements;
         [ReadOnly] public List<RequiredElement> requiredElements;
@@ -35,9 +36,9 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
         {
             interactableType = EInteractableObject.Collectable;
             hasRequirements = requirementsForCollecting.Any(JUtils.CheckStructWithListsForItems);
-            hasCollectable = returnedCollectables.Any(JUtils.CheckStructWithListsForItems);
+            isReturnCollectables = returnedCollectables.Any(JUtils.CheckStructWithListsForItems);
 
-            if (hasCollectable)
+            if (isReturnCollectables)
             {
                 JStructHelper.CompileReturnableElements(ref returnableElements, ref returnedCollectables);
             }
@@ -48,7 +49,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
 
             if (hasRequirements)
             {
-                JStructHelper.CompiledRequiredElements(ref requiredElements, ref requirementsForCollecting);
+                JStructHelper.CompileRequiredElements(ref requiredElements, ref requirementsForCollecting);
             }
             else
             {

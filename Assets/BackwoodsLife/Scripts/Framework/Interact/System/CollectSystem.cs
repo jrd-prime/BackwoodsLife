@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BackwoodsLife.Scripts.Data.Inventory;
+using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Manager.Inventory;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -18,12 +20,20 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             _inventoryManager = inventoryManager;
         }
 
-        public void Collect(ref List<InventoryElement> obj)
+        public void Collect(ref List<CollectableElement> obj)
         {
             Debug.LogWarning("COLLECT");
             Assert.IsNotNull(_inventoryManager, "inventoryManager is null");
             Assert.IsNotNull(obj, "obj is null");
-            _inventoryManager.IncreaseResource(obj);
+            var list = obj.Select(element => new InventoryElement
+                {
+                    Type = element.Name,
+                    Amount = RandomCollector.GetRandom(element.Range.min, element.Range.max)
+                })
+                .ToList();
+
+
+            _inventoryManager.IncreaseResource(list);
         }
     }
 }

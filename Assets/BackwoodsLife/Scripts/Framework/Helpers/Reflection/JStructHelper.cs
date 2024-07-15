@@ -5,7 +5,6 @@ using System.Reflection;
 using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using BackwoodsLife.Scripts.Data.Inventory;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace BackwoodsLife.Scripts.Framework.Helpers.Reflection
@@ -20,74 +19,66 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.Reflection
             listToSave.Clear();
             foreach (var collectable in returnCollectablesList)
             {
-                Type type = collectable.GetType();
-                FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
+                FieldInfo[] fields = collectable.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
 
                 foreach (FieldInfo field in fields)
                 {
-                    var fieldValue = field.GetValue(collectable);
+                    if (field.GetValue(collectable) is not IEnumerable list) continue;
 
-                    if (fieldValue is IEnumerable list)
+                    foreach (var item in list)
                     {
-                        foreach (var item in list)
+                        Type itemType = item.GetType();
+                        FieldInfo collectableTypeField = itemType.GetField("type");
+                        FieldInfo collectRangeField = itemType.GetField("range");
+
+                        Assert.IsNotNull(collectableTypeField, "collectableTypeField is null");
+                        Assert.IsNotNull(collectRangeField, "collectRangeField is null");
+
+                        var range = collectRangeField.GetValue(item) is CollectRange
+                            ? (CollectRange)collectRangeField.GetValue(item)
+                            : default;
+
+                        listToSave.Add(new CollectableElement
                         {
-                            Type itemType = item.GetType();
-                            FieldInfo collectableTypeField = itemType.GetField("type");
-                            FieldInfo collectRangeField = itemType.GetField("range");
-
-                            Assert.IsNotNull(collectableTypeField, "collectableTypeField is null");
-                            Assert.IsNotNull(collectRangeField, "collectRangeField is null");
-
-                            var range = collectRangeField.GetValue(item) is CollectRange
-                                ? (CollectRange)collectRangeField.GetValue(item)
-                                : default;
-
-                            listToSave.Add(new CollectableElement
-                            {
-                                Name = collectableTypeField.GetValue(item).ToString(),
-                                Range = range
-                            });
-                        }
+                            Name = collectableTypeField.GetValue(item).ToString(),
+                            Range = range
+                        });
                     }
                 }
             }
         }
 
-        public static void CompiledRequiredElements(
+        public static void CompileRequiredElements(
             ref List<RequiredElement> listToSave,
             ref List<RequirementForCollect> requirementsForCollecting)
         {
             listToSave.Clear();
-            foreach (var collectable in requirementsForCollecting)
+            foreach (var required in requirementsForCollecting)
             {
-                Type type = collectable.GetType();
-                FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
+                FieldInfo[] fields = required.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
 
                 foreach (FieldInfo field in fields)
                 {
-                    var fieldValue = field.GetValue(collectable);
+                    if (field.GetValue(required) is not IEnumerable list) continue;
 
-                    if (fieldValue is IEnumerable list)
+                    foreach (var item in list)
                     {
-                        foreach (var item in list)
+                        Type itemType = item.GetType();
+                        FieldInfo typeField = itemType.GetField("typeName");
+                        FieldInfo valueField = itemType.GetField("value");
+
+                        Assert.IsNotNull(typeField, "collectableTypeField is null");
+                        Assert.IsNotNull(valueField, "collectRangeField is null");
+
+                        var value = valueField.GetValue(item) is int
+                            ? (int)valueField.GetValue(item)
+                            : default;
+
+                        listToSave.Add(new RequiredElement
                         {
-                            Type itemType = item.GetType();
-                            FieldInfo typeField = itemType.GetField("typeName");
-                            FieldInfo valueField = itemType.GetField("value");
-
-                            Assert.IsNotNull(typeField, "collectableTypeField is null");
-                            Assert.IsNotNull(valueField, "collectRangeField is null");
-
-                            var value = valueField.GetValue(item) is int
-                                ? (int)valueField.GetValue(item)
-                                : default;
-
-                            listToSave.Add(new RequiredElement
-                            {
-                                typeName = typeField.GetValue(item).ToString(),
-                                value = value
-                            });
-                        }
+                            typeName = typeField.GetValue(item).ToString(),
+                            value = value
+                        });
                     }
                 }
             }
