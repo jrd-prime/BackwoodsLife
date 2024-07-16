@@ -10,7 +10,7 @@ namespace BackwoodsLife.Scripts.Data.Inventory
 {
     public struct InventoryElement
     {
-        public string Type;
+        public string typeName;
         public int Amount;
     }
 
@@ -39,7 +39,7 @@ namespace BackwoodsLife.Scripts.Data.Inventory
 
             foreach (var item in _inventory)
             {
-                _oneMoreList.Add(new InventoryElement { Type = item.Key, Amount = item.Value });
+                _oneMoreList.Add(new InventoryElement { typeName = item.Key, Amount = item.Value });
                 Debug.LogWarning($"Add {item.Key} {item.Value}");
             }
 
@@ -53,7 +53,7 @@ namespace BackwoodsLife.Scripts.Data.Inventory
 
             _inventory[elementType] += amount;
             Debug.LogWarning($"After {_inventory[elementType]}");
-            _oneMoreList.Add(new InventoryElement { Type = elementType, Amount = _inventory[elementType] });
+            _oneMoreList.Add(new InventoryElement { typeName = elementType, Amount = _inventory[elementType] });
             InventoryChanged(_oneMoreList);
         }
 
@@ -61,9 +61,9 @@ namespace BackwoodsLife.Scripts.Data.Inventory
         {
             foreach (var element in elements)
             {
-                Debug.LogWarning($"AddResource {element.Type} {element.Amount}. Before {_inventory[element.Type]}");
-                _inventory[element.Type] += element.Amount;
-                _oneMoreList.Add(new InventoryElement { Type = element.Type, Amount = _inventory[element.Type] });
+                Debug.LogWarning($"AddResource {element.typeName} {element.Amount}. Before {_inventory[element.typeName]}");
+                _inventory[element.typeName] += element.Amount;
+                _oneMoreList.Add(new InventoryElement { typeName = element.typeName, Amount = _inventory[element.typeName] });
             }
 
             InventoryChanged(_oneMoreList);
@@ -90,7 +90,7 @@ namespace BackwoodsLife.Scripts.Data.Inventory
 
             _inventory[elementType] += amount;
             Debug.LogWarning($"After {_inventory[elementType]}");
-            _oneMoreList.Add(new InventoryElement { Type = elementType, Amount = _inventory[elementType] });
+            _oneMoreList.Add(new InventoryElement { typeName = elementType, Amount = _inventory[elementType] });
             InventoryChanged(_oneMoreList);
         }
 
@@ -98,9 +98,9 @@ namespace BackwoodsLife.Scripts.Data.Inventory
         {
             foreach (var element in elements)
             {
-                Debug.LogWarning($"AddResource {element.Type} {element.Amount}. Before {_inventory[element.Type]}");
-                _inventory[element.Type] += element.Amount;
-                _oneMoreList.Add(new InventoryElement { Type = element.Type, Amount = _inventory[element.Type] });
+                Debug.LogWarning($"AddResource {element.typeName} {element.Amount}. Before {_inventory[element.typeName]}");
+                _inventory[element.typeName] += element.Amount;
+                _oneMoreList.Add(new InventoryElement { typeName = element.typeName, Amount = _inventory[element.typeName] });
             }
 
             InventoryChanged(_oneMoreList);
@@ -108,7 +108,7 @@ namespace BackwoodsLife.Scripts.Data.Inventory
 
         public bool HasEnoughResource(List<InventoryElement> inventoryElements)
         {
-            return inventoryElements.All(element => _inventory[element.Type] >= element.Amount);
+            return inventoryElements.All(element => _inventory[element.typeName] >= element.Amount);
         }
 
         public bool HasEnoughResource(string objResourceType, int amount)
@@ -123,7 +123,7 @@ namespace BackwoodsLife.Scripts.Data.Inventory
             var list = new List<InventoryElement>();
             foreach (var item in initItems)
             {
-                list.Add(new InventoryElement { Type = item.Key, Amount = item.Value });
+                list.Add(new InventoryElement { typeName = item.Key, Amount = item.Value });
             }
 
             InventoryChanged(list);

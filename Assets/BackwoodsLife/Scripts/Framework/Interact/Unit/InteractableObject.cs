@@ -10,7 +10,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit
     public abstract class InteractableObject : MonoBehaviour
     {
         [SerializeField] public SInteractableObject data;
-        public abstract void Process(IInteractableSystem interactableSystem, Action<List<CollectableElement>> callback);
+        public abstract void Process(IInteractableSystem interactableSystem, Action<List<InventoryElement>> callback);
     }
 
 }

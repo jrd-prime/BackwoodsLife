@@ -20,20 +20,15 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             _inventoryManager = inventoryManager;
         }
 
-        public void Collect(ref List<CollectableElement> obj)
+        public void Collect(ref List<InventoryElement> obj)
         {
             Debug.LogWarning("COLLECT");
             Assert.IsNotNull(_inventoryManager, "inventoryManager is null");
             Assert.IsNotNull(obj, "obj is null");
-            var list = obj.Select(element => new InventoryElement
-                {
-                    Type = element.Name,
-                    Amount = RandomCollector.GetRandom(element.Range.min, element.Range.max)
-                })
-                .ToList();
+           
 
 
-            _inventoryManager.IncreaseResource(list);
+            _inventoryManager.IncreaseResource(obj);
         }
     }
 }

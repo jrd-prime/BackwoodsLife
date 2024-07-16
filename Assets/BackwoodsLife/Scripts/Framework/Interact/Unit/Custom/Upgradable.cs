@@ -8,7 +8,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
 {
     public class Upgradable : CustomInteractableObject<SUpgradable>
     {
-        public override void Process(IInteractableSystem interactableSystem, Action<List<CollectableElement>> callback)
+        public override void Process(IInteractableSystem interactableSystem, Action<List<InventoryElement>> callback)
         {
             throw new NotImplementedException();
         }

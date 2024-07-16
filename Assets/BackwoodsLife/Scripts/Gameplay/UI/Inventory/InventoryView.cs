@@ -46,7 +46,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Inventory
         {
             foreach (var q in changedElements)
             {
-                var item = _container.ElementAt(_elementsPosition[q.Type]);
+                var item = _container.ElementAt(_elementsPosition[q.typeName]);
                 item.Q<Label>(InventoryConst.InventoryHUDItemLabel).text = q.Amount.ToString();
             }
         }

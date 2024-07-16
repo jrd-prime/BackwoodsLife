@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Data.Player;
-using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using DG.Tweening;
@@ -19,8 +18,6 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
     /// </summary>
     public class InteractSystem : MonoBehaviour
     {
-        [SerializeField] private GameObject textObjectTemplate;
-
         private CollectSystem _collectSystem;
         private PlayerModel _playerModel;
         private IInteractableSystem _usableSystem;
@@ -28,7 +25,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private IInteractableSystem _usableAndUpgradableSystem;
         private CharacterOverUI _characterOverUIHolder;
 
-        public event Action<List<CollectableElement>> OnCollected;
+        public event Action<List<InventoryElement>> OnCollected;
 
 
         [Inject]
@@ -42,45 +39,26 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
         private void Awake()
         {
-            Assert.IsNotNull(textObjectTemplate, "textObjectTemplate is null");
             OnCollected += OnCollect;
         }
 
 
-        private void OnCollect(List<CollectableElement> obj)
+        private void OnCollect(List<InventoryElement> obj)
         {
-            foreach (var element in obj)
-            {
-                // TODO pool
-                var inst = Instantiate(textObjectTemplate, parent: _characterOverUIHolder.transform);
-
-                inst.transform.localScale = Vector3.zero;
-
-                var t = inst.GetComponentInChildren<TMP_Text>();
-
-
-                t.text = $"+ {RandomCollector.GetRandom(element.Range.min, element.Range.max)} {element.Name}";
-
-                inst.transform.DOScale(new Vector3(.7f, .7f, .7f), .7f).SetEase(Ease.Flash);
-
-                inst.transform
-                    .DOMoveY(3f, 1f)
-                    .SetEase(Ease.InOutSine)
-                    .onComplete += () => { Destroy(inst); };
-            }
+            _characterOverUIHolder.ShowPopUpFor(obj);
         }
 
-        private void OnUseAndUpgrade(List<CollectableElement> collectableElements)
+        private void OnUseAndUpgrade(List<InventoryElement> collectableElements)
         {
             throw new NotImplementedException();
         }
 
-        private void OnUpgrade(List<CollectableElement> collectableElements)
+        private void OnUpgrade(List<InventoryElement> collectableElements)
         {
             throw new NotImplementedException();
         }
 
-        private void OnUse(List<CollectableElement> collectableElements)
+        private void OnUse(List<InventoryElement> collectableElements)
         {
             throw new NotImplementedException();
         }
