@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0d5bcd446ec4313a85113c946a12a92, type: 3}
-  m_Name: IconsConfiguration
+  m_Script: {fileID: 11500000, guid: e564a75fed93406195a272aa216ce2a0, type: 3}
+  m_Name: Stick
   m_EditorClassIdentifier: 
-  elementsIcons:
-  - typeName: Wood
-    icon: {fileID: 21300000, guid: b5050fb8b7b7ccd47be8d7e819966f74, type: 3}
+  itemName: Stick
+  interactableType: 0
+  itemType: 1
+  uiIcon: {fileID: 21300000, guid: cc5121c02d2370348961808d31946583, type: 3}
+  maxStackSize: 50

@@ -70,8 +70,6 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
             switch (interactableObject.data.interactableType)
             {
-                case EInteractableObject.Default:
-                    throw new Exception("Interactable type not set. " + interactableObject.name);
                 case EInteractableObject.Collectable:
                     interactableObject.Process(_collectSystem, OnCollected);
                     break;

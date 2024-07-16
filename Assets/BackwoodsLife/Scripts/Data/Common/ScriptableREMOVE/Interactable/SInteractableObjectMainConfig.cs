@@ -15,7 +15,7 @@ namespace BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE.Interactable
 
 
         [FormerlySerializedAs("interactableObjectType")]
-        public EInteractableObject eInteractableObjectType = EInteractableObject.Default;
+        public EInteractableObject eInteractableObjectType;
 
         public Vector3 spawnPosition;
         public bool upgardable;
@@ -28,9 +28,7 @@ namespace BackwoodsLife.Scripts.Data.Common.ScriptableREMOVE.Interactable
 
         private void OnValidate()
         {
-            objName = ((Object)this).name;
-            Assert.AreNotEqual(eInteractableObjectType, EInteractableObject.Default,
-                $"InteractableObjectType must be set. ScriptableObject: {((Object)this).name}");
+            objName = name;
         }
     }
 }

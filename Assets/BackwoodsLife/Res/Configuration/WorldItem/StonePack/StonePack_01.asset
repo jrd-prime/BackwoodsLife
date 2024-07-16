@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2b7fcf01dc4e3fa097f73d449af208, type: 3}
   m_Name: StonePack_01
   m_EditorClassIdentifier: 
-  interactableType: 1
+  interactableType: 0
   levelZeroPrefab:
     m_AssetGUID: 895b455666afca4428e411a54321191b
     m_SubObjectName: 
@@ -20,17 +20,24 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   hasRequirements: 0
   isReturnCollectables: 1
-  returnableElements:
+  returnElements:
   - Name: Stone
     Range:
       min: 1
-      max: 3
+      max: 5
+  - Name: Stick
+    Range:
+      min: 1
+      max: 5
   requiredElements: []
   returnedCollectables:
-  - returnResorces:
-    - type: 2
-      range:
-        min: 1
-        max: 3
-    returnFood: []
-  requirementsForCollecting: []
+  - item: {fileID: 11400000, guid: dae3fa4774340cd40893b4232ab70eb1, type: 2}
+    range:
+      min: 1
+      max: 5
+  - item: {fileID: 11400000, guid: e2e20a51e71fd9149ac3a1ff23b6fa1e, type: 2}
+    range:
+      min: 1
+      max: 5
+  requirementsForCollecting:
+  - value: 0

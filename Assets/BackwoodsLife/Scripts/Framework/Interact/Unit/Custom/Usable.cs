@@ -6,7 +6,7 @@ using BackwoodsLife.Scripts.Framework.Interact.System;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
 {
-    public class Usable : CustomInteractableObject<SUsable>
+    public class Usable : CustomInteractableObject<SInWorldInWorldUsable>
     {
         public override void Process(IInteractableSystem interactableSystem, Action<List<InventoryElement>> callback)
         {

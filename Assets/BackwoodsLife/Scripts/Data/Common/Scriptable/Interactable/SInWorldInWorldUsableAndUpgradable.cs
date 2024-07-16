@@ -9,7 +9,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
 {
     [CreateAssetMenu(fileName = "name",
         menuName = "Backwoods Life Scripts/Interactables/Objects/New Usable And Upgradable", order = 1)]
-    public class SUsableAndUpgradable : SInteractableObject
+    public class SInWorldInWorldUsableAndUpgradable : SInWorldInteractable
     {
         [Title("Levels Details (default lvl = 0)")]
         public List<UpgradeLevel> upgradeLevels;

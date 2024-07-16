@@ -5,7 +5,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
   
 
     public abstract class CustomInteractableObject<TScriptableType> : InteractableObject
-        where TScriptableType : SInteractableObject
+        where TScriptableType : SInWorldInteractable
     {
         public TScriptableType localData => data as TScriptableType;
     }

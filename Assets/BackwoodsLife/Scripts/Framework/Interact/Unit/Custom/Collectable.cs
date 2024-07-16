@@ -10,7 +10,7 @@ using UnityEngine.Assertions;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
 {
-    public class Collectable : CustomInteractableObject<SCollectable>
+    public class Collectable : CustomInteractableObject<SInWorldInWorldCollectable>
     {
         private CollectSystem _collectSystem;
 
@@ -30,7 +30,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
                 else
                 {
                     Debug.LogWarning("NO REQUIREMENTS just collect");
-                    var list = localData.returnableElements.Select(element => new InventoryElement
+                    var list = localData.returnElements.Select(element => new InventoryElement
                         {
                             typeName = element.Name,
                             Amount = RandomCollector.GetRandom(element.Range.min, element.Range.max)

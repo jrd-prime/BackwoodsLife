@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
 {
-    public abstract class SInteractableObject : ScriptableObject
+    public abstract class SInWorldInteractable : ScriptableObject
     {
         [ReadOnly] public EInteractableObject interactableType;
 
