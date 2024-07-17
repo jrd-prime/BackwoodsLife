@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.jnew;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem;
 
 namespace BackwoodsLife.Scripts.Data.Common.Structs
 {
     [Serializable]
     public struct ReturnCollectable
     {
-        public SCollectableItem item;
+        public SGameItemConfig item;
         public CollectRange range;
     }
 }

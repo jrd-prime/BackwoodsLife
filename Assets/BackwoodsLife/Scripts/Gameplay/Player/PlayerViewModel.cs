@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Scriptable.MainConfiguration;
+﻿using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;

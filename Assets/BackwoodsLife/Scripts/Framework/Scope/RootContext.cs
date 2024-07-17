@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.MainConfiguration;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
@@ -30,8 +30,8 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private EventSystem eventSystem;
 
-        [FormerlySerializedAs("sMainConfiguration")] [SerializeField]
-        private SMainConfigurations sMainConfigurations;
+        [FormerlySerializedAs("sMainConfigurations")] [FormerlySerializedAs("sMainConfiguration")] [SerializeField]
+        private SMainConfigurationsList sMainConfigurationsList;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -49,7 +49,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             var audioProvider = Check(audioManager.GetComponentInChildren<AudioProvider>());
             var audioSourceProvider = Check(audioManager.GetComponentInChildren<AudioSourceProvider>());
 
-            builder.RegisterInstance(sMainConfigurations);
+            builder.RegisterInstance(sMainConfigurationsList);
 
 
             // builder.RegisterComponent(resourceManager).AsSelf();

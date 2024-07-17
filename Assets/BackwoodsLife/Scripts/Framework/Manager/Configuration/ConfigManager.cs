@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.MainConfiguration;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using UnityEngine;
 using VContainer;
 
@@ -10,16 +10,16 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
     {
         public string Description => "Config Manager";
         public Dictionary<Type, object> ConfigsCache { get; } = new();
-        private SMainConfigurations _mainConfigurations;
+        private SMainConfigurationsList _mainConfigurationsList;
 
         [Inject]
-        private void Construct(SMainConfigurations mainConfigurations) => _mainConfigurations = mainConfigurations;
+        private void Construct(SMainConfigurationsList mainConfigurationsList) => _mainConfigurationsList = mainConfigurationsList;
 
         public void Initialize()
         {
-            AddToCache(_mainConfigurations.staticInteractableObjectsList);
-            AddToCache(_mainConfigurations.nonStaticInteractableObjectsList);
-            AddToCache(_mainConfigurations.characterConfiguration);
+            AddToCache(_mainConfigurationsList.staticInteractableObjectsList);
+            AddToCache(_mainConfigurationsList.nonStaticInteractableObjectsList);
+            AddToCache(_mainConfigurationsList.characterConfiguration);
         }
 
         private void AddToCache(object config)
