@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f03aba38b1e241c58a59efa3138f0042, type: 3}
   m_Name: Mining
   m_EditorClassIdentifier: 
-  itemName: 
-  uiIcon: {fileID: 0}
+  itemName: Mining
+  uiIcon: {fileID: 21300000, guid: 21c4b815667e4a6429b37eb31d4d9a08, type: 3}
   interactableType: 0
-  itemType: 0
+  gameItemType: 2

@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65949415398f4820b2dff13b051df85e, type: 3}
   m_Name: ItemsList
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: dae3fa4774340cd40893b4232ab70eb1, type: 2}
+  GameItems: []

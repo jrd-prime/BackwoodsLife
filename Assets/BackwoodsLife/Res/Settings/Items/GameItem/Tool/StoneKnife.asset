@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055f3ee22115451b9e7cb83bf4f1965b, type: 3}
   m_Name: StoneKnife
   m_EditorClassIdentifier: 
-  itemName: 
-  uiIcon: {fileID: 0}
+  itemName: StoneKnife
+  uiIcon: {fileID: 21300000, guid: cc5121c02d2370348961808d31946583, type: 3}
   interactableType: 0
-  itemType: 0
+  gameItemType: 3

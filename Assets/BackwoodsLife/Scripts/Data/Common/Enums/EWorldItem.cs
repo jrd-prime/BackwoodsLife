@@ -2,6 +2,6 @@
 {
     public enum EWorldItem
     {
-        Building = 0,
+        Collectable = 0,
     }
 }

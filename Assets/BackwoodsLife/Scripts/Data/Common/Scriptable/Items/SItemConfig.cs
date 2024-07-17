@@ -11,14 +11,14 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
         [Title("UI Config")] public Sprite uiIcon;
         [Title("Main")] [ReadOnly] public EInteractableObject interactableType;
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             itemName = name;
             interactableType = EInteractableObject.Collectable;
             CheckOnNull("icon", uiIcon);
         }
 
-        private void CheckOnNull(string fieldName, object obj)
+        protected void CheckOnNull(string fieldName, object obj)
         {
             if (obj == null)
                 Debug.LogError(fieldName.ToUpper() + " is null in " + name.ToUpper() + " config ");

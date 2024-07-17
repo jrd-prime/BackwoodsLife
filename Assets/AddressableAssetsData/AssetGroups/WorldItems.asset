@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: InteractablePrefabs
+  m_Name: WorldItems
   m_EditorClassIdentifier: 
-  m_GroupName: InteractablePrefabs
+  m_GroupName: WorldItems
   m_Data:
     m_SerializedData: []
-  m_GUID: 757925be3ff38ee47a2f2ea9efa6298f
-  m_SerializeEntries: []
+  m_GUID: 0f6f28cb16e0967418df71ea3d446ca5
+  m_SerializeEntries:
+  - m_GUID: a0d9695af41895d4a8f8082bf5dea82a
+    m_Address: WorldItems
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5e3c94725b02cd14c89072cbd3510190, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 686ee68b8236b164fa2caec18abf50d4, type: 2}
-    - {fileID: 11400000, guid: 41821c7e92ecae046b24bcd5c577527d, type: 2}
+    - {fileID: 11400000, guid: f56b25c84961b1d44a40fef0164c622b, type: 2}
+    - {fileID: 11400000, guid: acb4c80a97859354f8e2fbcd64d100c4, type: 2}

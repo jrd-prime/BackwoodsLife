@@ -10,5 +10,6 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Warehouse
     public class SWarehouseItem : SGameItemConfig
     {
         [Title("Warehouse")] [Range(1, 1000)] public int maxStackSize = 1;
+
     }
 }

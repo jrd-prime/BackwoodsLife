@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5318626d62f14faaaa37fa13e26ececc, type: 3}
   m_Name: Warehouse
   m_EditorClassIdentifier: 
-  itemName: 
-  uiIcon: {fileID: 0}
+  itemName: Warehouse
+  uiIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   interactableType: 0
   worldItemType: 0
   mainPrefab:
-    m_AssetGUID: 
+    m_AssetGUID: 8eca0cb07b81087488d8fa84bf19306e
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
