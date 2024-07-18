@@ -4,11 +4,9 @@ using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
+using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
-using DG.Tweening;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.System
@@ -24,14 +22,16 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private IInteractableSystem _upgradableSystem;
         private IInteractableSystem _usableAndUpgradableSystem;
         private CharacterOverUI _characterOverUIHolder;
+        private IConfigManager _configManager;
 
         public event Action<List<InventoryElement>> OnCollected;
 
 
         [Inject]
         private void Construct(PlayerModel playerModel, CollectSystem collectSystem,
-            CharacterOverUI characterOverUIHolder)
+            CharacterOverUI characterOverUIHolder, IConfigManager configManager)
         {
+            _configManager = configManager;
             _playerModel = playerModel;
             _collectSystem = collectSystem;
             _characterOverUIHolder = characterOverUIHolder;
@@ -42,6 +42,20 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             OnCollected += OnCollect;
         }
 
+
+        public void Interact(ref WorldInteractableItem worldInteractableItem)
+        {
+            if (worldInteractableItem == null) throw new NullReferenceException("Interactable obj is null");
+
+            switch (worldInteractableItem.worldItemType)
+            {
+                case EWorldItem.Collectable:
+                    worldInteractableItem.Process(_configManager, _collectSystem, OnCollected);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
         private void OnCollect(List<InventoryElement> obj)
         {
@@ -61,30 +75,6 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private void OnUse(List<InventoryElement> collectableElements)
         {
             throw new NotImplementedException();
-        }
-
-
-        public void Interact(ref InteractableObject interactableObject)
-        {
-            if (interactableObject == null) throw new NullReferenceException("Interactable obj is null");
-
-            switch (interactableObject.data.interactableType)
-            {
-                case EInteractableObject.Collectable:
-                    interactableObject.Process(_collectSystem, OnCollected);
-                    break;
-                case EInteractableObject.Usable:
-                    interactableObject.Process(_usableSystem, OnUse);
-                    break;
-                case EInteractableObject.Upgradable:
-                    interactableObject.Process(_upgradableSystem, OnUpgrade);
-                    break;
-                case EInteractableObject.UsableAndUpgradable:
-                    interactableObject.Process(_usableAndUpgradableSystem, OnUseAndUpgrade);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
     }
 }

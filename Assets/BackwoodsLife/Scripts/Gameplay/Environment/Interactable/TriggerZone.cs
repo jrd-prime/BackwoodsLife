@@ -24,7 +24,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
                 if (parentTransform != null)
                 {
                     Debug.LogWarning(transform.parent.name);
-                    var interactable = transform.parent.GetComponent<InteractableObject>();
+                    var interactable = transform.parent.GetComponent<WorldInteractableItem>();
 
                     if (interactable == null)
                         throw new NullReferenceException(

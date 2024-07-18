@@ -1,6 +1,8 @@
-﻿namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Collectable.Resource
+﻿using BackwoodsLife.Scripts.Framework.Interact.Unit.Custom;
+
+namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Collectable.Resource
 {
-    public class StonePack : Framework.Interact.Unit.Custom.Collectable
+    public class StonePack : CollectableItem
     {
     }
 }

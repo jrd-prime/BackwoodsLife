@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using UnityEngine;
 using VContainer;
@@ -41,6 +42,11 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
             }
 
             throw new KeyNotFoundException($"Config {typeof(T)} not found");
+        }
+
+        public T GetGameItemConfig<T>(string enumTypeName) where T : SItemConfig
+        {
+            return ConfigsCache[typeof(T)] as T;
         }
 
         public void ServiceInitialization()

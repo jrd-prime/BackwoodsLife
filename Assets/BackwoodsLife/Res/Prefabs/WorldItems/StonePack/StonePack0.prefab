@@ -500,6 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: fa9a1f9e28f790041a295d0b81bb905c, type: 2}
+  WorldItemConfig: {fileID: 11400000, guid: 18db739fb4e1df743b067b98b6f5715f, type: 2}
 --- !u!1 &6964464395570832800
 GameObject:
   m_ObjectHideFlags: 0
