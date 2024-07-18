@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1730aea88ba541579cefd1096c647dfc, type: 3}
-  m_Name: Stick
+  m_Script: {fileID: 11500000, guid: f03aba38b1e241c58a59efa3138f0042, type: 3}
+  m_Name: Gathering
   m_EditorClassIdentifier: 
-  itemName: Stick
-  uiIcon: {fileID: 0}
+  itemName: Gathering
+  uiIcon: {fileID: 21300000, guid: cc5121c02d2370348961808d31946583, type: 3}
   interactableType: 0
-  gameItemType: 1
+  gameItemType: 2

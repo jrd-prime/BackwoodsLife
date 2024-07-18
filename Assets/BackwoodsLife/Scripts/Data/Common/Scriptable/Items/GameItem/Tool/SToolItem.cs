@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BackwoodsLife.Scripts.Data.Common.Enums;
+using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Tool
 {
@@ -8,5 +9,11 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Tool
         order = 1)]
     public class SToolItem : SGameItemConfig
     {
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            
+            gameItemType = EGameItem.Tool;
+        }
     }
 }

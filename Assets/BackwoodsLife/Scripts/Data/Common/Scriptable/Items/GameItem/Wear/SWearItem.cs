@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BackwoodsLife.Scripts.Data.Common.Enums;
+using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Wear
 {
@@ -8,5 +9,11 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Wear
         order = 1)]
     public class SWearItem : SGameItemConfig
     {
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+
+            gameItemType = EGameItem.Wear;
+        }
     }
 }

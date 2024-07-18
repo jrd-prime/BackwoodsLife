@@ -1,10 +1,10 @@
 ﻿using BackwoodsLife.Scripts.Data.Common.Enums;
+using Sirenix.OdinInspector;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem
 {
     public abstract class SGameItemConfig : SItemConfig
     {
-        
-        public EGameItem gameItemType;
+        [ReadOnly] public EGameItem gameItemType;
     }
 }

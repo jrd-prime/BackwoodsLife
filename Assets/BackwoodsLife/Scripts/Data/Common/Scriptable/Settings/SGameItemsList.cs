@@ -42,6 +42,10 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
                 throw new Exception(
                     $"Not all game items in config. In cache {ConfigsCache.Count}, in enums {EnumHelper.GetGameItemsCount()}");
             }
+            else
+            {
+                Debug.LogWarning($"<color=green>GameItemsList has all items in config.</color>");
+            }
         }
     }
 

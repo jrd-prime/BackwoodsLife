@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BackwoodsLife.Scripts.Data.Common.Enums;
+using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Warehouse.Food
 {
@@ -8,5 +9,11 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Warehouse.
         order = 1)]
     public class SFoodItem : SWarehouseItem
     {
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+
+            gameItemType = EGameItem.Food;
+        }
     }
 }
