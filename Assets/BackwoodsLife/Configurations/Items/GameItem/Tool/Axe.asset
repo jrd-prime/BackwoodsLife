@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055f3ee22115451b9e7cb83bf4f1965b, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  itemName: 
-  uiIcon: {fileID: 0}
+  itemName: Axe
+  uiIcon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   interactableType: 0
-  gameItemType: 0
+  gameItemType: 3

@@ -8,7 +8,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
 {
     [CreateAssetMenu(fileName = "GameItemsList", menuName = SOPathName.ItemsConfigPath + "Game Items list config",
         order = 1)]
-    public class SGameItemsList : ScriptableObject, IConfigCache<SGameItemConfig>
+    public class SGameItemsList : SItemsConfigList<SGameItemsList>
     {
         [SerializeField] private List<SGameItemConfig> gameItems;
         public Dictionary<string, SGameItemConfig> ConfigsCache { get; } = new();
@@ -47,10 +47,5 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
                 Debug.LogWarning($"<color=green>GameItemsList has all items in config.</color>");
             }
         }
-    }
-
-    public interface IConfigCache<T>
-    {
-        public Dictionary<string, T> ConfigsCache { get; }
     }
 }

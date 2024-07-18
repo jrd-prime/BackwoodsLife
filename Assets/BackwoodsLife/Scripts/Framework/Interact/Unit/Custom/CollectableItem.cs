@@ -14,7 +14,7 @@ using UnityEngine.Assertions;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
 {
-    public class CollectableItem : CustomWorldInteractableItem<SWorldItemConfig>
+    public class CollectableItem : CustomWorldInteractableItem<SCollectableItem>
     {
         [SerializeField] public ECollectable collectableType;
 
@@ -25,39 +25,39 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
             Action<List<InventoryElement>> callback)
         {
             Assert.IsNotNull(configManager, "configManager is null");
-            localData = configManager.GetGameItemConfig<SCollectableItem>(nameof(collectableType));
+            localData = configManager.GetGameItemConfig<SCollectableItem>(collectableType.ToString());
 
             Assert.IsNotNull(interactableSystem, "interactableSystem is null");
             _collectSystem = interactableSystem as CollectSystem;
             Assert.IsNotNull(_collectSystem, "interactableSystem is not CollectSystem");
 
 
-            // if (localData.isReturnCollectables)
-            // {
-            //     Debug.LogWarning("HAS COLLECTABLE");
-            //     if (localData.hasRequirements)
-            //     {
-            //         Debug.LogWarning("HAS REQUIREMENTS");
-            //     }
-            //     else
-            //     {
-            //         Debug.LogWarning("NO REQUIREMENTS just collect");
-            //         var list = localData.returnElements.Select(element => new InventoryElement
-            //             {
-            //                 typeName = element.Name,
-            //                 Amount = RandomCollector.GetRandom(element.Range.min, element.Range.max)
-            //             })
-            //             .ToList();
-            //
-            //         callback.Invoke(list);
-            //
-            //         _collectSystem.Collect(ref list);
-            //     }
-            // }
-            // else
-            // {
-            //     Debug.LogWarning("NO COLLECTABLE");
-            // }
+            if (localData.retunedItemsCount > 0)
+            {
+                Debug.LogWarning("HAS COLLECTABLE");
+                if (localData.requiredItemsCount > 0)
+                {
+                    Debug.LogWarning("HAS REQUIREMENTS");
+                }
+                else
+                {
+                    Debug.LogWarning("NO REQUIREMENTS just collect");
+                    // var list = localData.returnElements.Select(element => new InventoryElement
+                    //     {
+                    //         typeName = element.Name,
+                    //         Amount = RandomCollector.GetRandom(element.Range.min, element.Range.max)
+                    //     })
+                    //     .ToList();
+                    //
+                    // callback.Invoke(list);
+                    //
+                    // _collectSystem.Collect(ref list);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("NO COLLECTABLE");
+            }
         }
     }
 }

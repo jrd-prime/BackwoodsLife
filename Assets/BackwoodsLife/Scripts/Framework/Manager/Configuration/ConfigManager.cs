@@ -14,7 +14,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
         private SMainConfigurationsList _mainConfigurationsList;
 
         [Inject]
-        private void Construct(SMainConfigurationsList mainConfigurationsList) => _mainConfigurationsList = mainConfigurationsList;
+        private void Construct(SMainConfigurationsList mainConfigurationsList) =>
+            _mainConfigurationsList = mainConfigurationsList;
 
         public void Initialize()
         {
@@ -44,9 +45,13 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
             throw new KeyNotFoundException($"Config {typeof(T)} not found");
         }
 
-        public T GetGameItemConfig<T>(string enumTypeName) where T : SItemConfig
+        public T1 GetGameItemConfig<TSList, T1>(string enumTypeName) where TSList : SItemsConfigList where T1 : SItemConfig
         {
-            return ConfigsCache[typeof(T)] as T;
+            Debug.LogWarning("GetGameItemConfig by name: " + enumTypeName);
+            var a = ConfigsCache[typeof(TSList)] as TSList;
+            
+            
+            return a.ConfigsCache[enumTypeName] as TSList ?? throw new Exception(enumTypeName);
         }
 
         public void ServiceInitialization()
