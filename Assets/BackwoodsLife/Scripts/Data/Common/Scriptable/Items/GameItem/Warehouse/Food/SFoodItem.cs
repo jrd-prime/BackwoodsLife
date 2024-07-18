@@ -1,7 +1,6 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Warehouse;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Food
+namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Warehouse.Food
 {
     [CreateAssetMenu(
         fileName = "FoodItem",
@@ -9,6 +8,5 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Food
         order = 1)]
     public class SFoodItem : SWarehouseItem
     {
-
     }
 }

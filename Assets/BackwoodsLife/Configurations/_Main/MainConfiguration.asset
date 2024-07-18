@@ -14,9 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterConfiguration: {fileID: 11400000, guid: 0caa8a7d20288344a81d7ad91e3819be,
     type: 2}
-  staticInteractableObjectsList: {fileID: 11400000, guid: 2b7227c26d2b50944b0932227c13c2c8,
-    type: 2}
-  nonStaticInteractableObjectsList: {fileID: 11400000, guid: aa6b4204984f4584e8cf6fac101ba5ff,
-    type: 2}
-  gameItemsList: {fileID: 11400000, guid: e57e07af116f57d418609e3df3a879cc, type: 2}
-  worldItemsList: {fileID: 0}
+  gameItemsList: {fileID: 11400000, guid: 1a6eb87b09621fa41a7cb368289b2fdf, type: 2}
+  worldItemsList: {fileID: 11400000, guid: 77501d62c7b72a14aa8b4722fa19826c, type: 2}

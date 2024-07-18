@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65949415398f4820b2dff13b051df85e, type: 3}
   m_Name: GameItemsList
   m_EditorClassIdentifier: 
-  GameItems: []
+  gameItems:
+  - {fileID: 11400000, guid: 9c87daa997559634bb881358bf4b2a1b, type: 2}
+  - {fileID: 11400000, guid: e5cf509cc005144408a89c0d8452af3a, type: 2}
+  - {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
+  - {fileID: 11400000, guid: 47dcd9baea59feb47a6c7b52830128ea, type: 2}
+  - {fileID: 11400000, guid: 5b422285c117d034bb6c3e5833c88fb4, type: 2}
+  - {fileID: 11400000, guid: 3da48bd6650c1674bbd54f02a25f1fa0, type: 2}

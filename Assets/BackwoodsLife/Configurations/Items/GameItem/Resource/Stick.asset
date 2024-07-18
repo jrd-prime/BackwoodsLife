@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2389d51cad924f828fcea5874432b5e8, type: 3}
-  m_Name: WorldItemsList
+  m_Script: {fileID: 11500000, guid: 1730aea88ba541579cefd1096c647dfc, type: 3}
+  m_Name: Stick
   m_EditorClassIdentifier: 
-  worldItems:
-  - {fileID: 11400000, guid: 18db739fb4e1df743b067b98b6f5715f, type: 2}
-  - {fileID: 11400000, guid: c2e995195ed2a9347bb629fe0c498c44, type: 2}
+  itemName: 
+  uiIcon: {fileID: 0}
+  interactableType: 0
+  gameItemType: 0
+  maxStackSize: 1
