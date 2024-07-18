@@ -66,8 +66,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameScene
         private async UniTask SetupStaticObjectsAsync()
         {
             Debug.Log("SetupStaticObjectsAsync");
-            var a = _configManager.GetConfig<SStaticInteractableObjectsList>();
-            Debug.Log(a);
+            // var a = _configManager.GetConfig<SStaticInteractableObjectsList>();
+            // Debug.Log(a);
 
             // foreach (var av in a.staticInteractables)
             // {

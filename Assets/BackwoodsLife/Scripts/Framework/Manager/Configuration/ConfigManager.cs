@@ -17,9 +17,14 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 
         public void Initialize()
         {
-            AddToCache(_mainConfigurationsList.staticInteractableObjectsList);
-            AddToCache(_mainConfigurationsList.nonStaticInteractableObjectsList);
+            AddToCache(_mainConfigurationsList.gameItemsList);
+            AddToCache(_mainConfigurationsList.worldItemsList);
             AddToCache(_mainConfigurationsList.characterConfiguration);
+
+            foreach (var o in ConfigsCache)
+            {
+                Debug.LogWarning($"In cache {o.Key}");
+            }
         }
 
         private void AddToCache(object config)

@@ -1,0 +1,9 @@
+﻿namespace BackwoodsLife.Scripts.Data.Common.Enums.Items.Game
+{
+    public enum ETool
+    {
+        Knife = 0,
+        Axe = 1,
+        StoneKnife = 2,
+    }
+}

@@ -11,7 +11,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem.Collectab
         fileName = "CollectableItem",
         menuName = SOPathName.WorldItemPath + "Collectable Item",
         order = 1)]
-    public class SCollectableItem : SWorldItemsConfig
+    public class SCollectableItem : SWorldItemConfig
     {
         [Title("Collectable")] [ReadOnly] public int retunedItemsCount;
         [ReadOnly] public int requiredItemsCount;

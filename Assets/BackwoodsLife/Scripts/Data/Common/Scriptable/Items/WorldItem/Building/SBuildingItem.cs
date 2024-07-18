@@ -6,7 +6,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem.Building
         fileName = "InventoryItem",
         menuName = SOPathName.WorldItemPath + "Building Item",
         order = 1)]
-    public class SBuildingItem : SWorldItemsConfig
+    public class SBuildingItem : SWorldItemConfig
     {
     }
 }

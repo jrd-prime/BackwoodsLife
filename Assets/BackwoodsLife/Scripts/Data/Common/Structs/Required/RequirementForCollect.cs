@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
 
 namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
 {
