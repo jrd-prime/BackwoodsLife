@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
     public sealed class AssetProvider : IAssetProvider
     {
         private IConfigManager _configManager;
-
+        private readonly Dictionary<string, Sprite> _iconsCache = new();
 
         [Inject]
         private void Construct(IConfigManager configManager)
@@ -48,10 +49,15 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
 
         public async UniTask<Sprite> LoadIconAsync(string elementTypeName)
         {
+            if (_iconsCache.TryGetValue(elementTypeName, out var sprite)) return sprite;
+
             var iconRef = _configManager.GetIconReference(elementTypeName);
             if (iconRef == null) throw new NullReferenceException($"Icon not found for {elementTypeName}");
-            var handle = Addressables.LoadAssetAsync<Sprite>(iconRef);
-            return await handle.Task;
+
+            var icon = await Addressables.LoadAssetAsync<Sprite>(iconRef);
+
+            _iconsCache.Add(elementTypeName, icon);
+            return icon;
         }
 
         private async UniTask CheckAsset(string assetId)
