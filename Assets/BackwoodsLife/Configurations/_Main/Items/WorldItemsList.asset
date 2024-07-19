@@ -15,3 +15,5 @@ MonoBehaviour:
   worldItems:
   - {fileID: 11400000, guid: 18db739fb4e1df743b067b98b6f5715f, type: 2}
   - {fileID: 11400000, guid: c2e995195ed2a9347bb629fe0c498c44, type: 2}
+  - {fileID: 11400000, guid: 40ee56be85754ba45a483d0d3a83eb36, type: 2}
+  - {fileID: 11400000, guid: 00d8add4d658f634ead5b3dc82b0f2da, type: 2}

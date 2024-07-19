@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 6d0618e54057aa248aaf987c6ec6e6ce
   m_SerializeEntries:
-  - m_GUID: afc6768a14751fb4db032ed092410427
-    m_Address: StoredObjectsIcons
+  - m_GUID: f38d03690684016419afd411a313282a
+    m_Address: Icons
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

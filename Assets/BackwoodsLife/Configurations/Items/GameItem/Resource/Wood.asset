@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1730aea88ba541579cefd1096c647dfc, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  itemName: 
-  uiIcon: {fileID: 0}
+  itemName: Wood
+  iconReference:
+    m_AssetGUID: 0381b4a3a56091947b1a3aa5575a0532
+    m_SubObjectName: wood-icon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
   interactableType: 0
-  gameItemType: 0
-  maxStackSize: 1
+  gameItemType: 1

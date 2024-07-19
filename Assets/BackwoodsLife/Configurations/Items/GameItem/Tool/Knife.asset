@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: Knife
   m_EditorClassIdentifier: 
   itemName: Knife
-  uiIcon: {fileID: 21300000, guid: 44a054df1702e39458b7072b08d0f212, type: 3}
+  iconReference:
+    m_AssetGUID: f5cd43095f9e58f4c8fc8df42280139d
+    m_SubObjectName: knife-icon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
   interactableType: 0
   gameItemType: 3

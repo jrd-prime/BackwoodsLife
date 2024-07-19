@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e3463140da4f95988805d59d01e3c9, type: 3}
   m_Name: MushroomPack
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: MushroomPack
   iconReference:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -20,6 +20,18 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   interactableType: 0
   worldItemType: 0
-  retunedItemsCount: 0
+  retunedItemsCount: 1
   requiredItemsCount: 0
-  collectableLevels: []
+  collectableLevels:
+  - level: 0
+    levelPrefab:
+      m_AssetGUID: 8dddcb942b660be4d8096e9f7611f55e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    returnedItems:
+    - Item: {fileID: 11400000, guid: 5b422285c117d034bb6c3e5833c88fb4, type: 2}
+      Range:
+        min: 1
+        max: 5
+    requiredItems: []
