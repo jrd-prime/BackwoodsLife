@@ -15,5 +15,6 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
         public UniTask<AsyncOperationHandle<GameObject>> InstantiateAsync(string assetId, Transform parent = null);
 
         public UniTask<GameObject> InstantiateAsync(AssetReference assetId);
+        public UniTask<Sprite> LoadIconAsync(string elementTypeName);
     }
 }

@@ -499,7 +499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f335e485d16462cbba80b9e722efb60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: fa9a1f9e28f790041a295d0b81bb905c, type: 2}
+  collectableType: 0
+  collectableLevel: 1
 --- !u!1 &6964464395570832800
 GameObject:
   m_ObjectHideFlags: 0

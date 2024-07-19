@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7373026993787199412}
   - component: {fileID: -7994490006380983331}
   m_Layer: 0
-  m_Name: Mushroom_lvl1
+  m_Name: MushroomPack_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682725af433942829c1a7a45ed1628ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: c6102b11481c0284d810bc93c0475fa2, type: 2}
+  collectableType: 2
+  collectableLevel: 0
 --- !u!1001 &5154550662355677051
 PrefabInstance:
   m_ObjectHideFlags: 0

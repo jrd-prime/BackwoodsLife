@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Data.Player;
+using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using DG.Tweening;
 using R3;
 using TMPro;
@@ -19,11 +20,13 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
         [SerializeField] private GameObject textObjectTemplate;
         private PlayerModel _playerModel;
         private readonly CompositeDisposable _disposables = new();
+        private IAssetProvider _assetProvider;
 
         [Inject]
-        private void Construct(PlayerModel playerModel)
+        private void Construct(PlayerModel playerModel, IAssetProvider assetProvider)
         {
             _playerModel = playerModel;
+            _assetProvider = assetProvider;
         }
 
         private void Awake()
@@ -38,7 +41,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
             _disposables.Dispose();
         }
 
-        public void ShowPopUpFor(List<InventoryElement> inventoryElements)
+        public async void ShowPopUpFor(List<InventoryElement> inventoryElements)
         {
             foreach (var element in inventoryElements)
             {
@@ -50,9 +53,13 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
                 var text = inst.GetComponentInChildren<TMP_Text>();
                 var icon = inst.GetComponentInChildren<Image>();
 
-                Debug.LogWarning("We need icon for " + element.typeName);
+                var iconSprite = await _assetProvider.LoadIconAsync(element.typeName);
+
+                if (iconSprite == null) Debug.LogError("We need icon for " + element.typeName);
+
 
                 text.text = $"+ {element.Amount}";
+                icon.sprite = iconSprite;
 
                 inst.transform.DOScale(new Vector3(.7f, .7f, .7f), .7f).SetEase(Ease.Flash);
 

@@ -2,6 +2,8 @@
 {
     public enum ECollectable
     {
-        StonePack =0,
+        StonePack = 0,
+        StickPack = 1,
+        MushroomPack = 2
     }
 }

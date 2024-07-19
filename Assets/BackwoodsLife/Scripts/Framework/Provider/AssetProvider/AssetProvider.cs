@@ -1,15 +1,26 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
+using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
 {
     public sealed class AssetProvider : IAssetProvider
     {
+        private IConfigManager _configManager;
+
+
+        [Inject]
+        private void Construct(IConfigManager configManager)
+        {
+            _configManager = configManager;
+        }
+
         public async UniTask<SceneInstance> LoadSceneAsync(string assetId, LoadSceneMode loadSceneMode)
         {
             await CheckAsset(assetId);
@@ -32,6 +43,14 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
         {
             // await CheckAsset(assetId);
             var handle = Addressables.InstantiateAsync(assetId);
+            return await handle.Task;
+        }
+
+        public async UniTask<Sprite> LoadIconAsync(string elementTypeName)
+        {
+            var iconRef = _configManager.GetIconReference(elementTypeName);
+            if (iconRef == null) throw new NullReferenceException($"Icon not found for {elementTypeName}");
+            var handle = Addressables.LoadAssetAsync<Sprite>(iconRef);
             return await handle.Task;
         }
 
