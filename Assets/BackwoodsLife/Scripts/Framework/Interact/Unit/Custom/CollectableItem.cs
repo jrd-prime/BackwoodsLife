@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Warehouse;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem.Collectable;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
@@ -25,17 +28,19 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
             Action<List<InventoryElement>> callback)
         {
             Assert.IsNotNull(configManager, "configManager is null");
-            localData = configManager.GetGameItemConfig<SCollectableItem>(collectableType.ToString());
+
+            config = configManager.GetWorldItemConfig<SCollectableItem>(collectableType.ToString());
+
 
             Assert.IsNotNull(interactableSystem, "interactableSystem is null");
             _collectSystem = interactableSystem as CollectSystem;
             Assert.IsNotNull(_collectSystem, "interactableSystem is not CollectSystem");
 
 
-            if (localData.retunedItemsCount > 0)
+            if (config.retunedItemsCount > 0)
             {
                 Debug.LogWarning("HAS COLLECTABLE");
-                if (localData.requiredItemsCount > 0)
+                if (config.requiredItemsCount > 0)
                 {
                     Debug.LogWarning("HAS REQUIREMENTS");
                 }

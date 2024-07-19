@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using UnityEngine;
 using VContainer;
@@ -45,13 +45,18 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
             throw new KeyNotFoundException($"Config {typeof(T)} not found");
         }
 
-        public T1 GetGameItemConfig<TSList, T1>(string enumTypeName) where TSList : SItemsConfigList where T1 : SItemConfig
+        public T GetWorldItemConfig<T>(string enumTypeName) where T : SWorldItemConfig
         {
-            Debug.LogWarning("GetGameItemConfig by name: " + enumTypeName);
-            var a = ConfigsCache[typeof(TSList)] as TSList;
-            
-            
-            return a.ConfigsCache[enumTypeName] as TSList ?? throw new Exception(enumTypeName);
+            var worldItemsList = ConfigsCache[typeof(SWorldItemsList)] as SWorldItemsList;
+            if (worldItemsList == null)
+                throw new Exception(nameof(SWorldItemsList) + " not found in " + nameof(ConfigsCache));
+
+            var itemConfig = worldItemsList.ConfigsCache[enumTypeName] as T;
+            if (itemConfig == null) throw new NullReferenceException("Config not found for: " + enumTypeName);
+
+            Debug.LogWarning("GetGameItemConfig by name: " + enumTypeName + " / " + itemConfig.itemName);
+
+            return itemConfig;
         }
 
         public void ServiceInitialization()

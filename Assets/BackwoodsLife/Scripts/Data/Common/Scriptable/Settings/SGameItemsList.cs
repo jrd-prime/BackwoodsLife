@@ -8,10 +8,9 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
 {
     [CreateAssetMenu(fileName = "GameItemsList", menuName = SOPathName.ItemsConfigPath + "Game Items list config",
         order = 1)]
-    public class SGameItemsList : SItemsConfigList<SGameItemsList>
+    public class SGameItemsList : SItemsConfigList<SGameItemConfig>
     {
         [SerializeField] private List<SGameItemConfig> gameItems;
-        public Dictionary<string, SGameItemConfig> ConfigsCache { get; } = new();
 
         private void OnValidate()
         {
