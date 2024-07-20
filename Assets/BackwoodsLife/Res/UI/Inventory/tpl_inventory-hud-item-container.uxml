@@ -1,14 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/inventory.uss?fileID=7433441132597879392&amp;guid=26dfa1f17d03ef6449e4ac62c770560d&amp;type=3#inventory" />
     <ui:VisualElement name="inventory-hud-item-container" class="inventory-hud-item-container">
-<<<<<<< HEAD
-        <ui:VisualElement name="i-hud-item-icon" class="i-hud-item-icon" style="background-image: url(&quot;project://database/Assets/BackwoodsLife/Res/Images/Icons/Resource/stick-icon.png?fileID=21300000&amp;guid=ac1a10f019ae9094789e4113fa78ed03&amp;type=3#stick-icon&quot;); right: 2px; left: auto;" />
+        <ui:VisualElement name="i-hud-item-icon" class="i-hud-item-icon" style="background-image: url(&quot;project://database/Assets/BackwoodsLife/Res/Images/Icons/Resource/stick-icon.png?fileID=21300000&amp;guid=1511e35934ea2444cba32f5ed2f1f5dc&amp;type=3#stick-icon&quot;); right: 2px; left: auto;" />
         <ui:Label tabindex="-1" text="9999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="i-hud-item-label" class="i-hud-item-label" style="color: rgb(107, 100, 93); right: 30px;" />
         <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="i-hud-item-id" style="position: absolute; left: -51px; display: none;" />
-=======
-        <ui:VisualElement name="i-hud-item-icon" class="i-hud-item-icon" />
-        <ui:Label tabindex="-1" text="9999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="i-hud-item-label" class="i-hud-item-label" style="color: rgb(107, 100, 93);" />
-        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="i-hud-item-id" style="position: absolute; left: -51px;" />
->>>>>>> parent of 60a1900 (up)
     </ui:VisualElement>
 </ui:UXML>
