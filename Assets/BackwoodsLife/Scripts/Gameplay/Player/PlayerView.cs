@@ -6,7 +6,7 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.Player
 {
-    [RequireComponent(typeof(Rigidbody), typeof(Animator), typeof(MeshCollider))]
+    [RequireComponent(typeof(Rigidbody), typeof(Animator), typeof(CapsuleCollider))]
     public class PlayerView : UIView
     {
         private IPlayerViewModel _viewModel;

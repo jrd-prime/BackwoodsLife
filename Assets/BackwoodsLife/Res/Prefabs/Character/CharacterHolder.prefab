@@ -147,6 +147,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d523bb9c8436de84d957c5858c426f9e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -170,7 +175,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d523bb9c8436de84d957c5858c426f9e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7220700213601863195}
+      addedObject: {fileID: 6997245936528087024}
   m_SourcePrefab: {fileID: 100100000, guid: d523bb9c8436de84d957c5858c426f9e, type: 3}
 --- !u!4 &104882132961575870 stripped
 Transform:
@@ -256,8 +261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1345fbf96149889d3606ed5d731d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &7220700213601863195
-MeshCollider:
+--- !u!136 &6997245936528087024
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -274,7 +279,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
