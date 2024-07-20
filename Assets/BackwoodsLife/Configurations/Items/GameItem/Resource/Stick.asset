@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Stick
   iconReference:
-    m_AssetGUID: ac1a10f019ae9094789e4113fa78ed03
+    m_AssetGUID: 1511e35934ea2444cba32f5ed2f1f5dc
     m_SubObjectName: stick-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null

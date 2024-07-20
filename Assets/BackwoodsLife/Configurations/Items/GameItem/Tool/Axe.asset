@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Axe
   iconReference:
-    m_AssetGUID: bc0ec4a4a41641e4792c1f25692994f2
+    m_AssetGUID: 55befca165c427740840cecd26b3b255
     m_SubObjectName: axe-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null

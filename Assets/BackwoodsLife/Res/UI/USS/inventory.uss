@@ -50,8 +50,8 @@
 
 .i-hud-item-icon {
     flex-grow: 0;
-    height: 22px;
-    width: 22px;
+    height: 26px;
+    width: 26px;
     background-color: rgba(56, 56, 56, 0);
     align-items: flex-start;
     margin-top: 0;
@@ -59,9 +59,9 @@
     margin-bottom: 0;
     margin-left: 0;
     position: absolute;
-    left: 6px;
-    background-image: url("project://database/Assets/BackwoodsLife/Res/UI/Inventory/StoredObjectsIcons/wood-icon.png?fileID=2800000&guid=b5050fb8b7b7ccd47be8d7e819966f74&type=3#wood-icon");
-    top: 4px;
+    left: 2px;
+    background-image: url('project://database/Assets/BackwoodsLife/Res/UI/Inventory/StoredObjectsIcons/wood-icon.png?fileID=2800000&guid=b5050fb8b7b7ccd47be8d7e819966f74&type=3#wood-icon');
+    top: 2px;
 }
 
 .i-hud-item-label {
