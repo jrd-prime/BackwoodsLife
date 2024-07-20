@@ -1207,6 +1207,21 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 480434150453014951, guid: e81446cb7d08f2f45933c4adbbed8880,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: d523bb9c8436de84d957c5858c426f9e, type: 3}
+    - target: {fileID: 480434150453014951, guid: e81446cb7d08f2f45933c4adbbed8880,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9b6877131deee7546935f45f52b141c9, type: 2}
+    - target: {fileID: 480434150453014951, guid: e81446cb7d08f2f45933c4adbbed8880,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1883513213570377627, guid: e81446cb7d08f2f45933c4adbbed8880,
         type: 3}
       propertyPath: m_LocalPosition.x
