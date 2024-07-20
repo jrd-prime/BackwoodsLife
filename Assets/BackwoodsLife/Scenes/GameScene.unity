@@ -1209,8 +1209,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384808038428770464, guid: e81446cb7d08f2f45933c4adbbed8880,
         type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 384808038428770464, guid: e81446cb7d08f2f45933c4adbbed8880,
+        type: 3}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 384808038428770464, guid: e81446cb7d08f2f45933c4adbbed8880,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1883513213570377627, guid: e81446cb7d08f2f45933c4adbbed8880,
         type: 3}
