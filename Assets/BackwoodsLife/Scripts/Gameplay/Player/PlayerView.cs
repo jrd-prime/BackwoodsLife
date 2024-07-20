@@ -1,4 +1,5 @@
 ﻿using BackwoodsLife.Scripts.Gameplay.UI;
+using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -16,14 +17,22 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private Animator _animator;
         private Rigidbody _rb;
         private Vector3 _moveDirection;
+        private JoystickModel _joy;
+        private static readonly int MoveValue = Animator.StringToHash("MoveValue");
 
         [Inject]
-        private void Construct(IPlayerViewModel viewModel) => _viewModel = viewModel;
+        private void Construct(IPlayerViewModel viewModel, JoystickModel joystickModel)
+        {
+            _viewModel = viewModel;
+            _joy = joystickModel;
+        }
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
             _animator = gameObject.GetComponent<Animator>();
+
+            Assert.IsNotNull(_animator, "Animator is null");
 
             Assert.IsNotNull(_viewModel,
                 $"ViewModel is null. Ensure that \"{this}\" is added to auto-injection in GameSceneContext prefab");
@@ -41,8 +50,16 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
                 .AddTo(_disposables);
 
             _viewModel.MoveDirection
-                .Subscribe(newDirection => { _moveDirection = newDirection; })
+                .Subscribe(newDirection =>
+                {
+                    _moveDirection = newDirection;
+                    _animator.SetFloat(MoveValue, newDirection.magnitude);
+                })
                 .AddTo(_disposables);
+            //
+            // _joy.MoveDirection
+            //     .Subscribe(joystickDirection => { Debug.LogWarning("Move " + joystickDirection.magnitude); })
+            //     .AddTo(_disposables);
         }
 
         private void FixedUpdate()
