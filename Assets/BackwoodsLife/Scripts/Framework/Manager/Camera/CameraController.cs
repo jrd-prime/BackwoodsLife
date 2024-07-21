@@ -30,13 +30,20 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Camera
             _subscribe?.Dispose();
         }
 
+        public void MoveToPosition(Vector3 position)
+        {
+            // transform.DOMove(position, 1f).SetEase(Ease.OutQuad);
+            transform.position = position;
+        }
+
         private void SubscribeToTargetPosition(IPlayerViewModel target)
         {
             _targetViewModel = target;
             _targetViewModel.Position
-                .Subscribe(x => transform.DOMove(x, 1f).SetEase(Ease.OutQuad))
+                .Subscribe(MoveToPosition)
                 .AddTo(_subscribe);
         }
+
 
         private void Awake()
         {

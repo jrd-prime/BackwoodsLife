@@ -1,4 +1,5 @@
-﻿using BackwoodsLife.Scripts.Framework.Bootstrap;
+﻿using System.Collections.Generic;
+using BackwoodsLife.Scripts.Framework.Bootstrap;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -10,6 +11,7 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
 {
     public interface IAssetProvider : ILoadingOperation
     {
+        public Dictionary<string, Sprite> IconCache { get; }
         public UniTask<SceneInstance> LoadSceneAsync(string assetId, LoadSceneMode loadSceneMode);
         public UniTask<AsyncOperationHandle<GameObject>> LoadAssetAsync(string assetId);
         public UniTask<AsyncOperationHandle<GameObject>> InstantiateAsync(string assetId, Transform parent = null);

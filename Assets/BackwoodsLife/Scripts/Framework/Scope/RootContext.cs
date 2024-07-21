@@ -9,8 +9,8 @@ using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using BackwoodsLife.Scripts.Framework.Manager.Input;
-using BackwoodsLife.Scripts.Framework.Manager.Inventory;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
+using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -68,12 +68,12 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.Register(typeof(DBManager), Lifetime.Singleton).As<IDBManager>();
             builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();
             builder.Register(typeof(SaveAndLoadManager), Lifetime.Singleton).As<ISaveAndLoadManager>();
-            builder.Register<InventoryManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<WarehouseManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             // Systems
             builder.Register<FollowSystem>(Lifetime.Singleton).AsSelf();
 
-            builder.Register<InventoryModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<WarehouseModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<DebugMemoryAndEtcModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             // ViewModel

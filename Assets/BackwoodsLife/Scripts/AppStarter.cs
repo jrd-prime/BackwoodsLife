@@ -3,8 +3,8 @@ using BackwoodsLife.Scripts.Framework.Manager.Audio;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using BackwoodsLife.Scripts.Framework.Manager.GameScene;
-using BackwoodsLife.Scripts.Framework.Manager.Inventory;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
+using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using Cysharp.Threading.Tasks;
 using UnityEngine.ResourceManagement.ResourceProviders;
@@ -24,7 +24,7 @@ namespace BackwoodsLife.Scripts
         private ISaveAndLoadManager _saveAndLoadManager;
         private ILoadingOperation _dbManager;
         private GameSceneManager _gameSceneManager;
-        private InventoryManager _inventoryManager;
+        private WarehouseManager _inventoryManager;
 
         [Inject]
         private void Construct(IObjectResolver container)
@@ -33,7 +33,7 @@ namespace BackwoodsLife.Scripts
             _configManager = container.Resolve<IConfigManager>();
             _dbManager = container.Resolve<IDBManager>();
             _gameSceneManager = container.Resolve<GameSceneManager>();
-            _inventoryManager = container.Resolve<InventoryManager>();
+            _inventoryManager = container.Resolve<WarehouseManager>();
             _audioManager = container.Resolve<IAudioManager>();
             _assetProvider = container.Resolve<IAssetProvider>();
             _saveAndLoadManager = container.Resolve<ISaveAndLoadManager>();

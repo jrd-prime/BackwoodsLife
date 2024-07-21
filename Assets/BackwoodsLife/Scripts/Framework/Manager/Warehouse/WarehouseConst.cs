@@ -1,4 +1,4 @@
-﻿namespace BackwoodsLife.Scripts.Framework.Manager.Inventory
+﻿namespace BackwoodsLife.Scripts.Framework.Manager.Warehouse
 {
     public static class InventoryConst
     {

@@ -21,7 +21,7 @@ namespace BackwoodsLife.Scripts.Data.Inventory
         public CollectRange Range;
     }
 
-    public class InventoryModel : IInitializable
+    public class WarehouseModel : IInitializable
     {
         private Dictionary<string, int> _inventory = new();
         public ReactiveProperty<List<InventoryElement>> OnInventoryChanged = new();

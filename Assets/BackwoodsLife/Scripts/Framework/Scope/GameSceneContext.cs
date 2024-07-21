@@ -1,6 +1,6 @@
 ﻿using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Interact.System;
-using BackwoodsLife.Scripts.Framework.Manager.Inventory;
+using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
@@ -23,7 +23,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             // builder.Register<PlayerStateMachine>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<PlayerViewModel>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<JoystickViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<InventoryViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<WarehouseViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<CollectSystem>(Lifetime.Singleton).AsSelf();
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Inventory;
-using BackwoodsLife.Scripts.Framework.Manager.Inventory;
+using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -9,10 +9,10 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.UI.Inventory
 {
-    public class InventoryView : UIView
+    public class WarehouseView : UIView
     {
         [SerializeField] private VisualTreeAsset itemViewTemplate;
-        private InventoryViewModel _viewModel;
+        private WarehouseViewModel _viewModel;
         private VisualElement _root;
         private readonly CompositeDisposable _disposables = new();
         private VisualElement _container;
@@ -20,7 +20,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Inventory
         private readonly Dictionary<string, int> _elementsPosition = new();
 
         [Inject]
-        private void Construct(InventoryViewModel viewModel) => _viewModel = viewModel;
+        private void Construct(WarehouseViewModel viewModel) => _viewModel = viewModel;
 
         private void Awake()
         {
@@ -51,17 +51,21 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Inventory
             }
         }
 
-        private void InitializeView()
+        private async void InitializeView()
         {
             var itemsForInventory = _viewModel.GetInventoryData();
             var i = 0;
+            
             foreach (var t in itemsForInventory)
             {
                 Debug.LogWarning($"Add {t} to position {i}");
 
+                var icon = await _viewModel.GetIcon(t.Key);
+
                 var newItem = itemViewTemplate.Instantiate();
-                newItem.Q<Label>(InventoryConst.InventoryHUDItemLabelId).text = t.Key.ToString();
+                newItem.Q<Label>(InventoryConst.InventoryHUDItemLabelId).text = t.Key;
                 newItem.Q<Label>(InventoryConst.InventoryHUDItemLabel).text = 0.ToString();
+                newItem.Q<VisualElement>(InventoryConst.InventoryHUDItemIcon).style.backgroundImage = icon.texture;
                 _container.Add(newItem);
 
                 _elementsPosition.Add(t.Key, i++);

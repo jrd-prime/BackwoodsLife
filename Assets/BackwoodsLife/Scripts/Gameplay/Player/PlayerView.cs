@@ -1,5 +1,4 @@
 ﻿using BackwoodsLife.Scripts.Gameplay.UI;
-using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -17,14 +16,12 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private Animator _animator;
         private Rigidbody _rb;
         private Vector3 _moveDirection;
-        private JoystickModel _joy;
         private static readonly int MoveValue = Animator.StringToHash("MoveValue");
 
         [Inject]
-        private void Construct(IPlayerViewModel viewModel, JoystickModel joystickModel)
+        private void Construct(IPlayerViewModel viewModel)
         {
             _viewModel = viewModel;
-            _joy = joystickModel;
         }
 
         private void Awake()

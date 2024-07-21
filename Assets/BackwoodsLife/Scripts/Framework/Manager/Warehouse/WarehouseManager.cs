@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
 using UnityEngine;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.Inventory
+namespace BackwoodsLife.Scripts.Framework.Manager.Warehouse
 {
-    public class InventoryManager : ILoadingOperation
+    public class WarehouseManager : ILoadingOperation
     {
-        private InventoryModel _model;
+        private WarehouseModel _model;
         public string Description => "Inventory Manager";
 
         [Inject]
-        private void Construct(InventoryModel model)
+        private void Construct(WarehouseModel model)
         {
             _model = model;
         }

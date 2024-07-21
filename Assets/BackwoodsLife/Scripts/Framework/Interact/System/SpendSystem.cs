@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Framework.Manager.Inventory;
+﻿using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
 using UnityEngine;
 using VContainer;
 
@@ -6,13 +6,13 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 {
     public class SpendSystem
     {
-        private InventoryManager _inventoryManager;
+        private WarehouseManager _inventoryManager;
 
         [Inject]
-        private void Construct(InventoryManager inventoryManager)
+        private void Construct(WarehouseManager warehouseManager)
         {
-            Debug.Log($"inventoryManager:{inventoryManager}");
-            _inventoryManager = inventoryManager;
+            Debug.Log($"inventoryManager:{warehouseManager}");
+            _inventoryManager = warehouseManager;
         }
     }
 }

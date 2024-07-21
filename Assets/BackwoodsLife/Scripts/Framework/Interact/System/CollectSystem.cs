@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using BackwoodsLife.Scripts.Data.Inventory;
-using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Framework.Manager.Inventory;
+using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
@@ -11,13 +9,13 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 {
     public class CollectSystem : IInteractableSystem
     {
-        private InventoryManager _inventoryManager;
+        private WarehouseManager _inventoryManager;
 
         [Inject]
-        private void Construct(InventoryManager inventoryManager)
+        private void Construct(WarehouseManager warehouseManager)
         {
-            Debug.Log($"inventoryManager:{inventoryManager}");
-            _inventoryManager = inventoryManager;
+            Debug.Log($"inventoryManager:{warehouseManager}");
+            _inventoryManager = warehouseManager;
         }
 
         public void Collect(ref List<InventoryElement> obj)
@@ -25,7 +23,6 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             Debug.LogWarning("COLLECT");
             Assert.IsNotNull(_inventoryManager, "inventoryManager is null");
             Assert.IsNotNull(obj, "obj is null");
-           
 
 
             _inventoryManager.IncreaseResource(obj);
