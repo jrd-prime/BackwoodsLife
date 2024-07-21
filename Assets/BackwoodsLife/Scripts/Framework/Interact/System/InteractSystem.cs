@@ -5,7 +5,9 @@ using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
+using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -17,22 +19,22 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
     public class InteractSystem : MonoBehaviour
     {
         private CollectSystem _collectSystem;
-        private PlayerModel _playerModel;
+        private IPlayerViewModel _playerViewModel;
         private IInteractableSystem _usableSystem;
         private IInteractableSystem _upgradableSystem;
         private IInteractableSystem _usableAndUpgradableSystem;
         private CharacterOverUI _characterOverUIHolder;
         private IConfigManager _configManager;
 
-        public event Action<List<InventoryElement>> OnCollected;
+        public event Action<List<InventoryElement>, EInteractType> OnCollected;
 
 
         [Inject]
-        private void Construct(PlayerModel playerModel, CollectSystem collectSystem,
+        private void Construct(IPlayerViewModel playerViewModel, CollectSystem collectSystem,
             CharacterOverUI characterOverUIHolder, IConfigManager configManager)
         {
             _configManager = configManager;
-            _playerModel = playerModel;
+            _playerViewModel = playerViewModel;
             _collectSystem = collectSystem;
             _characterOverUIHolder = characterOverUIHolder;
         }
@@ -57,8 +59,11 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             }
         }
 
-        private void OnCollect(List<InventoryElement> obj)
+        private async void OnCollect(List<InventoryElement> obj, EInteractType interactType)
         {
+            _playerViewModel.SetCollectableAction(interactType);
+
+            await UniTask.Delay(5000);
             _characterOverUIHolder.ShowPopUpFor(obj);
         }
 

@@ -1,4 +1,6 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
+﻿using System;
+using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
@@ -18,6 +20,11 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
+
+
+        private readonly Subject<Unit> _isGathering = new();
+        public Subject<Unit> IsGathering => _isGathering;
+
 
         private IConfigManager _configManager;
         private PlayerModel _model;
@@ -61,5 +68,27 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public void SetModelRotation(Quaternion rbRotation) => _model.SetRotation(rbRotation);
 
         public void Dispose() => _disposables.Dispose();
+
+        public void SetCollectableAction(EInteractType interactType)
+        {
+            switch (interactType)
+            {
+                case EInteractType.Gathering:
+                    // IsGathering.Value = true;
+                    IsGathering.OnNext(Unit.Default);
+                    break;
+                case EInteractType.Mining:
+                    // IsMining.Value = true;
+                    break;
+                case EInteractType.Fishing:
+                    // IsFishing.Value = true;
+                    break;
+                case EInteractType.Hunting:
+                    // IsHunting.Value = true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(interactType), interactType, null);
+            }
+        }
     }
 }

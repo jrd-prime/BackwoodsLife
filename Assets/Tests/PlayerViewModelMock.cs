@@ -1,4 +1,5 @@
-﻿using BackwoodsLife.Scripts.Data.Player;
+﻿using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using R3;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Tests
         public ReadOnlyReactiveProperty<Vector3> Position => _model.Position;
         public ReadOnlyReactiveProperty<Quaternion> Rotation => _model.Rotation;
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _model.MoveDirection;
+        public Subject<Unit> IsGathering { get; }
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
@@ -25,6 +27,11 @@ namespace Tests
             _model = model;
             _model.SetMoveSpeed(moveSpeed);
             _model.SetRotationSpeed(rotationSpeed);
+        }
+
+        public void SetCollectableAction(EInteractType interactType)
+        {
+            throw new System.NotImplementedException();
         }
 
         public void SetAnimation(string animationName)

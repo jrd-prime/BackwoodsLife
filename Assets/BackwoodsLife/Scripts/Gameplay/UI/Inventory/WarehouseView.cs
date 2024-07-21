@@ -38,7 +38,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Inventory
         {
             _viewModel.inventoryDataChanged
                 .Skip(1)
-                .Subscribe(e => ElementsChanged(e))
+                .Subscribe(ElementsChanged)
                 .AddTo(_disposables);
         }
 

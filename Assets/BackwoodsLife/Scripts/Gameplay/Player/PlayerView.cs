@@ -53,10 +53,10 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
                     _animator.SetFloat(MoveValue, newDirection.magnitude);
                 })
                 .AddTo(_disposables);
-            //
-            // _joy.MoveDirection
-            //     .Subscribe(joystickDirection => { Debug.LogWarning("Move " + joystickDirection.magnitude); })
-            //     .AddTo(_disposables);
+
+            _viewModel.IsGathering
+                .Subscribe(_ => _animator.SetBool("IsGathering", true))
+                .AddTo(_disposables);
         }
 
         private void FixedUpdate()

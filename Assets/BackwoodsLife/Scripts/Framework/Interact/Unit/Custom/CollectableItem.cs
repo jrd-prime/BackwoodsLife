@@ -21,7 +21,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
         public override EWorldItem worldItemType { get; protected set; } = EWorldItem.Collectable;
 
         public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
-            Action<List<InventoryElement>> callback)
+            Action<List<InventoryElement>, EInteractType> callback)
         {
             Assert.IsNotNull(configManager, "configManager is null");
 
@@ -42,6 +42,9 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
                 else
                 {
                     Debug.LogWarning("NO REQUIREMENTS just collect");
+
+                    Debug.LogWarning(" AAAAA === " + config.interactType);
+
                     // var list = localData.returnElements.Select(element => new InventoryElement
                     //     {
                     //         typeName = element.Name,
@@ -64,8 +67,8 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
                         });
                     }
 
-                    
-                    callback.Invoke(list);
+
+                    callback.Invoke(list, config.interactType);
                     _collectSystem.Collect(ref list);
                 }
             }
