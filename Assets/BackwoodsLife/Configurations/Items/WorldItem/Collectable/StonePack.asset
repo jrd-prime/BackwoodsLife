@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: StonePack
   iconReference:
-    m_AssetGUID: b5050fb8b7b7ccd47be8d7e819966f74
-    m_SubObjectName: wood-icon
-    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    m_EditorAssetChanged: 1
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   interactableType: 0
   worldItemType: 0
+  interactType: 0
   retunedItemsCount: 1
   requiredItemsCount: 0
   collectableLevels:
