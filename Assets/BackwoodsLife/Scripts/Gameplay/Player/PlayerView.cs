@@ -20,10 +20,10 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private Rigidbody _rb;
         private Vector3 _moveDirection;
         private static readonly int MoveValue = Animator.StringToHash("MoveValue");
-        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-        private static readonly int IsGathering = Animator.StringToHash("IsGathering");
+        private static readonly int IsMoving = Animator.StringToHash("Moving");
+        private static readonly int IsGathering = Animator.StringToHash("Gathering");
 
-        private bool _isInAction;
+        private bool _movementBlocked;
         private static readonly int IsInAction = Animator.StringToHash("IsInAction");
 
         [Inject]
@@ -57,77 +57,71 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
             _viewModel.MoveDirection
                 .Subscribe(newDirection =>
                 {
-                    if (_isInAction)
+                    if (_movementBlocked)
                     {
-                        Debug.LogWarning("In action");
-                        _animator.SetBool(IsMoving, false);
                         _moveDirection = Vector3.zero;
+                        _animator.SetFloat(MoveValue, 0.0f);
                     }
                     else
                     {
+                        _moveDirection = newDirection;
                         if (newDirection != Vector3.zero)
                         {
-                            Debug.LogWarning("NOT In action and direct NOT 0");
-                            _animator.SetBool(IsMoving, true);
-                            _animator.SetFloat(MoveValue, newDirection.magnitude);
-                            _moveDirection = newDirection;
+                            SetAnimatorBool("IsMoving", true);
                         }
-                        else
-                        {
-                            Debug.LogWarning("NOT In action and direct 0");
-                            _moveDirection = newDirection;
-                            _animator.SetBool(IsMoving, false);
-                            _animator.SetFloat(MoveValue, 0.0f);
-                        }
+
+                        _animator.SetFloat(MoveValue, newDirection.magnitude);
                     }
                 })
                 .AddTo(_disposables);
 
-            _viewModel.InAction
-                .Skip(1)
-                .Subscribe(InAction)
+            _viewModel.CharacterAction
+                .Subscribe(x => SetAnimatorBool(x, true))
+                .AddTo(_disposables);
+
+            _viewModel.CancelCharacterAction
+                .Subscribe(x => SetAnimatorBool(x, false))
+                .AddTo(_disposables);
+
+            _viewModel.IsInAction
+                .Subscribe(isInAction =>
+                {
+                    Debug.LogWarning($"<color=red>IsInAction = {isInAction}</color>");
+                    _movementBlocked = isInAction;
+                    _animator.SetBool(IsInAction, isInAction);
+                })
                 .AddTo(_disposables);
         }
 
-        private async void InAction(InActionData inActionData)
+        private void SetAnimatorBool(string s, bool value)
         {
-            switch (inActionData.InteractType)
-            {
-                case EInteractType.Gathering:
-                    Debug.LogWarning("Gathering action");
-                    _animator.SetBool(IsGathering, true);
-                    _animator.SetBool(IsInAction, true);
-                    _isInAction = true;
-                    await UniTask.Delay(6000);
-                    _animator.SetBool(IsGathering, false);
-                    _animator.SetBool(IsInAction, false);
-                    _isInAction = false;
-                    break;
-                case EInteractType.Mining:
-                    break;
-                case EInteractType.Fishing:
-                    break;
-                case EInteractType.Hunting:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            Debug.LogWarning($"<color=red>Anim {s} to {value}. IsInAction = {_movementBlocked}</color>");
+            _animator.SetBool(Animator.StringToHash(s), value);
         }
 
-        private void FixedUpdate()
+        private void FixedUpdate() => CharacterMovement();
+
+        private void CharacterMovement()
         {
-            if (_moveDirection != Vector3.zero) MoveCharacter();
-            if (_moveDirection.sqrMagnitude > 0) RotateCharacter();
+            // Если персонаж выполянет действие, то не передвигаем и не вращаем
+            if (_movementBlocked) return;
+
+            MoveCharacter();
+            RotateCharacter();
         }
 
         private void MoveCharacter()
         {
+            if (_moveDirection == Vector3.zero) return;
+
             _rb.position += _moveDirection * (_moveSpeed * Time.fixedDeltaTime);
             _viewModel.SetModelPosition(_rb.position);
         }
 
         private void RotateCharacter()
         {
+            if (_moveDirection.sqrMagnitude <= 0) return;
+
             var rotation = Quaternion.Lerp(
                 _rb.rotation,
                 Quaternion.LookRotation(_moveDirection, Vector3.up),

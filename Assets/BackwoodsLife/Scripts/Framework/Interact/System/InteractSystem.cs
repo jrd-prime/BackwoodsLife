@@ -61,7 +61,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
         private async void OnCollect(List<InventoryElement> obj, EInteractType interactType)
         {
-            _playerViewModel.SetCollectableAction(interactType);
+            _playerViewModel.SetCollectableActionForAnimation(interactType);
 
             await UniTask.Delay(5000);
             _characterOverUIHolder.ShowPopUpFor(obj);

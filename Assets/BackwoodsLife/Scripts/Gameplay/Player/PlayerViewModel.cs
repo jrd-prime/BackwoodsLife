@@ -5,6 +5,7 @@ using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -19,9 +20,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _model.MoveDirection;
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
-        public ReactiveProperty<InActionData> InAction { get; } = new();
-        public ReactiveProperty<bool> IsInAction { get; } = new();
-        public ReactiveProperty<string> PlayAnimationByName { get; } = new();
+        public ReactiveProperty<string> CharacterAction { get; } = new();
+        public ReactiveProperty<string> CancelCharacterAction { get; } = new();
+        public ReactiveProperty<bool> IsInAction { get; } = new(false);
 
 
         private IConfigManager _configManager;
@@ -56,26 +57,25 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         private void Subscribe()
         {
+            //TODO on drop joystick slow speed down
             _joystick.MoveDirection
                 .Subscribe(joystickDirection => { _model.SetMoveDirection(joystickDirection); })
                 .AddTo(_disposables);
         }
 
-        public void SetAnimation(string animationName) => PlayAnimationByName.Value = animationName;
         public void SetModelPosition(Vector3 rbPosition) => _model.SetPosition(rbPosition);
         public void SetModelRotation(Quaternion rbRotation) => _model.SetRotation(rbRotation);
 
         public void Dispose() => _disposables.Dispose();
 
-        public void SetCollectableAction(EInteractType interactType)
+        public void SetCollectableActionForAnimation(EInteractType interactType)
         {
+            IsInAction.Value = true;
+
             switch (interactType)
             {
                 case EInteractType.Gathering:
-                    // IsGathering.Value = true;
-                    InAction.Value = new InActionData { InteractType = EInteractType.Gathering, state = true };
-                    InAction.ForceNotify();
-                    IsInAction.Value = true;
+                    NewAction("IsGathering", 5000);
                     break;
                 case EInteractType.Mining:
                     // IsMining.Value = true;
@@ -89,6 +89,17 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
                 default:
                     throw new ArgumentOutOfRangeException(nameof(interactType), interactType, null);
             }
+
+            IsInAction.Value = false;
+        }
+
+        private async void NewAction(string animParameter, int delay)
+        {
+            CancelCharacterAction.Value = animParameter;
+            CancelCharacterAction.ForceNotify();
+            await UniTask.Delay(delay);
+            CharacterAction.Value = animParameter;
+            CharacterAction.ForceNotify();
         }
     }
 }

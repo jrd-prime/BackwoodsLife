@@ -14,11 +14,12 @@ namespace Tests
         public ReadOnlyReactiveProperty<Quaternion> Rotation => _model.Rotation;
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _model.MoveDirection;
         public Subject<Unit> IsGathering { get; }
+        public ReactiveProperty<string> CancelCharacterAction { get; }
         public ReactiveProperty<bool> IsInAction { get; }
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
-        public ReactiveProperty<InActionData> InAction { get; }
+        public ReactiveProperty<string> CharacterAction { get; }
 
         public void Initialize()
         {
@@ -31,7 +32,7 @@ namespace Tests
             _model.SetRotationSpeed(rotationSpeed);
         }
 
-        public void SetCollectableAction(EInteractType interactType)
+        public void SetCollectableActionForAnimation(EInteractType interactType)
         {
             throw new System.NotImplementedException();
         }
