@@ -14,9 +14,11 @@ namespace Tests
         public ReadOnlyReactiveProperty<Quaternion> Rotation => _model.Rotation;
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _model.MoveDirection;
         public Subject<Unit> IsGathering { get; }
+        public ReactiveProperty<bool> IsInAction { get; }
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
+        public ReactiveProperty<InActionData> InAction { get; }
 
         public void Initialize()
         {

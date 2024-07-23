@@ -20,9 +20,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReadOnlyReactiveProperty<float> MoveSpeed { get; }
         public ReadOnlyReactiveProperty<float> RotationSpeed { get; }
 
+        public ReactiveProperty<InActionData> InAction { get; } // <summary>
+        public ReactiveProperty<bool> IsInAction { get; }
 
-        public Subject<Unit> IsGathering { get; }
-        
         /// <summary>
         /// <c>PlayerView</c> подписан на это св-во и запускает анимацию при изменении значения
         /// </summary>
@@ -32,5 +32,11 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public void SetAnimation(string animationName);
         public void SetModelPosition(Vector3 rbPosition);
         public void SetModelRotation(Quaternion rbRotation);
+    }
+
+    public struct InActionData
+    {
+        public EInteractType InteractType;
+        public bool state;
     }
 }

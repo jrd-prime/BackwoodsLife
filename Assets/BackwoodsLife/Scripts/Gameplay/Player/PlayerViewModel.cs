@@ -19,11 +19,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _model.MoveDirection;
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
+        public ReactiveProperty<InActionData> InAction { get; } = new();
+        public ReactiveProperty<bool> IsInAction { get; } = new();
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
-
-
-        private readonly Subject<Unit> _isGathering = new();
-        public Subject<Unit> IsGathering => _isGathering;
 
 
         private IConfigManager _configManager;
@@ -75,7 +73,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
             {
                 case EInteractType.Gathering:
                     // IsGathering.Value = true;
-                    IsGathering.OnNext(Unit.Default);
+                    InAction.Value = new InActionData { InteractType = EInteractType.Gathering, state = true };
+                    InAction.ForceNotify();
+                    IsInAction.Value = true;
                     break;
                 case EInteractType.Mining:
                     // IsMining.Value = true;
