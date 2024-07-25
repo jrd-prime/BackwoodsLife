@@ -1,4 +1,5 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Data.Animation.Character;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Gameplay.UI;
 using Cysharp.Threading.Tasks;
@@ -19,12 +20,8 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private Animator _animator;
         private Rigidbody _rb;
         private Vector3 _moveDirection;
-        private static readonly int MoveValue = Animator.StringToHash("MoveValue");
-        private static readonly int IsMoving = Animator.StringToHash("Moving");
-        private static readonly int IsGathering = Animator.StringToHash("Gathering");
 
         private bool _movementBlocked;
-        private static readonly int IsInAction = Animator.StringToHash("IsInAction");
 
         [Inject]
         private void Construct(IPlayerViewModel viewModel)
@@ -60,52 +57,48 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
                     if (_movementBlocked)
                     {
                         _moveDirection = Vector3.zero;
-                        _animator.SetFloat(MoveValue, 0.0f);
+                        _animator.SetFloat(AnimConst.MoveValue, 0.0f);
                     }
                     else
                     {
                         _moveDirection = newDirection;
                         if (newDirection != Vector3.zero)
                         {
-                            SetAnimatorBool("IsMoving", true);
+                            SetAnimatorBool(AnimConst.IsMoving, true);
                         }
 
-                        _animator.SetFloat(MoveValue, newDirection.magnitude);
+                        _animator.SetFloat(AnimConst.MoveValue, newDirection.magnitude);
                     }
                 })
                 .AddTo(_disposables);
 
             _viewModel.CharacterAction
-                .Subscribe(x => SetAnimatorBool(x, true))
-                .AddTo(_disposables);
-
-            _viewModel.CancelCharacterAction
-                .Subscribe(x => SetAnimatorBool(x, false))
+                .Where(x => x.AnimationParamId != 0)
+                .Subscribe(x => SetAnimatorBool(x.AnimationParamId, x.Value))
                 .AddTo(_disposables);
 
             _viewModel.IsInAction
                 .Subscribe(isInAction =>
                 {
-                    Debug.LogWarning($"<color=red>IsInAction = {isInAction}</color>");
                     _movementBlocked = isInAction;
-                    _animator.SetBool(IsInAction, isInAction);
+                    SetAnimatorBool(AnimConst.IsInAction, isInAction);
                 })
                 .AddTo(_disposables);
         }
 
-        private void SetAnimatorBool(string s, bool value)
+        private void SetAnimatorBool(int animParameterId, bool value)
         {
-            Debug.LogWarning($"<color=red>Anim {s} to {value}. IsInAction = {_movementBlocked}</color>");
-            _animator.SetBool(Animator.StringToHash(s), value);
+            if (_animator.GetBool(animParameterId) == value) return;
+
+            Debug.LogWarning($"<color=red>Anim {animParameterId} to {value}. IsInAction = {_movementBlocked}</color>");
+            _animator.SetBool(animParameterId, value);
         }
 
         private void FixedUpdate() => CharacterMovement();
 
         private void CharacterMovement()
         {
-            // Если персонаж выполянет действие, то не передвигаем и не вращаем
             if (_movementBlocked) return;
-
             MoveCharacter();
             RotateCharacter();
         }

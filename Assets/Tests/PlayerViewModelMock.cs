@@ -19,7 +19,7 @@ namespace Tests
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
-        public ReactiveProperty<string> CharacterAction { get; }
+        public ReactiveProperty<CharacterAction> CharacterAction { get; }
 
         public void Initialize()
         {
@@ -32,7 +32,7 @@ namespace Tests
             _model.SetRotationSpeed(rotationSpeed);
         }
 
-        public void SetCollectableActionForAnimation(EInteractType interactType)
+        public void SetCollectableActionForAnimationAsync(EInteractType interactType)
         {
             throw new System.NotImplementedException();
         }

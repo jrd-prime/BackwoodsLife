@@ -459,6 +459,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1809065235}
     m_Modifications:
+    - target: {fileID: 1342711002489112029, guid: 895b455666afca4428e411a54321191b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342711002489112029, guid: 895b455666afca4428e411a54321191b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2919139168575915603, guid: 895b455666afca4428e411a54321191b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -514,8 +524,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: StonePack1
       objectReference: {fileID: 0}
+    - target: {fileID: 8148563060169497926, guid: 895b455666afca4428e411a54321191b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1803105144300427275, guid: 895b455666afca4428e411a54321191b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 895b455666afca4428e411a54321191b, type: 3}

@@ -1,4 +1,5 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Data.Animation.Character;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using BackwoodsLife.Scripts.Data.Player;
@@ -20,7 +21,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _model.MoveDirection;
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
-        public ReactiveProperty<string> CharacterAction { get; } = new();
+        public ReactiveProperty<CharacterAction> CharacterAction { get; } = new();
         public ReactiveProperty<string> CancelCharacterAction { get; } = new();
         public ReactiveProperty<bool> IsInAction { get; } = new(false);
 
@@ -30,6 +31,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private FollowSystem _followSystem;
         private JoystickModel _joystick;
         private readonly CompositeDisposable _disposables = new();
+        private readonly CharacterAction _characterActionReset = new() { AnimationParamId = 0, Value = false };
 
         [Inject]
         private void Construct(PlayerModel playerModel, JoystickModel joystickModel, IConfigManager saveAndLoadManager,
@@ -68,14 +70,15 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         public void Dispose() => _disposables.Dispose();
 
-        public void SetCollectableActionForAnimation(EInteractType interactType)
+        public async void SetCollectableActionForAnimationAsync(EInteractType interactType)
         {
+            Debug.LogWarning("SetCollectableActionForAnimation called");
             IsInAction.Value = true;
 
             switch (interactType)
             {
                 case EInteractType.Gathering:
-                    NewAction("IsGathering", 5000);
+                    await NewActionAsync(AnimConst.IsGathering, 5000);
                     break;
                 case EInteractType.Mining:
                     // IsMining.Value = true;
@@ -93,13 +96,20 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
             IsInAction.Value = false;
         }
 
-        private async void NewAction(string animParameter, int delay)
+        private async UniTask NewActionAsync(int animParameterId, int actionDelay)
         {
-            CancelCharacterAction.Value = animParameter;
-            CancelCharacterAction.ForceNotify();
-            await UniTask.Delay(delay);
-            CharacterAction.Value = animParameter;
-            CharacterAction.ForceNotify();
+            CharacterAction.Value = new CharacterAction { AnimationParamId = animParameterId, Value = true };
+            await UniTask.Delay(actionDelay);
+            CharacterAction.Value = new CharacterAction { AnimationParamId = animParameterId, Value = false };
+
+            // reset // TODO bad
+            CharacterAction.Value = _characterActionReset;
         }
+    }
+
+    public struct CharacterAction
+    {
+        public int AnimationParamId;
+        public bool Value;
     }
 }

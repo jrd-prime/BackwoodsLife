@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
@@ -8,8 +6,16 @@ using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
 {
+    [RequireComponent(typeof(CapsuleCollider))]
     public class TriggerZone : MonoBehaviour
     {
+        private Action _onInteractCompleted;
+
+        private void Awake()
+        {
+            _onInteractCompleted += () => { gameObject.transform.parent.gameObject.SetActive(false); };
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             // Проверяем, что объект, вошедший в зону триггера, находится на слое Player
@@ -29,12 +35,12 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
                     if (interactable == null)
                         throw new NullReferenceException(
                             $"Interactable is null on {parentTransform.name} prefab. You must set to object Interactable component. ");
-                    
+
                     var playerInteractSystem = other.GetComponent<InteractSystem>();
                     if (playerInteractSystem == null)
                         throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
 
-                    playerInteractSystem.Interact(ref interactable);
+                    playerInteractSystem.Interact(ref interactable, _onInteractCompleted);
                 }
                 else
                 {

@@ -20,11 +20,11 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReadOnlyReactiveProperty<float> MoveSpeed { get; }
         public ReadOnlyReactiveProperty<float> RotationSpeed { get; }
 
-        public ReactiveProperty<string> CharacterAction { get; }
+        public ReactiveProperty<CharacterAction> CharacterAction { get; }
         public ReactiveProperty<string> CancelCharacterAction { get; }
         public ReactiveProperty<bool> IsInAction { get; }
 
-        public void SetCollectableActionForAnimation(EInteractType interactType);
+        public void SetCollectableActionForAnimationAsync(EInteractType interactType);
         public void SetModelPosition(Vector3 rbPosition);
         public void SetModelRotation(Quaternion rbRotation);
     }

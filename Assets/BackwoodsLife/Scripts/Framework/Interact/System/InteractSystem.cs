@@ -25,6 +25,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private IInteractableSystem _usableAndUpgradableSystem;
         private CharacterOverUI _characterOverUIHolder;
         private IConfigManager _configManager;
+        private Action _triggerCallback;
 
         public event Action<List<InventoryElement>, EInteractType> OnCollected;
 
@@ -45,8 +46,9 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         }
 
 
-        public void Interact(ref WorldInteractableItem worldInteractableItem)
+        public void Interact(ref WorldInteractableItem worldInteractableItem, Action onInteractCompleted)
         {
+            _triggerCallback = onInteractCompleted;
             if (worldInteractableItem == null) throw new NullReferenceException("Interactable obj is null");
 
             switch (worldInteractableItem.worldItemType)
@@ -61,10 +63,11 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
         private async void OnCollect(List<InventoryElement> obj, EInteractType interactType)
         {
-            _playerViewModel.SetCollectableActionForAnimation(interactType);
-
+            _playerViewModel.SetCollectableActionForAnimationAsync(interactType);
+            
             await UniTask.Delay(5000);
             _characterOverUIHolder.ShowPopUpFor(obj);
+            _triggerCallback.Invoke();
         }
 
         private void OnUseAndUpgrade(List<InventoryElement> collectableElements)
