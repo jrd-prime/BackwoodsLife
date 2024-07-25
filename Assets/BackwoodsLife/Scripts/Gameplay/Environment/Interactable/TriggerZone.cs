@@ -21,7 +21,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
             // Проверяем, что объект, вошедший в зону триггера, находится на слое Player
             if (other.gameObject.layer != (int)JLayers.Player) return;
 
-            Debug.Log($"Игрок вошел в зону триггера! {name}");
+            Debug.Log($"Char in trigger zone! {name}");
 
             if (other != null)
             {
@@ -29,7 +29,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
 
                 if (parentTransform != null)
                 {
-                    Debug.LogWarning(transform.parent.name);
                     var interactable = transform.parent.GetComponent<WorldInteractableItem>();
 
                     if (interactable == null)

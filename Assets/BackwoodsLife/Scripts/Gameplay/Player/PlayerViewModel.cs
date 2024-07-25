@@ -70,7 +70,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         public void Dispose() => _disposables.Dispose();
 
-        public async void SetCollectableActionForAnimationAsync(EInteractType interactType)
+        public async UniTask SetCollectableActionForAnimationAsync(EInteractType interactType)
         {
             Debug.LogWarning("SetCollectableActionForAnimation called");
             IsInAction.Value = true;

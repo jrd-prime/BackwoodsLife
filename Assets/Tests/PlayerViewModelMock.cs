@@ -1,6 +1,7 @@
 ﻿using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Gameplay.Player;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace Tests
             _model.SetRotationSpeed(rotationSpeed);
         }
 
-        public void SetCollectableActionForAnimationAsync(EInteractType interactType)
+        public async UniTask SetCollectableActionForAnimationAsync(EInteractType interactType)
         {
             throw new System.NotImplementedException();
         }

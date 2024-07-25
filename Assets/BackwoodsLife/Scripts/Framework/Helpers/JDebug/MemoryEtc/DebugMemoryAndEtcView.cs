@@ -31,6 +31,12 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
 
             _btnExit = root.Q<Button>("btn-exit");
 
+
+            var lab3name = root.Q<Label>("3labname");
+            var lab3val = root.Q<Label>("3labval");
+            lab3name.text = "default";
+            lab3val.text = "default";
+
             _viewModel.MonoMemoryUsageView.Subscribe(x => mono.text = $"Heap: {x} MB").AddTo(_disposable);
             _viewModel.GraphicsMemoryUsageView.Subscribe(x => graph.text = $"Graphics: {x} MB").AddTo(_disposable);
 

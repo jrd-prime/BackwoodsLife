@@ -23,6 +23,7 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
 
         public void ServiceInitialization()
         {
+            Addressables.InitializeAsync();
         }
 
         public async UniTask<SceneInstance> LoadSceneAsync(string assetId, LoadSceneMode loadSceneMode)

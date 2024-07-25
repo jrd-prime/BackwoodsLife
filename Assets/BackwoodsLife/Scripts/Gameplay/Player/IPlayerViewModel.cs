@@ -1,6 +1,7 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Framework;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReactiveProperty<string> CancelCharacterAction { get; }
         public ReactiveProperty<bool> IsInAction { get; }
 
-        public void SetCollectableActionForAnimationAsync(EInteractType interactType);
+        public UniTask SetCollectableActionForAnimationAsync(EInteractType interactType);
         public void SetModelPosition(Vector3 rbPosition);
         public void SetModelRotation(Quaternion rbRotation);
     }

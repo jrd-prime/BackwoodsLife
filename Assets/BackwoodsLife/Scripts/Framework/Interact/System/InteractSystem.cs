@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Inventory;
-using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -63,11 +61,10 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
         private async void OnCollect(List<InventoryElement> obj, EInteractType interactType)
         {
-            _playerViewModel.SetCollectableActionForAnimationAsync(interactType);
-            
-            await UniTask.Delay(5000);
-            _characterOverUIHolder.ShowPopUpFor(obj);
+            await _playerViewModel.SetCollectableActionForAnimationAsync(interactType);
+
             _triggerCallback.Invoke();
+            _characterOverUIHolder.ShowPopUpFor(obj);
         }
 
         private void OnUseAndUpgrade(List<InventoryElement> collectableElements)
