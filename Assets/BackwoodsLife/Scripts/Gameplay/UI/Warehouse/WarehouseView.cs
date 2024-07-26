@@ -55,14 +55,14 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Inventory
         {
             var itemsForInventory = _viewModel.GetInventoryData();
             var i = 0;
-            
+
             foreach (var t in itemsForInventory)
             {
-                Debug.LogWarning($"Add {t} to position {i}");
+                Debug.Log($"Add {t} to position {i}");
 
                 var icon = await _viewModel.GetIcon(t.Key);
-
                 var newItem = itemViewTemplate.Instantiate();
+
                 newItem.Q<Label>(InventoryConst.InventoryHUDItemLabelId).text = t.Key;
                 newItem.Q<Label>(InventoryConst.InventoryHUDItemLabel).text = 0.ToString();
                 newItem.Q<VisualElement>(InventoryConst.InventoryHUDItemIcon).style.backgroundImage = icon.texture;

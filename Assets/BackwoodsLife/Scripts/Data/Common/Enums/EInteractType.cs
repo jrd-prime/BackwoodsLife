@@ -2,9 +2,10 @@
 {
     public enum EInteractType
     {
-        Gathering,
-        Mining,
-        Fishing,
-        Hunting
+        Gathering = 0,
+        Cutting = 1,
+        Mining = 2,
+        Fishing = 3,
+        Hunting = 4
     }
 }

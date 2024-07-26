@@ -53,8 +53,6 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
             if (IconCache.TryGetValue(elementTypeName, out Sprite iconFromCache)) return iconFromCache;
 
             var iconRef = _configManager.GetIconReference(elementTypeName);
-            if (iconRef == null) throw new NullReferenceException($"Icon not found for {elementTypeName}");
-
             var icon = await Addressables.LoadAssetAsync<Sprite>(iconRef).Task;
 
             IconCache.TryAdd(elementTypeName, icon);

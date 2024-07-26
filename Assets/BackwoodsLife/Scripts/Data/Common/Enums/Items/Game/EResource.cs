@@ -4,6 +4,8 @@
     {
         Stick = 0,
         Wood = 1,
-        Stone = 2
+        Stone = 2,
+        CooperOre = 3,
+        TinOre = 4,
     }
 }

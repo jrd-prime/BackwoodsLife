@@ -47,21 +47,25 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
             if (worldItemsList == null)
                 throw new Exception(nameof(SWorldItemsList) + " not found in " + nameof(ConfigsCache));
 
-            var itemConfig = worldItemsList.ConfigsCache[enumTypeName] as T;
-
-
-            if (itemConfig == null) throw new NullReferenceException("Config not found for: " + enumTypeName);
+            if (!worldItemsList.ConfigsCache.TryGetValue(enumTypeName, out var itemConfig))
+            {
+                throw new NullReferenceException(
+                    $"Config not found for: {enumTypeName}. Add {enumTypeName} config to WorldItemsList");
+            }
 
             Debug.LogWarning("GetGameItemConfig by name: " + enumTypeName + " / " + itemConfig.itemName);
 
-            return itemConfig;
+            return itemConfig as T;
         }
 
         public AssetReferenceTexture2D GetIconReference(string elementTypeName)
         {
             var iconRef = GetConfig<SGameItemsList>();
-            var b = iconRef.ConfigsCache[elementTypeName];
-            return b.iconReference;
+
+            if (!iconRef.ConfigsCache.TryGetValue(elementTypeName, out var itemConfig))
+                throw new NullReferenceException($"Icon not found for {elementTypeName}");
+
+            return itemConfig.iconReference;
         }
     }
 }

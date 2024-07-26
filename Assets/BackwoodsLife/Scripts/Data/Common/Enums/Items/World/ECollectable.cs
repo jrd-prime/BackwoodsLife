@@ -4,6 +4,9 @@
     {
         StonePack = 0,
         StickPack = 1,
-        MushroomPack = 2
+        MushroomPack = 2,
+        Tree = 3,
+        CooperVein = 4,
+        TinVein = 5
     }
 }

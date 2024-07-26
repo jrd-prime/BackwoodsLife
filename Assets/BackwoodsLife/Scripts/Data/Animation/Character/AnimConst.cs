@@ -8,5 +8,7 @@ namespace BackwoodsLife.Scripts.Data.Animation.Character
         public static readonly int IsMoving = Animator.StringToHash("IsMoving");
         public static readonly int IsGathering = Animator.StringToHash("IsGathering");
         public static readonly int IsInAction = Animator.StringToHash("IsInAction");
+        public static readonly int IsCutting = Animator.StringToHash("IsCutting");
+        public static readonly int IsMining= Animator.StringToHash("IsMining");
     }
 }

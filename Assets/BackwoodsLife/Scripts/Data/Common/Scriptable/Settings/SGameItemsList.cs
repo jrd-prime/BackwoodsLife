@@ -46,5 +46,10 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
                 Debug.LogWarning($"<color=green>GameItemsList has all items in config.</color>");
             }
         }
+
+#if !UNITY_EDITOR
+        // Important
+        private void Awake() => OnValidate();
+#endif
     }
 }

@@ -51,5 +51,10 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
                 Debug.LogWarning($"<color=green>WorldItemsList has all items in config.</color>");
             }
         }
+
+#if !UNITY_EDITOR
+        // Important
+        private void Awake() => OnValidate();
+#endif
     }
 }

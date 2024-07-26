@@ -72,7 +72,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         public async UniTask SetCollectableActionForAnimationAsync(EInteractType interactType)
         {
-            Debug.LogWarning("SetCollectableActionForAnimation called");
+            Debug.LogWarning("SetCollectableActionForAnimation called. InteractType: " + interactType);
             IsInAction.Value = true;
 
             switch (interactType)
@@ -80,8 +80,11 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
                 case EInteractType.Gathering:
                     await NewActionAsync(AnimConst.IsGathering, 5000);
                     break;
+                case EInteractType.Cutting:
+                    await NewActionAsync(AnimConst.IsCutting, 2267 * 3);
+                    break;
                 case EInteractType.Mining:
-                    // IsMining.Value = true;
+                    await NewActionAsync(AnimConst.IsMining, 6933);
                     break;
                 case EInteractType.Fishing:
                     // IsFishing.Value = true;
@@ -98,6 +101,8 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         private async UniTask NewActionAsync(int animParameterId, int actionDelay)
         {
+            Debug.LogWarning("NewActionAsync called. AnimParameterId: " + animParameterId + " ActionDelay: " +
+                             actionDelay);
             CharacterAction.Value = new CharacterAction { AnimationParamId = animParameterId, Value = true };
             await UniTask.Delay(actionDelay);
             CharacterAction.Value = new CharacterAction { AnimationParamId = animParameterId, Value = false };
