@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1730aea88ba541579cefd1096c647dfc, type: 3}
   m_Name: TinOre
   m_EditorClassIdentifier: 
-  itemName: Wood
+  itemName: TinOre
   iconReference:
-    m_AssetGUID: fd0264fd135d5fc4ba76a543b2a2d459
-    m_SubObjectName: wood-icon
+    m_AssetGUID: 142d9e91d38a45d4ea34d18e8f1777a2
+    m_SubObjectName: tin-ore
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
