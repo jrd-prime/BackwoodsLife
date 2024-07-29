@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5318626d62f14faaaa37fa13e26ececc, type: 3}
-  m_Name: Warehouse
+  m_Script: {fileID: 11500000, guid: 27a12a979233407fb716135d72700c04, type: 3}
+  m_Name: House
   m_EditorClassIdentifier: 
-  itemName: Warehouse
-  uiIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  interactableType: 0
-  worldItemType: 0
-  mainPrefab:
-    m_AssetGUID: 8eca0cb07b81087488d8fa84bf19306e
+  itemName: House
+  iconReference:
+    m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  interactableType: 0
+  worldItemType: 3
+  interactType: 100
+  interactInterfaceType: 0

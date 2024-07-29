@@ -48,5 +48,5 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects:
-  - {fileID: 3065223708380324432, guid: 38de798b6feca9c4780f6fdf3fa288dd, type: 3}
   - {fileID: 4691294185170130255, guid: 69cf6c099da685749ad7bed693862ba2, type: 3}
+  characterOverUIHolder: {fileID: 0}

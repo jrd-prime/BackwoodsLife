@@ -1,11 +1,14 @@
 ﻿using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
+using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
+using BackwoodsLife.Scripts.Gameplay.Environment.Interactable;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -14,9 +17,12 @@ namespace BackwoodsLife.Scripts.Framework.Scope
     public class GameSceneContext : LifetimeScope
     {
         [SerializeField] private CharacterOverUI characterOverUIHolder;
+          [SerializeField] private InteractPanelUI interactPanelUIHolder;
+
+
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.Log("GameSceneContext");
+            Debug.LogWarning("GameSceneContext");
             // builder.Register<NavMeshManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
 
@@ -39,6 +45,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             // builder.RegisterEntryPoint<PlayerViewModel>();
 
             builder.RegisterComponent(characterOverUIHolder).AsSelf().AsImplementedInterfaces();
+            builder.RegisterComponent(interactPanelUIHolder).AsSelf().AsImplementedInterfaces();
         }
     }
 }

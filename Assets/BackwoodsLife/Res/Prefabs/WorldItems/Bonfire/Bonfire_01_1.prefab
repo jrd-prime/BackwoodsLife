@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5088934638704923457}
   - component: {fileID: 4039419000779045021}
   m_Layer: 0
-  m_Name: Bonfire_lvl0
+  m_Name: Bonfire_01_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,9 +94,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 487757571319985785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab5819d69e45426d8daa6e512a2f7078, type: 3}
+  m_Script: {fileID: 11500000, guid: deb8c7b0100d4ab6a680c0db0648ed1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldItemConfig: {fileID: 11400000, guid: 8540679380a77794685e8f2051375b68, type: 2}
 --- !u!1001 &4667062795169000951
 PrefabInstance:
   m_ObjectHideFlags: 0

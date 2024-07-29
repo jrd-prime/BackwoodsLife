@@ -25,6 +25,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
     [Serializable]
     public struct RequirementForUpgrade
     {
+        public List<CustomRequirement<EResource>> resource;
         public List<CustomRequirement<ETool>> tool;
         public List<CustomRequirement<ESkill>> skill;
         public List<CustomRequirement<EBuilding>> building;

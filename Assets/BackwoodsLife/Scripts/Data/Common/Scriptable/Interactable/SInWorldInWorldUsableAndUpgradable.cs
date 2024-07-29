@@ -4,6 +4,8 @@ using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
 {
@@ -23,7 +25,8 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
     [Serializable]
     public struct UpgradeLevel
     {
-        public int level;
-        public List<RequirementForCollect> requirementsForUpgrading;
+        public ELevel level;
+        public AssetReferenceGameObject levelPrefabReference;
+        public List<RequirementForUpgrade> requirementsForUpgrading;
     }
 }

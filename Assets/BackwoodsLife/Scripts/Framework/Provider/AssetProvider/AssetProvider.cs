@@ -41,10 +41,17 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
             return Addressables.InstantiateAsync(assetId, parent);
         }
 
-        public async UniTask<GameObject> InstantiateAsync(AssetReference assetId)
+        public async UniTask<GameObject> InstantiateAsync(AssetReference assetId, Vector3 fixedPositionValue)
         {
             // await CheckAsset(assetId);
             var handle = Addressables.InstantiateAsync(assetId);
+            return await handle.Task;
+        }
+
+        public async UniTask<GameObject> InstantiateAsync(AssetReference assetId, Transform position)
+        {
+            // await CheckAsset(assetId);
+            var handle = Addressables.InstantiateAsync(assetId, position);
             return await handle.Task;
         }
 

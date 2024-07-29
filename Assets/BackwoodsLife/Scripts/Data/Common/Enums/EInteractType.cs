@@ -6,6 +6,8 @@
         Cutting = 1,
         Mining = 2,
         Fishing = 3,
-        Hunting = 4
+        Hunting = 4,
+        
+        Custom = 100
     }
 }

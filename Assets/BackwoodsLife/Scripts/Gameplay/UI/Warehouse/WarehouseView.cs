@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Gameplay.UI.Inventory
+namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
 {
     public class WarehouseView : UIView
     {
