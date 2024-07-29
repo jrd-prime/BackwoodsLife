@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
@@ -7,20 +9,24 @@ using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 using VContainer;
+using Image = UnityEngine.UI.Image;
 
-namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
+namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
 {
     /// <summary>
     /// Находится на холдере персонажа
     /// </summary>
     public class InteractPanelUI : UIView
     {
-        [SerializeField] private GameObject textObjectTemplate;
+        [SerializeField] private VisualTreeAsset buttonTemplate;
+        [SerializeField] private VisualTreeAsset buildButtonTemplate;
         private PlayerModel _playerModel;
         private readonly CompositeDisposable _disposables = new();
         private IAssetProvider _assetProvider;
+        private VisualElement root;
 
         [Inject]
         private void Construct(PlayerModel playerModel, IAssetProvider assetProvider)
@@ -32,7 +38,13 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
         private void Awake()
         {
             Assert.IsNotNull(_playerModel, "_playerModel is null");
-            Assert.IsNotNull(textObjectTemplate, "textObjectTemplate is null");
+            Assert.IsNotNull(buttonTemplate, "buttonTemplate is null");
+            Assert.IsNotNull(buildButtonTemplate, "buttonTemplate is null");
+
+            root = GetComponent<UIDocument>().rootVisualElement;
+            root.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
+
+
             _playerModel.Position.Subscribe(pos => { transform.position = pos; }).AddTo(_disposables);
         }
 
@@ -41,33 +53,78 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
             _disposables.Dispose();
         }
 
-        public async void ShowPopUpFor(List<InventoryElement> inventoryElements)
+        // public async void ShowPopUpFor(List<InventoryElement> inventoryElements)
+        // {
+        //     foreach (var element in inventoryElements)
+        //     {
+        //         // TODO pool
+        //         var inst = Instantiate(buttonTemplate, parent: transform);
+        //
+        //         inst.transform.localScale = Vector3.zero;
+        //
+        //         var text = inst.GetComponentInChildren<TMP_Text>();
+        //         var icon = inst.GetComponentInChildren<Image>();
+        //
+        //         var iconSprite = await _assetProvider.LoadIconAsync(element.typeName);
+        //
+        //         if (iconSprite == null) Debug.LogError("We need icon for " + element.typeName);
+        //
+        //
+        //         text.text = $"+ {element.Amount}";
+        //         icon.sprite = iconSprite;
+        //
+        //         inst.transform.DOScale(new Vector3(.7f, .7f, .7f), .7f).SetEase(Ease.Flash);
+        //
+        //         inst.transform
+        //             .DOMoveY(3f, 1f)
+        //             .SetEase(Ease.InOutSine)
+        //             .onComplete += () => { Destroy(inst); };
+        //     }
+        // }
+
+        public void Show(EInteractTypes interactTypes)
         {
-            foreach (var element in inventoryElements)
+            switch (interactTypes)
             {
-                // TODO pool
-                var inst = Instantiate(textObjectTemplate, parent: transform);
+                case EInteractTypes.Collect:
+                    break;
+                case EInteractTypes.Use:
+                    break;
+                case EInteractTypes.Upgrade:
+                    break;
+                case EInteractTypes.UseAndUpgrade:
 
-                inst.transform.localScale = Vector3.zero;
+                    var useb = buttonTemplate.Instantiate();
+                    useb.Q<Button>("ip-button").text = "Use"; // TODO конкретное действие
 
-                var text = inst.GetComponentInChildren<TMP_Text>();
-                var icon = inst.GetComponentInChildren<Image>();
+                    var upgb = buttonTemplate.Instantiate();
+                    upgb.Q<Button>("ip-button").text = "Upgrade"; // TODO конкретное действие
 
-                var iconSprite = await _assetProvider.LoadIconAsync(element.typeName);
-
-                if (iconSprite == null) Debug.LogError("We need icon for " + element.typeName);
-
-
-                text.text = $"+ {element.Amount}";
-                icon.sprite = iconSprite;
-
-                inst.transform.DOScale(new Vector3(.7f, .7f, .7f), .7f).SetEase(Ease.Flash);
-
-                inst.transform
-                    .DOMoveY(3f, 1f)
-                    .SetEase(Ease.InOutSine)
-                    .onComplete += () => { Destroy(inst); };
+                    root.Q<VisualElement>("interact-panel").Add(useb);
+                    root.Q<VisualElement>("interact-panel").Add(upgb);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(interactTypes), interactTypes, null);
             }
+
+            root.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
+        }
+
+        public void ShowPanelForBuild(SWorldItemConfigNew worldItemConfig)
+        {
+            var buildButton = buildButtonTemplate.Instantiate();
+            buildButton.Q<Label>("ip-building-name-label").text =
+                worldItemConfig.name.ToUpper(); // TODO конкретное действие
+            root.Q<VisualElement>("interact-panel").Add(buildButton);
+            root.Q<VisualElement>("ip-build-button-container").style.position =
+                new StyleEnum<Position>(Position.Absolute);
+
+            root.Q<VisualElement>("ip-build-button-container").style.top = new StyleLength(0f);
+            root.Q<VisualElement>("ip-build-button-container").style.left = new StyleLength(0f);
+            root.Q<VisualElement>("ip-build-button-container").style.right = new StyleLength(0f);
+            root.Q<VisualElement>("ip-build-button-container").style.bottom = new StyleLength(0f);
+
+            root.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
         }
     }
 }

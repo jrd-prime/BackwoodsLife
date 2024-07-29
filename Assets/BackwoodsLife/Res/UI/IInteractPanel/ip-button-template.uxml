@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/interact-panel.uss?fileID=7433441132597879392&amp;guid=8276aef655f16b7409758f48360cc33a&amp;type=3#interact-panel" />
+    <ui:VisualElement name="ip-button-container" class="ip-button-container">
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ip-button" class="ip-button" />
+    </ui:VisualElement>
+</ui:UXML>

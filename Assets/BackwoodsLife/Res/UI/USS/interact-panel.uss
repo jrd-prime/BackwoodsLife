@@ -53,3 +53,28 @@
     border-bottom-left-radius: 8px;
     border-bottom-width: 4px;
 }
+
+.ip-build-button {
+    flex-direction: row;
+}
+
+.ip-build-button-container {
+}
+
+.ip-button-yes-no {
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    -unity-text-align: middle-center;
+    width: 56px;
+    height: 56px;
+    margin-top: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-width: 4px;
+}
