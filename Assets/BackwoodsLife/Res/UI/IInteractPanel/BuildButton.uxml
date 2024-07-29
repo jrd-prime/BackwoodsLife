@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/interact-panel.uss?fileID=7433441132597879392&amp;guid=8276aef655f16b7409758f48360cc33a&amp;type=3#interact-panel" />
+    <ui:VisualElement name="ip-build-button-container" class="ip-button-container ip-build-button-container" style="flex-direction: column; align-items: center; justify-content: center; align-self: center; min-width: auto; width: auto; background-color: rgba(0, 141, 0, 0.19); position: absolute; left: 15%; top: auto; right: 15%; bottom: 0; -unity-text-align: middle-center; flex-grow: 0;">
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ip-build-button-apply" class="ip-button-yes-no" style="background-color: rgb(143, 209, 148); position: absolute; left: 0; background-image: url(&quot;project://database/Assets/Plugins/Demigiant/DemiLib/Core/Editor/Imgs/ico_ok.png?fileID=2800000&amp;guid=34f39b5a760ddbb4d8b8749852868335&amp;type=3#ico_ok&quot;);" />
+        <ui:VisualElement name="ip-building-name-container" style="flex-grow: 1; align-items: center; justify-content: center; align-self: center; flex-direction: row; position: absolute; left: 64px; right: 64px;">
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ip-building-name-label" style="-unity-font-style: bold; font-size: 18px;" />
+        </ui:VisualElement>
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ip-build-button-cancel" class="ip-button-yes-no" style="background-color: rgb(255, 170, 170); right: 0; position: absolute; background-image: url(&quot;project://database/Assets/Plugins/Demigiant/DemiLib/Core/Editor/Imgs/project/ico_cross.png?fileID=2800000&amp;guid=3b67e53c8c2f8114b966c0e70d452419&amp;type=3#ico_cross&quot;);" />
+    </ui:VisualElement>
+</ui:UXML>

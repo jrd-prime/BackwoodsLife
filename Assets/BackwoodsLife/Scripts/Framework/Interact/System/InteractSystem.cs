@@ -8,6 +8,7 @@ using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
+using R3;
 using UnityEngine;
 using VContainer;
 
@@ -28,7 +29,12 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private Action _triggerCallback;
         private InteractPanelUI _interactPanelUI;
 
+        private CompositeDisposable _disposable = new CompositeDisposable();
+
         private const int BuildingStartLevel = 0;
+
+        public bool IsMoving;
+
         public event Action<List<InventoryElement>, EInteractType> OnCollected;
 
 
@@ -46,6 +52,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private void Awake()
         {
             OnCollected += OnCollect;
+            _playerViewModel.MoveDirection.Subscribe(x => { IsMoving = x.magnitude > 0; }).AddTo(_disposable);
         }
 
 
@@ -104,8 +111,8 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
-            
+
+
             //
             // var upgradeConfig = worldItemConfig.upgradeConfig;
             //
@@ -129,9 +136,14 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             throw new NotImplementedException();
         }
 
-        public void Build(ref SWorldItemConfigNew worldItemConfig)
+        public void BuildZoneEnter(ref SWorldItemConfigNew worldItemConfig)
         {
             _interactPanelUI.ShowPanelForBuild(worldItemConfig);
+        }
+
+        public void BuildZoneExit()
+        {
+            _interactPanelUI.HidePanelForBuild();
         }
     }
 }

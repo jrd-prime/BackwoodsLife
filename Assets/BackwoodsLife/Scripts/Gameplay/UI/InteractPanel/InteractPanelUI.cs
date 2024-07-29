@@ -21,12 +21,14 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
     /// </summary>
     public class InteractPanelUI : UIView
     {
+        [SerializeField] private StyleSheet styleSheet;
         [SerializeField] private VisualTreeAsset buttonTemplate;
         [SerializeField] private VisualTreeAsset buildButtonTemplate;
         private PlayerModel _playerModel;
         private readonly CompositeDisposable _disposables = new();
         private IAssetProvider _assetProvider;
         private VisualElement root;
+        private VisualElement interactPanel;
 
         [Inject]
         private void Construct(PlayerModel playerModel, IAssetProvider assetProvider)
@@ -42,6 +44,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
             Assert.IsNotNull(buildButtonTemplate, "buttonTemplate is null");
 
             root = GetComponent<UIDocument>().rootVisualElement;
+            interactPanel = root.Q<VisualElement>("interact-panel");
             root.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
 
 
@@ -113,18 +116,23 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
         public void ShowPanelForBuild(SWorldItemConfigNew worldItemConfig)
         {
             var buildButton = buildButtonTemplate.Instantiate();
+
             buildButton.Q<Label>("ip-building-name-label").text =
                 worldItemConfig.name.ToUpper(); // TODO конкретное действие
-            root.Q<VisualElement>("interact-panel").Add(buildButton);
-            root.Q<VisualElement>("ip-build-button-container").style.position =
-                new StyleEnum<Position>(Position.Absolute);
 
-            root.Q<VisualElement>("ip-build-button-container").style.top = new StyleLength(0f);
-            root.Q<VisualElement>("ip-build-button-container").style.left = new StyleLength(0f);
-            root.Q<VisualElement>("ip-build-button-container").style.right = new StyleLength(0f);
-            root.Q<VisualElement>("ip-build-button-container").style.bottom = new StyleLength(0f);
+            interactPanel.Add(buildButton);
+
+            buildButton.styleSheets.Add(styleSheet);
+            buildButton.AddToClassList("ip-build-button-template");
+
 
             root.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
+        }
+
+        public void HidePanelForBuild()
+        {
+            root.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
+            interactPanel.Clear();
         }
     }
 }

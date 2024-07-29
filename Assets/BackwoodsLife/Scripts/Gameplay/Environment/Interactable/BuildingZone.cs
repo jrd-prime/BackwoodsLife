@@ -2,6 +2,7 @@
 using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
 using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Interact.System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -12,6 +13,8 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
         [SerializeField] private SWorldItemConfigNew worldItemConfig;
 
         private InteractSystem _interactSystem;
+
+        private bool _isInTriggerZone;
 
         [Inject]
         private void Construct(InteractSystem interactSystem) => _interactSystem = interactSystem;
@@ -25,11 +28,35 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
                 throw new NullReferenceException("InteractSystem does not inject!");
         }
 
-        private void OnTriggerEnter(Collider other)
+        private async void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.layer != (int)JLayers.Player) return;
+
+            _isInTriggerZone = true;
+
+            while (_isInTriggerZone && _interactSystem.IsMoving)
+            {
+                Debug.LogWarning("In zone but still moving, waiting 100ms");
+                await UniTask.Delay(100);
+            }
+
+            if (!_isInTriggerZone || _interactSystem.IsMoving) return;
+
+            await UniTask.Delay(300);
+
+            Debug.LogWarning("In zone and not moving, building!");
             Debug.Log($"Char in trigger zone! {name} / {worldItemConfig.InteractTypes}");
-            _interactSystem.Build(ref worldItemConfig);
+            _interactSystem.BuildZoneEnter(ref worldItemConfig);
+        }
+
+        private async void OnTriggerExit(Collider other)
+        {
+            _isInTriggerZone = false;
+            if (other.gameObject.layer != (int)JLayers.Player) return;
+            Debug.LogWarning($"Char exit from trigger zone! {name} / {worldItemConfig.InteractTypes}");
+
+            await UniTask.Delay(300);
+            _interactSystem.BuildZoneExit();
         }
     }
 }

@@ -62,6 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d803dc41c75447f18e19c1bef3442df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  styleSheet: {fileID: 7433441132597879392, guid: 8276aef655f16b7409758f48360cc33a,
+    type: 3}
   buttonTemplate: {fileID: 9197481963319205126, guid: 3bb03279ce4dac749b3441d3d2e0de06,
     type: 3}
   buildButtonTemplate: {fileID: 9197481963319205126, guid: 186657afbb2f03740b38a874a739e54e,
