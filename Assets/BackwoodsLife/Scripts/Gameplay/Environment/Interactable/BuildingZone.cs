@@ -13,7 +13,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
         [SerializeField] private SWorldItemConfigNew worldItemConfig;
 
         private InteractSystem _interactSystem;
-
         private bool _isInTriggerZone;
 
         [Inject]
@@ -42,21 +41,18 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
 
             if (!_isInTriggerZone || _interactSystem.IsMoving) return;
 
-            await UniTask.Delay(300);
-
             Debug.LogWarning("In zone and not moving, building!");
             Debug.Log($"Char in trigger zone! {name} / {worldItemConfig.InteractTypes}");
-            _interactSystem.BuildZoneEnter(ref worldItemConfig);
+            _interactSystem.OnBuildZoneEnter(ref worldItemConfig);
         }
 
-        private async void OnTriggerExit(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             _isInTriggerZone = false;
             if (other.gameObject.layer != (int)JLayers.Player) return;
             Debug.LogWarning($"Char exit from trigger zone! {name} / {worldItemConfig.InteractTypes}");
 
-            await UniTask.Delay(300);
-            _interactSystem.BuildZoneExit();
+            _interactSystem.OnBuildZoneExit();
         }
     }
 }

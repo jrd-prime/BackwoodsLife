@@ -33,7 +33,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
         private const int BuildingStartLevel = 0;
 
-        public bool IsMoving;
+        public bool IsMoving { get; private set; }
 
         public event Action<List<InventoryElement>, EInteractType> OnCollected;
 
@@ -52,7 +52,9 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private void Awake()
         {
             OnCollected += OnCollect;
-            _playerViewModel.MoveDirection.Subscribe(x => { IsMoving = x.magnitude > 0; }).AddTo(_disposable);
+            _playerViewModel.MoveDirection
+                .Subscribe(x => IsMoving = x.magnitude > 0)
+                .AddTo(_disposable);
         }
 
 
@@ -77,21 +79,6 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
             _triggerCallback.Invoke();
             _characterOverUIHolder.ShowPopUpFor(obj);
-        }
-
-        private void OnUseAndUpgrade(List<InventoryElement> collectableElements)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnUpgrade(List<InventoryElement> collectableElements)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnUse(List<InventoryElement> collectableElements)
-        {
-            throw new NotImplementedException();
         }
 
         public void Interact(ref SWorldItemConfigNew worldInteractableItem)
@@ -136,12 +123,12 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             throw new NotImplementedException();
         }
 
-        public void BuildZoneEnter(ref SWorldItemConfigNew worldItemConfig)
+        public void OnBuildZoneEnter(ref SWorldItemConfigNew worldItemConfig)
         {
             _interactPanelUI.ShowPanelForBuild(worldItemConfig);
         }
 
-        public void BuildZoneExit()
+        public void OnBuildZoneExit()
         {
             _interactPanelUI.HidePanelForBuild();
         }

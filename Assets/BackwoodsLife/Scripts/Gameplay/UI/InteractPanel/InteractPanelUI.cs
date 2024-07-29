@@ -124,9 +124,11 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
 
             buildButton.styleSheets.Add(styleSheet);
             buildButton.AddToClassList("ip-build-button-template");
-
-
+            //
+            // root.style.bottom = new StyleLength(-64f - 32f);
+            root.style.opacity = 1f;
             root.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
+            root.AnimateInFromBottom(500, 96f);
         }
 
         public void HidePanelForBuild()
