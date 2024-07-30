@@ -1,8 +1,5 @@
-﻿using System;
-using BackwoodsLife.Scripts.Data.Animation.Character;
-using BackwoodsLife.Scripts.Data.Common.Enums;
+﻿using BackwoodsLife.Scripts.Data.Animation.Character;
 using BackwoodsLife.Scripts.Gameplay.UI;
-using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -35,9 +32,10 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
             _animator = gameObject.GetComponent<Animator>();
 
             Assert.IsNotNull(_animator, "Animator is null");
-
             Assert.IsNotNull(_viewModel,
                 $"ViewModel is null. Ensure that \"{this}\" is added to auto-injection in GameSceneContext prefab");
+
+            _viewModel.SetModelPosition(_rb.position);
             Subscribe();
         }
 

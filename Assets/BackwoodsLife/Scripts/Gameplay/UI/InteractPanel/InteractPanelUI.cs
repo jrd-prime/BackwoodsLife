@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
+using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
@@ -30,6 +35,8 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
         private VisualElement root;
         private VisualElement interactPanel;
 
+        private Button _buildButton;
+
         [Inject]
         private void Construct(PlayerModel playerModel, IAssetProvider assetProvider)
         {
@@ -45,7 +52,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
 
             root = GetComponent<UIDocument>().rootVisualElement;
             interactPanel = root.Q<VisualElement>("interact-panel");
-            root.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
+            root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
 
 
             _playerModel.Position.Subscribe(pos => { transform.position = pos; }).AddTo(_disposables);
@@ -110,11 +117,46 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
                     throw new ArgumentOutOfRangeException(nameof(interactTypes), interactTypes, null);
             }
 
-            root.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
+            root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
         }
+
+        private Dictionary<Type, Dictionary<Enum, int>> TestReqForUpgrade(UpgradeLevel level)
+        {
+            var dict = new Dictionary<Type, Dictionary<Enum, int>>();
+            AddToDictReqForUpgradeFor(level.requirementsForUpgrading.resource, ref dict);
+            AddToDictReqForUpgradeFor(level.requirementsForUpgrading.building, ref dict);
+            AddToDictReqForUpgradeFor(level.requirementsForUpgrading.tool, ref dict);
+            AddToDictReqForUpgradeFor(level.requirementsForUpgrading.skill, ref dict);
+            return dict;
+        }
+
+        private void AddToDictReqForUpgradeFor<T>(List<CustomRequirement<T>> res,
+            ref Dictionary<Type, Dictionary<Enum, int>> dict) where T : Enum
+        {
+            var dict2 = res.ToDictionary<CustomRequirement<T>, Enum, int>(re => re.typeName, re => re.value);
+
+            dict.Add(typeof(T), dict2);
+        }
+
 
         public void ShowPanelForBuild(SWorldItemConfigNew worldItemConfig)
         {
+            UpgradeLevel levreq = worldItemConfig.GetLevelRequirements(ELevel.Level_1);
+
+            var a = TestReqForUpgrade(levreq);
+
+            foreach (var d in a)
+            {
+                Debug.LogWarning($"\t{d.Key}");
+                foreach (var i in d.Value)
+                {
+                    Debug.LogWarning($"\t\t{i.Key} = {i.Value}");
+                }
+            }
+
+            Debug.LogWarning("lev = " + levreq.level);
+
+
             var buildButton = buildButtonTemplate.Instantiate();
 
             buildButton.Q<Label>("ip-building-name-label").text =
@@ -124,17 +166,22 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
 
             buildButton.styleSheets.Add(styleSheet);
             buildButton.AddToClassList("ip-build-button-template");
-            //
-            // root.style.bottom = new StyleLength(-64f - 32f);
-            root.style.opacity = 1f;
-            root.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
-            root.AnimateInFromBottom(500, 96f);
+            _buildButton = buildButton.Q<Button>("ip-build-button");
+            _buildButton.clicked += OnBuildButtonClicked;
+
+            root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
         }
 
         public void HidePanelForBuild()
         {
-            root.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
+            _buildButton.clicked -= OnBuildButtonClicked;
+            root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
             interactPanel.Clear();
+        }
+
+        private void OnBuildButtonClicked()
+        {
+            Debug.LogWarning("Build button click");
         }
     }
 }

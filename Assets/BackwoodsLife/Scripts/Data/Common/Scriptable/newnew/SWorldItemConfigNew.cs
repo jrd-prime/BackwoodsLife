@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable;
 using Sirenix.OdinInspector;
@@ -19,6 +21,8 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
         public EWorldItemNew WorldItemType;
         public EInteractTypes InteractTypes;
 
+        public List<ERequirement> requirementType;
+
         public bool fixedPosition = false;
         [ShowIf("@fixedPosition")] public Vector3 fixedPositionValue;
 
@@ -32,12 +36,36 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
         public UpgradeConfig upgradeConfig;
     }
 
+    public enum ERequirement
+    {
+        Resource = 0,
+        Tool = 1,
+        Skill = 2,
+        Building = 3
+    }
+
+    public static class ConfigsExtensions
+    {
+        public static UpgradeLevel GetLevelRequirements(this SWorldItemConfigNew config, ELevel level)
+        {
+            Debug.LogWarning($"find level: {level}");
+
+            var levels = config.upgradeConfig.upgradeLevels
+                .Where(upgradeLevel => upgradeLevel.level == level)
+                .ToArray();
+
+            if (levels.Length == 1) return levels[0];
+
+            throw new NullReferenceException($"{config.name} doesn't contain level {level}");
+        }
+    }
+
     [Serializable]
     public struct UpgradeConfig
     {
         public List<UpgradeLevel> upgradeLevels;
 
-        public AssetReferenceGameObject GetLevel(int level)
+        public AssetReferenceGameObject GetLevelPrefabRef(int level)
         {
             return upgradeLevels.Find(x => (int)x.level == level).levelPrefabReference;
         }

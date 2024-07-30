@@ -19,6 +19,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Camera
         {
             Debug.Log("SetFollowTarget " + target);
 
+            transform.position = target.Position.CurrentValue;
+
             if (_targetViewModel != null) _subscribe?.Dispose();
             SubscribeToTargetPosition(target);
         }

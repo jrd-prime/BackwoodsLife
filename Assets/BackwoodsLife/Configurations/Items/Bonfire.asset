@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WorldItemType: 0
   InteractTypes: 3
+  requirementType: 00000000
   fixedPosition: 1
   fixedPositionValue: {x: 14, y: 0, z: 0}
   useConfig:
@@ -27,4 +28,18 @@ MonoBehaviour:
         m_SubObjectName: 
         m_SubObjectType: 
         m_EditorAssetChanged: 0
-      requirementsForUpgrading: []
+      requirementsForUpgrading:
+        resource:
+        - typeName: 0
+          value: 20
+        - typeName: 2
+          value: 10
+        tool:
+        - typeName: 1
+          value: 1
+        skill:
+        - typeName: 1
+          value: 3
+        building:
+        - typeName: 100
+          value: 4
