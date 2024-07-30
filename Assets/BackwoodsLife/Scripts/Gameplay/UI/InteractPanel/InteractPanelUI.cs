@@ -120,41 +120,15 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
             root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
         }
 
-        private Dictionary<Type, Dictionary<Enum, int>> TestReqForUpgrade(UpgradeLevel level)
-        {
-            var dict = new Dictionary<Type, Dictionary<Enum, int>>();
-            AddToDictReqForUpgradeFor(level.requirementsForUpgrading.resource, ref dict);
-            AddToDictReqForUpgradeFor(level.requirementsForUpgrading.building, ref dict);
-            AddToDictReqForUpgradeFor(level.requirementsForUpgrading.tool, ref dict);
-            AddToDictReqForUpgradeFor(level.requirementsForUpgrading.skill, ref dict);
-            return dict;
-        }
-
-        private void AddToDictReqForUpgradeFor<T>(List<CustomRequirement<T>> res,
-            ref Dictionary<Type, Dictionary<Enum, int>> dict) where T : Enum
-        {
-            var dict2 = res.ToDictionary<CustomRequirement<T>, Enum, int>(re => re.typeName, re => re.value);
-
-            dict.Add(typeof(T), dict2);
-        }
-
 
         public void ShowPanelForBuild(SWorldItemConfigNew worldItemConfig)
         {
-            UpgradeLevel levreq = worldItemConfig.GetLevelRequirements(ELevel.Level_1);
+            Dictionary<Type, Dictionary<Enum, int>> levreq = worldItemConfig.GetLevelReq(ELevel.Level_1);
 
-            var a = TestReqForUpgrade(levreq);
-
-            foreach (var d in a)
+            foreach (var lev in levreq)
             {
-                Debug.LogWarning($"\t{d.Key}");
-                foreach (var i in d.Value)
-                {
-                    Debug.LogWarning($"\t\t{i.Key} = {i.Value}");
-                }
+                Debug.LogWarning(lev);
             }
-
-            Debug.LogWarning("lev = " + levreq.level);
 
 
             var buildButton = buildButtonTemplate.Instantiate();
