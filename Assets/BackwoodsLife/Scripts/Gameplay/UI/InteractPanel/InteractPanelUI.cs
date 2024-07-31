@@ -8,7 +8,9 @@ using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Data.Player;
+using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using R3;
 using TMPro;
@@ -34,14 +36,19 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
         private IAssetProvider _assetProvider;
         private VisualElement root;
         private VisualElement interactPanel;
+        private VisualElement leftFrame;
 
         private Button _buildButton;
+        private UIFrameController _uiFrameController;
+
 
         [Inject]
-        private void Construct(PlayerModel playerModel, IAssetProvider assetProvider)
+        private void Construct(PlayerModel playerModel, IAssetProvider assetProvider,
+            UIFrameController uiFrameController)
         {
             _playerModel = playerModel;
             _assetProvider = assetProvider;
+            _uiFrameController = uiFrameController;
         }
 
         private void Awake()
@@ -50,10 +57,10 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
             Assert.IsNotNull(buttonTemplate, "buttonTemplate is null");
             Assert.IsNotNull(buildButtonTemplate, "buttonTemplate is null");
 
-            root = GetComponent<UIDocument>().rootVisualElement;
-            interactPanel = root.Q<VisualElement>("interact-panel");
-            root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
-
+            // root = GetComponent<UIDocument>().rootVisualElement;
+            // interactPanel = root.Q<VisualElement>("main-popup-frame");
+            // leftFrame = interactPanel.Q<VisualElement>("left-frame");
+            // root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
 
             _playerModel.Position.Subscribe(pos => { transform.position = pos; }).AddTo(_disposables);
         }
@@ -121,7 +128,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
         }
 
 
-        public void ShowPanelForBuild(SWorldItemConfigNew worldItemConfig)
+        public async void ShowPanelForBuild(SWorldItemConfigNew worldItemConfig)
         {
             Dictionary<Type, Dictionary<Enum, int>> levreq = worldItemConfig.GetLevelReq(ELevel.Level_1);
 
@@ -136,26 +143,38 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
             buildButton.Q<Label>("ip-building-name-label").text =
                 worldItemConfig.name.ToUpper(); // TODO конкретное действие
 
-            interactPanel.Add(buildButton);
+
+            _uiFrameController.ShowPopUpUi();
+            _uiFrameController.GetPopUpUILeft().Add(buildButton);
 
             buildButton.styleSheets.Add(styleSheet);
             buildButton.AddToClassList("ip-build-button-template");
             _buildButton = buildButton.Q<Button>("ip-build-button");
             _buildButton.clicked += OnBuildButtonClicked;
 
-            root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+            // root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
         }
 
         public void HidePanelForBuild()
         {
             _buildButton.clicked -= OnBuildButtonClicked;
-            root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
-            interactPanel.Clear();
+            // root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+            // interactPanel.Clear();
         }
 
         private void OnBuildButtonClicked()
         {
             Debug.LogWarning("Build button click");
+        }
+
+        public override void Show()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Hide()
+        {
+            throw new NotImplementedException();
         }
     }
 }

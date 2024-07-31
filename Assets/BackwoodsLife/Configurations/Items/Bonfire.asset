@@ -41,5 +41,5 @@ MonoBehaviour:
         - typeName: 1
           value: 3
         building:
-        - typeName: 100
+        - typeName: 1
           value: 4

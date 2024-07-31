@@ -71,5 +71,15 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
                 _elementsPosition.Add(t.Key, i++);
             }
         }
+
+        public override void Show()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Hide()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

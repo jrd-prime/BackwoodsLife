@@ -32,5 +32,13 @@ namespace BackwoodsLife.Scripts.Framework.Bootstrap
             // Подписываемся на вьюмодель
             _viewModel.HeaderView.Subscribe(x => header.text = x);
         }
+
+        public override void Show()
+        {
+        }
+
+        public override void Hide()
+        {
+        }
     }
 }
