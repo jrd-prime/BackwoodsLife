@@ -133,16 +133,9 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
 
             var buildButton = buildButtonTemplate.Instantiate();
 
-            buildButton.Q<Label>("ip-building-name-label").text =
-                worldItemConfig.name.ToUpper(); // TODO конкретное действие
-
-
-            buildButton.styleSheets.Add(styleSheet);
-            buildButton.AddToClassList("ip-build-button-template");
-
-
-            _buildButton = buildButton.Q<Button>("ip-build-button");
-            _buildButton.clicked += OnBuildButtonClicked;
+            //
+            // _buildButton = buildButton.Q<Button>("ip-build-button");
+            // _buildButton.clicked += OnBuildButtonClicked;
 
 
             popUpFrame.ShowIn(EPopUpSubFrame.Left, buildButton);
@@ -153,7 +146,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
 
         public void HidePanelForBuild()
         {
-            _buildButton.clicked -= OnBuildButtonClicked;
+            // _buildButton.clicked -= OnBuildButtonClicked;
             // root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
             // interactPanel.Clear();
         }
