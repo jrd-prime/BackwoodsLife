@@ -1,7 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="ui-frame-popup" style="flex-grow: 1; margin-top: 24px; margin-right: 24px; margin-bottom: 24px; margin-left: 24px; flex-direction: row; -unity-text-align: middle-center; background-color: rgba(197, 87, 168, 0.65);">
-        <ui:VisualElement name="left-frame" style="flex-grow: 1; position: absolute; left: 0; top: 0; bottom: 0; width: 200px; background-color: rgba(146, 0, 0, 0.53);" />
-        <ui:VisualElement name="center-frame" style="flex-grow: 1; left: 200px; position: absolute; right: 200px; top: 0; bottom: 0;" />
+    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/ui-frames.uss?fileID=7433441132597879392&amp;guid=bebfaf019dde7c7439be19643fd74efa&amp;type=3#ui-frames" />
+    <ui:VisualElement name="ui-frame-popup" class="ui-frame" style="left: 0; top: 0; right: 0; bottom: 0;">
+        <ui:VisualElement name="left-frame" style="flex-grow: 1; position: absolute; left: 0; top: 0; bottom: 0; width: 220px; background-color: rgba(146, 0, 0, 0.77); align-items: flex-end; justify-content: flex-end; align-self: center; flex-direction: column; -unity-text-align: middle-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+        <ui:VisualElement name="center-frame" style="flex-grow: 1; left: 220px; position: absolute; right: 200px; top: 0; bottom: 0;" />
         <ui:VisualElement name="right-frame" style="flex-grow: 1; width: 200px; position: absolute; top: 0; right: 0; bottom: 0; background-color: rgba(185, 212, 177, 0.57);" />
     </ui:VisualElement>
 </ui:UXML>

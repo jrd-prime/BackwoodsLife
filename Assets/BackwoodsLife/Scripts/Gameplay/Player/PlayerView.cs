@@ -123,14 +123,5 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         }
 
         private void OnDestroy() => _disposables.Dispose();
-        public override void Show()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Hide()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

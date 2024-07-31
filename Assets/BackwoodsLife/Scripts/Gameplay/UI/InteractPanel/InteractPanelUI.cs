@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable;
+using BackwoodsLife.Scripts.Data.Common.Enums.UI;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
-using BackwoodsLife.Scripts.Data.Common.Structs.Required;
-using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using R3;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 using VContainer;
-using Image = UnityEngine.UI.Image;
 
 namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
 {
@@ -137,6 +128,8 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
                 Debug.LogWarning(lev);
             }
 
+            var popUpFrame = _uiFrameController.GetPopUpFrame();
+
 
             var buildButton = buildButtonTemplate.Instantiate();
 
@@ -144,13 +137,16 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
                 worldItemConfig.name.ToUpper(); // TODO конкретное действие
 
 
-            _uiFrameController.ShowPopUpUi();
-            _uiFrameController.GetPopUpUILeft().Add(buildButton);
-
             buildButton.styleSheets.Add(styleSheet);
             buildButton.AddToClassList("ip-build-button-template");
+
+
             _buildButton = buildButton.Q<Button>("ip-build-button");
             _buildButton.clicked += OnBuildButtonClicked;
+
+
+            popUpFrame.ShowIn(EPopUpSubFrame.Left, buildButton);
+
 
             // root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
         }
@@ -165,16 +161,6 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
         private void OnBuildButtonClicked()
         {
             Debug.LogWarning("Build button click");
-        }
-
-        public override void Show()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Hide()
-        {
-            throw new NotImplementedException();
         }
     }
 }

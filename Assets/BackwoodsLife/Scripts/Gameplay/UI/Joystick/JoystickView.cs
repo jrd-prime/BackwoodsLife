@@ -52,15 +52,5 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Joystick
             _root.UnregisterCallback<PointerUpEvent>(OnPointerUp);
             _root.UnregisterCallback<PointerOutEvent>(OnPointerCancel);
         }
-
-        public override void Show()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Hide()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

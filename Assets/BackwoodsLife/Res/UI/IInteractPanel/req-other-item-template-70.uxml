@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/interact-panel.uss?fileID=7433441132597879392&amp;guid=8276aef655f16b7409758f48360cc33a&amp;type=3#interact-panel" />
+    <ui:VisualElement name="other" class="req-other-container" style="flex-direction: row;">
+        <ui:Label tabindex="-1" text="Building" parse-escape-sequences="true" display-tooltip-when-elided="true" class="req-other-title-label" />
+        <ui:VisualElement name="ff" style="flex-grow: 0; position: absolute; left: 0; top: 20px; right: 0; bottom: 0; align-items: center; justify-content: center;">
+            <ui:VisualElement name="reqreq-item-cont" class="req-item-cont">
+                <ui:VisualElement style="flex-grow: 1; width: 42px; text-overflow: ellipsis; align-items: center; justify-content: center;">
+                    <ui:Label tabindex="-1" text="Fishing Something" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: center; justify-content: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 7px; -unity-text-align: middle-center; text-overflow: ellipsis; white-space: normal;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 0; align-items: flex-end; justify-content: center; width: 14px; -unity-text-align: middle-center; white-space: nowrap; flex-direction: column;">
+                    <ui:Label tabindex="-1" text="9/9" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 8px; -unity-text-align: middle-right;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -12,5 +12,9 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.Extensions
             element.style.top = new StyleLength(0f);
             element.style.bottom = new StyleLength(0f);
         }
+
+        public static void ToSafeArea(this VisualElement element)
+        {
+        }
     }
 }
