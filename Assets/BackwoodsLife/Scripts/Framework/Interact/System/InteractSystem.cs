@@ -5,6 +5,7 @@ using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
+using BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
@@ -30,6 +31,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private InteractPanelUI _interactPanelUI;
 
         private CompositeDisposable _disposable = new CompositeDisposable();
+        private BuildingPanelController _buildingPanelController;
 
         private const int BuildingStartLevel = 0;
 
@@ -40,13 +42,15 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
         [Inject]
         private void Construct(IPlayerViewModel playerViewModel, CollectSystem collectSystem,
-            CharacterOverUI characterOverUIHolder, IConfigManager configManager, InteractPanelUI interactPanelUI)
+            CharacterOverUI characterOverUIHolder, IConfigManager configManager, InteractPanelUI interactPanelUI,
+            BuildingPanelController buildingPanelController)
         {
             _configManager = configManager;
             _playerViewModel = playerViewModel;
             _collectSystem = collectSystem;
             _characterOverUIHolder = characterOverUIHolder;
             _interactPanelUI = interactPanelUI;
+            _buildingPanelController = buildingPanelController;
         }
 
         private void Awake()
@@ -123,14 +127,14 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             throw new NotImplementedException();
         }
 
-        public void OnBuildZoneEnter(ref SWorldItemConfigNew worldItemConfig)
+        public void OnBuildZoneEnter(in SWorldItemConfigNew worldItemConfig)
         {
-            _interactPanelUI.ShowPanelForBuild(worldItemConfig);
+            _buildingPanelController.OnBuildZoneEnter(in worldItemConfig);
         }
 
         public void OnBuildZoneExit()
         {
-            _interactPanelUI.HidePanelForBuild();
+            _buildingPanelController.OnBuildZoneExit();
         }
     }
 }

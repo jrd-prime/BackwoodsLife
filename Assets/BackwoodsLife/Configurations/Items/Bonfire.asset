@@ -15,6 +15,13 @@ MonoBehaviour:
   WorldItemType: 0
   InteractTypes: 3
   requirementType: 00000000
+  shortDescription: A campfire can be used to cook simple meals and keep you warm
+    on cold nights..
+  icon:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   fixedPosition: 1
   fixedPositionValue: {x: 14, y: 0, z: 0}
   useConfig:

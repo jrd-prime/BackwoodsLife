@@ -43,7 +43,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
 
             Debug.LogWarning("In zone and not moving, building!");
             Debug.Log($"Char in trigger zone! {name} / {worldItemConfig.InteractTypes}");
-            _interactSystem.OnBuildZoneEnter(ref worldItemConfig);
+            _interactSystem.OnBuildZoneEnter(in worldItemConfig);
         }
 
         private void OnTriggerExit(Collider other)

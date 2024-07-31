@@ -117,43 +117,5 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
 
             root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
         }
-
-
-        public async void ShowPanelForBuild(SWorldItemConfigNew worldItemConfig)
-        {
-            Dictionary<Type, Dictionary<Enum, int>> levreq = worldItemConfig.GetLevelReq(ELevel.Level_1);
-
-            foreach (var lev in levreq)
-            {
-                Debug.LogWarning(lev);
-            }
-
-            var popUpFrame = _uiFrameController.GetPopUpFrame();
-
-
-            var buildButton = buildButtonTemplate.Instantiate();
-
-            //
-            // _buildButton = buildButton.Q<Button>("ip-build-button");
-            // _buildButton.clicked += OnBuildButtonClicked;
-
-
-            popUpFrame.ShowIn(EPopUpSubFrame.Left, buildButton);
-
-
-            // root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
-        }
-
-        public void HidePanelForBuild()
-        {
-            // _buildButton.clicked -= OnBuildButtonClicked;
-            // root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
-            // interactPanel.Clear();
-        }
-
-        private void OnBuildButtonClicked()
-        {
-            Debug.LogWarning("Build button click");
-        }
     }
 }

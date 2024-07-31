@@ -66,5 +66,17 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
 
             return icon;
         }
+
+        public Sprite LoadIconAsync1(string elementTypeName)
+        {
+            if (IconCache.TryGetValue(elementTypeName, out Sprite iconFromCache)) return iconFromCache;
+
+            var iconRef = _configManager.GetIconReference(elementTypeName);
+            var icon = Addressables.LoadAssetAsync<Sprite>(iconRef).Task;
+
+            IconCache.TryAdd(elementTypeName, icon.Result);
+
+            return icon.Result;
+        }
     }
 }

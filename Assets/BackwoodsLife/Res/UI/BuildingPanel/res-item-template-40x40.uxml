@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/interact-panel.uss?fileID=7433441132597879392&amp;guid=8276aef655f16b7409758f48360cc33a&amp;type=3#interact-panel" />
+    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/build-panel.uss?fileID=7433441132597879392&amp;guid=a873d28cbeb18ef45aae7d638cad659f&amp;type=3#build-panel" />
     <ui:VisualElement name="res" class="res-item" style="border-left-color: rgba(0, 0, 0, 0.13); border-right-color: rgba(0, 0, 0, 0.13); border-top-color: rgba(0, 0, 0, 0.13); border-bottom-color: rgba(0, 0, 0, 0.13); border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px;">
         <ui:VisualElement name="res-item-icon" class="res-item-icon" />
         <ui:VisualElement name="res-item-count-container" class="res-item-count-container">

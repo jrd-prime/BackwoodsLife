@@ -26,6 +26,9 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
         public EInteractTypes InteractTypes;
 
         public List<ERequirement> requirementType;
+        
+        public string shortDescription;
+        public AssetReferenceSprite icon;
 
         private Dictionary<ELevel, Dictionary<Type, Dictionary<Enum, int>>> _reqForUpgradeCache;
 

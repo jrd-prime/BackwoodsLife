@@ -2,6 +2,7 @@
   <assembly fullname="BackwoodsLife, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="BackwoodsLife.Scripts.Data.Common.Scriptable.newnew.SWorldItemConfigNew" preserve="all" />
     <type fullname="BackwoodsLife.Scripts.Framework.Interact.System.InteractSystem" preserve="all" />
+    <type fullname="BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel.BuildingPanelController" preserve="all" />
     <type fullname="BackwoodsLife.Scripts.Framework.Manager.UIFrame.MainFrameUI" preserve="all" />
     <type fullname="BackwoodsLife.Scripts.Framework.Manager.UIFrame.PopUpFrameUI" preserve="all" />
     <type fullname="BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIFrameController" preserve="all" />
@@ -35,6 +36,7 @@
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
     <type fullname="UnityEngine.AddressableAssets.AssetReferenceGameObject" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.AddressableAssets.AssetReferenceSprite" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider" preserve="all" />

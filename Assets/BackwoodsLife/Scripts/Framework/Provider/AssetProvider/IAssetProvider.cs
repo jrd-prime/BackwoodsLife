@@ -19,5 +19,6 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
         public UniTask<GameObject> InstantiateAsync(AssetReference assetId, Vector3 fixedPositionValue);
         public UniTask<GameObject> InstantiateAsync(AssetReference assetId, Transform position = null);
         public UniTask<Sprite> LoadIconAsync(string elementTypeName);
+        public Sprite LoadIconAsync1(string elementTypeName);
     }
 }
