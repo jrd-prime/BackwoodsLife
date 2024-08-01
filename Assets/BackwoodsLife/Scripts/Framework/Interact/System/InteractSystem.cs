@@ -129,6 +129,8 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
         public void OnBuildZoneEnter(in SWorldItemConfigNew worldItemConfig)
         {
+            Debug.LogWarning("Interact system. On build Zone enter");
+
             _buildingPanelController.OnBuildZoneEnter(in worldItemConfig);
         }
 

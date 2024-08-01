@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Assertions;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
 {
@@ -16,30 +18,11 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
         order = 1)]
     public class SWorldItemConfigNew : ScriptableObject
     {
-        /// <summary>
-        /// Dictionary(Level, Dictionary(Req item type, Dictionary(Req type, Req value)))
-        /// </summary>
-        public Dictionary<ELevel, Dictionary<Type, Dictionary<Enum, int>>> reqForUpgradeCache =>
-            InitReqForUpgradeCache();
-
         public EWorldItemNew WorldItemType;
         public EInteractTypes InteractTypes;
-
         public List<ERequirement> requirementType;
-        
         public string shortDescription;
-        public AssetReferenceSprite icon;
-
-        private Dictionary<ELevel, Dictionary<Type, Dictionary<Enum, int>>> _reqForUpgradeCache;
-
-
-        private void AddToDictReqForUpgradeFor<T>(List<CustomRequirement<T>> res,
-            ref Dictionary<Type, Dictionary<Enum, int>> dict) where T : Enum
-        {
-            if (res.Count == 0) return;
-
-            dict.Add(typeof(T), res.ToDictionary<CustomRequirement<T>, Enum, int>(re => re.typeName, re => re.value));
-        }
+        public AssetReferenceTexture2D icon;
 
         public bool fixedPosition = false;
         [ShowIf("@fixedPosition")] public Vector3 fixedPositionValue;
@@ -53,22 +36,68 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
         [ShowIf("@InteractTypes == EInteractTypes.Upgrade || InteractTypes == EInteractTypes.UseAndUpgrade")]
         public UpgradeConfig upgradeConfig;
 
-        private Dictionary<ELevel, Dictionary<Type, Dictionary<Enum, int>>> InitReqForUpgradeCache()
+        private Dictionary<ELevel, Dictionary<EReqType, Dictionary<SItemConfig, int>>> _reqForUpgradeCache;
+
+        /// <summary>
+        /// Dictionary(Level, Dictionary(Req item type, Dictionary(Req type, Req value)))
+        /// </summary>
+        public Dictionary<ELevel, Dictionary<EReqType, Dictionary<SItemConfig, int>>> UpgradeCache =>
+            InitReqForUpgradeCache();
+
+        private void OnValidate()
+        {
+            Assert.IsTrue(icon.RuntimeKeyIsValid(), $"Icon asset ref is not set. World item config: {name}");
+
+            if (InteractTypes == EInteractTypes.Upgrade || InteractTypes == EInteractTypes.UseAndUpgrade)
+            {
+                if (upgradeConfig.upgradeLevels[0].levelPrefabReference.RuntimeKeyIsValid() == false)
+                {
+                    throw new Exception($"Upgrade level prefab is not set for level 0. World item config: {name}");
+                }
+            }
+
+
+            foreach (var upgradeLevel in upgradeConfig.upgradeLevels)
+            {
+                if (upgradeLevel.requirementsForUpgrading.resource.Count > 5)
+                    throw new Exception(
+                        $"{name} Resource requirements for upgrade level {upgradeLevel.level} is too much. Max 5 resources!");
+
+                if (upgradeLevel.requirementsForUpgrading.building.Count > 3 ||
+                    upgradeLevel.requirementsForUpgrading.skill.Count > 3 ||
+                    upgradeLevel.requirementsForUpgrading.tool.Count > 3)
+                    throw new Exception(
+                        $"{name} Building/Tool/Skill requirements for upgrade level {upgradeLevel.level} is too much. Max 3 per type!");
+            }
+
+            _reqForUpgradeCache = null;
+        }
+
+        private void OnDestroy()
+        {
+            Debug.LogWarning("Destroy " + name);
+            _reqForUpgradeCache.Clear();
+        }
+
+
+        private Dictionary<ELevel, Dictionary<EReqType, Dictionary<SItemConfig, int>>> InitReqForUpgradeCache()
         {
             if (_reqForUpgradeCache is { Count: > 0 }) return _reqForUpgradeCache;
 
             Debug.LogWarning("Init cache " + name);
-            var cache = new Dictionary<ELevel, Dictionary<Type, Dictionary<Enum, int>>>();
+            var cache = new Dictionary<ELevel, Dictionary<EReqType, Dictionary<SItemConfig, int>>>();
 
             foreach (var level in upgradeConfig.upgradeLevels)
             {
-                var levelDictionary = new Dictionary<Type, Dictionary<Enum, int>>();
+                var levelDictionary = new Dictionary<EReqType, Dictionary<SItemConfig, int>>();
                 cache.Add(level.level, levelDictionary);
 
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.resource, ref levelDictionary);
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.building, ref levelDictionary);
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.tool, ref levelDictionary);
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.skill, ref levelDictionary);
+                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.resource, EReqType.Resorce,
+                    ref levelDictionary);
+                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.building, EReqType.Building,
+                    ref levelDictionary);
+                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.tool, EReqType.Tool, ref levelDictionary);
+                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.skill, EReqType.Skill, ref levelDictionary);
             }
 
 
@@ -89,9 +118,18 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
             return _reqForUpgradeCache = cache;
         }
 
-        public Dictionary<Type, Dictionary<Enum, int>> GetLevelReq(ELevel level1)
+        private void AddToDictReqForUpgradeFor<T>(List<CustomRequirement<T>> res, EReqType eReqType,
+            ref Dictionary<EReqType, Dictionary<SItemConfig, int>> dict) where T : SItemConfig
         {
-            return reqForUpgradeCache[level1];
+            if (res.Count == 0) return;
+
+            dict.Add(eReqType,
+                res.ToDictionary<CustomRequirement<T>, SItemConfig, int>(re => re.typeName, re => re.value));
+        }
+
+        public Dictionary<EReqType, Dictionary<SItemConfig, int>> GetLevelReq(ELevel level1)
+        {
+            return UpgradeCache[level1];
         }
     }
 

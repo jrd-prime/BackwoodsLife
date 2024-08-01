@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/build-panel.uss?fileID=7433441132597879392&amp;guid=a873d28cbeb18ef45aae7d638cad659f&amp;type=3#build-panel" />
+    <ui:VisualElement name="other-type-container" class="req-other-container" style="flex-direction: row;">
+        <ui:Label tabindex="-1" text="Building" parse-escape-sequences="true" display-tooltip-when-elided="true" name="other-head-label" class="req-other-title-label" />
+        <ui:VisualElement name="other-sub-container" style="flex-grow: 0; position: absolute; left: 0; top: 20px; right: 0; bottom: 0; align-items: center; justify-content: center;" />
+    </ui:VisualElement>
+</ui:UXML>

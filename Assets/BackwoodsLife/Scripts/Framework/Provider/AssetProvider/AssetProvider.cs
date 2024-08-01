@@ -15,6 +15,7 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
     {
         public string Description => "AssetProvider";
         public Dictionary<string, Sprite> IconCache { get; } = new();
+        public Dictionary<AssetReferenceTexture2D, Sprite> IconCache2 { get; } = new();
 
         private IConfigManager _configManager;
 
@@ -55,6 +56,7 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
             return await handle.Task;
         }
 
+        //TODO remove
         public async UniTask<Sprite> LoadIconAsync(string elementTypeName)
         {
             if (IconCache.TryGetValue(elementTypeName, out Sprite iconFromCache)) return iconFromCache;
@@ -67,16 +69,26 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
             return icon;
         }
 
-        public Sprite LoadIconAsync1(string elementTypeName)
+        public Sprite GetIconFromRef(AssetReferenceTexture2D icon)
         {
-            if (IconCache.TryGetValue(elementTypeName, out Sprite iconFromCache)) return iconFromCache;
+            if (IconCache2.TryGetValue(icon, out Sprite iconFromCache)) return iconFromCache;
 
-            var iconRef = _configManager.GetIconReference(elementTypeName);
-            var icon = Addressables.LoadAssetAsync<Sprite>(iconRef).Task;
+            Sprite iconNew = Addressables.LoadAssetAsync<Sprite>(icon).WaitForCompletion();
 
-            IconCache.TryAdd(elementTypeName, icon.Result);
+            IconCache2.TryAdd(icon, iconNew);
 
-            return icon.Result;
+            return iconNew;
+        }
+
+        public Sprite GetIconFromName(string toString)
+        {
+            if (IconCache.TryGetValue(toString, out Sprite iconFromCache)) return iconFromCache;
+
+            var iconNew = Addressables.LoadAssetAsync<Sprite>(toString).WaitForCompletion();
+
+            IconCache.TryAdd(toString, iconNew);
+
+            return iconNew;
         }
     }
 }

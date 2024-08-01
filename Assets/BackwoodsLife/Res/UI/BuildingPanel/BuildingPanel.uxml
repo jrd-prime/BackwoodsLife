@@ -15,14 +15,14 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="req-res-list" style="flex-grow: 0; -unity-text-align: middle-center; align-items: center; justify-content: center; flex-direction: row; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;">
+            <ui:VisualElement name="req-res-container" style="flex-grow: 0; -unity-text-align: middle-center; align-items: center; justify-content: center; flex-direction: row; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;">
                 <ui:Instance template="res-item-template-40x40" name="res-item-template-40x40" />
                 <ui:Instance template="res-item-template-40x40" name="res-item-template-40x40" />
                 <ui:Instance template="res-item-template-40x40" name="res-item-template-40x40" />
                 <ui:Instance template="res-item-template-40x40" name="res-item-template-40x40" />
                 <ui:Instance template="res-item-template-40x40" name="res-item-template-40x40" />
             </ui:VisualElement>
-            <ui:VisualElement name="req-other-list" style="flex-grow: 0; -unity-text-align: middle-center; align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+            <ui:VisualElement name="req-other-container" style="flex-grow: 0; -unity-text-align: middle-center; align-items: center; justify-content: center; flex-direction: row; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
                 <ui:Instance template="req-other-item-template-70" name="req-other-item-template-70" />
                 <ui:Instance template="req-other-item-template-70" name="req-other-item-template-70" />
                 <ui:Instance template="req-other-item-template-70" name="req-other-item-template-70" />
