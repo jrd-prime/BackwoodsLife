@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
@@ -8,6 +9,7 @@ using BackwoodsLife.Scripts.Framework.Manager.Audio;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
+using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.Input;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
@@ -62,6 +64,12 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(audioSourceProvider).As<IAudioSourceProvider>();
             builder.RegisterComponent(eventSystem).AsSelf();
 
+            // Data
+            builder.Register<WarehouseData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<BuildingData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<SkillData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<ToolData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+
             // Services
             builder.Register<ConfigManager>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register(typeof(AssetProvider), Lifetime.Singleton).As<IAssetProvider>();
@@ -69,6 +77,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();
             builder.Register(typeof(SaveAndLoadManager), Lifetime.Singleton).As<ISaveAndLoadManager>();
             builder.Register<WarehouseManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<GameDataManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             // Systems
             builder.Register<FollowSystem>(Lifetime.Singleton).AsSelf();

@@ -17,13 +17,13 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
         public List<CustomRequirement<SBuildingItem>> building;
     }
 
-    // [Serializable]
-    // public struct RequirementForUse
-    // {
-    //     public List<CustomRequirement<ETool>> tool;
-    //     public List<CustomRequirement<ESkill>> skill;
-    //     public List<CustomRequirement<EBuilding>> building;
-    // }
+// [Serializable]
+// public struct RequirementForUse
+// {
+//     public List<CustomRequirement<ETool>> tool;
+//     public List<CustomRequirement<ESkill>> skill;
+//     public List<CustomRequirement<EBuilding>> building;
+// }
 
     [Serializable]
     public struct RequirementForUpgrade
@@ -34,21 +34,21 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
         public List<CustomRequirement<SBuildingItem>> building;
     }
 
-    // [Serializable]
-    // public struct RequirementForUseAndUpgrade
-    // {
-    //     public List<CustomRequirement<ETool>> tool;
-    //     public List<CustomRequirement<ESkill>> skill;
-    //     public List<CustomRequirement<EBuilding>> building;
-}
+// [Serializable]
+// public struct RequirementForUseAndUpgrade
+// {
+//     public List<CustomRequirement<ETool>> tool;
+//     public List<CustomRequirement<ESkill>> skill;
+//     public List<CustomRequirement<EBuilding>> building;
 
-[Serializable]
-public struct CustomRequirement<T> where T : SItemConfig
-{
-    public T typeName;
-    [Range(0, 99)] public int value;
-}
+    [Serializable]
+    public struct CustomRequirement<T> where T : SItemConfig
+    {
+        public T typeName;
+        [Range(0, 99)] public int value;
+    }
 
-public interface IRequirement
-{
+    public interface IRequirement
+    {
+    }
 }

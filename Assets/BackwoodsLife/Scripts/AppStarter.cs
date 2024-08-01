@@ -2,6 +2,7 @@
 using BackwoodsLife.Scripts.Framework.Manager.Audio;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
+using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.GameScene;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
@@ -25,6 +26,7 @@ namespace BackwoodsLife.Scripts
         private ILoadingOperation _dbManager;
         private GameSceneManager _gameSceneManager;
         private WarehouseManager _inventoryManager;
+        private GameDataManager _gameDataManager;
 
         [Inject]
         private void Construct(IObjectResolver container)
@@ -37,6 +39,7 @@ namespace BackwoodsLife.Scripts
             _audioManager = container.Resolve<IAudioManager>();
             _assetProvider = container.Resolve<IAssetProvider>();
             _saveAndLoadManager = container.Resolve<ISaveAndLoadManager>();
+            _gameDataManager = container.Resolve<GameDataManager>();
         }
 
         public async void Initialize()
@@ -61,6 +64,7 @@ namespace BackwoodsLife.Scripts
             _loader.AddServiceToInitialize(_saveAndLoadManager);
             _loader.AddServiceToInitialize(_inventoryManager);
             _loader.AddServiceToInitialize(_gameSceneManager);
+            _loader.AddServiceToInitialize(_gameDataManager);
 
             await _loader.StartServicesInitializationAsync();
 
