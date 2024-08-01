@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data
 {
     public abstract class ItemDataHolder
     {
-        public virtual Dictionary<string, int> ItemsCache { get; protected set; }
+        protected virtual Dictionary<string, int> ItemsCache { get; set; }
+
+        public abstract void Initialize();
 
         public virtual void AddItem(string name, int count)
         {
@@ -16,7 +19,12 @@ namespace BackwoodsLife.Scripts.Data
 
         public virtual ItemData GetItem(string name)
         {
-            return new ItemData();
+            Debug.LogWarning("Get item " + name);
+            return new ItemData
+            {
+                Name = name,
+                Count = ItemsCache[name]
+            };
         }
     }
 }

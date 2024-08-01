@@ -2,7 +2,9 @@
 using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
+using BackwoodsLife.Scripts.Gameplay.Player;
 using UnityEngine;
+using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
 {
@@ -14,6 +16,12 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
         private void Awake()
         {
             _onInteractCompleted += () => { gameObject.transform.parent.gameObject.SetActive(false); };
+        }
+
+        [Inject]
+        private void Construct()
+        {
+            Debug.LogWarning("Trigger zone init");
         }
 
         private void OnTriggerEnter(Collider other)
@@ -35,7 +43,12 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable
                         throw new NullReferenceException(
                             $"Interactable is null on {parentTransform.name} prefab. You must set to object Interactable component. ");
 
-                    var playerInteractSystem = other.GetComponent<InteractSystem>();
+                    // var playerInteractSystem = other.GetComponent<InteractSystem>();
+                    // if (playerInteractSystem == null)
+                    //     throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
+
+
+                    var playerInteractSystem = other.GetComponent<PlayerView>().InteractSystem;
                     if (playerInteractSystem == null)
                         throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
 
