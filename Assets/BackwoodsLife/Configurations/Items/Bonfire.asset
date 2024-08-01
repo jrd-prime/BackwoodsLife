@@ -39,27 +39,27 @@ MonoBehaviour:
       requirementsForUpgrading:
         resource:
         - typeName: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
-          value: 20
+          value: 11
         - typeName: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
           value: 10
         - typeName: {fileID: 11400000, guid: 9799e7405dfe6a54babd9ac223aa686d, type: 2}
-          value: 1
+          value: 8
         - typeName: {fileID: 11400000, guid: 46dd9e11499fff24f97a11ccb2805ce1, type: 2}
-          value: 1
+          value: 3
         - typeName: {fileID: 11400000, guid: 05bc6d68211d3e741b5d8583e5fa6a78, type: 2}
-          value: 1
+          value: 11
         tool:
         - typeName: {fileID: 11400000, guid: 47dcd9baea59feb47a6c7b52830128ea, type: 2}
-          value: 1
+          value: 5
         - typeName: {fileID: 11400000, guid: 4a49fd94b87c28944bfecf0c700f2e57, type: 2}
-          value: 0
+          value: 3
         - typeName: {fileID: 11400000, guid: 14abc33a29a934448996187b4e8ae3f4, type: 2}
-          value: 0
+          value: 2
         skill:
         - typeName: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
           value: 3
         - typeName: {fileID: 11400000, guid: e5cf509cc005144408a89c0d8452af3a, type: 2}
-          value: 0
+          value: 4
         building:
         - typeName: {fileID: 11400000, guid: 39081289efa4f1a41a6be7e354071ea5, type: 2}
-          value: 4
+          value: 5

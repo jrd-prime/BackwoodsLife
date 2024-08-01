@@ -114,3 +114,14 @@
     margin-left: 2px;
     margin-right: 2px;
 }
+
+.is-enough-icon-container {
+    flex-grow: 1;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    align-items: center;
+    justify-content: center;
+}

@@ -5,5 +5,6 @@
         <ui:VisualElement name="res-item-count-container" class="res-item-count-container">
             <ui:Label tabindex="-1" text="99 / 99" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="res-item-count-label" class="res-item-count-label" />
         </ui:VisualElement>
+        <ui:VisualElement name="is-enough-icon-container" class="is-enough-icon-container" />
     </ui:VisualElement>
 </ui:UXML>

@@ -1,4 +1,8 @@
-﻿using BackwoodsLife.Scripts.Data;
+﻿using System;
+using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data;
+using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
 using UnityEngine;
 using VContainer;
@@ -31,6 +35,15 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
             Building = buildingData;
             Skill = skillData;
             Tool = toolData;
+        }
+
+        public bool IsEnoughForBuild(Dictionary<EReqType, Dictionary<SItemConfig, int>> level)
+        {
+            return
+                Warehouse.IsEnough(level[EReqType.Resorce]) &&
+                Building.IsEnough(level[EReqType.Building]) &&
+                Skill.IsEnough(level[EReqType.Skill]) &&
+                Tool.IsEnough(level[EReqType.Tool]);
         }
     }
 }

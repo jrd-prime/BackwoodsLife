@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data
@@ -19,12 +22,31 @@ namespace BackwoodsLife.Scripts.Data
 
         public virtual ItemData GetItem(string name)
         {
-            Debug.LogWarning("Get item " + name);
             return new ItemData
             {
                 Name = name,
                 Count = ItemsCache[name]
             };
+        }
+
+        public virtual bool IsEnough(Dictionary<SItemConfig, int> itemsDictionary)
+        {
+            var result = true;
+            foreach (var _ in itemsDictionary
+                         .Where(item => !IsEnough(item.Key.itemName, item.Value)))
+                result = false;
+
+            return result;
+        }
+
+        public virtual bool IsEnough(string itemName, int count)
+        {
+            return ItemsCache.ContainsKey(itemName) && ItemsCache[itemName] >= count;
+        }
+
+        public bool IsEnough(KeyValuePair<SItemConfig, int> valuePair)
+        {
+            return IsEnough(valuePair.Key.itemName, valuePair.Value);
         }
     }
 }

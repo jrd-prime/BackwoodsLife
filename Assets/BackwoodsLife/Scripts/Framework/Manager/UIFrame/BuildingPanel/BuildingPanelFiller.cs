@@ -40,7 +40,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             tool = _gameDataManager.Tool;
         }
 
-        public void Fill(ELevel levelForFill, in BuildingPanelElementsRef buildingPanelElementsRef,
+        public void Fill(Dictionary<EReqType, Dictionary<SItemConfig, int>> level,
+            in BuildingPanelElementsRef buildingPanelElementsRef,
             in SWorldItemConfigNew worldItemConfig)
         {
             var iconFromRef = _assetProvider.GetIconFromRef(worldItemConfig.icon);
@@ -52,7 +53,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             _panelRef.NameRef.text = worldItemConfig.name;
             _panelRef.DescriptionRef.text = worldItemConfig.shortDescription;
 
-            Dictionary<EReqType, Dictionary<SItemConfig, int>> level = worldItemConfig.GetLevelReq(levelForFill);
 
             _panelRef.ResourceContainer.Clear();
             _panelRef.OtherContainer.Clear();
@@ -80,20 +80,32 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         {
             Debug.LogWarning("Fill resource");
 
-            foreach (var valuePair in levValue)
+            foreach (var pair in levValue)
             {
-                var rr = _panelRef.ResourceItemTemplate.Instantiate();
-                var label = rr.Q<Label>(_panelRef.ReqResItemCountLabelName);
-                var icon = rr.Q<VisualElement>(_panelRef.ReqResItemIconName);
+                var resourceTemplateContainer = _panelRef.ResourceItemTemplate.Instantiate();
+                var label = resourceTemplateContainer.Q<Label>(_panelRef.ReqResItemCountLabelName);
+                var icon = resourceTemplateContainer.Q<VisualElement>(_panelRef.ReqResItemIconName);
+                var isEnough = resourceTemplateContainer.Q<VisualElement>(_panelRef.ReqResIsEnoughIconContainerName);
 
                 // label.text = valuePair.Value.ToString();
 
-                label.text = ReqStatText(EReqType.Resorce, valuePair.Key.itemName, valuePair.Value);
+                label.text = ReqStatText(EReqType.Resorce, pair.Key.itemName, pair.Value);
 
                 icon.style.backgroundImage =
-                    new StyleBackground(_assetProvider.GetIconFromRef(valuePair.Key.iconReference));
+                    new StyleBackground(_assetProvider.GetIconFromRef(pair.Key.iconReference));
 
-                _panelRef.ResourceContainer.Add(rr);
+                {
+                    Sprite isEnoughIcon =
+                        _assetProvider.GetIconFromRef(warehouse.IsEnough(pair)
+                            ? _panelRef.CheckIcon
+                            : _panelRef.CrossIcon);
+
+                    Debug.LogWarning(isEnoughIcon);
+
+                    isEnough.style.backgroundImage = new StyleBackground(isEnoughIcon);
+                }
+
+                _panelRef.ResourceContainer.Add(resourceTemplateContainer);
             }
         }
 
@@ -129,6 +141,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
 
             // Find sub container
             var subContainer = typeTemplate.Q<VisualElement>(_panelRef.OtherSubContainer);
+            var isEnough = typeTemplate.Q<VisualElement>(_panelRef.ReqResIsEnoughIconContainerName);
+
 
             // Fill sub container
             foreach (var i in levValue)
@@ -140,6 +154,25 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
                     ReqStatText(levKey, i.Key.name, i.Value);
 
                 subContainer.Add(itemTemplate);
+            }
+
+            ItemDataHolder data = levKey switch
+            {
+                EReqType.Resorce => warehouse,
+                EReqType.Building => building,
+                EReqType.Skill => skill,
+                EReqType.Tool => tool,
+                _ => throw new ArgumentOutOfRangeException(nameof(levKey), levKey, null)
+            };
+            {
+                Sprite isEnoughIcon =
+                    _assetProvider.GetIconFromRef(data.IsEnough(levValue)
+                        ? _panelRef.CheckIcon
+                        : _panelRef.CrossIcon);
+
+                Debug.LogWarning(isEnoughIcon);
+
+                isEnough.style.backgroundImage = new StyleBackground(isEnoughIcon);
             }
 
             _panelRef.OtherContainer.Add(typeTemplate);

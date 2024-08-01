@@ -2050,16 +2050,57 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
         type: 3}
+      propertyPath: checkIcon.m_AssetGUID
+      value: c2d834b0797df344887fa40fd7072973
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
+        type: 3}
+      propertyPath: crossIcon.m_AssetGUID
+      value: f1d6987465d0103409de7290d6d3a6d1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
+        type: 3}
       propertyPath: buildingOtherItemTemplate
       value: 
       objectReference: {fileID: 9197481963319205126, guid: 75d5ba2ee5e004e4995a0959a36c2b2c,
         type: 3}
     - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
         type: 3}
+      propertyPath: checkIcon.m_SubObjectName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
+        type: 3}
+      propertyPath: checkIcon.m_SubObjectType
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
+        type: 3}
+      propertyPath: crossIcon.m_SubObjectName
+      value: delete-button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
+        type: 3}
+      propertyPath: crossIcon.m_SubObjectType
+      value: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
+        type: 3}
       propertyPath: buildingOtherTypeItemTemplate
       value: 
       objectReference: {fileID: 9197481963319205126, guid: 5fdaa8309bac1d04ebcaf04e8ba34cde,
         type: 3}
+    - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
+        type: 3}
+      propertyPath: checkIcon.m_EditorAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044622976803136209, guid: 9416637c73b2ce24ba3b0406df0c1e34,
+        type: 3}
+      propertyPath: crossIcon.m_EditorAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

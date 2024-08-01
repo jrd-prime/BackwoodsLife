@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
+using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 using VContainer;
 
@@ -15,6 +18,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         [SerializeField] private VisualTreeAsset buildingReqResourceItemTemplate;
         [SerializeField] private VisualTreeAsset buildingOtherTypeItemTemplate;
         [SerializeField] private VisualTreeAsset buildingOtherItemTemplate;
+        [SerializeField] private AssetReferenceTexture2D checkIcon;
+        [SerializeField] private AssetReferenceTexture2D crossIcon;
 
         private UIFrameController _uiFrameController;
         private BuildingPanelFiller _buildingPanelFiller;
@@ -23,6 +28,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         private TemplateContainer _buildingPanel;
         private Button _buildButton;
         private BuildingPanelElementsRef _buildingPanelElementsRef;
+        private GameDataManager _gameDataManager;
 
         private const string IconContainer = "building-icon";
         private const string NameLabel = "building-name-label";
@@ -37,16 +43,19 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
 
         private const string ResItemIconName = "res-item-icon";
         private const string ResItemCountLabelName = "res-item-count-label";
+        private const string ResIsEnoughIconContainerName = "is-enough-icon-container";
 
         private const string OtherTypeHeadLabelName = "other-head-label";
         private const string OtherItemLabelName = "other-item-label";
         private const string OtherItemCountLabelName = "other-item-count-label";
 
         [Inject]
-        private void Construct(UIFrameController uiFrameController, BuildingPanelFiller buildingPanelFiller)
+        private void Construct(UIFrameController uiFrameController, BuildingPanelFiller buildingPanelFiller,
+            GameDataManager gameDataManager)
         {
             _uiFrameController = uiFrameController;
             _buildingPanelFiller = buildingPanelFiller;
+            _gameDataManager = gameDataManager;
         }
 
         private void Awake()
@@ -65,15 +74,19 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
                 OtherSubContainer = OtherSubContainerName,
                 OtherItemContainer = _buildingPanel.Q<VisualElement>(OtherItemContainerName),
 
-
                 ResourceItemTemplate = buildingReqResourceItemTemplate,
                 ReqResItemIconName = ResItemIconName,
                 ReqResItemCountLabelName = ResItemCountLabelName,
+                ReqResIsEnoughIconContainerName = ResIsEnoughIconContainerName,
+
                 OtherTypeTemplate = buildingOtherTypeItemTemplate,
                 OtherItemTemplate = buildingOtherItemTemplate,
                 OtherTypeHeadLabelName = OtherTypeHeadLabelName,
                 OtherItemLabelName = OtherItemLabelName,
-                OtherItemCountLabelName = OtherItemCountLabelName
+                OtherItemCountLabelName = OtherItemCountLabelName,
+                
+                CheckIcon = checkIcon,
+                CrossIcon = crossIcon
             };
 
             _buildButton = _buildingPanelElementsRef.BuildButton;
@@ -84,7 +97,13 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             Debug.LogWarning("OnBuildZoneEnter");
             SubscribeBuildButton(true);
 
-            _buildingPanelFiller.Fill(ELevel.Level_1, in _buildingPanelElementsRef, in worldItemConfig);
+            Dictionary<EReqType, Dictionary<SItemConfig, int>> level = worldItemConfig.GetLevelReq(ELevel.Level_1);
+
+            var isEnough = _gameDataManager.IsEnoughForBuild(level);
+
+            _buildButton.SetEnabled(isEnough);
+
+            _buildingPanelFiller.Fill(level, in _buildingPanelElementsRef, in worldItemConfig);
 
             _popUpFrame = _uiFrameController.GetPopUpFrame();
             _popUpFrame.ShowIn(EPopUpSubFrame.Left, ref _buildingPanel);
@@ -128,5 +147,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         public string OtherTypeHeadLabelName;
         public string OtherItemLabelName;
         public string OtherItemCountLabelName;
+        public string ReqResIsEnoughIconContainerName;
+        public AssetReferenceTexture2D CheckIcon;
+        public AssetReferenceTexture2D CrossIcon;
     }
 }
