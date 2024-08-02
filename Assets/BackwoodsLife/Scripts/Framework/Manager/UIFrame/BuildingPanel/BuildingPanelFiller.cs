@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
@@ -20,10 +20,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         private BuildingPanelElementsRef _panelRef;
         private GameDataManager _gameDataManager;
 
-        private WarehouseData warehouse;
-        private BuildingData building;
-        private SkillData skill;
-        private ToolData tool;
+        private WarehouseData _warehouse;
+        private BuildingData _building;
+        private SkillData _skill;
+        private ToolData _tool;
 
         [Inject]
         private void Construct(IAssetProvider assetProvider, GameDataManager gameDataManager)
@@ -34,24 +34,24 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
 
         public void Initialize()
         {
-            warehouse = _gameDataManager.Warehouse;
-            building = _gameDataManager.Building;
-            skill = _gameDataManager.Skill;
-            tool = _gameDataManager.Tool;
+            _warehouse = _gameDataManager.Warehouse;
+            _building = _gameDataManager.Building;
+            _skill = _gameDataManager.Skill;
+            _tool = _gameDataManager.Tool;
         }
 
         public void Fill(Dictionary<EReqType, Dictionary<SItemConfig, int>> level,
             in BuildingPanelElementsRef buildingPanelElementsRef,
-            in SWorldItemConfigNew worldItemConfig)
+            in SWorldItemConfigNew itemConfig)
         {
-            var iconFromRef = _assetProvider.GetIconFromRef(worldItemConfig.icon);
+            var iconFromRef = _assetProvider.GetIconFromRef(itemConfig.icon);
 
-            if (iconFromRef == null) throw new ArgumentNullException("Icon not found for " + worldItemConfig.name);
+            if (iconFromRef == null) throw new ArgumentNullException("Icon not found for " + itemConfig.name);
 
             _panelRef = buildingPanelElementsRef;
             _panelRef.IconRef.style.backgroundImage = new StyleBackground(iconFromRef);
-            _panelRef.NameRef.text = worldItemConfig.name;
-            _panelRef.DescriptionRef.text = worldItemConfig.shortDescription;
+            _panelRef.NameRef.text = itemConfig.name;
+            _panelRef.DescriptionRef.text = itemConfig.shortDescription;
 
 
             _panelRef.ResourceContainer.Clear();
@@ -80,6 +80,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         {
             Debug.LogWarning("Fill resource");
 
+            Dictionary<SItemConfig, int> itemTempDict = new();
+
             foreach (var pair in levValue)
             {
                 var resourceTemplateContainer = _panelRef.ResourceItemTemplate.Instantiate();
@@ -87,16 +89,18 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
                 var icon = resourceTemplateContainer.Q<VisualElement>(_panelRef.ReqResItemIconName);
                 var isEnough = resourceTemplateContainer.Q<VisualElement>(_panelRef.ReqResIsEnoughIconContainerName);
 
-                // label.text = valuePair.Value.ToString();
+                itemTempDict.Add(pair.Key, pair.Value);
+                SetIsEnoughIcon(isEnough, EReqType.Resorce, ref itemTempDict, true);
+
+                LoadAndSetIcon(icon, pair.Key.iconReference);
 
                 label.text = ReqStatText(EReqType.Resorce, pair.Key.itemName, pair.Value);
 
-                icon.style.backgroundImage =
-                    new StyleBackground(_assetProvider.GetIconFromRef(pair.Key.iconReference));
 
                 {
+                    ItemDataHolder dataHolder = ChooseDataHolder(EReqType.Resorce);
                     Sprite isEnoughIcon =
-                        _assetProvider.GetIconFromRef(warehouse.IsEnough(pair)
+                        _assetProvider.GetIconFromRef(dataHolder.IsEnough(pair)
                             ? _panelRef.CheckIcon
                             : _panelRef.CrossIcon);
 
@@ -109,23 +113,16 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             }
         }
 
+        private void LoadAndSetIcon(VisualElement iconHolder, AssetReferenceTexture2D iconReference)
+        {
+            var icon = _assetProvider.GetIconFromRef(iconReference);
+            iconHolder.style.backgroundImage = new StyleBackground(icon);
+        }
+
         private string ReqStatText(EReqType reqType, string itemName, int reqValue)
         {
-            ItemDataHolder data = reqType switch
-            {
-                EReqType.Resorce => warehouse,
-                EReqType.Building => building,
-                EReqType.Skill => skill,
-                EReqType.Tool => tool,
-                _ => throw new ArgumentOutOfRangeException(nameof(reqType), reqType, null)
-            };
-
-            Debug.LogWarning($"ask {data.GetType()}");
-            var d = data.GetItem(itemName);
-
-            Debug.LogWarning($"{d.Name} {d.Count} / {reqValue}");
-
-            return d.Count < reqValue ? $"{d.Count}/{reqValue}" : $"{reqValue}/{reqValue}";
+            var itemData = ChooseDataHolder(reqType).GetItem(itemName);
+            return itemData.Count < reqValue ? $"{itemData.Count}/{reqValue}" : $"{reqValue}/{reqValue}";
         }
 
         private void FillReqForOther(EReqType levKey, Dictionary<SItemConfig, int> levValue)
@@ -135,7 +132,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             // Create type template (Building, Skill, Tool)
             var typeTemplate = _panelRef.OtherTypeTemplate.Instantiate();
 
-
             // Set type name
             typeTemplate.Q<Label>(_panelRef.OtherTypeHeadLabelName).text = GetReqTypeHead(levKey);
 
@@ -143,6 +139,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             var subContainer = typeTemplate.Q<VisualElement>(_panelRef.OtherSubContainer);
             var isEnough = typeTemplate.Q<VisualElement>(_panelRef.ReqResIsEnoughIconContainerName);
 
+            SetIsEnoughIcon(isEnough, levKey, ref levValue);
 
             // Fill sub container
             foreach (var i in levValue)
@@ -156,26 +153,29 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
                 subContainer.Add(itemTemplate);
             }
 
-            ItemDataHolder data = levKey switch
+            _panelRef.OtherContainer.Add(typeTemplate);
+        }
+
+        private void SetIsEnoughIcon(VisualElement isEnough, EReqType levKey, ref Dictionary<SItemConfig, int> levValue,
+            bool clearDict = false)
+        {
+            ItemDataHolder dataHolder = ChooseDataHolder(levKey);
+
+            LoadAndSetIcon(isEnough, dataHolder.IsEnough(levValue) ? _panelRef.CheckIcon : _panelRef.CrossIcon);
+
+            if (clearDict) levValue.Clear();
+        }
+
+        private ItemDataHolder ChooseDataHolder(EReqType levKey)
+        {
+            return levKey switch
             {
-                EReqType.Resorce => warehouse,
-                EReqType.Building => building,
-                EReqType.Skill => skill,
-                EReqType.Tool => tool,
+                EReqType.Resorce => _warehouse,
+                EReqType.Building => _building,
+                EReqType.Skill => _skill,
+                EReqType.Tool => _tool,
                 _ => throw new ArgumentOutOfRangeException(nameof(levKey), levKey, null)
             };
-            {
-                Sprite isEnoughIcon =
-                    _assetProvider.GetIconFromRef(data.IsEnough(levValue)
-                        ? _panelRef.CheckIcon
-                        : _panelRef.CrossIcon);
-
-                Debug.LogWarning(isEnoughIcon);
-
-                isEnough.style.backgroundImage = new StyleBackground(isEnoughIcon);
-            }
-
-            _panelRef.OtherContainer.Add(typeTemplate);
         }
 
 
