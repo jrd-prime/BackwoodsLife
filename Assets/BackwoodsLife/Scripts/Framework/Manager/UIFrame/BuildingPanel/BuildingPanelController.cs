@@ -97,7 +97,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             Debug.LogWarning("OnBuildZoneEnter");
             SubscribeBuildButton(true);
 
-            Dictionary<EReqType, Dictionary<SItemConfig, int>> level = worldItemConfig.GetLevelReq(ELevel.Level_1);
+            Dictionary<EItemData, Dictionary<SItemConfig, int>> level = worldItemConfig.GetLevelReq(ELevel.Level_1);
 
             var isEnough = _gameDataManager.IsEnoughForBuild(level);
 

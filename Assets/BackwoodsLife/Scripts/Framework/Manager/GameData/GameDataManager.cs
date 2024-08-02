@@ -37,13 +37,13 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
             Tool = toolData;
         }
 
-        public bool IsEnoughForBuild(Dictionary<EReqType, Dictionary<SItemConfig, int>> level)
+        public bool IsEnoughForBuild(Dictionary<EItemData, Dictionary<SItemConfig, int>> level)
         {
             return
-                Warehouse.IsEnough(level[EReqType.Resorce]) &&
-                Building.IsEnough(level[EReqType.Building]) &&
-                Skill.IsEnough(level[EReqType.Skill]) &&
-                Tool.IsEnough(level[EReqType.Tool]);
+                Warehouse.IsEnough(level[EItemData.Resorce]) &&
+                Building.IsEnough(level[EItemData.Building]) &&
+                Skill.IsEnough(level[EItemData.Skill]) &&
+                Tool.IsEnough(level[EItemData.Tool]);
         }
     }
 }

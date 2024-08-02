@@ -36,12 +36,12 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
         [ShowIf("@InteractTypes == EInteractTypes.Upgrade || InteractTypes == EInteractTypes.UseAndUpgrade")]
         public UpgradeConfig upgradeConfig;
 
-        private Dictionary<ELevel, Dictionary<EReqType, Dictionary<SItemConfig, int>>> _reqForUpgradeCache;
+        private Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>> _reqForUpgradeCache;
 
         /// <summary>
         /// Dictionary(Level, Dictionary(Req item type, Dictionary(Req type, Req value)))
         /// </summary>
-        public Dictionary<ELevel, Dictionary<EReqType, Dictionary<SItemConfig, int>>> UpgradeCache =>
+        public Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>> UpgradeCache =>
             InitReqForUpgradeCache();
 
         private void OnValidate()
@@ -80,24 +80,24 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
         }
 
 
-        private Dictionary<ELevel, Dictionary<EReqType, Dictionary<SItemConfig, int>>> InitReqForUpgradeCache()
+        private Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>> InitReqForUpgradeCache()
         {
             if (_reqForUpgradeCache is { Count: > 0 }) return _reqForUpgradeCache;
 
             Debug.LogWarning("Init cache " + name);
-            var cache = new Dictionary<ELevel, Dictionary<EReqType, Dictionary<SItemConfig, int>>>();
+            var cache = new Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>>();
 
             foreach (var level in upgradeConfig.upgradeLevels)
             {
-                var levelDictionary = new Dictionary<EReqType, Dictionary<SItemConfig, int>>();
+                var levelDictionary = new Dictionary<EItemData, Dictionary<SItemConfig, int>>();
                 cache.Add(level.level, levelDictionary);
 
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.resource, EReqType.Resorce,
+                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.resource, EItemData.Resorce,
                     ref levelDictionary);
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.building, EReqType.Building,
+                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.building, EItemData.Building,
                     ref levelDictionary);
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.tool, EReqType.Tool, ref levelDictionary);
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.skill, EReqType.Skill, ref levelDictionary);
+                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.tool, EItemData.Tool, ref levelDictionary);
+                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.skill, EItemData.Skill, ref levelDictionary);
             }
 
 
@@ -118,16 +118,16 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
             return _reqForUpgradeCache = cache;
         }
 
-        private void AddToDictReqForUpgradeFor<T>(List<CustomRequirement<T>> res, EReqType eReqType,
-            ref Dictionary<EReqType, Dictionary<SItemConfig, int>> dict) where T : SItemConfig
+        private void AddToDictReqForUpgradeFor<T>(List<CustomRequirement<T>> res, EItemData eItemData,
+            ref Dictionary<EItemData, Dictionary<SItemConfig, int>> dict) where T : SItemConfig
         {
             if (res.Count == 0) return;
 
-            dict.Add(eReqType,
+            dict.Add(eItemData,
                 res.ToDictionary<CustomRequirement<T>, SItemConfig, int>(re => re.typeName, re => re.value));
         }
 
-        public Dictionary<EReqType, Dictionary<SItemConfig, int>> GetLevelReq(ELevel level1)
+        public Dictionary<EItemData, Dictionary<SItemConfig, int>> GetLevelReq(ELevel level1)
         {
             return UpgradeCache[level1];
         }

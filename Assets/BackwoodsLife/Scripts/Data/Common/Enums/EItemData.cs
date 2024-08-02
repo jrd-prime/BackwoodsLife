@@ -1,6 +1,6 @@
 ﻿namespace BackwoodsLife.Scripts.Data.Common.Enums
 {
-    public enum EReqType
+    public enum EItemData
     {
         Resorce = 0,
         Building = 1,
