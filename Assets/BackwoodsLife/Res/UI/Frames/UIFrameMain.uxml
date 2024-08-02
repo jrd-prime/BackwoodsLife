@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/ui-frames.uss?fileID=7433441132597879392&amp;guid=bebfaf019dde7c7439be19643fd74efa&amp;type=3#ui-frames" />
-    <ui:VisualElement name="ui-frame-main" class="ui-frame" style="flex-direction: row;">
-        <ui:VisualElement name="left" style="flex-grow: 1; width: 111px; height: 111px;" />
+    <ui:VisualElement name="ui-frame-main" picking-mode="Ignore" class="ui-frame" style="flex-direction: row;">
+        <ui:VisualElement name="left" picking-mode="Ignore" style="flex-grow: 1; width: 111px; height: 111px;" />
     </ui:VisualElement>
 </ui:UXML>

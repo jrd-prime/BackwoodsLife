@@ -85,53 +85,15 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             _characterOverUIHolder.ShowPopUpFor(obj);
         }
 
-        public void Interact(ref SWorldItemConfigNew worldInteractableItem)
-        {
-            switch (worldInteractableItem.InteractTypes)
-            {
-                case EInteractTypes.Collect:
-                    break;
-                case EInteractTypes.Use:
-                    break;
-                case EInteractTypes.Upgrade:
-                    break;
-                case EInteractTypes.UseAndUpgrade:
-                    _interactPanelUI.Show(worldInteractableItem.InteractTypes);
-                    ShowInteractPanel(worldInteractableItem.InteractTypes);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-
-            //
-            // var upgradeConfig = worldItemConfig.upgradeConfig;
-            //
-            //
-            // var prefab = upgradeConfig.GetLevel(BuildingStartLevel);
-            //
-            // if (prefab == null)
-            //     throw new NullReferenceException(
-            //         $"{worldItemConfig.name} prefab in upgradeConfig is null for level {BuildingStartLevel + 1}! Check {worldItemConfig.name} config!");
-            //
-            // Debug.LogWarning(worldItemConfig.fixedPositionValue);
-            //
-            // var obj = await _assetProvider.InstantiateAsync(prefab);
-            //
-            // obj.transform.position = worldItemConfig.fixedPositionValue;
-            // DestroyImmediate(gameObject);
-        }
-
         private void ShowInteractPanel(EInteractTypes interactTypes)
         {
             throw new NotImplementedException();
         }
 
-        public void OnBuildZoneEnter(in SWorldItemConfigNew worldItemConfig)
+        public void OnBuildZoneEnter(in SWorldItemConfigNew worldItemConfig, Action onBuildStarted)
         {
-            Debug.LogWarning("Interact system. On build Zone enter");
-
-            _buildingPanelController.OnBuildZoneEnter(in worldItemConfig);
+            // Debug.LogWarning("Interact system. On build Zone enter");
+            _buildingPanelController.OnBuildZoneEnter(in worldItemConfig, onBuildStarted);
         }
 
         public void OnBuildZoneExit()

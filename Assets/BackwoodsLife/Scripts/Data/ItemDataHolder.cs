@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data
 {

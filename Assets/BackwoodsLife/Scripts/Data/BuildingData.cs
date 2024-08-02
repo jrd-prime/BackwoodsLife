@@ -20,7 +20,7 @@ namespace BackwoodsLife.Scripts.Data
 
             // Init to zero
             foreach (var name in list.SelectMany(Enum.GetNames))
-                ItemsCache.TryAdd(name, RandomCollector.GetRandom(0, 33));
+                ItemsCache.TryAdd(name, RandomCollector.GetRandom(3, 33));
 
             // foreach (var keyValuePair in ItemsCache)
             // {

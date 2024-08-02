@@ -72,10 +72,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
 
         private void FillReqForResources(Dictionary<SItemConfig, int> levValue)
         {
-            Debug.LogWarning("Fill resource");
-
-            Dictionary<SItemConfig, int> itemTempDict = new();
-
             foreach (var pair in levValue)
             {
                 var resourceContainer = _panelRef.ResourceItemTemplate.Instantiate();
@@ -83,8 +79,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
                 var label = resourceContainer.Q<Label>(_panelRef.ReqResItemCountLabelName);
                 var isEnough = resourceContainer.Q<VisualElement>(_panelRef.ReqResIsEnoughIconContainerName);
 
-                itemTempDict.Add(pair.Key, pair.Value);
-                SetIsEnoughIcon(isEnough, EItemData.Resorce, ref itemTempDict, true);
+                SetIsEnoughIcon(isEnough, EItemData.Resorce,
+                    new Dictionary<SItemConfig, int> { { pair.Key, pair.Value } });
 
                 LoadAndSetIcon(icon, pair.Key.iconReference);
 
@@ -109,10 +105,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             return itemDataHolder.Count < reqValue ? $"{itemDataHolder.Count}/{reqValue}" : $"{reqValue}/{reqValue}";
         }
 
-        private void FillReqForOther(EItemData itemDataType, Dictionary<SItemConfig, int> levValue)
+        private void FillReqForOther(EItemData itemDataType, Dictionary<SItemConfig, int> itemDictionary)
         {
-            Debug.LogWarning("Fill other");
-
             // Create type template (Building, Skill, Tool)
             var typeTemplate = _panelRef.OtherTypeTemplate.Instantiate();
 
@@ -123,10 +117,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             var subContainer = typeTemplate.Q<VisualElement>(_panelRef.OtherSubContainer);
             var isEnough = typeTemplate.Q<VisualElement>(_panelRef.ReqResIsEnoughIconContainerName);
 
-            SetIsEnoughIcon(isEnough, itemDataType, ref levValue);
+            SetIsEnoughIcon(isEnough, itemDataType, itemDictionary);
 
             // Fill sub container
-            foreach (var i in levValue)
+            foreach (var i in itemDictionary)
             {
                 var itemTemplate = _panelRef.OtherItemTemplate.Instantiate();
 
@@ -141,14 +135,11 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         }
 
         private void SetIsEnoughIcon(VisualElement iconHolder, EItemData itemDataType,
-            ref Dictionary<SItemConfig, int> itemDictionary,
-            bool clearDict = false)
+            Dictionary<SItemConfig, int> itemDictionary)
         {
             LoadAndSetIcon(iconHolder, ChooseDataHolder(itemDataType).IsEnough(itemDictionary)
                 ? _panelRef.CheckIcon
                 : _panelRef.CrossIcon);
-
-            if (clearDict) itemDictionary.Clear();
         }
 
         private ItemDataHolder ChooseDataHolder(EItemData itemDataType)

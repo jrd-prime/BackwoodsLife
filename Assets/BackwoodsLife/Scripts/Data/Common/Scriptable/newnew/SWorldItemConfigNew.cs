@@ -166,6 +166,11 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
         {
             return upgradeLevels.Find(x => (int)x.level == level).levelPrefabReference;
         }
+
+        public UpgradeLevel GetLevel(ELevel level)
+        {
+            return upgradeLevels.Find(x => x.level == level);
+        }
     }
 
     /// <summary>

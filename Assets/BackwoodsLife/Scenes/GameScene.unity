@@ -528,6 +528,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: camping tent blue
       objectReference: {fileID: 0}
+    - target: {fileID: 3780931223619013831, guid: 080cbeb4618525e41866b0af8c565c59,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5320395422154030636, guid: 080cbeb4618525e41866b0af8c565c59,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1214,6 +1219,37 @@ Transform:
   - {fileID: 965680182}
   m_Father: {fileID: 1809065235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1662009842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1662009843}
+  m_Layer: 0
+  m_Name: BuildingsHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1662009843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662009842}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1896645471}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1776445223 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3006338227006033406, guid: f96600426a4eb8a4a909cba614bdb377,
@@ -1265,7 +1301,40 @@ Transform:
   - {fileID: 1624771805}
   - {fileID: 923003394}
   - {fileID: 1661486220}
+  - {fileID: 1896645471}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1896645470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1896645471}
+  m_Layer: 0
+  m_Name: GameObjectsHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1896645471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896645470}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1662009843}
+  m_Father: {fileID: 1809065235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1913210811
 GameObject:
@@ -1341,7 +1410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1922303882
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1793,6 +1862,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2083681899}
     m_Modifications:
+    - target: {fileID: 611460462874508613, guid: f96600426a4eb8a4a909cba614bdb377,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 102
+      objectReference: {fileID: 0}
     - target: {fileID: 3006338227006033406, guid: f96600426a4eb8a4a909cba614bdb377,
         type: 3}
       propertyPath: m_Name
@@ -1857,6 +1931,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615857517725852063, guid: f96600426a4eb8a4a909cba614bdb377,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2222,6 +2301,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wooden winter house
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821983389613498084, guid: 5b6da6570939bbc45b0d5083f69f781a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2610299013434245021, guid: 5b6da6570939bbc45b0d5083f69f781a,
         type: 3}

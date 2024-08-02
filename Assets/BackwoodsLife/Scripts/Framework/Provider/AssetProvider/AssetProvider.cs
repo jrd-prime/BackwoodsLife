@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -35,6 +36,11 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
         public async UniTask<AsyncOperationHandle<GameObject>> LoadAssetAsync(string assetId)
         {
             return Addressables.LoadAssetAsync<GameObject>(assetId);
+        }
+
+        public async UniTask<GameObject> LoadAssetAsync(AssetReferenceGameObject assetReferenceGameObject)
+        {
+            return await Addressables.LoadAssetAsync<GameObject>(assetReferenceGameObject);
         }
 
         public async UniTask<AsyncOperationHandle<GameObject>> InstantiateAsync(string assetId, Transform parent = null)

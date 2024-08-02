@@ -52,7 +52,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             return frame;
         }
 
-        public void ShowIn(EPopUpSubFrame subFrameName, ref TemplateContainer visualTemplate, bool clear = true)
+        public void ShowIn(EPopUpSubFrame subFrameName, in TemplateContainer visualTemplate, bool clear = true)
         {
             var subFrame = GetSubFrame(subFrameName);
             if (clear) subFrame.Clear();

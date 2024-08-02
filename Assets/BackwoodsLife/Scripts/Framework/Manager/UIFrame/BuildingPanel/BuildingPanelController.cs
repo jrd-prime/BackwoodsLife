@@ -4,6 +4,7 @@ using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
+using BackwoodsLife.Scripts.Data.UI;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -29,25 +30,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         private Button _buildButton;
         private BuildingPanelElementsRef _buildingPanelElementsRef;
         private GameDataManager _gameDataManager;
-
-        private const string IconContainer = "building-icon";
-        private const string NameLabel = "building-name-label";
-        private const string DescriptionLabel = "building-description-label";
-        private const string ButtonName = "build-button";
-        private const string ResourceContainerName = "req-res-container";
-        private const string OtherContainerName = "req-other-container";
-
-        private const string OtherTypeContainerName = "other-type-container";
-        private const string OtherSubContainerName = "other-sub-container";
-        private const string OtherItemContainerName = "other-item-container";
-
-        private const string ResItemIconName = "res-item-icon";
-        private const string ResItemCountLabelName = "res-item-count-label";
-        private const string ResIsEnoughIconContainerName = "is-enough-icon-container";
-
-        private const string OtherTypeHeadLabelName = "other-head-label";
-        private const string OtherItemLabelName = "other-item-label";
-        private const string OtherItemCountLabelName = "other-item-count-label";
+        private Action _buildZoneCallback;
 
         [Inject]
         private void Construct(UIFrameController uiFrameController, BuildingPanelFiller buildingPanelFiller,
@@ -61,41 +44,15 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         private void Awake()
         {
             _buildingPanel = buildingPanelTemplate.Instantiate();
-
-            _buildingPanelElementsRef = new BuildingPanelElementsRef
-            {
-                IconRef = _buildingPanel.Q<VisualElement>(IconContainer),
-                NameRef = _buildingPanel.Q<Label>(NameLabel),
-                DescriptionRef = _buildingPanel.Q<Label>(DescriptionLabel),
-                BuildButton = _buildingPanel.Q<Button>(ButtonName),
-                ResourceContainer = _buildingPanel.Q<VisualElement>(ResourceContainerName),
-                OtherContainer = _buildingPanel.Q<VisualElement>(OtherContainerName),
-                OtherTypeContainer = _buildingPanel.Q<VisualElement>(OtherTypeContainerName),
-                OtherSubContainer = OtherSubContainerName,
-                OtherItemContainer = _buildingPanel.Q<VisualElement>(OtherItemContainerName),
-
-                ResourceItemTemplate = buildingReqResourceItemTemplate,
-                ReqResItemIconName = ResItemIconName,
-                ReqResItemCountLabelName = ResItemCountLabelName,
-                ReqResIsEnoughIconContainerName = ResIsEnoughIconContainerName,
-
-                OtherTypeTemplate = buildingOtherTypeItemTemplate,
-                OtherItemTemplate = buildingOtherItemTemplate,
-                OtherTypeHeadLabelName = OtherTypeHeadLabelName,
-                OtherItemLabelName = OtherItemLabelName,
-                OtherItemCountLabelName = OtherItemCountLabelName,
-                
-                CheckIcon = checkIcon,
-                CrossIcon = crossIcon
-            };
-
+            InitializeBuildingPanelElementsReferences();
             _buildButton = _buildingPanelElementsRef.BuildButton;
         }
 
-        public void OnBuildZoneEnter(in SWorldItemConfigNew worldItemConfig)
+        public void OnBuildZoneEnter(in SWorldItemConfigNew worldItemConfig, Action onBuildStarted)
         {
             Debug.LogWarning("OnBuildZoneEnter");
-            SubscribeBuildButton(true);
+            _buildZoneCallback = onBuildStarted;
+            _buildButton.clicked += OnBuildButtonClicked;
 
             Dictionary<EItemData, Dictionary<SItemConfig, int>> level = worldItemConfig.GetLevelReq(ELevel.Level_1);
 
@@ -106,25 +63,49 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
             _buildingPanelFiller.Fill(level, in _buildingPanelElementsRef, in worldItemConfig);
 
             _popUpFrame = _uiFrameController.GetPopUpFrame();
-            _popUpFrame.ShowIn(EPopUpSubFrame.Left, ref _buildingPanel);
-        }
-
-        private void SubscribeBuildButton(bool b)
-        {
-            if (b) _buildButton.clicked += OnBuildButtonClicked;
-
-            _buildButton.clicked -= OnBuildButtonClicked;
+            _popUpFrame.ShowIn(EPopUpSubFrame.Left, in _buildingPanel);
         }
 
         private void OnBuildButtonClicked()
         {
-            throw new NotImplementedException();
+            Debug.LogWarning("On build button clicked");
+            _buildZoneCallback.Invoke();
         }
 
         public void OnBuildZoneExit()
         {
-            SubscribeBuildButton(false);
+            _buildButton.clicked -= OnBuildButtonClicked;
             _popUpFrame?.HideIn(EPopUpSubFrame.Left, in _buildingPanel);
+        }
+
+        private void InitializeBuildingPanelElementsReferences()
+        {
+            _buildingPanelElementsRef = new BuildingPanelElementsRef
+            {
+                IconRef = _buildingPanel.Q<VisualElement>(BuildingPanelConst.IconContainer),
+                NameRef = _buildingPanel.Q<Label>(BuildingPanelConst.NameLabel),
+                DescriptionRef = _buildingPanel.Q<Label>(BuildingPanelConst.DescriptionLabel),
+                BuildButton = _buildingPanel.Q<Button>(BuildingPanelConst.ButtonName),
+                ResourceContainer = _buildingPanel.Q<VisualElement>(BuildingPanelConst.ResourceContainerName),
+                OtherContainer = _buildingPanel.Q<VisualElement>(BuildingPanelConst.OtherContainerName),
+                OtherTypeContainer = _buildingPanel.Q<VisualElement>(BuildingPanelConst.OtherTypeContainerName),
+                OtherSubContainer = BuildingPanelConst.OtherSubContainerName,
+                OtherItemContainer = _buildingPanel.Q<VisualElement>(BuildingPanelConst.OtherItemContainerName),
+
+                ResourceItemTemplate = buildingReqResourceItemTemplate,
+                ReqResItemIconName = BuildingPanelConst.ResItemIconName,
+                ReqResItemCountLabelName = BuildingPanelConst.ResItemCountLabelName,
+                ReqResIsEnoughIconContainerName = BuildingPanelConst.ResIsEnoughIconContainerName,
+
+                OtherTypeTemplate = buildingOtherTypeItemTemplate,
+                OtherItemTemplate = buildingOtherItemTemplate,
+                OtherTypeHeadLabelName = BuildingPanelConst.OtherTypeHeadLabelName,
+                OtherItemLabelName = BuildingPanelConst.OtherItemLabelName,
+                OtherItemCountLabelName = BuildingPanelConst.OtherItemCountLabelName,
+
+                CheckIcon = checkIcon,
+                CrossIcon = crossIcon
+            };
         }
     }
 
@@ -137,8 +118,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         public VisualElement ResourceContainer;
         public VisualElement OtherContainer;
         public VisualTreeAsset ResourceItemTemplate;
-        public VisualTreeAsset OtherItemTemplate;
         public VisualTreeAsset OtherTypeTemplate;
+        public VisualTreeAsset OtherItemTemplate;
         public string ReqResItemIconName;
         public string ReqResItemCountLabelName;
         public VisualElement OtherTypeContainer;
