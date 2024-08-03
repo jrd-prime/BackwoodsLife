@@ -3,6 +3,7 @@
     public enum EUIFrame
     {
         Main,
-        PopUp
+        PopUp,
+        MainPopUpWindow
     }
 }

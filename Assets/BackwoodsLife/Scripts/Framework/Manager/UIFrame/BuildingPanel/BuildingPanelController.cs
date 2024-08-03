@@ -25,7 +25,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         private UIFrameController _uiFrameController;
         private BuildingPanelFiller _buildingPanelFiller;
 
-        private PopUpFrameUI _popUpFrame;
+        private FramePopUp _framePopUpFrame;
         private TemplateContainer _buildingPanel;
         private Button _buildButton;
         private BuildingPanelElementsRef _buildingPanelElementsRef;
@@ -62,8 +62,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
 
             _buildingPanelFiller.Fill(level, in _buildingPanelElementsRef, in worldItemConfig);
 
-            _popUpFrame = _uiFrameController.GetPopUpFrame();
-            _popUpFrame.ShowIn(EPopUpSubFrame.Left, in _buildingPanel);
+            _framePopUpFrame = _uiFrameController.GetPopUpFrame();
+            _framePopUpFrame.ShowIn(EPopUpSubFrame.Left, in _buildingPanel);
         }
 
         private void OnBuildButtonClicked()
@@ -75,7 +75,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
         public void OnBuildZoneExit()
         {
             _buildButton.clicked -= OnBuildButtonClicked;
-            _popUpFrame?.HideIn(EPopUpSubFrame.Left, in _buildingPanel);
+            _framePopUpFrame?.HideIn(EPopUpSubFrame.Left, in _buildingPanel);
         }
 
         private void InitializeBuildingPanelElementsReferences()

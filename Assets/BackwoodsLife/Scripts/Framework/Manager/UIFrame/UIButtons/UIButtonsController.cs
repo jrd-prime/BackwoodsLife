@@ -12,6 +12,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons
     public class UIButtonsController : MonoBehaviour
     {
         [SerializeField] private VisualTreeAsset uiButtonTemplate;
+        [SerializeField] private Sprite questSprite; //TODO remove
+        [SerializeField] private Sprite warehouseSprite; //TODO remove
 
         public Subject<Unit> QuestButtonClicked = new();
         public Subject<Unit> WarehouseButtonClicked = new();
@@ -19,7 +21,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons
         private UIFrameController _uiFrameController;
         private BuildingPanelFiller _buildingPanelFiller;
         private GameDataManager _gameDataManager;
-        private MainFrameUI _mainFrame;
+        private FrameMain _frameMainFrame;
 
 
         [Inject]
@@ -33,7 +35,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons
 
         private void Start()
         {
-            _mainFrame = _uiFrameController.GetMainFrame();
+            _frameMainFrame = _uiFrameController.GetMainFrame();
 
             AddButton("Quest", QuestButtonClicked);
             AddButton("Warehouse", WarehouseButtonClicked);
@@ -44,14 +46,21 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons
             var uiButton = uiButtonTemplate.Instantiate();
             uiButton.Q<Label>().text = quest;
 
-            var btn = uiButton.Q<Button>("ui-button");
-            btn.clicked += () =>
+            if (quest == "Quest")
             {
-                onButtonClicked.OnNext(Unit.Default);
-            };
+                uiButton.Q<VisualElement>("icon").style.backgroundImage = new StyleBackground(questSprite);
+            }
+            else if (quest == "Warehouse")
+            {
+                uiButton.Q<VisualElement>("icon").style.backgroundImage = new StyleBackground(warehouseSprite);
+            }
 
 
-            _mainFrame.ShowIn(EMainSubFrame.Top, uiButton, false);
+            var btn = uiButton.Q<Button>("ui-button");
+            btn.clicked += () => { onButtonClicked.OnNext(Unit.Default); };
+
+
+            _frameMainFrame.ShowIn(EMainSubFrame.Top, uiButton, false);
         }
     }
 }

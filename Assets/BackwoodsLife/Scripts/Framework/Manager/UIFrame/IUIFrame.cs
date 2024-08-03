@@ -8,6 +8,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
     {
         
         // TODO generic
-        public VisualElement GetSubFrame(Enum subFrame) ;
+        // public VisualElement GetSubFrame(Enum subFrame) ;
     }
 }

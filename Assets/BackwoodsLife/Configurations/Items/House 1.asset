@@ -17,8 +17,8 @@ MonoBehaviour:
   requirementType: 
   shortDescription: It's your house
   icon:
-    m_AssetGUID: fd0264fd135d5fc4ba76a543b2a2d459
-    m_SubObjectName: wood-icon
+    m_AssetGUID: 19c9549112dffb146a5e49e93d194902
+    m_SubObjectName: tent-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1

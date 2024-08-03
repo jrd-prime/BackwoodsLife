@@ -18,8 +18,8 @@ MonoBehaviour:
   shortDescription: A campfire can be used to cook simple meals and keep you warm
     on cold nights..
   icon:
-    m_AssetGUID: 55befca165c427740840cecd26b3b255
-    m_SubObjectName: axe-icon
+    m_AssetGUID: f7fc1d09f8686f44dbe66713466fc7af
+    m_SubObjectName: bonfire-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1

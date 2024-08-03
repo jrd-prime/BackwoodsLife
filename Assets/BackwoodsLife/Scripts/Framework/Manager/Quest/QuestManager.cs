@@ -1,4 +1,5 @@
-﻿using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
+﻿using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
+using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
 using R3;
 using UnityEngine;
 using VContainer;
@@ -11,11 +12,13 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Quest
     {
         private UIButtonsController _uiButtonsController;
         private readonly CompositeDisposable _disposable = new();
+        private UIFrameController _uiFrameController;
 
         [Inject]
-        private void Construct(UIButtonsController uiButtonsController)
+        private void Construct(UIFrameController uiFrameController, UIButtonsController uiButtonsController)
         {
             _uiButtonsController = uiButtonsController;
+            _uiFrameController = uiFrameController;
         }
 
 
@@ -29,6 +32,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Quest
         private void QuestButtonClicked()
         {
             Debug.LogWarning("Quest clicked");
+            _uiFrameController.ShowMainPopUpWindow();
         }
     }
 }
