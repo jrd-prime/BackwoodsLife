@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="other-item-container" class="req-item-cont">
+        <ui:VisualElement style="flex-grow: 1; width: 42px; text-overflow: ellipsis; align-items: center; justify-content: center;">
+            <ui:Label tabindex="-1" text="Fishing Something" parse-escape-sequences="true" display-tooltip-when-elided="true" name="other-item-label" style="align-items: center; justify-content: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 7px; -unity-text-align: middle-center; text-overflow: ellipsis; white-space: normal;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 0; align-items: flex-end; justify-content: center; width: 14px; -unity-text-align: middle-center; white-space: nowrap; flex-direction: column;">
+            <ui:Label tabindex="-1" text="9/9" parse-escape-sequences="true" display-tooltip-when-elided="true" name="other-item-count-label" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 8px; -unity-text-align: middle-right;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

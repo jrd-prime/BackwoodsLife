@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine.UIElements;
+using VContainer.Unity;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 {
@@ -7,6 +8,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
     {
         
         // TODO generic
-        public VisualElement GetSubFrame(Enum subFrame) ; 
+        public VisualElement GetSubFrame(Enum subFrame) ;
     }
 }

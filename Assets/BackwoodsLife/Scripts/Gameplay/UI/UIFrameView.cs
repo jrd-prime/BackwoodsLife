@@ -11,8 +11,6 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
         public abstract void Show();
         public abstract void Hide();
 
-        protected abstract void InitSubFramesDict();
-
         private void Start()
         {
             if (SubFrames == null || SubFrames.Count == 0) throw new Exception("Subframes not initialized. " + this);

@@ -925,6 +925,11 @@ PrefabInstance:
       objectReference: {fileID: 4122789083083517607}
     - target: {fileID: 1852188865919934960, guid: b74625ef6a830aa44987d96dfc945d22,
         type: 3}
+      propertyPath: uiButtonsController
+      value: 
+      objectReference: {fileID: 2831404434198506712}
+    - target: {fileID: 1852188865919934960, guid: b74625ef6a830aa44987d96dfc945d22,
+        type: 3}
       propertyPath: characterOverUIHolder
       value: 
       objectReference: {fileID: 6418911284883133272}
@@ -1618,6 +1623,7 @@ Transform:
   - {fileID: 447762245500853537}
   - {fileID: 1776445224}
   - {fileID: 6626671851928422660}
+  - {fileID: 2831404434198506711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2122735738 stripped
@@ -1786,6 +1792,92 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69cf6c099da685749ad7bed693862ba2, type: 3}
+--- !u!1001 &2831404434198506710
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2083681899}
+    m_Modifications:
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290021915141809546, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: m_Name
+      value: UIButtonsController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5bdb41552563c30418f794d47bafa354, type: 3}
+--- !u!4 &2831404434198506711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 927936225488307394, guid: 5bdb41552563c30418f794d47bafa354,
+    type: 3}
+  m_PrefabInstance: {fileID: 2831404434198506710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2831404434198506712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4933347532001613367, guid: 5bdb41552563c30418f794d47bafa354,
+    type: 3}
+  m_PrefabInstance: {fileID: 2831404434198506710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4dc54f34174e0d8e5be518037e6bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3766329651014800628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1935,7 +2027,7 @@ PrefabInstance:
     - target: {fileID: 8615857517725852063, guid: f96600426a4eb8a4a909cba614bdb377,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 100
+      value: 333
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

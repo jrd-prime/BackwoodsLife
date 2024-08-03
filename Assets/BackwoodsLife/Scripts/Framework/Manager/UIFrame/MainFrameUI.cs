@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
 using BackwoodsLife.Scripts.Framework.Helpers.Extensions;
 using BackwoodsLife.Scripts.Gameplay.UI;
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 
@@ -12,7 +13,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
     {
         private VisualElement _root;
 
+        private const string TopFrameName = "top";
         private const string LeftFrameName = "left";
+        private const string RightFrameName = "right";
 
         private void Awake()
         {
@@ -20,9 +23,16 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             Assert.IsNotNull(_root, "root is null");
             _root.ToAbsolute();
             _root.ToSafeArea();
-            Hide();
 
-            InitSubFramesDict();
+            SubFrames[EMainSubFrame.Top] = _root.Q<VisualElement>(TopFrameName);
+            SubFrames[EMainSubFrame.Left] = _root.Q<VisualElement>(LeftFrameName);
+            SubFrames[EMainSubFrame.Right] = _root.Q<VisualElement>(RightFrameName);
+
+            foreach (var subFrame in SubFrames)
+            {
+                subFrame.Value.style.backgroundColor = new StyleColor(new Color(0, 0, 0, 0.0f));
+            }
+            // Hide();
         }
 
         public VisualElement GetSubFrame(Enum subFrame)
@@ -35,11 +45,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             return frame;
         }
 
-        protected override void InitSubFramesDict()
-        {
-            SubFrames.TryAdd(EMainSubFrame.Left, _root.Q<VisualElement>(LeftFrameName));
-        }
-
         public override void Show()
         {
             _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
@@ -48,6 +53,23 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
         public override void Hide()
         {
             _root.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+        }
+
+        public void ShowIn(EMainSubFrame subFrameName, in TemplateContainer visualTemplate, bool clear = true)
+        {
+            var subFrame = GetSubFrame(subFrameName);
+            if (clear) subFrame.Clear();
+
+            subFrame.Add(visualTemplate);
+
+            Show();
+        }
+
+        public void HideIn(EMainSubFrame subFrameName, in TemplateContainer buildingPanel)
+        {
+            var subFrame = GetSubFrame(subFrameName);
+
+            subFrame.Remove(buildingPanel);
         }
     }
 }

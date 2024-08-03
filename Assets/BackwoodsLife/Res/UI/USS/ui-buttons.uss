@@ -1,0 +1,27 @@
+.ui-button-container {
+    flex-grow: 0;
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 254, 215, 0.83);
+    width: 56px;
+    height: 56px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}

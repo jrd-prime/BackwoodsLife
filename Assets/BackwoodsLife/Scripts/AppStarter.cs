@@ -25,7 +25,6 @@ namespace BackwoodsLife.Scripts
         private ISaveAndLoadManager _saveAndLoadManager;
         private ILoadingOperation _dbManager;
         private GameSceneManager _gameSceneManager;
-        private WarehouseManager _inventoryManager;
         private GameDataManager _gameDataManager;
 
         [Inject]
@@ -35,7 +34,6 @@ namespace BackwoodsLife.Scripts
             _configManager = container.Resolve<IConfigManager>();
             _dbManager = container.Resolve<IDBManager>();
             _gameSceneManager = container.Resolve<GameSceneManager>();
-            _inventoryManager = container.Resolve<WarehouseManager>();
             _audioManager = container.Resolve<IAudioManager>();
             _assetProvider = container.Resolve<IAssetProvider>();
             _saveAndLoadManager = container.Resolve<ISaveAndLoadManager>();
@@ -62,7 +60,6 @@ namespace BackwoodsLife.Scripts
             _loader.AddServiceToInitialize(_assetProvider);
             _loader.AddServiceToInitialize(_dbManager);
             _loader.AddServiceToInitialize(_saveAndLoadManager);
-            _loader.AddServiceToInitialize(_inventoryManager);
             _loader.AddServiceToInitialize(_gameSceneManager);
             _loader.AddServiceToInitialize(_gameDataManager);
 

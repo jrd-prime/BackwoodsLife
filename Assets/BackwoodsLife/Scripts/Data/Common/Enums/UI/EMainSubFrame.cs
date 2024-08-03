@@ -2,6 +2,8 @@
 {
     public enum EMainSubFrame
     {
-        Left = 0
+        Top = 0,
+        Left = 1,
+        Right = 2
     }
 }

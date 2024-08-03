@@ -76,7 +76,6 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.Register(typeof(DBManager), Lifetime.Singleton).As<IDBManager>();
             builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();
             builder.Register(typeof(SaveAndLoadManager), Lifetime.Singleton).As<ISaveAndLoadManager>();
-            builder.Register<WarehouseManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<GameDataManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             // Systems

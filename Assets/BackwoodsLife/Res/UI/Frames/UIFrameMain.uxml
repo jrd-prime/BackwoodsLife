@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/ui-frames.uss?fileID=7433441132597879392&amp;guid=bebfaf019dde7c7439be19643fd74efa&amp;type=3#ui-frames" />
     <ui:VisualElement name="ui-frame-main" picking-mode="Ignore" class="ui-frame" style="flex-direction: row;">
-        <ui:VisualElement name="left" picking-mode="Ignore" style="flex-grow: 1; width: 111px; height: 111px;" />
+        <ui:VisualElement name="top" picking-mode="Ignore" style="flex-grow: 0; background-color: rgba(110, 155, 200, 0.24); width: 100%; height: 65px; position: absolute; left: 0; top: 0; right: 0; flex-direction: row;" />
+        <ui:VisualElement name="right" picking-mode="Ignore" style="flex-grow: 0; background-color: rgba(171, 85, 85, 0.33); width: 64px; position: absolute; top: 64px; right: 0; bottom: 0;" />
+        <ui:VisualElement name="left" picking-mode="Ignore" style="flex-grow: 0; width: 64px; height: auto; background-color: rgba(147, 100, 71, 0.22); position: absolute; left: 0; top: 64px; bottom: 0;" />
     </ui:VisualElement>
 </ui:UXML>

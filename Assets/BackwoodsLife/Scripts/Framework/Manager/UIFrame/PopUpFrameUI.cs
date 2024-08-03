@@ -20,16 +20,11 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             _root = GetComponent<UIDocument>().rootVisualElement;
             _root.ToAbsolute();
             _root.ToSafeArea();
-            Hide();
 
-            InitSubFramesDict();
-        }
-
-        protected override void InitSubFramesDict()
-        {
             SubFrames[EPopUpSubFrame.Left] = _root.Q<VisualElement>(LeftFrameName);
             SubFrames[EPopUpSubFrame.Center] = _root.Q<VisualElement>(CenterFrameName);
             SubFrames[EPopUpSubFrame.Right] = _root.Q<VisualElement>(RightFrameName);
+            Hide();
         }
 
         public override void Show()
