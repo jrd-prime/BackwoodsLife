@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96aa546afe124f75813348b91f2b7e2a, type: 3}
-  m_Name: House 1
+  m_Name: FishTrapPlace
   m_EditorClassIdentifier: 
-  WorldItemType: 1
-  InteractTypes: 3
+  WorldItemType: 3
+  InteractTypes: 1
   requirementType: 
-  shortDescription: It's your house
+  shortDescription: A place to set a fish trap. Bait is also required.
   icon:
     m_AssetGUID: 19c9549112dffb146a5e49e93d194902
     m_SubObjectName: tent-icon
@@ -25,7 +25,10 @@ MonoBehaviour:
   fixedPosition: 1
   fixedPositionValue: {x: 11, y: 0, z: 3}
   useConfig:
-    useActions: []
+    useActions:
+    - useType: 5
+    - useType: 1
+    - useType: 2
   upgradeConfig:
     upgradeLevels:
     - level: 0

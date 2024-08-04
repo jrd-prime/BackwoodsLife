@@ -19,6 +19,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
         private VisualElement _pu;
         private UIDocument uiDocument;
         private VisualElement _root;
+        private Button _closeBtn;
 
         private void Awake()
         {
@@ -50,8 +51,18 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             var fp = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Full);
             var ap = fp.Q<VisualElement>("in-window-container");
 
+            _closeBtn = fp.Q<Button>("close");
+
+            _closeBtn.clicked += CloseMainPopUpWindow;
+
             ap.Add(instantiate);
             framePopUpWindow.Show();
+        }
+
+        private void CloseMainPopUpWindow()
+        {
+            framePopUpWindow.Hide();
+            _closeBtn.clicked -= CloseMainPopUpWindow;
         }
     }
 }

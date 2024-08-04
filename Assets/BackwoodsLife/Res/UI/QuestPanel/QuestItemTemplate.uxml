@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="qpiw-item-conteiner" class="qpiw-item-conteiner">
+        <ui:VisualElement name="sub-container" class="qpiw-sub-container">
+            <ui:VisualElement name="qpiw-icon" class="qpiw-icon" />
+            <ui:VisualElement name="qpiw-reward-container" class="qpiw-reward-container" />
+            <ui:VisualElement name="qpiw-mid" class="qpiw-mid">
+                <ui:VisualElement name="qpiw-head-container" class="qpiw-head-container">
+                    <ui:Label tabindex="-1" text="Fishig Something Stuff" parse-escape-sequences="true" display-tooltip-when-elided="true" name="qpiw-head-label" class="qpiw-head-label" />
+                </ui:VisualElement>
+                <ui:VisualElement name="qpiw-description-container" class="qpiw-description-container">
+                    <ui:Label tabindex="-1" text="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="qpiw-description-label" class="qpiw-description-label" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

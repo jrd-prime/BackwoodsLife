@@ -7,6 +7,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Quest
     public class QuestPanelUIController : MonoBehaviour, IUIPanelController
     {
         [SerializeField] private VisualTreeAsset questPanelInWindowUITemplate;
+        [SerializeField] private VisualTreeAsset questItemTemplate;
 
         public VisualTreeAsset GetTemplateFor(string inWindow)
         {
@@ -14,6 +15,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Quest
             return inWindow switch
             {
                 "InWindow" => questPanelInWindowUITemplate,
+                "QuestItem" => questItemTemplate,
                 _ => throw new ArgumentOutOfRangeException(nameof(inWindow), inWindow, null)
             };
         }

@@ -3,6 +3,9 @@
     public enum EWorldItemNew
     {
         Bonfire,
-        House
+        House,
+         Warehouse,
+         FishTrapPlace,
+         WaterPlace
     }
 }

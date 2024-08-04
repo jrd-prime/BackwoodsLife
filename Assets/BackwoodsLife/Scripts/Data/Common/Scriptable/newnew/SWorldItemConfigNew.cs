@@ -191,7 +191,13 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
     public enum EUseType
     {
         Cooking = 0,
-        AddItems = 1,
+        PutItems = 1,
+        TakeItems = 2,
+        Crafting = 3,
+        Resting = 4,
+        Fishing = 5,
+        Drinking = 6,
+        Eating = 7
     }
 
     [Serializable]

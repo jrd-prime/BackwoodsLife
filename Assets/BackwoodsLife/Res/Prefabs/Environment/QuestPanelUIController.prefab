@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questPanelInWindowUITemplate: {fileID: 9197481963319205126, guid: 7bf342f70ed2a8d48b5af499fb3d3143,
     type: 3}
+  questItemTemplate: {fileID: 9197481963319205126, guid: 6ae9cfcda73f1444084ee0e66b873b51,
+    type: 3}
