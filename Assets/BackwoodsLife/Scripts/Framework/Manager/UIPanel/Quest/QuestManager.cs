@@ -1,4 +1,5 @@
-﻿using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
+﻿using BackwoodsLife.Scripts.Framework.Helpers.Extensions;
+using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
 using R3;
 using UnityEngine;
@@ -13,12 +14,15 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Quest
         private UIButtonsController _uiButtonsController;
         private readonly CompositeDisposable _disposable = new();
         private UIFrameController _uiFrameController;
+        private PanelUIController _panelUIController;
 
         [Inject]
-        private void Construct(UIFrameController uiFrameController, UIButtonsController uiButtonsController)
+        private void Construct(UIFrameController uiFrameController, UIButtonsController uiButtonsController,
+            PanelUIController panelUIController)
         {
             _uiButtonsController = uiButtonsController;
             _uiFrameController = uiFrameController;
+            _panelUIController = panelUIController;
         }
 
 
@@ -32,7 +36,14 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Quest
         private void QuestButtonClicked()
         {
             Debug.LogWarning("Quest clicked");
-            _uiFrameController.ShowMainPopUpWindow();
+            var controller = _panelUIController.GetController<QuestPanelUIController>();
+
+            var uiTemplate = controller.GetTemplateFor("InWindow");
+            var inst = uiTemplate.Instantiate();
+
+            inst.ToAbsolute();
+
+            _uiFrameController.ShowMainPopUpWindow(inst);
         }
     }
 }

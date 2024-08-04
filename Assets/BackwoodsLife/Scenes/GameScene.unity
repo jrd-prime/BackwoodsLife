@@ -548,52 +548,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23ecad61092422246a4bce685383b78e, type: 3}
---- !u!1 &896102478
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 896102479}
-  - component: {fileID: 896102480}
-  m_Layer: 0
-  m_Name: QuestPanelUIController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &896102479
+--- !u!4 &896102479 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 896102478}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 76717304}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &896102480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 896102478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00eff03652bf4744949e9b44a6ed99a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questPanelInWindowUITemplate: {fileID: 9197481963319205126, guid: 7bf342f70ed2a8d48b5af499fb3d3143,
+  m_CorrespondingSourceObject: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
     type: 3}
+  m_PrefabInstance: {fileID: 8267081690919340548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &923003393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1052,6 +1012,11 @@ PrefabInstance:
       propertyPath: interactPanelUIHolder
       value: 
       objectReference: {fileID: 447762245500853538}
+    - target: {fileID: 1852188865919934960, guid: b74625ef6a830aa44987d96dfc945d22,
+        type: 3}
+      propertyPath: questPanelUIController
+      value: 
+      objectReference: {fileID: 8267081690919340549}
     - target: {fileID: 1852188865919934960, guid: b74625ef6a830aa44987d96dfc945d22,
         type: 3}
       propertyPath: buildingPanelController
@@ -2392,7 +2357,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3891931351555203442, guid: f96600426a4eb8a4a909cba614bdb377,
         type: 3}
+      propertyPath: frameMainAsset
+      value: 
+      objectReference: {fileID: 1707573069}
+    - target: {fileID: 3891931351555203442, guid: f96600426a4eb8a4a909cba614bdb377,
+        type: 3}
+      propertyPath: framePopUpAsset
+      value: 
+      objectReference: {fileID: 1633513675}
+    - target: {fileID: 3891931351555203442, guid: f96600426a4eb8a4a909cba614bdb377,
+        type: 3}
       propertyPath: mainPopUpWindow
+      value: 
+      objectReference: {fileID: 1863293696}
+    - target: {fileID: 3891931351555203442, guid: f96600426a4eb8a4a909cba614bdb377,
+        type: 3}
+      propertyPath: framePopUpWindow
       value: 
       objectReference: {fileID: 1863293696}
     - target: {fileID: 3891931351555203442, guid: f96600426a4eb8a4a909cba614bdb377,
@@ -2945,6 +2925,86 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb1345fbf96149889d3606ed5d731d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &8267081690919340548
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 76717304}
+    m_Modifications:
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101155267255869222, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522613894462784604, guid: 9507d44955dfbf149bb407dc420b93c4,
+        type: 3}
+      propertyPath: m_Name
+      value: QuestPanelUIController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9507d44955dfbf149bb407dc420b93c4, type: 3}
+--- !u!114 &8267081690919340549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7355526607060520256, guid: 9507d44955dfbf149bb407dc420b93c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8267081690919340548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00eff03652bf4744949e9b44a6ed99a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &8878708754505566745 stripped

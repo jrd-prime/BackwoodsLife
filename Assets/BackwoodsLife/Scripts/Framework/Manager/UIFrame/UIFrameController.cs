@@ -45,8 +45,12 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
         public FramePopUp GetPopUpFrame() => framePopUpAsset;
         public FrameMain GetMainFrame() => frameMainAsset;
 
-        public void ShowMainPopUpWindow()
+        public void ShowMainPopUpWindow(TemplateContainer instantiate)
         {
+            var fp = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Full);
+            var ap = fp.Q<VisualElement>("in-window-container");
+
+            ap.Add(instantiate);
             framePopUpWindow.Show();
         }
     }

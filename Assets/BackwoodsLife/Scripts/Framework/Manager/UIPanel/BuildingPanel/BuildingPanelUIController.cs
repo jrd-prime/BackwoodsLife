@@ -14,7 +14,7 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
 {
-    public class BuildingPanelUIController : PanelUIController
+    public class BuildingPanelUIController : MonoBehaviour, IUIPanelController
     {
         [SerializeField] private VisualTreeAsset buildingPanelTemplate;
         [SerializeField] private VisualTreeAsset buildingReqResourceItemTemplate;

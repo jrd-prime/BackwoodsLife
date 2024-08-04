@@ -1,4 +1,5 @@
-﻿using BackwoodsLife.Scripts.Data.Player;
+﻿using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Manager.Quest;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
@@ -24,7 +25,8 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private InteractSystem interactSystem;
         [SerializeField] private CharacterOverUI characterOverUIHolder;
         [SerializeField] private InteractPanelUI interactPanelUIHolder;
-        [FormerlySerializedAs("buildingPanelController")] [SerializeField] private BuildingPanelUIController buildingPanelUIController;
+        [SerializeField] private BuildingPanelUIController buildingPanelUIController;
+        [SerializeField] private QuestPanelUIController questPanelUIController;
 
 
         protected override void Configure(IContainerBuilder builder)
@@ -50,6 +52,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             // builder.Register<GroundSystem>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             // builder.Register<GatherableSystem>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
+
             // Model
             builder.Register<PlayerModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<JoystickModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
@@ -65,6 +68,12 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(interactSystem).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(characterOverUIHolder).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(interactPanelUIHolder).AsSelf().AsImplementedInterfaces();
+
+
+            builder.Register(
+                _ => new PanelUIController(new List<IUIPanelController>
+                    { buildingPanelUIController, questPanelUIController }),
+                Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
     }
 }
