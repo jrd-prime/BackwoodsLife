@@ -122,6 +122,39 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &76717303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 76717304}
+  m_Layer: 0
+  m_Name: Panels
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &76717304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76717303}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 896102479}
+  - {fileID: 6626671851928422660}
+  m_Father: {fileID: 2083681899}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &229391301
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,6 +548,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23ecad61092422246a4bce685383b78e, type: 3}
+--- !u!1 &896102478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 896102479}
+  - component: {fileID: 896102480}
+  m_Layer: 0
+  m_Name: QuestPanelUIController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &896102479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896102478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 76717304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &896102480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896102478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00eff03652bf4744949e9b44a6ed99a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questPanelInWindowUITemplate: {fileID: 9197481963319205126, guid: 7bf342f70ed2a8d48b5af499fb3d3143,
+    type: 3}
 --- !u!1001 &923003393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -806,7 +885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1123974103}
   m_Layer: 0
-  m_Name: Frame
+  m_Name: Frames
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -983,6 +1062,11 @@ PrefabInstance:
       propertyPath: parentReference.TypeName
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1852188865919934960, guid: b74625ef6a830aa44987d96dfc945d22,
+        type: 3}
+      propertyPath: buildingPanelUIController
+      value: 
+      objectReference: {fileID: 6626671851928422659}
     - target: {fileID: 1852188865919934960, guid: b74625ef6a830aa44987d96dfc945d22,
         type: 3}
       propertyPath: autoInjectGameObjects.Array.size
@@ -1952,9 +2036,9 @@ Transform:
   - {fileID: 1208361514}
   - {fileID: 285172832}
   - {fileID: 447762245500853537}
-  - {fileID: 6626671851928422660}
   - {fileID: 2831404434198506711}
   - {fileID: 1123974103}
+  - {fileID: 76717304}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2122735738 stripped
@@ -2485,12 +2569,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2083681899}
+    m_TransformParent: {fileID: 76717304}
     m_Modifications:
     - target: {fileID: 2065073431582887920, guid: 9416637c73b2ce24ba3b0406df0c1e34,
         type: 3}
       propertyPath: m_Name
-      value: BuildingPanelController
+      value: BuildingPanelUIController
       objectReference: {fileID: 0}
     - target: {fileID: 3087161164719247096, guid: 9416637c73b2ce24ba3b0406df0c1e34,
         type: 3}
@@ -2515,17 +2599,17 @@ PrefabInstance:
     - target: {fileID: 3087161164719247096, guid: 9416637c73b2ce24ba3b0406df0c1e34,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3087161164719247096, guid: 9416637c73b2ce24ba3b0406df0c1e34,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3087161164719247096, guid: 9416637c73b2ce24ba3b0406df0c1e34,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3087161164719247096, guid: 9416637c73b2ce24ba3b0406df0c1e34,
         type: 3}

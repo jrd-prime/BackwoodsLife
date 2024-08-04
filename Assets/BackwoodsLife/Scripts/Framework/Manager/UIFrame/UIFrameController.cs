@@ -2,7 +2,6 @@
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
@@ -12,15 +11,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
     public class UIFrameController : MonoBehaviour
     {
         [SerializeField] private VisualTreeAsset uiFrameAsset;
-
-        [FormerlySerializedAs("mainFrameUIAsset")] [SerializeField]
-        private FrameMain frameMainAsset;
-
-        [FormerlySerializedAs("popUpFrameUIAsset")] [SerializeField]
-        private FramePopUp framePopUpAsset;
-
-        [FormerlySerializedAs("mainPopUpWindow")] [SerializeField]
-        private FramePopUpWindow framePopUpWindow;
+        [SerializeField] private FrameMain frameMainAsset;
+        [SerializeField] private FramePopUp framePopUpAsset;
+        [SerializeField] private FramePopUpWindow framePopUpWindow;
 
         private VisualElement _mu;
         private VisualElement _pu;
@@ -36,13 +29,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             _root = GetComponent<UIDocument>().rootVisualElement;
             uiDocument = GetComponent<UIDocument>();
         }
-
-
-        public VisualElement GetMainUI() => _mu;
-
-        public VisualElement GetPopUpUILeft() => _pu.Q<VisualElement>("left-frame");
-
-        public void ShowPopUpUi() => _pu.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
 
         // TODO generic
         public IUIFrame GetFrame(EUIFrame frame)

@@ -31,7 +31,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private InteractPanelUI _interactPanelUI;
 
         private CompositeDisposable _disposable = new CompositeDisposable();
-        private BuildingPanelController _buildingPanelController;
+        private BuildingPanelUIController _buildingPanelUIController;
 
         private const int BuildingStartLevel = 0;
 
@@ -43,14 +43,14 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         [Inject]
         private void Construct(IPlayerViewModel playerViewModel, CollectSystem collectSystem,
             CharacterOverUI characterOverUIHolder, IConfigManager configManager, InteractPanelUI interactPanelUI,
-            BuildingPanelController buildingPanelController)
+            BuildingPanelUIController buildingPanelUIController)
         {
             _configManager = configManager;
             _playerViewModel = playerViewModel;
             _collectSystem = collectSystem;
             _characterOverUIHolder = characterOverUIHolder;
             _interactPanelUI = interactPanelUI;
-            _buildingPanelController = buildingPanelController;
+            _buildingPanelUIController = buildingPanelUIController;
         }
 
         private void Awake()
@@ -93,12 +93,12 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         public void OnBuildZoneEnter(in SWorldItemConfigNew worldItemConfig, Action onBuildStarted)
         {
             // Debug.LogWarning("Interact system. On build Zone enter");
-            _buildingPanelController.OnBuildZoneEnter(in worldItemConfig, onBuildStarted);
+            _buildingPanelUIController.OnBuildZoneEnter(in worldItemConfig, onBuildStarted);
         }
 
         public void OnBuildZoneExit()
         {
-            _buildingPanelController.OnBuildZoneExit();
+            _buildingPanelUIController.OnBuildZoneExit();
         }
     }
 }

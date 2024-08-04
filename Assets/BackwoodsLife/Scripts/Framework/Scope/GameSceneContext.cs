@@ -11,6 +11,7 @@ using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -23,14 +24,14 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private InteractSystem interactSystem;
         [SerializeField] private CharacterOverUI characterOverUIHolder;
         [SerializeField] private InteractPanelUI interactPanelUIHolder;
-        [SerializeField] private BuildingPanelController buildingPanelController;
+        [FormerlySerializedAs("buildingPanelController")] [SerializeField] private BuildingPanelUIController buildingPanelUIController;
 
 
         protected override void Configure(IContainerBuilder builder)
         {
             Debug.LogWarning("GameSceneContext");
 
-            Assert.IsNotNull(buildingPanelController,
+            Assert.IsNotNull(buildingPanelUIController,
                 "buildingPanelController is null. Add prefab to scene and set prefab to " + name);
             // builder.Register<NavMeshManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
@@ -58,7 +59,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
             builder.Register<BuildingPanelFiller>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
-            builder.RegisterComponent(buildingPanelController).AsSelf().AsImplementedInterfaces();
+            builder.RegisterComponent(buildingPanelUIController).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(uiFrameController).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(uiButtonsController).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(interactSystem).AsSelf().AsImplementedInterfaces();

@@ -6,6 +6,7 @@ using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
 using BackwoodsLife.Scripts.Data.UI;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
+using BackwoodsLife.Scripts.Framework.Manager.Quest;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
@@ -13,7 +14,7 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
 {
-    public class BuildingPanelController : MonoBehaviour
+    public class BuildingPanelUIController : PanelUIController
     {
         [SerializeField] private VisualTreeAsset buildingPanelTemplate;
         [SerializeField] private VisualTreeAsset buildingReqResourceItemTemplate;

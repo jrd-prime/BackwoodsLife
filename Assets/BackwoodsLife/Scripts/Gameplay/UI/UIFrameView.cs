@@ -23,7 +23,6 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
 
         protected void Awake()
         {
-            Debug.LogWarning("UIFrameView awake abstract");
             Root = GetComponent<UIDocument>().rootVisualElement;
             Root.ToAbsolute();
             Root.ToSafeArea();
