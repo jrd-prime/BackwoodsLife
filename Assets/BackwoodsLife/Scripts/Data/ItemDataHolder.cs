@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
+using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data
 {
     public abstract class ItemDataHolder
     {
-        protected virtual Dictionary<string, int> ItemsCache { get; set; }
+        protected Dictionary<string, int> ItemsCache { get; set; }
 
         public abstract void Initialize();
 
@@ -27,18 +28,21 @@ namespace BackwoodsLife.Scripts.Data
             };
         }
 
-        public virtual bool IsEnough(Dictionary<SItemConfig, int> itemsDictionary)
+        public bool IsEnough(Dictionary<SItemConfig, int> itemsDictionary)
         {
             var result = true;
             foreach (var _ in itemsDictionary
                          .Where(item => !IsEnough(item.Key.itemName, item.Value)))
+            {
                 result = false;
+            }
 
             return result;
         }
 
-        public virtual bool IsEnough(string itemName, int count)
+        public bool IsEnough(string itemName, int count)
         {
+            Debug.LogWarning($"{itemName} + {count}");
             return ItemsCache.ContainsKey(itemName) && ItemsCache[itemName] >= count;
         }
 

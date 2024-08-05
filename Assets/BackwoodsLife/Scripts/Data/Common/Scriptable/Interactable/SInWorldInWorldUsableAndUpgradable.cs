@@ -27,6 +27,6 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable
     {
         public ELevel level;
         public AssetReferenceGameObject levelPrefabReference;
-        public RequirementForUpgrade requirementsForUpgrading;
+        [FormerlySerializedAs("requirementsForUpgrading")] public RequirementForUpgrade reqForUpgrade;
     }
 }

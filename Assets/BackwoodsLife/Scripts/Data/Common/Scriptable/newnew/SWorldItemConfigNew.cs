@@ -4,6 +4,8 @@ using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Interactable;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem.Warehouse.Resource;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -59,18 +61,32 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
 
             foreach (var upgradeLevel in upgradeConfig.upgradeLevels)
             {
-                if (upgradeLevel.requirementsForUpgrading.resource.Count > 5)
+                if (upgradeLevel.reqForUpgrade.resource.Count > 5)
                     throw new Exception(
                         $"{name} Resource requirements for upgrade level {upgradeLevel.level} is too much. Max 5 resources!");
 
-                if (upgradeLevel.requirementsForUpgrading.building.Count > 3 ||
-                    upgradeLevel.requirementsForUpgrading.skill.Count > 3 ||
-                    upgradeLevel.requirementsForUpgrading.tool.Count > 3)
+                if (upgradeLevel.reqForUpgrade.building.Count > 3 ||
+                    upgradeLevel.reqForUpgrade.skill.Count > 3 ||
+                    upgradeLevel.reqForUpgrade.tool.Count > 3)
                     throw new Exception(
                         $"{name} Building/Tool/Skill requirements for upgrade level {upgradeLevel.level} is too much. Max 3 per type!");
+
+                foreach (var res in upgradeLevel.reqForUpgrade.resource)
+                    CheckOnNull(res.typeName, "Resource");
+                foreach (var building in upgradeLevel.reqForUpgrade.building)
+                    CheckOnNull(building.typeName, "Building");
+                foreach (var skill in upgradeLevel.reqForUpgrade.skill)
+                    CheckOnNull(skill.typeName, "Skill");
+                foreach (var tool in upgradeLevel.reqForUpgrade.tool)
+                    CheckOnNull(tool.typeName, "Tool");
             }
 
             _reqForUpgradeCache = null;
+        }
+
+        private void CheckOnNull(SItemConfig resTypeName, string type)
+        {
+            Assert.IsNotNull(resTypeName, $"{type}: type is null. World item config: {name}");
         }
 
         private void OnDestroy()
@@ -79,49 +95,33 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
             _reqForUpgradeCache.Clear();
         }
 
-
         private Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>> InitReqForUpgradeCache()
         {
             if (_reqForUpgradeCache is { Count: > 0 }) return _reqForUpgradeCache;
 
             Debug.LogWarning("Init cache " + name);
-            var cache = new Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>>();
+            _reqForUpgradeCache = new Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>>();
 
             foreach (var level in upgradeConfig.upgradeLevels)
             {
-                var levelDictionary = new Dictionary<EItemData, Dictionary<SItemConfig, int>>();
-                cache.Add(level.level, levelDictionary);
+                var levelDict = new Dictionary<EItemData, Dictionary<SItemConfig, int>>();
+                _reqForUpgradeCache.Add(level.level, levelDict);
 
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.resource, EItemData.Resorce,
-                    ref levelDictionary);
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.building, EItemData.Building,
-                    ref levelDictionary);
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.tool, EItemData.Tool, ref levelDictionary);
-                AddToDictReqForUpgradeFor(level.requirementsForUpgrading.skill, EItemData.Skill, ref levelDictionary);
+                AddToDictReqForUpgradeFor(level.reqForUpgrade.resource, EItemData.Resorce, in levelDict);
+                AddToDictReqForUpgradeFor(level.reqForUpgrade.building, EItemData.Building, in levelDict);
+                AddToDictReqForUpgradeFor(level.reqForUpgrade.tool, EItemData.Tool, in levelDict);
+                AddToDictReqForUpgradeFor(level.reqForUpgrade.skill, EItemData.Skill, in levelDict);
             }
 
-
-            // foreach (var level in cache)
-            // {
-            //     Debug.LogWarning($"{level.Key} => {level.Value.Count}");
-            //     foreach (var levelReq in level.Value)
-            //     {
-            //         Debug.LogWarning($"\t{levelReq.Key} => {levelReq.Value.Count}");
-            //
-            //         foreach (var levelReq2 in levelReq.Value)
-            //         {
-            //             Debug.LogWarning($"\t\t{levelReq2.Key} => {levelReq2.Value}");
-            //         }
-            //     }
-            // }
-
-            return _reqForUpgradeCache = cache;
+            return _reqForUpgradeCache;
         }
 
         private void AddToDictReqForUpgradeFor<T>(List<CustomRequirement<T>> res, EItemData eItemData,
-            ref Dictionary<EItemData, Dictionary<SItemConfig, int>> dict) where T : SItemConfig
+            in Dictionary<EItemData, Dictionary<SItemConfig, int>> dict) where T : SItemConfig
         {
             if (res.Count == 0) return;
+
+            Debug.LogWarning("e item data = " + eItemData);
 
             dict.Add(eItemData,
                 res.ToDictionary<CustomRequirement<T>, SItemConfig, int>(re => re.typeName, re => re.value));
@@ -129,6 +129,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.newnew
 
         public Dictionary<EItemData, Dictionary<SItemConfig, int>> GetLevelReq(ELevel level1)
         {
+            Debug.LogWarning("get level req = " + UpgradeCache[level1]);
             return UpgradeCache[level1];
         }
     }
