@@ -3,10 +3,10 @@
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
 {
     [CreateAssetMenu(
-        fileName = "InventoryItem",
-        menuName = SOPathName.WorldItemPath + "Building Item",
+        fileName = "PlaceItem",
+        menuName = SOPathName.WorldItemPath + "Place Item",
         order = 1)]
-    public class SBuildingItem : SWorldItemConfigNew
+    public class SPlaceItem : SWorldItemConfigNew
     {
     }
 }

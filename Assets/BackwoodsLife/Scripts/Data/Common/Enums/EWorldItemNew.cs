@@ -4,8 +4,10 @@
     {
         Bonfire,
         House,
-         Warehouse,
-         FishTrapPlace,
-         WaterPlace
+        Warehouse,
+        FishTrapPlace,
+        WaterPlace,
+        StickPack,
+        StonePack
     }
 }

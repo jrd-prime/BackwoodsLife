@@ -32,8 +32,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private EventSystem eventSystem;
 
-        [FormerlySerializedAs("sMainConfigurations")] [FormerlySerializedAs("sMainConfiguration")] [SerializeField]
-        private SMainConfigurationsList sMainConfigurationsList;
+        [SerializeField] private SMainConfigurationsList sMainConfigurationsList;
 
         protected override void Configure(IContainerBuilder builder)
         {

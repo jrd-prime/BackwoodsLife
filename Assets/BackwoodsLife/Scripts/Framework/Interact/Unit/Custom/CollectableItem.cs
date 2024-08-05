@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Helpers;
@@ -9,6 +10,7 @@ using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
 {
@@ -16,6 +18,8 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
     {
         [SerializeField] public ECollectable collectableType;
         [SerializeField] private int collectableLevel;
+
+        [SerializeField] private SWorldItemConfigNew worldItemConfig;
 
         private CollectSystem _collectSystem;
         public override EWorldItem worldItemType { get; protected set; } = EWorldItem.Collectable;
@@ -43,8 +47,6 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
                 {
                     Debug.LogWarning("NO REQUIREMENTS just collect");
 
-                    Debug.LogWarning(" AAAAA === " + config.interactType);
-
                     // var list = localData.returnElements.Select(element => new InventoryElement
                     //     {
                     //         typeName = element.Name,
@@ -62,13 +64,13 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
                     {
                         list.Add(new InventoryElement
                         {
-                            typeName = returnedItem.Item.itemName,
-                            Amount = RandomCollector.GetRandom(returnedItem.Range.min, returnedItem.Range.max)
+                            typeName = returnedItem.item.itemName,
+                            Amount = RandomCollector.GetRandom(returnedItem.range.min, returnedItem.range.max)
                         });
                     }
 
 
-                    callback.Invoke(list, config.interactType);
+                    // callback.Invoke(list, config.);
                     _collectSystem.Collect(ref list);
                 }
             }

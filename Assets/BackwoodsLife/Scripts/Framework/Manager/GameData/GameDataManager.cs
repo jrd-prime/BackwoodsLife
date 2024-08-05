@@ -37,7 +37,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
         public bool IsEnoughForBuild(Dictionary<EItemData, Dictionary<SItemConfig, int>> level)
         {
             return
-                level.TryGetValue(EItemData.Resorce, out var resource)
+                level.TryGetValue(EItemData.Resource, out var resource)
                     ? Warehouse.IsEnough(resource)
                     : level.TryGetValue(EItemData.Building, out var building)
                         ? Building.IsEnough(building)

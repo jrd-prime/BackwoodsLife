@@ -12,7 +12,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
     {
         public Dictionary<Type, object> ConfigsCache { get; }
         public T GetConfig<T>() where T : ScriptableObject;
-        public T GetWorldItemConfig<T>(string enumTypeName) where T : SWorldItemConfig;
+        public T GetWorldItemConfig<T>(string enumTypeName) where T : SWorldItemConfigNew;
         public AssetReferenceTexture2D GetIconReference(string elementTypeName);
     }
 }

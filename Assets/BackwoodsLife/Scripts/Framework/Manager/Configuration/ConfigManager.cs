@@ -14,6 +14,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
     {
         public string Description => "Config Manager";
         public Dictionary<Type, object> ConfigsCache { get; private set; }
+        public Dictionary<string, SItemConfig> ItemsConfigCache { get; } = new();
 
         private SMainConfigurationsList _mainConfigurationsList;
 
@@ -24,9 +25,12 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
         public void ServiceInitialization()
         {
             ConfigsCache = new Dictionary<Type, object>();
-            AddToCache(_mainConfigurationsList.gameItemsList);
-            AddToCache(_mainConfigurationsList.worldItemsList);
             AddToCache(_mainConfigurationsList.characterConfiguration);
+
+            // foreach (var VARIABLE in _mainConfigurationsList.GameItemsList)
+            // {
+            //     
+            // }
         }
 
         private void AddToCache(object config)
@@ -42,7 +46,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
             return (T)ConfigsCache[typeof(T)];
         }
 
-        public T GetWorldItemConfig<T>(string enumTypeName) where T : SWorldItemConfig
+        public T GetWorldItemConfig<T>(string enumTypeName) where T : SWorldItemConfigNew
         {
             var worldItemsList = ConfigsCache[typeof(SWorldItemsList)] as SWorldItemsList;
             if (worldItemsList == null)
@@ -66,7 +70,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
             if (!iconRef.ConfigsCache.TryGetValue(elementTypeName, out var itemConfig))
                 throw new NullReferenceException($"Icon not found for {elementTypeName}");
 
-            return itemConfig.iconReference;
+            return itemConfig.icon;
         }
     }
 }

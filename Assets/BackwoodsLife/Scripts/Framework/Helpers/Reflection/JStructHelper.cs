@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using BackwoodsLife.Scripts.Data.Common.Structs;
+using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using BackwoodsLife.Scripts.Data.Inventory;
 using UnityEngine.Assertions;
@@ -14,7 +15,7 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.Reflection
     {
         public static void CompileReturnableElements(
             ref List<CollectableElement> listToSave,
-            ref List<ReturnCollectable> returnCollectablesList)
+            ref List<ItemDataWithConfig> returnCollectablesList)
         {
             listToSave.Clear();
             foreach (var collectable in returnCollectablesList)

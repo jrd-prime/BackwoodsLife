@@ -54,7 +54,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
             {
                 switch (levelData.Key)
                 {
-                    case EItemData.Resorce:
+                    case EItemData.Resource:
                         FillReqForResources(levelData.Value);
                         break;
                     case EItemData.Building:
@@ -77,12 +77,12 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
                 var label = resourceContainer.Q<Label>(_panelRef.ReqResItemCountLabelName);
                 var isEnough = resourceContainer.Q<VisualElement>(_panelRef.ReqResIsEnoughIconContainerName);
 
-                SetIsEnoughIcon(isEnough, EItemData.Resorce,
+                SetIsEnoughIcon(isEnough, EItemData.Resource,
                     new Dictionary<SItemConfig, int> { { pair.Key, pair.Value } });
 
-                LoadAndSetIcon(icon, pair.Key.iconReference);
+                LoadAndSetIcon(icon, pair.Key.icon);
 
-                SetText(label, ReqStatText(EItemData.Resorce, pair.Key.itemName, pair.Value));
+                SetText(label, ReqStatText(EItemData.Resource, pair.Key.itemName, pair.Value));
 
                 _panelRef.ResourceContainer.Add(resourceContainer);
             }
@@ -144,7 +144,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         {
             return itemDataType switch
             {
-                EItemData.Resorce => _warehouse,
+                EItemData.Resource => _warehouse,
                 EItemData.Building => _building,
                 EItemData.Skill => _skill,
                 EItemData.Tool => _tool,
@@ -157,7 +157,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         {
             return itemDataType switch
             {
-                EItemData.Resorce => "Resource",
+                EItemData.Resource => "Resource",
                 EItemData.Building => "Building",
                 EItemData.Skill => "Skill",
                 EItemData.Tool => "Tool",

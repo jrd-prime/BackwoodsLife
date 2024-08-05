@@ -2,7 +2,7 @@
 {
     public enum EItemData
     {
-        Resorce = 0,
+        Resource = 0,
         Building = 1,
         Skill = 2,
         Tool = 3

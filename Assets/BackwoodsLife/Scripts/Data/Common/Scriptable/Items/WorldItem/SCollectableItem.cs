@@ -11,7 +11,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
         fileName = "CollectableItem",
         menuName = SOPathName.WorldItemPath + "Collectable Item",
         order = 1)]
-    public class SCollectableItem : SWorldItemConfig
+    public class SCollectableItem : SWorldItemConfigNew
     {
         [Title("Collectable")] [ReadOnly] public int retunedItemsCount;
         [ReadOnly] public int requiredItemsCount;
@@ -37,8 +37,8 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
                     retunedItemsCount = 0;
                     foreach (var returnedItem in level.returnedItems)
                     {
-                        Assert.IsNotNull(returnedItem.Item, "Returned item config is null." + name);
-                        Assert.IsTrue(returnedItem.Range.max != 0, "Returned item max range is 0." + name);
+                        Assert.IsNotNull(returnedItem.item, "Returned item config is null." + name);
+                        Assert.IsTrue(returnedItem.range.max != 0, "Returned item max range is 0." + name);
                         retunedItemsCount++;
                     }
                 }
@@ -48,8 +48,8 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
                     requiredItemsCount = 0;
                     foreach (var requiredItem in level.requiredItems)
                     {
-                        Assert.IsNotNull(requiredItem.Item, "Required item config is null." + name);
-                        Assert.IsTrue(requiredItem.value != 0, "Required item value is 0." + name);
+                        Assert.IsNotNull(requiredItem.item, "Required item config is null." + name);
+                        Assert.IsTrue(requiredItem.range.max != 0, "Required item value is 0." + name);
                         requiredItemsCount++;
                     }
                 }

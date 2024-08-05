@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
@@ -12,16 +11,8 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
     {
         public List<CustomRequirement<SToolItem>> tool;
         public List<CustomRequirement<SSkillItem>> skill;
-        public List<CustomRequirement<SBuildingItem>> building;
+        public List<CustomRequirement<SWorldItemConfigNew>> building;
     }
-
-// [Serializable]
-// public struct RequirementForUse
-// {
-//     public List<CustomRequirement<ETool>> tool;
-//     public List<CustomRequirement<ESkill>> skill;
-//     public List<CustomRequirement<EBuilding>> building;
-// }
 
     [Serializable]
     public struct RequirementForUpgrade
@@ -31,13 +22,6 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
         public List<CustomRequirement<SSkillItem>> skill;
         public List<CustomRequirement<SWorldItemConfigNew>> building;
     }
-
-// [Serializable]
-// public struct RequirementForUseAndUpgrade
-// {
-//     public List<CustomRequirement<ETool>> tool;
-//     public List<CustomRequirement<ESkill>> skill;
-//     public List<CustomRequirement<EBuilding>> building;
 
     [Serializable]
     public struct CustomRequirement<T> where T : SItemConfig

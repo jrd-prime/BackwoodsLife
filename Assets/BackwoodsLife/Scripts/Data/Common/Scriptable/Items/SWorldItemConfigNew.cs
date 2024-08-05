@@ -21,7 +21,6 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
         public EInteractTypes InteractTypes;
         public List<ERequirement> requirementType;
         public string shortDescription;
-        public AssetReferenceTexture2D icon;
 
         public bool fixedPosition = false;
         [ShowIf("@fixedPosition")] public Vector3 fixedPositionValue;
@@ -139,7 +138,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
                 var levelDict = new Dictionary<EItemData, Dictionary<SItemConfig, int>>();
                 _reqForUpgradeCache.Add(level.level, levelDict);
 
-                AddToDictReqForUpgradeFor(level.reqForUpgrade.resource, EItemData.Resorce, in levelDict);
+                AddToDictReqForUpgradeFor(level.reqForUpgrade.resource, EItemData.Resource, in levelDict);
                 AddToDictReqForUpgradeFor(level.reqForUpgrade.building, EItemData.Building, in levelDict);
                 AddToDictReqForUpgradeFor(level.reqForUpgrade.tool, EItemData.Tool, in levelDict);
                 AddToDictReqForUpgradeFor(level.reqForUpgrade.skill, EItemData.Skill, in levelDict);
@@ -224,6 +223,8 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
     [Serializable]
     public struct CollectConfig
     {
+        public List<ItemDataWithConfig> returnedItems;
+        public RequirementForCollect requirementForCollect;
     }
 
     public enum EInteractTypes

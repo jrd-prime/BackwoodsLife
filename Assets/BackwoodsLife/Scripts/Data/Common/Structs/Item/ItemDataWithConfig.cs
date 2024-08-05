@@ -4,9 +4,9 @@ using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 namespace BackwoodsLife.Scripts.Data.Common.Structs.Item
 {
     [Serializable]
-    public struct ReturnedItem
+    public struct ItemDataWithConfig
     {
-        public SGameItemConfig Item;
-        public CollectRange Range;
+        public SGameItemConfig item;
+        public CollectRange range;
     }
 }

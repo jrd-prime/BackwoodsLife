@@ -9,13 +9,13 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
     {
         [ReadOnly] public string itemName;
 
-        [Title("UI Config")] public AssetReferenceTexture2D iconReference;
-        [Title("Main")] [ReadOnly] public EInteractableObject interactableType;
+        [Title("UI Config")] public AssetReferenceTexture2D icon;
+        // [Title("Main")] [ReadOnly] public EInteractableObject interactableType;
 
         protected virtual void OnValidate()
         {
             itemName = name;
-            interactableType = EInteractableObject.Collectable;
+            // interactableType = EInteractableObject.Collectable;
         }
     }
 

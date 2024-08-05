@@ -14,5 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterConfiguration: {fileID: 11400000, guid: 0caa8a7d20288344a81d7ad91e3819be,
     type: 2}
-  gameItemsList: {fileID: 11400000, guid: 1a6eb87b09621fa41a7cb368289b2fdf, type: 2}
-  worldItemsList: {fileID: 11400000, guid: 77501d62c7b72a14aa8b4722fa19826c, type: 2}
+  GameItemsList:
+    resourceItems:
+    - Config: {fileID: 11400000, guid: 05bc6d68211d3e741b5d8583e5fa6a78, type: 2}
+    - Config: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
+    - Config: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
+    - Config: {fileID: 11400000, guid: 9799e7405dfe6a54babd9ac223aa686d, type: 2}
+    - Config: {fileID: 11400000, guid: 46dd9e11499fff24f97a11ccb2805ce1, type: 2}
+    toolItems:
+    - Config: {fileID: 11400000, guid: 4a49fd94b87c28944bfecf0c700f2e57, type: 2}
+    - Config: {fileID: 11400000, guid: 14abc33a29a934448996187b4e8ae3f4, type: 2}
+    - Config: {fileID: 11400000, guid: 47dcd9baea59feb47a6c7b52830128ea, type: 2}
+    skillItems:
+    - Config: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
+    - Config: {fileID: 11400000, guid: e5cf509cc005144408a89c0d8452af3a, type: 2}
+    foodItems:
+    - Config: {fileID: 11400000, guid: 3da48bd6650c1674bbd54f02a25f1fa0, type: 2}
+    - Config: {fileID: 11400000, guid: 5b422285c117d034bb6c3e5833c88fb4, type: 2}
+  WorldItemsList:
+    buildingItems:
+    - Config: {fileID: 0}
+    collectableItems:
+    - Config: {fileID: 11400000, guid: 049f409acb83e3e44a9446beaad366c1, type: 2}
+    warehouseItems:
+    - Config: {fileID: 0}
