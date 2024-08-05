@@ -1,7 +1,7 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
-using BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
 using R3;
 using UnityEngine;
 using UnityEngine.UIElements;

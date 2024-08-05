@@ -33,9 +33,10 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
             return await Addressables.LoadSceneAsync(AssetConst.GameScene, loadSceneMode).Task;
         }
 
-        public async UniTask<AsyncOperationHandle<GameObject>> LoadAssetAsync(string assetId)
+        public async UniTask<GameObject> LoadAssetAsync(string assetId)
         {
-            return Addressables.LoadAssetAsync<GameObject>(assetId);
+            var handle = await Addressables.LoadAssetAsync<GameObject>(assetId);
+            return handle;
         }
 
         public async UniTask<GameObject> LoadAssetAsync(AssetReferenceGameObject assetReferenceGameObject)
@@ -43,9 +44,10 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
             return await Addressables.LoadAssetAsync<GameObject>(assetReferenceGameObject);
         }
 
-        public async UniTask<AsyncOperationHandle<GameObject>> InstantiateAsync(string assetId, Transform parent = null)
+        public async UniTask<GameObject> InstantiateAsync(string assetId, Transform parent = null)
         {
-            return Addressables.InstantiateAsync(assetId, parent);
+            var handle = Addressables.InstantiateAsync(assetId, parent);
+            return await handle;
         }
 
         public async UniTask<GameObject> InstantiateAsync(AssetReference assetId, Vector3 fixedPositionValue)

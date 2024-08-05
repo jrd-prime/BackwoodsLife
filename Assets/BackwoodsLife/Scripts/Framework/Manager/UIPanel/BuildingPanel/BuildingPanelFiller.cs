@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.newnew;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel
+namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
 {
     public class BuildingPanelFiller : IInitializable
     {

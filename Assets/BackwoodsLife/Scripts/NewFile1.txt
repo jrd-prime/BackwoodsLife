@@ -1,0 +1,43 @@
+﻿  
+  
+        [Title("Food Stats")] [Range(0, 100)] public float foodStaminaRegen = 1;
+        [Title("Food Effect")] public FoodEffect foodEffect = FoodEffect.None;
+
+        [ShowIf("@foodEffect != FoodEffect.None")] [Range(1, 120)]
+        public float foodEffectDuration = 1;
+
+        [Title("Cookable")] public bool canBeCooked;
+
+        [ShowIf("@canBeCooked == true")] [Range(1, 120)]
+        public float cookingTime = 1;
+  
+  
+  /* TODO Someday
+        [Range(1, 100)] public float foodHPRegen = 1;
+        [Range(0, 100)] public float foodStaminaRegen = 1;
+        [Range(0, 100)] public float foodWaterRegen = 1; */
+        /* TODO Someday
+        [Title("Settings")] public bool canBeEatenRaw;
+        [Title("Poisonable")] [Range(0.1f, 100.0f)]
+        public float poisonChance = 0.1f;
+        [Range(1f, 5f)] public float poisonDuration = 1;
+        [Range(10f, 100f)] public float poisonDamage = 10;
+         */
+         
+         
+         public abstract class SCommonData : ScriptableObject
+             {
+                 [ReadOnly] public string nameId;
+                 public AssetReferenceTexture2D icon;
+         
+                 [Title("Settings")] [Range(1, 100)] public int maxStackSize = 20;
+                 public bool canBeSold = true;
+         
+                 [ShowIf("@canBeSold == true")] [Range(1, 1000)]
+                 public float sellPrice = 1;
+         
+                 private void OnValidate()
+                 {
+                     nameId = name;
+                 }
+             }

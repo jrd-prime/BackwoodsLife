@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.Quest
+namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest
 {
     public class QuestPanelUIController : MonoBehaviour, IUIPanelController
     {

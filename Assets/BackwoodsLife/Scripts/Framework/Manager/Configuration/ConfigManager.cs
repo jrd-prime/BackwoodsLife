@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;

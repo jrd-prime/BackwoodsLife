@@ -1,4 +1,4 @@
-﻿namespace BackwoodsLife.Scripts.Framework.Manager.Quest
+﻿namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest
 {
     public class QuestViewModel : IViewModel
     {

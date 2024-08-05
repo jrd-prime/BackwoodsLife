@@ -9,7 +9,7 @@ using VContainer;
 using VContainer.Unity;
 using CompositeDisposable = R3.CompositeDisposable;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.Quest
+namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest
 {
     public class QuestManager : IInitializable
     {

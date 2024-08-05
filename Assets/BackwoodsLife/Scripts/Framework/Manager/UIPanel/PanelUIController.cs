@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.Quest
+namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel
 {
     public sealed class PanelUIController
     {

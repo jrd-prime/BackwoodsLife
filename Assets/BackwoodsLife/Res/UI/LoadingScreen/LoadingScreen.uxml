@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/main.uss?fileID=7433441132597879392&amp;guid=ded51bb9d01edb0408b0a90e67083594&amp;type=3#main" />
-    <ui:VisualElement name="main-container" class="main-container" style="background-color: rgb(159, 186, 143); display: none; opacity: 1;">
+    <ui:VisualElement name="main-container" class="main-container" style="background-color: rgb(159, 186, 143); display: none; opacity: 1; right: 0; width: 100%; height: 100%; top: 0; left: 0;">
         <ui:VisualElement name="header-container" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 75%; align-items: center; justify-content: center; align-self: center;">
             <ui:Label tabindex="-1" text="Backwood Life" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 25px; -unity-font: url(&quot;project://database/Assets/BackwoodsLife/Res/Fonts/Dosis/Dosis-ExtraBold.ttf?fileID=12800000&amp;guid=fb7f4c98d7727d14d8d102e86829e603&amp;type=3#Dosis-ExtraBold&quot;); -unity-font-style: bold;" />
         </ui:VisualElement>

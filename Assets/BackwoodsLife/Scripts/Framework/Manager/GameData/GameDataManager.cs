@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
-using UnityEngine;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.GameData
@@ -20,7 +18,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
 
         public void ServiceInitialization()
         {
-            Debug.LogWarning("Game data manager init");
             Warehouse.Initialize();
             Building.Initialize();
             Skill.Initialize();
@@ -40,10 +37,13 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
         public bool IsEnoughForBuild(Dictionary<EItemData, Dictionary<SItemConfig, int>> level)
         {
             return
-                Warehouse.IsEnough(level[EItemData.Resorce]) &&
-                Building.IsEnough(level[EItemData.Building]) &&
-                Skill.IsEnough(level[EItemData.Skill]) &&
-                Tool.IsEnough(level[EItemData.Tool]);
+                level.TryGetValue(EItemData.Resorce, out var resource)
+                    ? Warehouse.IsEnough(resource)
+                    : level.TryGetValue(EItemData.Building, out var building)
+                        ? Building.IsEnough(building)
+                        : level.TryGetValue(EItemData.Skill, out var skill)
+                            ? Skill.IsEnough(skill)
+                            : !level.TryGetValue(EItemData.Tool, out var tool) || Tool.IsEnough(tool);
         }
     }
 }

@@ -15,9 +15,9 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
     {
         public Dictionary<string, Sprite> IconCache { get; }
         public UniTask<SceneInstance> LoadSceneAsync(string assetId, LoadSceneMode loadSceneMode);
-        public UniTask<AsyncOperationHandle<GameObject>> LoadAssetAsync(string assetId);
+        public UniTask<GameObject> LoadAssetAsync(string assetId);
         public UniTask<GameObject> LoadAssetAsync(AssetReferenceGameObject assetReferenceGameObject);
-        public UniTask<AsyncOperationHandle<GameObject>> InstantiateAsync(string assetId, Transform parent = null);
+        public UniTask<GameObject> InstantiateAsync(string assetId, Transform parent = null);
         public UniTask<GameObject> InstantiateAsync(AssetReference assetId, Vector3 fixedPositionValue);
         public UniTask<GameObject> InstantiateAsync(AssetReference assetId, Transform position = null);
         public UniTask<Sprite> LoadIconAsync(string elementTypeName);

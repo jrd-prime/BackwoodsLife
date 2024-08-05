@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data
 {
@@ -19,13 +18,12 @@ namespace BackwoodsLife.Scripts.Data
         {
         }
 
-        public virtual ItemData GetItem(string name)
+        public ItemData GetItem(string itemName)
         {
-            return new ItemData
-            {
-                Name = name,
-                Count = ItemsCache[name]
-            };
+            if (!ItemsCache.TryGetValue(itemName, out var value))
+                throw new KeyNotFoundException($"\"{itemName}\" not found in ItemsCache. Check config name or enum");
+
+            return new ItemData { Name = itemName, Count = value };
         }
 
         public bool IsEnough(Dictionary<SItemConfig, int> itemsDictionary)
@@ -42,7 +40,6 @@ namespace BackwoodsLife.Scripts.Data
 
         public bool IsEnough(string itemName, int count)
         {
-            Debug.LogWarning($"{itemName} + {count}");
             return ItemsCache.ContainsKey(itemName) && ItemsCache[itemName] >= count;
         }
 

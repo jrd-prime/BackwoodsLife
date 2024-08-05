@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Interact.System;
-using BackwoodsLife.Scripts.Framework.Manager.Quest;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
-using BackwoodsLife.Scripts.Framework.Manager.UIFrame.BuildingPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest;
 using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
@@ -31,7 +32,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
         protected override void Configure(IContainerBuilder builder)
         {
-            Debug.LogWarning("GameSceneContext");
+            Debug.Log("GameSceneContext");
 
             Assert.IsNotNull(buildingPanelUIController,
                 "buildingPanelController is null. Add prefab to scene and set prefab to " + name);

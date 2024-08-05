@@ -12,7 +12,7 @@ namespace BackwoodsLife.Scripts.Data
     {
         public override void Initialize()
         {
-            Debug.LogWarning("Warehouse data init");
+            // Debug.LogWarning("Warehouse data init");
             ItemsCache = new Dictionary<string, int>();
 
             // TODO load saved data and initialize
@@ -22,7 +22,7 @@ namespace BackwoodsLife.Scripts.Data
 
             // Init to zero
             foreach (var name in list.SelectMany(Enum.GetNames))
-                ItemsCache.TryAdd(name, RandomCollector.GetRandom(3, 33));
+                ItemsCache.TryAdd(name, 0);
 
             // foreach (var keyValuePair in ItemsCache)
             // {
