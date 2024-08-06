@@ -15,12 +15,13 @@ MonoBehaviour:
   itemName: TinVein
   iconReference:
     m_AssetGUID: 142d9e91d38a45d4ea34d18e8f1777a2
-    m_SubObjectName: tin-ore
+    m_SubObjectName: tin-ore-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
+  worldItemTypeType: 0
   WorldItemType: 4
-  InteractTypes: 1
+  InteractTypes: 0
   requirementType: 
   shortDescription: A place to set a fish trap. Bait is also required.
   fixedPosition: 1
@@ -64,3 +65,9 @@ MonoBehaviour:
   retunedItemsCount: 0
   requiredItemsCount: 0
   collectableLevels: []
+  collectConfig:
+    returnedItems: []
+    requirementForCollect:
+      tool: []
+      skill: []
+      building: []

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
@@ -16,25 +18,38 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
         public Dictionary<Type, object> ConfigsCache { get; private set; }
         public Dictionary<string, SItemConfig> ItemsConfigCache { get; } = new();
 
-        private SMainConfigurationsList _mainConfigurationsList;
+        private SMainConfig _mainConfig;
 
         [Inject]
-        private void Construct(SMainConfigurationsList mainConfigurationsList) =>
-            _mainConfigurationsList = mainConfigurationsList;
+        private void Construct(SMainConfig mainConfig) =>
+            _mainConfig = mainConfig;
 
         public void ServiceInitialization()
         {
             ConfigsCache = new Dictionary<Type, object>();
-            AddToCache(_mainConfigurationsList.characterConfiguration);
+
+            AddToCache(_mainConfig.characterConfig);
+
+            {
+                // TODO refactor
+                _mainConfig.Check(_mainConfig.GameItemsList.resourceItems, typeof(EResource), "Resource");
+                _mainConfig.Check(_mainConfig.GameItemsList.foodItems, typeof(EFood), "Food");
+                _mainConfig.Check(_mainConfig.GameItemsList.toolItems, typeof(ETool), "Tool");
+                _mainConfig.Check(_mainConfig.GameItemsList.skillItems, typeof(ESkill), "Skill");
+
+                _mainConfig.Check(_mainConfig.WorldItemsList.buildingItems, typeof(EBuilding), "Building");
+                _mainConfig.Check(_mainConfig.WorldItemsList.collectableItems, typeof(ECollectable), "Collectable");
+                _mainConfig.Check(_mainConfig.WorldItemsList.placeItems, typeof(EPlace), "Place");
+            }
 
             //TODO refactor
-            AddToItemsCache(_mainConfigurationsList.GameItemsList.resourceItems);
-            AddToItemsCache(_mainConfigurationsList.GameItemsList.foodItems);
-            AddToItemsCache(_mainConfigurationsList.GameItemsList.skillItems);
-            AddToItemsCache(_mainConfigurationsList.GameItemsList.toolItems);
-            AddToItemsCache(_mainConfigurationsList.WorldItemsList.placeItems);
-            AddToItemsCache(_mainConfigurationsList.WorldItemsList.collectableItems);
-            AddToItemsCache(_mainConfigurationsList.WorldItemsList.buildingItems);
+            AddToItemsCache(_mainConfig.GameItemsList.resourceItems);
+            AddToItemsCache(_mainConfig.GameItemsList.foodItems);
+            AddToItemsCache(_mainConfig.GameItemsList.skillItems);
+            AddToItemsCache(_mainConfig.GameItemsList.toolItems);
+            AddToItemsCache(_mainConfig.WorldItemsList.placeItems);
+            AddToItemsCache(_mainConfig.WorldItemsList.collectableItems);
+            AddToItemsCache(_mainConfig.WorldItemsList.buildingItems);
         }
 
         private void AddToItemsCache<T>(List<CustomItemConfig<T>> items) where T : SItemConfig
@@ -45,23 +60,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
         private void AddToCache(object config)
         {
             if (ConfigsCache.TryAdd(config.GetType(), config)) Debug.Log($"Add to cache {config.GetType()}");
-        }
-
-        public T GetWorldItemConfig<T>(string enumTypeName) where T : SWorldItemConfigNew
-        {
-            var worldItemsList = ConfigsCache[typeof(SWorldItemsList)] as SWorldItemsList;
-            if (worldItemsList == null)
-                throw new Exception(nameof(SWorldItemsList) + " not found in " + nameof(ConfigsCache));
-
-            if (!worldItemsList.ConfigsCache.TryGetValue(enumTypeName, out var itemConfig))
-            {
-                throw new NullReferenceException(
-                    $"Config not found for: {enumTypeName}. Add {enumTypeName} config to WorldItemsList");
-            }
-
-            Debug.LogWarning("GetGameItemConfig by name: " + enumTypeName + " / " + itemConfig.itemName);
-
-            return itemConfig as T;
         }
 
         public AssetReferenceTexture2D GetIconReference(string elementTypeName)

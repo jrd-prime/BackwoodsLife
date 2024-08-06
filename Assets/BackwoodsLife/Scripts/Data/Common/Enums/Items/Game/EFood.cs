@@ -3,6 +3,8 @@
     public enum EFood
     {
         Mushroom = 0,
-        Blueberry = 1
+        Blueberry = 1,
+        FreshFish = 2,
+        GrilledFish = 3
     }   
 }

@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5318626d62f14faaaa37fa13e26ececc, type: 3}
   m_Name: House
   m_EditorClassIdentifier: 
-  itemName: 
-  icon:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  itemName: House
+  iconReference:
+    m_AssetGUID: 19c9549112dffb146a5e49e93d194902
+    m_SubObjectName: tent-icon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  worldItemTypeType: 0
   WorldItemType: 0
-  InteractTypes: 0
+  InteractTypes: 3
   requirementType: 
   shortDescription: 
-  fixedPosition: 0
-  fixedPositionValue: {x: 0, y: 0, z: 0}
+  fixedPosition: 1
+  fixedPositionValue: {x: 10, y: 0, z: 4}
   collectConfig:
     returnedItems: []
     requirementForCollect:
@@ -31,6 +33,25 @@ MonoBehaviour:
       skill: []
       building: []
   useConfig:
-    useActions: []
+    useActions:
+    - useType: 3
+    - useType: 4
   upgradeConfig:
-    upgradeLevels: []
+    upgradeLevels:
+    - level: 0
+      levelPrefabReference:
+        m_AssetGUID: 080cbeb4618525e41866b0af8c565c59
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      reqForUpgrade:
+        resource:
+        - typeName: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
+          value: 60
+        - typeName: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
+          value: 20
+        tool: []
+        skill: []
+        building:
+        - typeName: {fileID: 11400000, guid: 8540679380a77794685e8f2051375b68, type: 2}
+          value: 1

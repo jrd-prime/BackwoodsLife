@@ -9,6 +9,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.UsableAndUpgra
 
     public abstract class WorldItemNew : MonoBehaviour
     {
-        [SerializeField] protected SWorldItemConfigNew worldItemConfig;
+        [SerializeField] protected SWorldItemConfig worldItemConfig;
     }
 }

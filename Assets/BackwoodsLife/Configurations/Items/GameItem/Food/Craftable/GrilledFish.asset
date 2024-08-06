@@ -9,18 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1730aea88ba541579cefd1096c647dfc, type: 3}
-  m_Name: CooperOre
+  m_Script: {fileID: 11500000, guid: e3ff6a3dea164ebd90e362af632c9f8f, type: 3}
+  m_Name: GrilledFish
   m_EditorClassIdentifier: 
-  itemName: CooperOre
+  itemName: GrilledFish
   iconReference:
-    m_AssetGUID: 108a8d9b797c13244b4c6d208fd2f957
-    m_SubObjectName: cooper-ore-icon
+    m_AssetGUID: c8dedd39500d93f49b6768829b90d41b
+    m_SubObjectName: mushroom-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
   gameItemType: 0
-  itemStorage: 0
+  itemStorage: 1
   warehouseItemSetting:
-    stackSize: 0
-  craftable: 0
+    stackSize: 5
+  craftable: 1
+  craftItemSetting:
+    craftingType: 0
+    craftingTime: 45
+    recipeForOneItem:
+    - item: {fileID: 11400000, guid: d04046d958154ed4b8f39c902ff73da4, type: 2}
+      count: 1
+  foodType: 3

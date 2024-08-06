@@ -1,4 +1,6 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Enums;
+﻿using System;
+using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem
@@ -7,13 +9,17 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem
         fileName = "InventoryItem",
         menuName = SOPathName.GameItemPath + "Inventory Item",
         order = 1)]
-    public class SWearItem : SGameItemConfig
+    public class SWearItem : SCraftableItem<SWearItem>
     {
         protected override void OnValidate()
         {
             base.OnValidate();
 
-            gameItemType = EGameItem.Wear;
+        }
+
+        private void Awake()
+        {
+            gameItemType = EGameItemType.Wear;
         }
     }
 }

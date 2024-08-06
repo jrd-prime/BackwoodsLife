@@ -59,8 +59,7 @@ MonoBehaviour:
   audioManager: {fileID: 9066086263725906187}
   eventSystem: {fileID: 3538000293222517056, guid: 176d6967704186742a46409bd636b1c8,
     type: 3}
-  sMainConfigurationsList: {fileID: 11400000, guid: 4eb0b503a40ddc740a478eacd3330ee8,
-    type: 2}
+  sMainConfig: {fileID: 11400000, guid: 4eb0b503a40ddc740a478eacd3330ee8, type: 2}
 --- !u!1001 &1406272716495603427
 PrefabInstance:
   m_ObjectHideFlags: 0

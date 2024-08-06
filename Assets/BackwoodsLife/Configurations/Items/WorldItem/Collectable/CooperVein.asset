@@ -15,12 +15,13 @@ MonoBehaviour:
   itemName: CooperVein
   iconReference:
     m_AssetGUID: 108a8d9b797c13244b4c6d208fd2f957
-    m_SubObjectName: cooper-ore
+    m_SubObjectName: cooper-ore-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
+  worldItemTypeType: 0
   WorldItemType: 4
-  InteractTypes: 1
+  InteractTypes: 0
   requirementType: 
   shortDescription: A place to set a fish trap. Bait is also required.
   fixedPosition: 1
@@ -64,3 +65,9 @@ MonoBehaviour:
   retunedItemsCount: 0
   requiredItemsCount: 0
   collectableLevels: []
+  collectConfig:
+    returnedItems: []
+    requirementForCollect:
+      tool: []
+      skill: []
+      building: []

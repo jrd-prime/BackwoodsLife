@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using Sirenix.OdinInspector;
@@ -11,12 +12,16 @@ using UnityEngine.Assertions;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
 {
+    /// <summary>
+    /// Предмет который находится в игровом мире
+    /// </summary>
     [CreateAssetMenu(
         fileName = "New world item config",
         menuName = SOPathName.WorldItemPath + "New World Item",
         order = 1)]
-    public class SWorldItemConfigNew : SItemConfig
+    public class SWorldItemConfig : SItemConfig
     {
+        [Title("World Item Config")] public EWorldItemType worldItemTypeType;
         public EWorldItemNew WorldItemType;
         public EInteractTypes InteractTypes;
         public List<ERequirement> requirementType;
@@ -142,7 +147,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
 
     public static class ConfigsExtensions
     {
-        public static UpgradeLevel GetLevelRequirements(this SWorldItemConfigNew config, ELevel level)
+        public static UpgradeLevel GetLevelRequirements(this SWorldItemConfig config, ELevel level)
         {
             Debug.LogWarning($"find level: {level}");
 

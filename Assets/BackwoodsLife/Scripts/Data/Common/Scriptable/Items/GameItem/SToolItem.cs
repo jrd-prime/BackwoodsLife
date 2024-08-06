@@ -1,4 +1,6 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Enums;
+﻿using System;
+using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem
@@ -7,13 +9,17 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem
         fileName = "ToolItem",
         menuName = SOPathName.GameItemPath + "Tool Item",
         order = 1)]
-    public class SToolItem : SGameItemConfig
+    public class SToolItem : SCraftableItem<SToolItem>
     {
         protected override void OnValidate()
         {
             base.OnValidate();
             
-            gameItemType = EGameItem.Tool;
+        }
+
+        private void Awake()
+        {
+            gameItemType = EGameItemType.Tool;
         }
     }
 }

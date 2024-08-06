@@ -15,9 +15,12 @@ MonoBehaviour:
   itemName: TinOre
   iconReference:
     m_AssetGUID: 142d9e91d38a45d4ea34d18e8f1777a2
-    m_SubObjectName: tin-ore
+    m_SubObjectName: tin-ore-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  interactableType: 0
-  gameItemType: 1
+  gameItemType: 0
+  itemStorage: 0
+  warehouseItemSetting:
+    stackSize: 0
+  craftable: 0

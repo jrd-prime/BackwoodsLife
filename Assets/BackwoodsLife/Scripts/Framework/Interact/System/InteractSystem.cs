@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
@@ -67,9 +68,9 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             _triggerCallback = onInteractCompleted;
             if (worldInteractableItem == null) throw new NullReferenceException("Interactable obj is null");
 
-            switch (worldInteractableItem.worldItemType)
+            switch (worldInteractableItem.worldItemTypeType)
             {
-                case EWorldItem.Collectable:
+                case EWorldItemType.Collectable:
                     worldInteractableItem.Process(_configManager, _collectSystem, OnCollected);
                     break;
                 default:
@@ -90,7 +91,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             throw new NotImplementedException();
         }
 
-        public void OnBuildZoneEnter(in SWorldItemConfigNew worldItemConfig, Action onBuildStarted)
+        public void OnBuildZoneEnter(in SWorldItemConfig worldItemConfig, Action onBuildStarted)
         {
             // Debug.LogWarning("Interact system. On build Zone enter");
             _buildingPanelUIController.OnBuildZoneEnter(in worldItemConfig, onBuildStarted);

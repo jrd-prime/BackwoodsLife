@@ -49,7 +49,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
             Assert.IsNotNull(_followSystem, $"{_followSystem.GetType()} is null.");
             _followSystem.SetTarget(this);
 
-            var characterConfiguration = _configManager.GetConfig<SCharacterConfiguration>();
+            var characterConfiguration = _configManager.GetConfig<SCharacterConfig>();
             Assert.IsNotNull(characterConfiguration, "Character configuration not found!");
 
             _model.SetMoveSpeed(characterConfiguration.moveSpeed);

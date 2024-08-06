@@ -1,6 +1,6 @@
-﻿namespace BackwoodsLife.Scripts.Data.Common.Enums
+﻿namespace BackwoodsLife.Scripts.Data.Common.Enums.Items
 {
-    public enum EWorldItem
+    public enum EWorldItemType
     {
         Collectable = 0,
         Usable = 1,

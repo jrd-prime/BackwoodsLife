@@ -32,7 +32,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private EventSystem eventSystem;
 
-        [SerializeField] private SMainConfigurationsList sMainConfigurationsList;
+        [FormerlySerializedAs("sMainConfigurationsList")] [SerializeField] private SMainConfig sMainConfig;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -50,7 +50,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             var audioProvider = Check(audioManager.GetComponentInChildren<AudioProvider>());
             var audioSourceProvider = Check(audioManager.GetComponentInChildren<AudioSourceProvider>());
 
-            builder.RegisterInstance(sMainConfigurationsList);
+            builder.RegisterInstance(sMainConfig);
 
 
             // builder.RegisterComponent(resourceManager).AsSelf();

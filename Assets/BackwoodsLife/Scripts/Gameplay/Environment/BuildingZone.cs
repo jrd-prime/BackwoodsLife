@@ -11,7 +11,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
 {
     public class BuildingZone : MonoBehaviour
     {
-        [SerializeField] private SWorldItemConfigNew worldItemConfig;
+        [SerializeField] private SWorldItemConfig worldItemConfig;
 
         public Action OnBuildStarted;
         public Action OnBuildFinished;

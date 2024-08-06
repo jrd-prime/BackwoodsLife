@@ -7,7 +7,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
         fileName = "CharacterConfiguration", 
         menuName = SOPathName.ConfigPath + "Character Configuration",
         order = 100)]
-    public class SCharacterConfiguration : ScriptableObject
+    public class SCharacterConfig : ScriptableObject
     {
         [Range(0.1f, 100f)] public float moveSpeed = 5f;
 

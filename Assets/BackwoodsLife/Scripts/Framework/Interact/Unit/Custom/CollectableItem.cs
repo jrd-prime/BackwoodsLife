@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Data.Inventory;
@@ -12,15 +13,15 @@ using UnityEngine.Assertions;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
 {
-    public class CollectableItem : CustomWorldInteractableItem<SCollectableItem>
+    public class CollectableItem : CustomWorldInteractableItem<SCollectOnlyItem>
     {
         [SerializeField] public ECollectable collectableType;
         [SerializeField] private int collectableLevel;
 
-        [SerializeField] private SCollectableItem worldItemConfig;
+        [SerializeField] private SCollectOnlyItem worldItemConfig;
 
         private CollectSystem _collectSystem;
-        public override EWorldItem worldItemType { get; protected set; } = EWorldItem.Collectable;
+        public override EWorldItemType worldItemTypeType { get; protected set; } = EWorldItemType.Collectable;
 
         public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
             Action<List<InventoryElement>, EInteractType> callback)
@@ -31,7 +32,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
             // config = configManager.GetWorldItemConfig<SCollectableItem>(collectableType.ToString());
 
             // config = configManager.GetItemConfig(worldItemConfig.itemName);
-            var co = configManager.GetItemConfig<SCollectableItem>(worldItemConfig.itemName);
+            var co = configManager.GetItemConfig<SCollectOnlyItem>(worldItemConfig.itemName);
 
             Debug.LogWarning(co.collectConfig);
 

@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5318626d62f14faaaa37fa13e26ececc, type: 3}
   m_Name: Warehouse
   m_EditorClassIdentifier: 
-  itemName: 
-  icon:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  itemName: Warehouse
+  iconReference:
+    m_AssetGUID: c4ae8695573596c468427a59a06371bd
+    m_SubObjectName: warehouse-icon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  worldItemTypeType: 0
   WorldItemType: 0
   InteractTypes: 0
   requirementType: 

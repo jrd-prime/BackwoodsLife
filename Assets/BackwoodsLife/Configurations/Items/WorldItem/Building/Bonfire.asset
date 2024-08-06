@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5318626d62f14faaaa37fa13e26ececc, type: 3}
   m_Name: Bonfire
   m_EditorClassIdentifier: 
-  itemName: 
-  icon:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  itemName: Bonfire
+  iconReference:
+    m_AssetGUID: f7fc1d09f8686f44dbe66713466fc7af
+    m_SubObjectName: bonfire-icon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  worldItemTypeType: 0
   WorldItemType: 0
-  InteractTypes: 0
+  InteractTypes: 3
   requirementType: 
   shortDescription: 
-  fixedPosition: 0
-  fixedPositionValue: {x: 0, y: 0, z: 0}
+  fixedPosition: 1
+  fixedPositionValue: {x: 14, y: 0, z: 0}
   collectConfig:
     returnedItems: []
     requirementForCollect:
@@ -31,6 +33,24 @@ MonoBehaviour:
       skill: []
       building: []
   useConfig:
-    useActions: []
+    useActions:
+    - useType: 0
+    - useType: 1
+    - useType: 2
   upgradeConfig:
-    upgradeLevels: []
+    upgradeLevels:
+    - level: 0
+      levelPrefabReference:
+        m_AssetGUID: 80c6246fef9bfeb44b8696127cef6560
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      reqForUpgrade:
+        resource:
+        - typeName: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
+          value: 30
+        - typeName: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
+          value: 15
+        tool: []
+        skill: []
+        building: []

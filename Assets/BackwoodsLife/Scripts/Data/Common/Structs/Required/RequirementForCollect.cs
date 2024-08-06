@@ -12,7 +12,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
     {
         public List<CustomRequirement<SToolItem>> tool;
         public List<CustomRequirement<SSkillItem>> skill;
-        public List<CustomRequirement<SBuildingItem>> building;
+        public List<CustomRequirement<SUseAndUpgradeItem>> building;
     }
 
     [Serializable]
@@ -21,7 +21,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
         public List<CustomRequirement<SResourceItem>> resource;
         public List<CustomRequirement<SToolItem>> tool;
         public List<CustomRequirement<SSkillItem>> skill;
-        public List<CustomRequirement<SBuildingItem>> building;
+        public List<CustomRequirement<SUseAndUpgradeItem>> building;
     }
 
     [Serializable]

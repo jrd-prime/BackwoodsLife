@@ -39,7 +39,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
 
         public void Fill(Dictionary<EItemData, Dictionary<SItemConfig, int>> level,
             in BuildingPanelElementsRef buildingPanelElementsRef,
-            in SWorldItemConfigNew itemConfig)
+            in SWorldItemConfig itemConfig)
         {
             _panelRef = buildingPanelElementsRef;
             _panelRef.NameRef.text = itemConfig.name;

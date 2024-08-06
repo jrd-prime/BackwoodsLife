@@ -7,6 +7,7 @@ using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
 {
@@ -14,9 +15,10 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
         fileName = "MainConfigurations",
         menuName = SOPathName.ConfigPath + "Main Configurations List",
         order = 100)]
-    public class SMainConfigurationsList : ScriptableObject
+    public class SMainConfig : ScriptableObject
     {
-        [Title("Character")] public SCharacterConfiguration characterConfiguration;
+        [FormerlySerializedAs("characterConfiguration")] [Title("Character")]
+        public SCharacterConfig characterConfig;
 
         [Title("Items")] public GameItemsList GameItemsList;
 
@@ -37,7 +39,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
             Check(WorldItemsList.placeItems, typeof(EPlace), "Place");
         }
 
-        private void Check<T>(List<CustomItemConfig<T>> resourceItems, Type type, string id) where T : SItemConfig
+        public void Check<T>(List<CustomItemConfig<T>> resourceItems, Type type, string id) where T : SItemConfig
         {
             var count = Enum.GetNames(type).Length;
 
@@ -58,9 +60,9 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
     [Serializable]
     public struct WorldItemsList
     {
-        public List<CustomItemConfig<SBuildingItem>> buildingItems;
-        public List<CustomItemConfig<SCollectableItem>> collectableItems;
-        public List<CustomItemConfig<SPlaceItem>> placeItems;
+        public List<CustomItemConfig<SUseAndUpgradeItem>> buildingItems;
+        public List<CustomItemConfig<SCollectOnlyItem>> collectableItems;
+        public List<CustomItemConfig<SUseOnlyItem>> placeItems;
     }
 
     [Serializable]

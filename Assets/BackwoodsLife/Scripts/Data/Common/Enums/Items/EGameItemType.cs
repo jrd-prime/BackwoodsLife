@@ -1,6 +1,6 @@
-﻿namespace BackwoodsLife.Scripts.Data.Common.Enums
+﻿namespace BackwoodsLife.Scripts.Data.Common.Enums.Items
 {
-    public enum EGameItem
+    public enum EGameItemType
     {
         Food = 0,
         Resource = 1,

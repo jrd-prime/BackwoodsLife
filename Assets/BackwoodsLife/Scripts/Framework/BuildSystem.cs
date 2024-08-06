@@ -17,7 +17,7 @@ namespace BackwoodsLife.Scripts.Framework
             _assetProvider = assetProvider;
         }
 
-        public async void BuildAsync(SWorldItemConfigNew worldItemConfig, Action onBuildFinish)
+        public async void BuildAsync(SWorldItemConfig worldItemConfig, Action onBuildFinish)
         {
             Debug.LogWarning("Build");
 

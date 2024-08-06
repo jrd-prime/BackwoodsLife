@@ -48,7 +48,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
             _buildButton = _buildingPanelElementsRef.BuildButton;
         }
 
-        public void OnBuildZoneEnter(in SWorldItemConfigNew worldItemConfig, Action onBuildStarted)
+        public void OnBuildZoneEnter(in SWorldItemConfig worldItemConfig, Action onBuildStarted)
         {
             Debug.LogWarning("OnBuildZoneEnter");
             _buildZoneCallback = onBuildStarted;
