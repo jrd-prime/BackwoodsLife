@@ -13,14 +13,20 @@ MonoBehaviour:
   m_Name: TinOre
   m_EditorClassIdentifier: 
   itemName: TinOre
+  worldItemTypeName: 0
+  shortDescription: 
   iconReference:
     m_AssetGUID: 142d9e91d38a45d4ea34d18e8f1777a2
     m_SubObjectName: tin-ore-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  gameItemType: 0
-  itemStorage: 0
+  gameItemType: 1
+  itemStorage: 1
   warehouseItemSetting:
     stackSize: 0
   craftable: 0
+  craftItemSetting:
+    craftingType: 0
+    craftingTime: 0
+    recipeForOneItem: []

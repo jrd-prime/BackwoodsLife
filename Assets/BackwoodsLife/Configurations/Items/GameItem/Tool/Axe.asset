@@ -13,11 +13,20 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   itemName: Axe
+  worldItemTypeName: 0
+  shortDescription: 
   iconReference:
     m_AssetGUID: 55befca165c427740840cecd26b3b255
     m_SubObjectName: axe-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  interactableType: 0
   gameItemType: 3
+  itemStorage: 2
+  warehouseItemSetting:
+    stackSize: 0
+  craftable: 0
+  craftItemSetting:
+    craftingType: 0
+    craftingTime: 0
+    recipeForOneItem: []

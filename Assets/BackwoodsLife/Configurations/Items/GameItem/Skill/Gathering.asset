@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: Gathering
   m_EditorClassIdentifier: 
   itemName: Gathering
-  uiIcon: {fileID: 21300000, guid: cc5121c02d2370348961808d31946583, type: 3}
-  interactableType: 0
+  worldItemTypeName: 0
+  shortDescription: 
+  iconReference:
+    m_AssetGUID: ba9a2f2c1bbe9fc44b6eea515d717ce6
+    m_SubObjectName: stone-icon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
   gameItemType: 2
+  itemStorage: 2
+  warehouseItemSetting:
+    stackSize: 0

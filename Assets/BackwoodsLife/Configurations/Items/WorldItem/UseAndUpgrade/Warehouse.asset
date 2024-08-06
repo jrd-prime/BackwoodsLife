@@ -13,25 +13,18 @@ MonoBehaviour:
   m_Name: Warehouse
   m_EditorClassIdentifier: 
   itemName: Warehouse
+  worldItemTypeName: 2
+  shortDescription: 
   iconReference:
     m_AssetGUID: c4ae8695573596c468427a59a06371bd
     m_SubObjectName: warehouse-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  worldItemTypeType: 0
-  WorldItemType: 0
-  InteractTypes: 0
-  requirementType: 
-  shortDescription: 
+  interactTypes: 3
+  interactAnimation: 0
   fixedPosition: 0
   fixedPositionValue: {x: 0, y: 0, z: 0}
-  collectConfig:
-    returnedItems: []
-    requirementForCollect:
-      tool: []
-      skill: []
-      building: []
   useConfig:
     useActions: []
   upgradeConfig:

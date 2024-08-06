@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0efe7e3ee6b44ecdbec91b09fba01d7b, type: 3}
   m_Name: MainConfiguration
   m_EditorClassIdentifier: 
-  characterConfiguration: {fileID: 11400000, guid: 0caa8a7d20288344a81d7ad91e3819be,
-    type: 2}
+  characterConfig: {fileID: 11400000, guid: 0caa8a7d20288344a81d7ad91e3819be, type: 2}
   GameItemsList:
     resourceItems:
     - config: {fileID: 11400000, guid: 05bc6d68211d3e741b5d8583e5fa6a78, type: 2}
@@ -31,6 +30,8 @@ MonoBehaviour:
     foodItems:
     - config: {fileID: 11400000, guid: 3da48bd6650c1674bbd54f02a25f1fa0, type: 2}
     - config: {fileID: 11400000, guid: 5b422285c117d034bb6c3e5833c88fb4, type: 2}
+    - config: {fileID: 11400000, guid: d04046d958154ed4b8f39c902ff73da4, type: 2}
+    - config: {fileID: 11400000, guid: de7b3d03ef337194c94f0b65d9ce0fa2, type: 2}
   WorldItemsList:
     buildingItems:
     - config: {fileID: 11400000, guid: 8540679380a77794685e8f2051375b68, type: 2}

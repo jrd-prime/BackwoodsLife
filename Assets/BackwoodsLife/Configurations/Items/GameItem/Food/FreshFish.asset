@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff6a3dea164ebd90e362af632c9f8f, type: 3}
   m_Name: FreshFish
   m_EditorClassIdentifier: 
-  itemName: GrilledFish
+  itemName: FreshFish
+  worldItemTypeName: 0
+  shortDescription: 
   iconReference:
     m_AssetGUID: c8dedd39500d93f49b6768829b90d41b
     m_SubObjectName: mushroom-icon
@@ -22,11 +24,10 @@ MonoBehaviour:
   gameItemType: 0
   itemStorage: 1
   warehouseItemSetting:
-    stackSize: 5
-  craftable: 1
+    stackSize: 10
+  craftable: 0
   craftItemSetting:
     craftingType: 0
-    recipe:
-    - item: {fileID: 11400000}
-      count: 0
+    craftingTime: 0
+    recipeForOneItem: []
   foodType: 2

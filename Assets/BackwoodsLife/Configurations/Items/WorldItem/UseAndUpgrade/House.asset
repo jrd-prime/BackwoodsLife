@@ -13,25 +13,18 @@ MonoBehaviour:
   m_Name: House
   m_EditorClassIdentifier: 
   itemName: House
+  worldItemTypeName: 1
+  shortDescription: 
   iconReference:
     m_AssetGUID: 19c9549112dffb146a5e49e93d194902
     m_SubObjectName: tent-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  worldItemTypeType: 0
-  WorldItemType: 0
-  InteractTypes: 3
-  requirementType: 
-  shortDescription: 
+  interactTypes: 3
+  interactAnimation: 0
   fixedPosition: 1
   fixedPositionValue: {x: 10, y: 0, z: 4}
-  collectConfig:
-    returnedItems: []
-    requirementForCollect:
-      tool: []
-      skill: []
-      building: []
   useConfig:
     useActions:
     - useType: 3

@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: Hat
   m_EditorClassIdentifier: 
   itemName: Hat
-  uiIcon: {fileID: 21300000, guid: 44a054df1702e39458b7072b08d0f212, type: 3}
-  interactableType: 0
+  worldItemTypeName: 0
+  shortDescription: 
+  iconReference:
+    m_AssetGUID: 1511e35934ea2444cba32f5ed2f1f5dc
+    m_SubObjectName: stick-icon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
   gameItemType: 4
+  itemStorage: 2
+  warehouseItemSetting:
+    stackSize: 0
+  craftable: 0
+  craftItemSetting:
+    craftingType: 0
+    craftingTime: 0
+    recipeForOneItem: []

@@ -13,25 +13,18 @@ MonoBehaviour:
   m_Name: TinVein
   m_EditorClassIdentifier: 
   itemName: TinVein
+  worldItemTypeName: 0
+  shortDescription: A place to set a fish trap. Bait is also required.
   iconReference:
     m_AssetGUID: 142d9e91d38a45d4ea34d18e8f1777a2
     m_SubObjectName: tin-ore-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  worldItemTypeType: 0
-  WorldItemType: 4
-  InteractTypes: 0
-  requirementType: 
-  shortDescription: A place to set a fish trap. Bait is also required.
-  fixedPosition: 1
+  interactTypes: 0
+  interactAnimation: 2
+  fixedPosition: 0
   fixedPositionValue: {x: 11, y: 0, z: 3}
-  collectConfig:
-    returnedItems: []
-    requirementForCollect:
-      tool: []
-      skill: []
-      building: []
   useConfig:
     useActions:
     - useType: 6
@@ -62,11 +55,13 @@ MonoBehaviour:
         building:
         - typeName: {fileID: 11400000, guid: 39081289efa4f1a41a6be7e354071ea5, type: 2}
           value: 1
-  retunedItemsCount: 0
-  requiredItemsCount: 0
   collectableLevels: []
   collectConfig:
-    returnedItems: []
+    returnedItems:
+    - item: {fileID: 11400000, guid: 9799e7405dfe6a54babd9ac223aa686d, type: 2}
+      range:
+        min: 3
+        max: 6
     requirementForCollect:
       tool: []
       skill: []

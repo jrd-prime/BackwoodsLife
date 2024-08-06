@@ -13,11 +13,20 @@ MonoBehaviour:
   m_Name: StoneKnife
   m_EditorClassIdentifier: 
   itemName: StoneKnife
+  worldItemTypeName: 0
+  shortDescription: 
   iconReference:
     m_AssetGUID: f5cd43095f9e58f4c8fc8df42280139d
     m_SubObjectName: knife-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  interactableType: 0
   gameItemType: 3
+  itemStorage: 2
+  warehouseItemSetting:
+    stackSize: 0
+  craftable: 0
+  craftItemSetting:
+    craftingType: 0
+    craftingTime: 0
+    recipeForOneItem: []
