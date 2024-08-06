@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
 {
@@ -11,5 +12,10 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
         order = 1)]
     public class SUseOnlyItem : SWorldItemConfig
     {
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            interactTypes = EInteractTypes.Use;
+        }
     }
 }

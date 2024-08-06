@@ -1,6 +1,6 @@
 ﻿namespace BackwoodsLife.Scripts.Data.Common.Enums
 {
-    public enum EWorldItemNew
+    public enum EWorldItemName
     {
         Bonfire,
         House,

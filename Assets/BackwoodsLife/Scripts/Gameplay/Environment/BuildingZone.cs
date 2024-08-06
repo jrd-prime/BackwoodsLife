@@ -58,7 +58,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
             if (!_isInTriggerZone || _interactSystem.IsMoving) return;
 
             Debug.LogWarning("In zone and not moving, building!");
-            Debug.Log($"Char in trigger zone! {name} / {worldItemConfig.InteractTypes}");
+            Debug.Log($"Char in trigger zone! {name} / {worldItemConfig.interactTypes}");
             _interactSystem.OnBuildZoneEnter(in worldItemConfig, OnBuildStarted);
         }
 
@@ -78,14 +78,14 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
         private void OnLeaveZone()
         {
             _isInTriggerZone = false;
-            Debug.LogWarning($"Char leave zone! {name} / {worldItemConfig.InteractTypes}");
+            Debug.LogWarning($"Char leave zone! {name} / {worldItemConfig.interactTypes}");
             _interactSystem.OnBuildZoneExit();
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (!_isInTriggerZone) return;
-            Debug.LogWarning($"Char exit from trigger zone! {name} / {worldItemConfig.InteractTypes}");
+            Debug.LogWarning($"Char exit from trigger zone! {name} / {worldItemConfig.interactTypes}");
             OnLeaveZone();
         }
     }

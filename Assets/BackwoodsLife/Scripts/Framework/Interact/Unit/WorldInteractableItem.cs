@@ -14,6 +14,6 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit
     {
         public abstract EWorldItemType worldItemTypeType { get; protected set; }
         public abstract void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
-            Action<List<InventoryElement>, EInteractType> callback);
+            Action<List<InventoryElement>, EInteractAnimation> callback);
     }
 }

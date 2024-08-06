@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using Sirenix.OdinInspector;
@@ -21,22 +20,21 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
         order = 1)]
     public class SWorldItemConfig : SItemConfig
     {
-        [Title("World Item Config")] public EWorldItemType worldItemTypeType;
-        public EWorldItemNew WorldItemType;
-        public EInteractTypes InteractTypes;
-        public List<ERequirement> requirementType;
-        public string shortDescription;
+        [Title("World Item Config")] [ReadOnly]
+        public EInteractTypes interactTypes;
 
-        public bool fixedPosition = false;
+        [Title("Interact Animation Setup")] public EInteractAnimation interactAnimation;
+
+        [Title("World Position Setup")] public bool fixedPosition;
         [ShowIf("@fixedPosition")] public Vector3 fixedPositionValue;
 
-        [ShowIf("@InteractTypes == EInteractTypes.Collect")]
-        public CollectConfig collectConfig;
 
-        [ShowIf("@InteractTypes == EInteractTypes.Use|| InteractTypes == EInteractTypes.UseAndUpgrade")]
+        [ShowIf("@interactTypes == EInteractTypes.Use || interactTypes == EInteractTypes.UseAndUpgrade")]
+        [Title("Use Setup")]
         public UseConfig useConfig;
 
-        [ShowIf("@InteractTypes == EInteractTypes.Upgrade || InteractTypes == EInteractTypes.UseAndUpgrade")]
+        [ShowIf("@interactTypes == EInteractTypes.Upgrade || interactTypes == EInteractTypes.UseAndUpgrade")]
+        [Title("Upgrade Setup")]
         public UpgradeConfig upgradeConfig;
 
         private Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>> _reqForUpgradeCache;
@@ -50,9 +48,11 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
         protected override void OnValidate()
         {
             base.OnValidate();
+            Assert.IsTrue(interactAnimation != EInteractAnimation.NotSet,
+                $"InteractType is not set. World item config: {name}");
             Assert.IsTrue(iconReference.RuntimeKeyIsValid(), $"Icon asset ref is not set. World item config: {name}");
 
-            if (InteractTypes == EInteractTypes.Upgrade || InteractTypes == EInteractTypes.UseAndUpgrade)
+            if (interactTypes == EInteractTypes.Upgrade || interactTypes == EInteractTypes.UseAndUpgrade)
             {
                 if (upgradeConfig.upgradeLevels[0].levelPrefabReference.RuntimeKeyIsValid() == false)
                 {
@@ -72,22 +72,6 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
                     upgradeLevel.reqForUpgrade.tool.Count > 3)
                     throw new Exception(
                         $"{name} Building/Tool/Skill requirements for upgrade level {upgradeLevel.level} is too much. Max 3 per type!");
-
-                switch (InteractTypes)
-                {
-                    case EInteractTypes.Collect:
-                        break;
-                    case EInteractTypes.Use:
-                        break;
-                    case EInteractTypes.Upgrade:
-                        // CheckUpgrade(upgradeLevel);
-                        break;
-                    case EInteractTypes.UseAndUpgrade:
-                        // CheckUpgrade(upgradeLevel);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
             }
 
             _reqForUpgradeCache = null;

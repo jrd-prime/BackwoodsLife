@@ -11,5 +11,11 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
         order = 1)]
     public class SUseAndUpgradeItem : SWorldItemConfig
     {
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            interactTypes = EInteractTypes.UseAndUpgrade;
+        }
     }
 }

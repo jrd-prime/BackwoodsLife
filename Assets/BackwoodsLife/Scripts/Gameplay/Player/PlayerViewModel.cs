@@ -71,30 +71,30 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
 
         public void Dispose() => _disposables.Dispose();
 
-        public async UniTask SetCollectableActionForAnimationAsync(EInteractType interactType)
+        public async UniTask SetCollectableActionForAnimationAsync(EInteractAnimation interactAnimation)
         {
-            Debug.LogWarning("SetCollectableActionForAnimation called. InteractType: " + interactType);
+            Debug.LogWarning("SetCollectableActionForAnimation called. InteractType: " + interactAnimation);
             IsInAction.Value = true;
 
-            switch (interactType)
+            switch (interactAnimation)
             {
-                case EInteractType.Gathering:
+                case EInteractAnimation.Gathering:
                     await NewActionAsync(AnimConst.IsGathering, 5000);
                     break;
-                case EInteractType.Cutting:
+                case EInteractAnimation.Cutting:
                     await NewActionAsync(AnimConst.IsCutting, 2267 * 3);
                     break;
-                case EInteractType.Mining:
+                case EInteractAnimation.Mining:
                     await NewActionAsync(AnimConst.IsMining, 6933);
                     break;
-                case EInteractType.Fishing:
+                case EInteractAnimation.Fishing:
                     // IsFishing.Value = true;
                     break;
-                case EInteractType.Hunting:
+                case EInteractAnimation.Hunting:
                     // IsHunting.Value = true;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(interactType), interactType, null);
+                    throw new ArgumentOutOfRangeException(nameof(interactAnimation), interactAnimation, null);
             }
 
             IsInAction.Value = false;

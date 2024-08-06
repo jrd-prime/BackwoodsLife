@@ -38,7 +38,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
 
         public bool IsMoving { get; private set; }
 
-        public event Action<List<InventoryElement>, EInteractType> OnCollected;
+        public event Action<List<InventoryElement>, EInteractAnimation> OnCollected;
 
 
         [Inject]
@@ -78,9 +78,9 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             }
         }
 
-        private async void OnCollect(List<InventoryElement> obj, EInteractType interactType)
+        private async void OnCollect(List<InventoryElement> obj, EInteractAnimation interactAnimation)
         {
-            await _playerViewModel.SetCollectableActionForAnimationAsync(interactType);
+            await _playerViewModel.SetCollectableActionForAnimationAsync(interactAnimation);
 
             _triggerCallback.Invoke();
             _characterOverUIHolder.ShowPopUpFor(obj);

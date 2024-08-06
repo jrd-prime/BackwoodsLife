@@ -24,59 +24,45 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
         public override EWorldItemType worldItemTypeType { get; protected set; } = EWorldItemType.Collectable;
 
         public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
-            Action<List<InventoryElement>, EInteractType> callback)
+            Action<List<InventoryElement>, EInteractAnimation> callback)
         {
             Assert.IsNotNull(configManager, "configManager is null");
             Assert.IsNotNull(worldItemConfig, $"{this}. Config not set");
 
-            // config = configManager.GetWorldItemConfig<SCollectableItem>(collectableType.ToString());
-
-            // config = configManager.GetItemConfig(worldItemConfig.itemName);
-            var co = configManager.GetItemConfig<SCollectOnlyItem>(worldItemConfig.itemName);
-
-            Debug.LogWarning(co.collectConfig);
-
+            var itemConfig = configManager.GetItemConfig<SCollectOnlyItem>(worldItemConfig.itemName);
 
             Assert.IsNotNull(interactableSystem, "interactableSystem is null");
             _collectSystem = interactableSystem as CollectSystem;
             Assert.IsNotNull(_collectSystem, "interactableSystem is not CollectSystem");
 
 
-            if (config.retunedItemsCount > 0)
+            if (itemConfig.interactAnimation == EInteractAnimation.NotSet)
+                throw new NullReferenceException("Interact animation is null");
+
+            if (itemConfig.collectConfig.returnedItems.Count > 0)
             {
                 Debug.LogWarning("HAS COLLECTABLE");
-                if (config.requiredItemsCount > 0)
+                if (itemConfig.collectConfig.requirementForCollect.building.Count > 0 ||
+                    itemConfig.collectConfig.requirementForCollect.tool.Count > 0 ||
+                    itemConfig.collectConfig.requirementForCollect.skill.Count > 0)
                 {
                     Debug.LogWarning("HAS REQUIREMENTS");
                 }
                 else
                 {
                     Debug.LogWarning("NO REQUIREMENTS just collect");
-
-                    // var list = localData.returnElements.Select(element => new InventoryElement
-                    //     {
-                    //         typeName = element.Name,
-                    //         Amount = RandomCollector.GetRandom(element.Range.min, element.Range.max)
-                    //     })
-                    //     .ToList();
-                    //
-                    // callback.Invoke(list);
-                    //
-                    // _collectSystem.Collect(ref list);
-
                     var list = new List<InventoryElement>();
-                    var lvl = config.collectableLevels[collectableLevel];
-                    foreach (var returnedItem in lvl.returnedItems)
+
+                    foreach (var returnedItem in itemConfig.collectConfig.returnedItems)
                     {
-                        list.Add(new InventoryElement
+                        list.Add(new InventoryElement()
                         {
                             typeName = returnedItem.item.itemName,
                             Amount = RandomCollector.GetRandom(returnedItem.range.min, returnedItem.range.max)
                         });
                     }
 
-
-                    // callback.Invoke(list, config.);
+                    callback.Invoke(list, itemConfig.interactAnimation);
                     _collectSystem.Collect(ref list);
                 }
             }

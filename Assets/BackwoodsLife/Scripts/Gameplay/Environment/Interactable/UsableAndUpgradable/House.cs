@@ -13,7 +13,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.UsableAndUpgra
     public class House : WorldInteractableItem
     {
         public override EWorldItemType worldItemTypeType { get; protected set; }
-        public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem, Action<List<InventoryElement>, EInteractType> callback)
+        public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem, Action<List<InventoryElement>, EInteractAnimation> callback)
         {
             throw new NotImplementedException();
         }

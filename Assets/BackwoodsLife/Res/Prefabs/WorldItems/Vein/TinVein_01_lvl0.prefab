@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectableType: 5
   collectableLevel: 0
+  worldItemConfig: {fileID: 11400000, guid: 1c3ed10a3f8936641937b06a75bafc79, type: 2}
 --- !u!1001 &4340020655608352229
 PrefabInstance:
   m_ObjectHideFlags: 0

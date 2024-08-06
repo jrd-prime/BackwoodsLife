@@ -1,4 +1,5 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Data.Common.Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -8,7 +9,8 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
     public abstract class SItemConfig : ScriptableObject
     {
         [Title("Item Config")] [ReadOnly] public string itemName;
-
+        public EWorldItemName worldItemTypeName;
+        public string shortDescription;
         public AssetReferenceTexture2D iconReference;
 
         protected virtual void OnValidate()
