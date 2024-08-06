@@ -45,7 +45,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
             _panelRef.NameRef.text = itemConfig.name;
             _panelRef.DescriptionRef.text = itemConfig.shortDescription;
 
-            LoadAndSetIcon(_panelRef.IconRef, itemConfig.icon);
+            LoadAndSetIcon(_panelRef.IconRef, itemConfig.iconReference);
 
             _panelRef.ResourceContainer.Clear();
             _panelRef.OtherContainer.Clear();
@@ -80,7 +80,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
                 SetIsEnoughIcon(isEnough, EItemData.Resource,
                     new Dictionary<SItemConfig, int> { { pair.Key, pair.Value } });
 
-                LoadAndSetIcon(icon, pair.Key.icon);
+                LoadAndSetIcon(icon, pair.Key.iconReference);
 
                 SetText(label, ReqStatText(EItemData.Resource, pair.Key.itemName, pair.Value));
 

@@ -45,7 +45,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
         protected override void OnValidate()
         {
             base.OnValidate();
-            Assert.IsTrue(icon.RuntimeKeyIsValid(), $"Icon asset ref is not set. World item config: {name}");
+            Assert.IsTrue(iconReference.RuntimeKeyIsValid(), $"Icon asset ref is not set. World item config: {name}");
 
             if (InteractTypes == EInteractTypes.Upgrade || InteractTypes == EInteractTypes.UseAndUpgrade)
             {

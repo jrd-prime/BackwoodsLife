@@ -24,8 +24,8 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
         {
             base.OnValidate();
 
-            if (collectableLevels.Count == 0)
-                throw new Exception("No collectable levels in " + name + ". You need at least one collectable level");
+            // if (collectableLevels.Count == 0)
+            //     throw new Exception("No collectable levels in " + name + ". You need at least one collectable level");
 
             CollectableLevelsDict.Clear();
             foreach (var level in collectableLevels)

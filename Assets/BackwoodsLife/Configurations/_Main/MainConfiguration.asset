@@ -16,25 +16,33 @@ MonoBehaviour:
     type: 2}
   GameItemsList:
     resourceItems:
-    - Config: {fileID: 11400000, guid: 05bc6d68211d3e741b5d8583e5fa6a78, type: 2}
-    - Config: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
-    - Config: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
-    - Config: {fileID: 11400000, guid: 9799e7405dfe6a54babd9ac223aa686d, type: 2}
-    - Config: {fileID: 11400000, guid: 46dd9e11499fff24f97a11ccb2805ce1, type: 2}
+    - config: {fileID: 11400000, guid: 05bc6d68211d3e741b5d8583e5fa6a78, type: 2}
+    - config: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
+    - config: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
+    - config: {fileID: 11400000, guid: 9799e7405dfe6a54babd9ac223aa686d, type: 2}
+    - config: {fileID: 11400000, guid: 46dd9e11499fff24f97a11ccb2805ce1, type: 2}
     toolItems:
-    - Config: {fileID: 11400000, guid: 4a49fd94b87c28944bfecf0c700f2e57, type: 2}
-    - Config: {fileID: 11400000, guid: 14abc33a29a934448996187b4e8ae3f4, type: 2}
-    - Config: {fileID: 11400000, guid: 47dcd9baea59feb47a6c7b52830128ea, type: 2}
+    - config: {fileID: 11400000, guid: 4a49fd94b87c28944bfecf0c700f2e57, type: 2}
+    - config: {fileID: 11400000, guid: 14abc33a29a934448996187b4e8ae3f4, type: 2}
+    - config: {fileID: 11400000, guid: 47dcd9baea59feb47a6c7b52830128ea, type: 2}
     skillItems:
-    - Config: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
-    - Config: {fileID: 11400000, guid: e5cf509cc005144408a89c0d8452af3a, type: 2}
+    - config: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
+    - config: {fileID: 11400000, guid: e5cf509cc005144408a89c0d8452af3a, type: 2}
     foodItems:
-    - Config: {fileID: 11400000, guid: 3da48bd6650c1674bbd54f02a25f1fa0, type: 2}
-    - Config: {fileID: 11400000, guid: 5b422285c117d034bb6c3e5833c88fb4, type: 2}
+    - config: {fileID: 11400000, guid: 3da48bd6650c1674bbd54f02a25f1fa0, type: 2}
+    - config: {fileID: 11400000, guid: 5b422285c117d034bb6c3e5833c88fb4, type: 2}
   WorldItemsList:
     buildingItems:
-    - Config: {fileID: 0}
+    - config: {fileID: 11400000, guid: 8540679380a77794685e8f2051375b68, type: 2}
+    - config: {fileID: 11400000, guid: 597102a6c8e75bf4baebf53aa80da2fd, type: 2}
+    - config: {fileID: 11400000, guid: c01ecb6cadd0e6448b473184846bb5e7, type: 2}
     collectableItems:
-    - Config: {fileID: 11400000, guid: 049f409acb83e3e44a9446beaad366c1, type: 2}
-    warehouseItems:
-    - Config: {fileID: 0}
+    - config: {fileID: 11400000, guid: 049f409acb83e3e44a9446beaad366c1, type: 2}
+    - config: {fileID: 11400000, guid: c0736b5f1ae046a4e87eeca5f859b4d0, type: 2}
+    - config: {fileID: 11400000, guid: 7c09f5f602a014e49a07e3f5319a90c0, type: 2}
+    - config: {fileID: 11400000, guid: 2684b9e31c0ce0c49b28e122726ceb5c, type: 2}
+    - config: {fileID: 11400000, guid: 1c3ed10a3f8936641937b06a75bafc79, type: 2}
+    - config: {fileID: 11400000, guid: 63f6c5fdc98ec844dbe11a6928adc3d1, type: 2}
+    placeItems:
+    - config: {fileID: 11400000, guid: 369ee61514a13e84a8242ba0356f0891, type: 2}
+    - config: {fileID: 11400000, guid: 8b58d836a6945e14ca26c812e491f824, type: 2}

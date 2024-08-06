@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
 {
@@ -9,7 +10,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
     {
         [ReadOnly] public string itemName;
 
-        [Title("UI Config")] public AssetReferenceTexture2D icon;
+        [FormerlySerializedAs("icon")] [Title("UI Config")] public AssetReferenceTexture2D iconReference;
         // [Title("Main")] [ReadOnly] public EInteractableObject interactableType;
 
         protected virtual void OnValidate()

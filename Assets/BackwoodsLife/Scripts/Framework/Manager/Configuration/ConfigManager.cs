@@ -27,23 +27,24 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
             ConfigsCache = new Dictionary<Type, object>();
             AddToCache(_mainConfigurationsList.characterConfiguration);
 
-            // foreach (var VARIABLE in _mainConfigurationsList.GameItemsList)
-            // {
-            //     
-            // }
+            //TODO refactor
+            AddToItemsCache(_mainConfigurationsList.GameItemsList.resourceItems);
+            AddToItemsCache(_mainConfigurationsList.GameItemsList.foodItems);
+            AddToItemsCache(_mainConfigurationsList.GameItemsList.skillItems);
+            AddToItemsCache(_mainConfigurationsList.GameItemsList.toolItems);
+            AddToItemsCache(_mainConfigurationsList.WorldItemsList.placeItems);
+            AddToItemsCache(_mainConfigurationsList.WorldItemsList.collectableItems);
+            AddToItemsCache(_mainConfigurationsList.WorldItemsList.buildingItems);
+        }
+
+        private void AddToItemsCache<T>(List<CustomItemConfig<T>> items) where T : SItemConfig
+        {
+            foreach (var item in items) ItemsConfigCache.Add(item.config.itemName, item.config);
         }
 
         private void AddToCache(object config)
         {
             if (ConfigsCache.TryAdd(config.GetType(), config)) Debug.Log($"Add to cache {config.GetType()}");
-        }
-
-        public T GetConfig<T>() where T : ScriptableObject
-        {
-            if (!ConfigsCache.ContainsKey(typeof(T)))
-                throw new KeyNotFoundException($"Config {typeof(T)} not found");
-
-            return (T)ConfigsCache[typeof(T)];
         }
 
         public T GetWorldItemConfig<T>(string enumTypeName) where T : SWorldItemConfigNew
@@ -65,12 +66,20 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 
         public AssetReferenceTexture2D GetIconReference(string elementTypeName)
         {
-            var iconRef = GetConfig<SGameItemsList>();
+            return GetItemConfig(elementTypeName).iconReference;
+        }
 
-            if (!iconRef.ConfigsCache.TryGetValue(elementTypeName, out var itemConfig))
-                throw new NullReferenceException($"Icon not found for {elementTypeName}");
+        public T GetConfig<T>() where T : ScriptableObject
+        {
+            return ConfigsCache[typeof(T)] as T;
+        }
 
-            return itemConfig.icon;
+        public SItemConfig GetItemConfig(string elementTypeName)
+        {
+            if (!ItemsConfigCache.ContainsKey(elementTypeName))
+                throw new KeyNotFoundException($"Config {elementTypeName} not found");
+
+            return ItemsConfigCache[elementTypeName];
         }
     }
 }
