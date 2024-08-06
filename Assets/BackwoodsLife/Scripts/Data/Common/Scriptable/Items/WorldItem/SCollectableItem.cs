@@ -18,6 +18,10 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
 
         [Title("Collectable Setup")] public List<CollectableLevel> collectableLevels;
 
+
+        public CollectConfig collectConfig;
+
+
         public readonly Dictionary<int, CollectableLevel> CollectableLevelsDict = new();
 
         protected override void OnValidate()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
@@ -11,7 +12,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
     {
         public List<CustomRequirement<SToolItem>> tool;
         public List<CustomRequirement<SSkillItem>> skill;
-        public List<CustomRequirement<SWorldItemConfigNew>> building;
+        public List<CustomRequirement<SBuildingItem>> building;
     }
 
     [Serializable]
@@ -20,7 +21,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
         public List<CustomRequirement<SResourceItem>> resource;
         public List<CustomRequirement<SToolItem>> tool;
         public List<CustomRequirement<SSkillItem>> skill;
-        public List<CustomRequirement<SWorldItemConfigNew>> building;
+        public List<CustomRequirement<SBuildingItem>> building;
     }
 
     [Serializable]

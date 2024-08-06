@@ -54,7 +54,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
             _buildZoneCallback = onBuildStarted;
             _buildButton.clicked += OnBuildButtonClicked;
 
-            Dictionary<EItemData, Dictionary<SItemConfig, int>> level = worldItemConfig.GetLevelReq(ELevel.Level_1);
+            if (!worldItemConfig.GetLevelReq(ELevel.Level_1, out var level))
+                throw new NullReferenceException(
+                    $"Level 1 not found in UpgradeCache. Check config: {worldItemConfig.itemName}");
+
 
             var isEnough = _gameDataManager.IsEnoughForBuild(level);
 

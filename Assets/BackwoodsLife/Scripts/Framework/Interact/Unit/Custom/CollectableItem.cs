@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Helpers;
@@ -10,7 +9,6 @@ using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
 {
@@ -19,7 +17,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
         [SerializeField] public ECollectable collectableType;
         [SerializeField] private int collectableLevel;
 
-        [SerializeField] private SWorldItemConfigNew worldItemConfig;
+        [SerializeField] private SCollectableItem worldItemConfig;
 
         private CollectSystem _collectSystem;
         public override EWorldItem worldItemType { get; protected set; } = EWorldItem.Collectable;
@@ -28,8 +26,15 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
             Action<List<InventoryElement>, EInteractType> callback)
         {
             Assert.IsNotNull(configManager, "configManager is null");
+            Assert.IsNotNull(worldItemConfig, $"{this}. Config not set");
 
-            config = configManager.GetWorldItemConfig<SCollectableItem>(collectableType.ToString());
+            // config = configManager.GetWorldItemConfig<SCollectableItem>(collectableType.ToString());
+
+            // config = configManager.GetItemConfig(worldItemConfig.itemName);
+            var co = configManager.GetItemConfig<SCollectableItem>(worldItemConfig.itemName);
+
+            Debug.LogWarning(co.collectConfig);
+
 
             Assert.IsNotNull(interactableSystem, "interactableSystem is null");
             _collectSystem = interactableSystem as CollectSystem;

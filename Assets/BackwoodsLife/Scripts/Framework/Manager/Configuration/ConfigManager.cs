@@ -66,7 +66,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 
         public AssetReferenceTexture2D GetIconReference(string elementTypeName)
         {
-            return GetItemConfig(elementTypeName).iconReference;
+            return GetItemConfig<SItemConfig>(elementTypeName).iconReference;
         }
 
         public T GetConfig<T>() where T : ScriptableObject
@@ -74,12 +74,12 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
             return ConfigsCache[typeof(T)] as T;
         }
 
-        public SItemConfig GetItemConfig(string elementTypeName)
+        public T GetItemConfig<T>(string elementTypeName) where T : SItemConfig
         {
             if (!ItemsConfigCache.ContainsKey(elementTypeName))
                 throw new KeyNotFoundException($"Config {elementTypeName} not found");
 
-            return ItemsConfigCache[elementTypeName];
+            return ItemsConfigCache[elementTypeName] as T;
         }
     }
 }

@@ -69,8 +69,6 @@ namespace BackwoodsLife.Scripts.Framework.Provider.AssetProvider
         {
             if (IconCache.TryGetValue(elementTypeName, out Sprite iconFromCache)) return iconFromCache;
 
-            Debug.LogWarning("LoadIconAsync: " + elementTypeName);
-            
             var iconRef = _configManager.GetIconReference(elementTypeName);
             var icon = await Addressables.LoadAssetAsync<Sprite>(iconRef).Task;
 

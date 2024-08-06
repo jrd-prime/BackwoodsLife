@@ -75,10 +75,10 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
                     case EInteractTypes.Use:
                         break;
                     case EInteractTypes.Upgrade:
-                        CheckUpgrade(upgradeLevel);
+                        // CheckUpgrade(upgradeLevel);
                         break;
                     case EInteractTypes.UseAndUpgrade:
-                        CheckUpgrade(upgradeLevel);
+                        // CheckUpgrade(upgradeLevel);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -88,37 +88,6 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
             _reqForUpgradeCache = null;
         }
 
-        private void CheckUse()
-        {
-        }
-
-        private void CheckUpgrade(UpgradeLevel upgradeLevel)
-        {
-            foreach (var res in upgradeLevel.reqForUpgrade.resource)
-            {
-                CheckOnNull(res.typeName, "Resource");
-            }
-
-            foreach (var building in upgradeLevel.reqForUpgrade.building)
-            {
-                CheckOnNull(building.typeName, "Building");
-            }
-
-            foreach (var skill in upgradeLevel.reqForUpgrade.skill)
-            {
-                CheckOnNull(skill.typeName, "Skill");
-            }
-
-            foreach (var tool in upgradeLevel.reqForUpgrade.tool)
-            {
-                CheckOnNull(tool.typeName, "Tool");
-            }
-        }
-
-        private void CheckOnNull(SItemConfig resTypeName, string type)
-        {
-            Assert.IsNotNull(resTypeName, $"{type}: type is null. World item config: {name}");
-        }
 
         private void OnDestroy()
         {
@@ -128,6 +97,9 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
 
         private Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>> InitReqForUpgradeCache()
         {
+#if UNITY_EDITOR
+            _reqForUpgradeCache = null;
+#endif
             if (_reqForUpgradeCache is { Count: > 0 }) return _reqForUpgradeCache;
 
             Debug.LogWarning("Init cache " + name);
@@ -155,9 +127,16 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items
                 res.ToDictionary<CustomRequirement<T>, SItemConfig, int>(re => re.typeName, re => re.value));
         }
 
-        public Dictionary<EItemData, Dictionary<SItemConfig, int>> GetLevelReq(ELevel level1)
+        public bool GetLevelReq(ELevel level1, out Dictionary<EItemData, Dictionary<SItemConfig, int>> level)
         {
-            return UpgradeCache[level1];
+            if (UpgradeCache.ContainsKey(level1))
+            {
+                level = UpgradeCache[level1];
+                return true;
+            }
+
+            level = null;
+            return false;
         }
     }
 
