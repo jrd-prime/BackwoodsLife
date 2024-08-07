@@ -11,7 +11,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.UsableAndUpgra
     public class House : UseAndUpgradeItem
     {
         public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
-            Action<List<InventoryElement>, EInteractAnimation> callback)
+            Action<List<InventoryElement>, EInteractAnimation> callbackToInteractSystem)
         {
             throw new NotImplementedException();
         }

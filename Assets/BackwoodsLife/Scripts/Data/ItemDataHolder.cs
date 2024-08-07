@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Common.Structs;
+using BackwoodsLife.Scripts.Framework.Manager.GameData;
+using R3;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -8,6 +11,11 @@ namespace BackwoodsLife.Scripts.Data
 {
     public abstract class ItemDataHolder : IInitializable
     {
+        public ReactiveProperty<List<InventoryElement>> OnItemsChanged = new();
+
+        /// <summary>
+        /// Initialized in <see cref="GameDataManager"/>
+        /// </summary>
         protected Dictionary<string, int> ItemsCache { get; set; }
 
         public abstract void Initialize();

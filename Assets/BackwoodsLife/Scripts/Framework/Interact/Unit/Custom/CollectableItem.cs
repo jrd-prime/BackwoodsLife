@@ -9,6 +9,7 @@ using BackwoodsLife.Scripts.Framework.Extensions;
 using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
+using BackwoodsLife.Scripts.Framework.System;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
@@ -18,9 +19,9 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.Collect;
 
         public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
-            Action<List<InventoryElement>, EInteractAnimation> callback)
+            Action<List<InventoryElement>, EInteractAnimation> callbackToInteractSystem)
         {
-            base.Process(configManager, interactableSystem, callback);
+            base.Process(configManager, interactableSystem, callbackToInteractSystem);
 
             if (!WorldItemConfig.HasCollectables())
             {
@@ -35,20 +36,8 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
             else
             {
                 Debug.LogWarning($"{WorldItemConfig.itemName} has collectables, no requirements, just collect");
-
-                var list = new List<InventoryElement>();
-
-                foreach (var returnedItem in WorldItemConfig.collectConfig.returnedItems)
-                {
-                    list.Add(new InventoryElement()
-                    {
-                        typeName = returnedItem.item.itemName,
-                        Amount = RandomCollector.GetRandom(returnedItem.range.min, returnedItem.range.max)
-                    });
-                }
-
-                callback.Invoke(list, WorldItemConfig.interactAnimation);
-                this.CurrentInteractableSystem.Collect(ref list);
+                CurrentInteractableSystem.Collect(WorldItemConfig.collectConfig.returnedItems,
+                    callbackToInteractSystem);
             }
         }
     }

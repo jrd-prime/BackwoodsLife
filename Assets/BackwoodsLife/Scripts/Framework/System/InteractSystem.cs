@@ -5,8 +5,10 @@ using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
+using BackwoodsLife.Scripts.Framework.Interact.Unit.Custom;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
+using BackwoodsLife.Scripts.Framework.System;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
@@ -55,7 +57,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
                 .AddTo(_disposable);
         }
 
-        public void Interact(ref WorldInteractableItem worldInteractableItem, Action onInteractCompleted)
+        public async void InteractAsync(WorldInteractableItem worldInteractableItem, Action onInteractCompleted)
         {
             Debug.LogWarning($"<color=red>Interact system.</color>");
 
@@ -66,7 +68,14 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             switch (worldInteractableItem.interactType)
             {
                 case EInteractTypes.Collect:
-                    worldInteractableItem.Process(_configManager, _collectSystem, OnCollected);
+                    var collectableItem = worldInteractableItem as CollectableItem;
+                    if (collectableItem == null)
+                        throw new NullReferenceException("Interactable obj is null. As collectable item");
+
+                    
+                    Debug.LogWarning(collectableItem);
+                    worldInteractableItem.Process(_configManager, collectableItem.CurrentInteractableSystem,
+                        OnCollected);
                     break;
                 case EInteractTypes.Use:
                     break;

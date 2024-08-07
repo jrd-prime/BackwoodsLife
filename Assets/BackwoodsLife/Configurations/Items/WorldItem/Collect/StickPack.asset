@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StickPack
   m_EditorClassIdentifier: 
   itemName: StickPack
-  worldItemTypeName: 0
+  worldItemTypeName: 5
   shortDescription: A place to set a fish trap. Bait is also required.
   iconReference:
     m_AssetGUID: 1511e35934ea2444cba32f5ed2f1f5dc
@@ -53,7 +53,7 @@ MonoBehaviour:
         - typeName: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
           value: 1
         building:
-        - typeName: {fileID: 11400000, guid: 39081289efa4f1a41a6be7e354071ea5, type: 2}
+        - typeName: {fileID: 0}
           value: 1
   collectableLevels: []
   collectConfig:

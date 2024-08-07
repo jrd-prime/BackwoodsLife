@@ -43,8 +43,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
         private List<InventoryElement> _tempList = new();
         private List<InventoryElement> _oneMoreList = new();
 
-        private Dictionary<string, int> _warehouseItems = new();
-
         public void IncreaseResource(string elementType, int amount)
         {
             AddItem(elementType, amount);

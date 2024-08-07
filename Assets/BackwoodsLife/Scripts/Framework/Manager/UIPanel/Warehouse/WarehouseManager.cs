@@ -55,7 +55,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
         public void IncreaseResource(string res, int amount) =>
             _model.IncreaseResource(res, amount);
 
-        public void IncreaseResource(List<InventoryElement> inventoryElements) =>
+        public void IncreaseResource(in List<InventoryElement> inventoryElements) =>
             _model.IncreaseResource(inventoryElements);
 
         public void DecreaseResource(string objResourceType, int amount)

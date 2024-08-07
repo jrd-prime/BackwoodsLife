@@ -4,7 +4,6 @@
     {
         public void Initialize()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

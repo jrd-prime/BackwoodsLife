@@ -7,6 +7,7 @@ using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
+using BackwoodsLife.Scripts.Framework.System;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
