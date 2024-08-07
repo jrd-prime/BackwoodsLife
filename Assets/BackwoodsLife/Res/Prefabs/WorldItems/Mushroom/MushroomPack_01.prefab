@@ -119,9 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682725af433942829c1a7a45ed1628ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableType: 2
-  collectableLevel: 0
-  worldItemConfig: {fileID: 11400000, guid: 7c09f5f602a014e49a07e3f5319a90c0, type: 2}
+  itemName: 2
 --- !u!1001 &4905784483540978919
 PrefabInstance:
   m_ObjectHideFlags: 0

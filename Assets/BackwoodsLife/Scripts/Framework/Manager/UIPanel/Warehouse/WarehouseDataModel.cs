@@ -46,7 +46,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
         public void IncreaseResource(string elementType, int amount)
         {
             AddItem(elementType, amount);
-            
+
             _oneMoreList.Add(
                 new InventoryElement { typeName = elementType, Amount = ItemsCache[elementType] });
             InventoryChanged(_oneMoreList);
@@ -89,10 +89,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
 
         public void DecreaseResource(string elementType, int amount)
         {
-            Debug.LogWarning($"AddResource {elementType} {amount}. Before {ItemsCache[elementType]}");
-
-            ItemsCache[elementType] += amount;
-            Debug.LogWarning($"After {ItemsCache[elementType]}");
+            RemoveItem(elementType, amount);
             _oneMoreList.Add(
                 new InventoryElement { typeName = elementType, Amount = ItemsCache[elementType] });
             InventoryChanged(_oneMoreList);

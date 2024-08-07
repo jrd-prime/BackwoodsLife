@@ -30,7 +30,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         private Button _buildButton;
         private BuildingPanelElementsRef _buildingPanelElementsRef;
         private GameDataManager _gameDataManager;
-        private Action _buildZoneCallback;
+        private Action<Dictionary<SItemConfig, int>> _buildZoneCallback;
+        private Dictionary<EItemData, Dictionary<SItemConfig, int>> _currentLevelConfig;
 
         [Inject]
         private void Construct(UIFrameController uiFrameController, BuildingPanelFiller buildingPanelFiller,
@@ -48,22 +49,23 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
             _buildButton = _buildingPanelElementsRef.BuildButton;
         }
 
-        public void OnBuildZoneEnter(in SWorldItemConfig worldItemConfig, Action onBuildStarted)
+        public void OnBuildZoneEnter(in SWorldItemConfig worldItemConfig,
+            Action<Dictionary<SItemConfig, int>> buildZoneCallback)
         {
             Debug.LogWarning("OnBuildZoneEnter");
-            _buildZoneCallback = onBuildStarted;
+            _buildZoneCallback = buildZoneCallback;
             _buildButton.clicked += OnBuildButtonClicked;
 
-            if (!worldItemConfig.GetLevelReq(ELevel.Level_1, out var level))
+            if (!worldItemConfig.GetLevelReq(ELevel.Level_1, out _currentLevelConfig))
                 throw new NullReferenceException(
                     $"Level 1 not found in UpgradeCache. Check config: {worldItemConfig.itemName}");
 
 
-            var isEnough = _gameDataManager.IsEnoughForBuild(level);
+            var isEnough = _gameDataManager.IsEnoughForBuild(_currentLevelConfig);
 
             _buildButton.SetEnabled(isEnough);
 
-            _buildingPanelFiller.Fill(level, in _buildingPanelElementsRef, in worldItemConfig);
+            _buildingPanelFiller.Fill(_currentLevelConfig, in _buildingPanelElementsRef, in worldItemConfig);
 
             _framePopUpFrame = _uiFrameController.GetPopUpFrame();
             _framePopUpFrame.ShowIn(EPopUpSubFrame.Left, in _buildingPanel);
@@ -72,7 +74,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         private void OnBuildButtonClicked()
         {
             Debug.LogWarning("On build button clicked");
-            _buildZoneCallback.Invoke();
+            if (_buildZoneCallback == null) throw new NullReferenceException("Interact system callback is null");
+            if (_currentLevelConfig == null) throw new NullReferenceException("Current level config is null");
+
+            _buildZoneCallback.Invoke(_currentLevelConfig[EItemData.Resource]);
         }
 
         public void OnBuildZoneExit()

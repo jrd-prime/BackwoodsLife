@@ -43,7 +43,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
                 if (interactSystem == null)
                     throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
 
-                interactSystem.InteractAsync(interactable, _onInteractCompleted);
+                interactSystem.Interact(interactable, _onInteractCompleted);
             }
             else Debug.LogWarning("Текущий объект не имеет родителя.");
         }

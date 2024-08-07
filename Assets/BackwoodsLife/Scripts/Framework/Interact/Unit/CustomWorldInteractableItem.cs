@@ -17,11 +17,11 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit
         where TInteractSystem : class, IInteractableSystem
     {
         [SerializeField] public TEnumItemName itemName;
-        public TSWorldItemConfigType WorldItemConfig;
-        public TInteractSystem CurrentInteractableSystem;
+        protected TSWorldItemConfigType WorldItemConfig;
+        protected TInteractSystem CurrentInteractableSystem;
 
         public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
-            Action<List<InventoryElement>, EInteractAnimation> callbackToInteractSystem)
+            Action<List<InventoryElement>> callbackToInteractSystem)
         {
             Assert.IsNotNull(configManager, "configManager is null");
             Assert.IsNotNull(interactableSystem, "interactableSystem is null");

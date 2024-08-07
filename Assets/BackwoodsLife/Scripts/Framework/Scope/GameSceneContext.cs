@@ -47,6 +47,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.Register<WarehouseViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<CollectSystem>(Lifetime.Singleton).AsSelf();
+            builder.Register<SpendSystem>(Lifetime.Singleton).AsSelf();
 
             builder.Register<WarehouseManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<QuestManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

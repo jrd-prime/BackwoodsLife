@@ -119,8 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa62804afadc47b9ad7bede9780171ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableType: 4
-  collectableLevel: 0
+  itemName: 4
 --- !u!1001 &183880289181793873
 PrefabInstance:
   m_ObjectHideFlags: 0

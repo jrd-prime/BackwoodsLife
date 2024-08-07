@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework;
 using BackwoodsLife.Scripts.Framework.Helpers;
@@ -13,7 +15,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
     {
         [SerializeField] private SWorldItemConfig worldItemConfig;
 
-        public Action OnBuildStarted;
+        public Action<Dictionary<SItemConfig, int>> OnBuildStarted;
         public Action OnBuildFinished;
 
         private InteractSystem _interactSystem;
@@ -62,16 +64,18 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
             _interactSystem.OnBuildZoneEnter(in worldItemConfig, OnBuildStarted);
         }
 
-        private void OnBuildStart()
+        private void OnBuildStart(Dictionary<SItemConfig, int> levelResources)
         {
             Debug.LogWarning("On build start");
+
+            _interactSystem.SpendResourcesForBuild(levelResources);
             _buildSystem.BuildAsync(worldItemConfig, OnBuildFinish);
         }
 
         private void OnBuildFinish()
         {
             Debug.LogWarning("On build finish");
-            Destroy(gameObject); 
+            Destroy(gameObject);
             OnLeaveZone();
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Framework.Helpers;
@@ -27,7 +28,7 @@ namespace BackwoodsLife.Scripts.Framework.System
         }
 
         public void Collect(List<ItemDataWithConfig> itemsWithConfigToCollect,
-            Action<List<InventoryElement>, EInteractAnimation> callback)
+            Action<List<InventoryElement>> callback)
         {
             Debug.LogWarning("COLLECT");
             Assert.IsNotNull(_warehouseManager, "WarehouseManager is null");
@@ -44,7 +45,7 @@ namespace BackwoodsLife.Scripts.Framework.System
                 processedItems.Add(new InventoryElement { typeName = item.item.itemName, Amount = itemAmount });
             }
 
-            callback?.Invoke(processedItems, EInteractAnimation.Cutting);
+            callback?.Invoke(processedItems);
             _warehouseManager.IncreaseResource(in processedItems);
         }
     }

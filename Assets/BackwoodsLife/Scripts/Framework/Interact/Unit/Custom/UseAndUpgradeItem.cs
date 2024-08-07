@@ -16,7 +16,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.UseAndUpgrade;
 
         public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
-            Action<List<InventoryElement>, EInteractAnimation> callbackToInteractSystem)
+            Action<List<InventoryElement>> callbackToInteractSystem)
         {
             base.Process(configManager, interactableSystem, callbackToInteractSystem);
         }

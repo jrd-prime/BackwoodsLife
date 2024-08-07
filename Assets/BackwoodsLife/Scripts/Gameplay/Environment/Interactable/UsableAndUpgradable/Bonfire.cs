@@ -1,5 +1,4 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.UsableAndUpgradable
 {
@@ -9,6 +8,5 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.UsableAndUpgra
 
     public abstract class WorldItemNew : MonoBehaviour
     {
-        [SerializeField] protected SWorldItemConfig worldItemConfig;
     }
 }
