@@ -1,6 +1,6 @@
 ﻿namespace BackwoodsLife.Scripts.Data.Common.Enums.Items.World
 {
-    public enum EBuilding
+    public enum EUseAndUpgradeName
     {
         Bonfire = 0,
         House = 1,

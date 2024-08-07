@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Inventory;
-using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
+using BackwoodsLife.Scripts.Data.Common.Structs;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;

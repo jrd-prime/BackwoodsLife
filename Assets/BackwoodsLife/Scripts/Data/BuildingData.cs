@@ -16,7 +16,7 @@ namespace BackwoodsLife.Scripts.Data
             // TODO load saved data and initialize
 
             // List of enums that can be stored in the warehouse
-            List<Type> list = new() { typeof(EBuilding) };
+            List<Type> list = new() { typeof(EUseAndUpgradeName) };
 
             // Init to zero
             foreach (var name in list.SelectMany(Enum.GetNames))

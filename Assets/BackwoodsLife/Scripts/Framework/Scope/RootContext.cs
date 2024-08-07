@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
-using BackwoodsLife.Scripts.Data.Inventory;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
 using BackwoodsLife.Scripts.Framework.Interact.Unit.Custom;
@@ -12,7 +11,7 @@ using BackwoodsLife.Scripts.Framework.Manager.DB;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.Input;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
-using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -32,7 +31,8 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private EventSystem eventSystem;
 
-        [FormerlySerializedAs("sMainConfigurationsList")] [SerializeField] private SMainConfig sMainConfig;
+        [FormerlySerializedAs("sMainConfigurationsList")] [SerializeField]
+        private SMainConfig sMainConfig;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -52,9 +52,6 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
             builder.RegisterInstance(sMainConfig);
 
-
-            // builder.RegisterComponent(resourceManager).AsSelf();
-            // builder.RegisterComponent(extractableResourcesConfigProvider).AsSelf();
             // Components
             builder.RegisterComponent(input).As<IInput>();
             builder.RegisterComponent(cameraController).As<ICameraController>();
@@ -64,7 +61,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(eventSystem).AsSelf();
 
             // Data
-            builder.Register<WarehouseData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<WarehouseDataModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<BuildingData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<SkillData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<ToolData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
@@ -79,8 +76,6 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
             // Systems
             builder.Register<FollowSystem>(Lifetime.Singleton).AsSelf();
-
-            builder.Register<WarehouseModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<DebugMemoryAndEtcModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             // ViewModel

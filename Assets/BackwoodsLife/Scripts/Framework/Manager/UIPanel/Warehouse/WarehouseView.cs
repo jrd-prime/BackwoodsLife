@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Inventory;
-using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
+using BackwoodsLife.Scripts.Data.Common.Structs;
+using BackwoodsLife.Scripts.Data.UI;
+using BackwoodsLife.Scripts.Gameplay.UI;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
+namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
 {
     public class WarehouseView : UIView
     {
@@ -27,7 +28,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
             Assert.IsNotNull(itemViewTemplate, "item view template is null " + name);
             _root = GetComponent<UIDocument>().rootVisualElement;
 
-            _container = _root.Q<VisualElement>(InventoryConst.InventoryHUDContainer);
+            _container = _root.Q<VisualElement>(WarehouseConst.InventoryHUDContainer);
             _container.Clear();
 
             InitializeView();
@@ -47,7 +48,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
             foreach (var q in changedElements)
             {
                 var item = _container.ElementAt(_elementsPosition[q.typeName]);
-                item.Q<Label>(InventoryConst.InventoryHUDItemLabel).text = q.Amount.ToString();
+                item.Q<Label>(WarehouseConst.InventoryHUDItemLabel).text = q.Amount.ToString();
             }
         }
 
@@ -63,9 +64,9 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
                 var icon = await _viewModel.GetIcon(t.Key);
                 var newItem = itemViewTemplate.Instantiate();
 
-                newItem.Q<Label>(InventoryConst.InventoryHUDItemLabelId).text = t.Key;
-                newItem.Q<Label>(InventoryConst.InventoryHUDItemLabel).text = 0.ToString();
-                newItem.Q<VisualElement>(InventoryConst.InventoryHUDItemIcon).style.backgroundImage = icon.texture;
+                newItem.Q<Label>(WarehouseConst.InventoryHUDItemLabelId).text = t.Key;
+                newItem.Q<Label>(WarehouseConst.InventoryHUDItemLabel).text = 0.ToString();
+                newItem.Q<VisualElement>(WarehouseConst.InventoryHUDItemIcon).style.backgroundImage = icon.texture;
                 _container.Add(newItem);
 
                 _elementsPosition.Add(t.Key, i++);

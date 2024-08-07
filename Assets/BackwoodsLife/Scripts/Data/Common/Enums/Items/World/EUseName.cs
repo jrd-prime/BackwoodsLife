@@ -1,6 +1,6 @@
 ﻿namespace BackwoodsLife.Scripts.Data.Common.Enums.Items.World
 {
-    public enum EPlace
+    public enum EUseName
     {
         FishTrapPlace,
         WaterPlace

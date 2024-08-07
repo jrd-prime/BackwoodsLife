@@ -23,8 +23,8 @@ namespace BackwoodsLife.Scripts.Data.Common.Enums
 
         public static List<Type> WorldItemEnums = new()
         {
-            typeof(EBuilding),
-            typeof(ECollectable)
+            typeof(EUseAndUpgradeName),
+            typeof(ECollectName)
         };
 
         public static int GetGameItemsCount()

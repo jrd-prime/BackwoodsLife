@@ -34,9 +34,9 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
             Check(GameItemsList.toolItems, typeof(ETool), "Tool");
             Check(GameItemsList.skillItems, typeof(ESkill), "Skill");
 
-            Check(WorldItemsList.buildingItems, typeof(EBuilding), "Building");
-            Check(WorldItemsList.collectableItems, typeof(ECollectable), "Collectable");
-            Check(WorldItemsList.placeItems, typeof(EPlace), "Place");
+            Check(WorldItemsList.buildingItems, typeof(EUseAndUpgradeName), "Building");
+            Check(WorldItemsList.collectableItems, typeof(ECollectName), "Collectable");
+            Check(WorldItemsList.placeItems, typeof(EUseName), "Place");
         }
 
         public void Check<T>(List<CustomItemConfig<T>> resourceItems, Type type, string id) where T : SItemConfig

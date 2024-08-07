@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
+﻿using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
 using UnityEngine;
 using VContainer;
 

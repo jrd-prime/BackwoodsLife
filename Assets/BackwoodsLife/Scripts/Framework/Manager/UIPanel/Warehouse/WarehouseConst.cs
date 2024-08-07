@@ -1,6 +1,6 @@
-﻿namespace BackwoodsLife.Scripts.Framework.Manager.Warehouse
+﻿namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
 {
-    public static class InventoryConst
+    public static class WarehouseConst
     {
         public const string InventoryHUDContainer = "inventory-hud-container";
         public const string InventoryHUDItemContainer = "inventory-hud-item-container";

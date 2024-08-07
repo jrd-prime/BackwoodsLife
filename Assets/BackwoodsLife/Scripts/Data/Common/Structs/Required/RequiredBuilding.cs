@@ -8,7 +8,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Required
     [Serializable]
     public struct RequiredBuilding : IRequirement
     {
-        public EBuilding type;
+        public EUseAndUpgradeName type;
         public int minLevel;
     }
 }

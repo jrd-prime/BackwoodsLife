@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Data.Inventory;
+using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Framework.Interact.Unit;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
@@ -21,6 +21,9 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
     /// </summary>
     public class InteractSystem : MonoBehaviour
     {
+        public bool IsMoving { get; private set; }
+        public event Action<List<InventoryElement>, EInteractAnimation> OnCollected;
+
         private CollectSystem _collectSystem;
         private IPlayerViewModel _playerViewModel;
         private IInteractableSystem _usableSystem;
@@ -29,28 +32,18 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
         private CharacterOverUI _characterOverUIHolder;
         private IConfigManager _configManager;
         private Action _triggerCallback;
-        private InteractPanelUI _interactPanelUI;
-
-        private CompositeDisposable _disposable = new CompositeDisposable();
+        private CompositeDisposable _disposable = new();
         private BuildingPanelUIController _buildingPanelUIController;
-
-        private const int BuildingStartLevel = 0;
-
-        public bool IsMoving { get; private set; }
-
-        public event Action<List<InventoryElement>, EInteractAnimation> OnCollected;
-
 
         [Inject]
         private void Construct(IPlayerViewModel playerViewModel, CollectSystem collectSystem,
-            CharacterOverUI characterOverUIHolder, IConfigManager configManager, InteractPanelUI interactPanelUI,
+            CharacterOverUI characterOverUIHolder, IConfigManager configManager,
             BuildingPanelUIController buildingPanelUIController)
         {
             _configManager = configManager;
             _playerViewModel = playerViewModel;
             _collectSystem = collectSystem;
             _characterOverUIHolder = characterOverUIHolder;
-            _interactPanelUI = interactPanelUI;
             _buildingPanelUIController = buildingPanelUIController;
         }
 
@@ -62,16 +55,24 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
                 .AddTo(_disposable);
         }
 
-
         public void Interact(ref WorldInteractableItem worldInteractableItem, Action onInteractCompleted)
         {
+            Debug.LogWarning($"<color=red>Interact system.</color>");
+
+
             _triggerCallback = onInteractCompleted;
             if (worldInteractableItem == null) throw new NullReferenceException("Interactable obj is null");
 
-            switch (worldInteractableItem.worldItemTypeType)
+            switch (worldInteractableItem.interactType)
             {
-                case EWorldItemType.Collectable:
+                case EInteractTypes.Collect:
                     worldInteractableItem.Process(_configManager, _collectSystem, OnCollected);
+                    break;
+                case EInteractTypes.Use:
+                    break;
+                case EInteractTypes.Upgrade:
+                    break;
+                case EInteractTypes.UseAndUpgrade:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -86,14 +87,9 @@ namespace BackwoodsLife.Scripts.Framework.Interact.System
             _characterOverUIHolder.ShowPopUpFor(obj);
         }
 
-        private void ShowInteractPanel(EInteractTypes interactTypes)
-        {
-            throw new NotImplementedException();
-        }
-
         public void OnBuildZoneEnter(in SWorldItemConfig worldItemConfig, Action onBuildStarted)
         {
-            // Debug.LogWarning("Interact system. On build Zone enter");
+            Debug.LogWarning("Interact system. On build Zone enter");
             _buildingPanelUIController.OnBuildZoneEnter(in worldItemConfig, onBuildStarted);
         }
 

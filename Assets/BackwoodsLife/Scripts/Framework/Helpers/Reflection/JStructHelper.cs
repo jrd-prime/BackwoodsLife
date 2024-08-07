@@ -5,7 +5,6 @@ using System.Reflection;
 using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
-using BackwoodsLife.Scripts.Data.Inventory;
 using UnityEngine.Assertions;
 
 namespace BackwoodsLife.Scripts.Framework.Helpers.Reflection

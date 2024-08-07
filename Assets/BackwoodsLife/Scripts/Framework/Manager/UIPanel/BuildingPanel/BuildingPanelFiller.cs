@@ -4,6 +4,7 @@ using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
@@ -17,7 +18,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         private IAssetProvider _assetProvider;
         private BuildingPanelElementsRef _panelRef;
         private GameDataManager _gameDataManager;
-        private WarehouseData _warehouse;
+        private WarehouseDataModel _warehouse;
         private BuildingData _building;
         private SkillData _skill;
         private ToolData _tool;

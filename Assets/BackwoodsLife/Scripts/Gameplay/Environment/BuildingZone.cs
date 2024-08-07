@@ -51,7 +51,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
 
             while (_isInTriggerZone && _interactSystem.IsMoving)
             {
-                Debug.LogWarning("In zone but still moving, waiting 100ms");
+                // Debug.LogWarning("In zone but still moving, waiting 100ms");
                 await UniTask.Delay(100);
             }
 

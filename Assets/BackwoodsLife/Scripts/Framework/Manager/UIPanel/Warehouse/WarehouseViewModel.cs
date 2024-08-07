@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Inventory;
+using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using Cysharp.Threading.Tasks;
 using R3;
@@ -7,18 +7,18 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.Warehouse
+namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
 {
     public class WarehouseViewModel : IViewModel
     {
         public ReadOnlyReactiveProperty<List<InventoryElement>> inventoryDataChanged => _model.OnInventoryChanged;
 
-        private WarehouseModel _model;
+        private WarehouseDataModel _model;
         private WarehouseManager _manager;
         private IAssetProvider _assetProvider;
 
         [Inject]
-        private void Construct(WarehouseModel model, WarehouseManager manager, IAssetProvider assetProvider)
+        private void Construct(WarehouseDataModel model, WarehouseManager manager, IAssetProvider assetProvider)
         {
             _model = model;
             _manager = manager;

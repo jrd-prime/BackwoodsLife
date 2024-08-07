@@ -6,14 +6,13 @@ using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest;
-using BackwoodsLife.Scripts.Framework.Manager.Warehouse;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -28,6 +27,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private InteractPanelUI interactPanelUIHolder;
         [SerializeField] private BuildingPanelUIController buildingPanelUIController;
         [SerializeField] private QuestPanelUIController questPanelUIController;
+        [SerializeField] private WarehousePanelUIController warehousePanelUIController;
 
 
         protected override void Configure(IContainerBuilder builder)
@@ -36,10 +36,11 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
             Assert.IsNotNull(buildingPanelUIController,
                 "buildingPanelController is null. Add prefab to scene and set prefab to " + name);
-            // builder.Register<NavMeshManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            Assert.IsNotNull(questPanelUIController,
+                "questPanelController is null. Add prefab to scene and set prefab to " + name);
+            Assert.IsNotNull(warehousePanelUIController,
+                "warehousePanelController is null. Add prefab to scene and set prefab to " + name);
 
-
-            // builder.Register<PlayerStateMachine>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<PlayerViewModel>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<JoystickViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<WarehouseViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
@@ -49,17 +50,9 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.Register<WarehouseManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<QuestManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
-            // Systems
-            // builder.Register<GroundSystem>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            // builder.Register<GatherableSystem>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-
-
             // Model
             builder.Register<PlayerModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<JoystickModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            // builder.RegisterEntryPoint<PlayerLoop>();
-            //
-            // builder.RegisterEntryPoint<PlayerViewModel>();
 
             builder.Register<BuildingPanelFiller>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
@@ -73,7 +66,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
             builder.Register(
                 _ => new PanelUIController(new List<IUIPanelController>
-                    { buildingPanelUIController, questPanelUIController }),
+                    { buildingPanelUIController, questPanelUIController, warehousePanelUIController }),
                 Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
     }

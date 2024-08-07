@@ -7,61 +7,45 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment
 {
+    /// <summary>
+    /// При входе игрока получает с родителя данные объекта и InteractSystem
+    /// </summary>
     [RequireComponent(typeof(CapsuleCollider))]
     public class TriggerZone : MonoBehaviour
     {
         private Action _onInteractCompleted;
 
-        private void Awake()
-        {
-            _onInteractCompleted += () => { gameObject.transform.parent.gameObject.SetActive(false); };
-        }
+        private void Awake() => _onInteractCompleted += () => gameObject.transform.parent.gameObject.SetActive(false);
 
         [Inject]
         private void Construct()
         {
+            // TODO inject interact system
             Debug.LogWarning("Trigger zone init");
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            // Проверяем, что объект, вошедший в зону триггера, находится на слое Player
-            if (other.gameObject.layer != (int)JLayers.Player) return;
+            if (other == null || other.gameObject.layer != (int)JLayers.Player) return;
 
-            Debug.Log($"Char in trigger zone! {name}");
+            Transform parentTransform = transform.parent;
 
-            if (other != null)
+            if (parentTransform != null)
             {
-                Transform parentTransform = transform.parent;
+                var interactable = parentTransform.GetComponent<WorldInteractableItem>();
+                if (interactable == null)
+                    throw new NullReferenceException(
+                        $"Interactable is null on {parentTransform.name} prefab. You must set to object Interactable component. ");
 
-                if (parentTransform != null)
-                {
-                    var interactable = transform.parent.GetComponent<WorldInteractableItem>();
+                Debug.LogWarning($"<color=red>Trigger zone: </color> {interactable.GetType().Name}");
 
-                    if (interactable == null)
-                        throw new NullReferenceException(
-                            $"Interactable is null on {parentTransform.name} prefab. You must set to object Interactable component. ");
+                var interactSystem = other.GetComponent<PlayerView>().InteractSystem;
+                if (interactSystem == null)
+                    throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
 
-                    // var playerInteractSystem = other.GetComponent<InteractSystem>();
-                    // if (playerInteractSystem == null)
-                    //     throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
-
-
-                    var playerInteractSystem = other.GetComponent<PlayerView>().InteractSystem;
-                    if (playerInteractSystem == null)
-                        throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
-
-                    playerInteractSystem.Interact(ref interactable, _onInteractCompleted);
-                }
-                else
-                {
-                    Debug.LogWarning("Текущий объект не имеет родителя.");
-                }
+                interactSystem.Interact(ref interactable, _onInteractCompleted);
             }
-            else
-            {
-                Debug.LogWarning("Объект, вызвавший триггер, не существует.");
-            }
+            else Debug.LogWarning("Текущий объект не имеет родителя.");
         }
     }
 }

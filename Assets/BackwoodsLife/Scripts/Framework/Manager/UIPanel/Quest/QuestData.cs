@@ -4,4 +4,13 @@
     {
         
     }
+    
+    
+    public struct QuestConfig
+    {
+        public int id;
+        public string title;
+        public string description;
+        public int reward;
+    }
 }

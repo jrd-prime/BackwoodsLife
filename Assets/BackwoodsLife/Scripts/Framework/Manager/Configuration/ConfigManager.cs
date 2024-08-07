@@ -37,9 +37,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
                 _mainConfig.Check(_mainConfig.GameItemsList.toolItems, typeof(ETool), "Tool");
                 _mainConfig.Check(_mainConfig.GameItemsList.skillItems, typeof(ESkill), "Skill");
 
-                _mainConfig.Check(_mainConfig.WorldItemsList.buildingItems, typeof(EBuilding), "Building");
-                _mainConfig.Check(_mainConfig.WorldItemsList.collectableItems, typeof(ECollectable), "Collectable");
-                _mainConfig.Check(_mainConfig.WorldItemsList.placeItems, typeof(EPlace), "Place");
+                _mainConfig.Check(_mainConfig.WorldItemsList.buildingItems, typeof(EUseAndUpgradeName), "Building");
+                _mainConfig.Check(_mainConfig.WorldItemsList.collectableItems, typeof(ECollectName), "Collectable");
+                _mainConfig.Check(_mainConfig.WorldItemsList.placeItems, typeof(EUseName), "Place");
             }
 
             //TODO refactor
@@ -74,6 +74,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 
         public T GetItemConfig<T>(string elementTypeName) where T : SItemConfig
         {
+            Debug.LogWarning($"GetItemConfig {elementTypeName} / {typeof(T)}");
             if (!ItemsConfigCache.ContainsKey(elementTypeName))
                 throw new KeyNotFoundException($"Config {elementTypeName} not found");
 

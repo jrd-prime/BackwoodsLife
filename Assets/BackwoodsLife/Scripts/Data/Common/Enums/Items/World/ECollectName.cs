@@ -1,6 +1,6 @@
 ﻿namespace BackwoodsLife.Scripts.Data.Common.Enums.Items.World
 {
-    public enum ECollectable
+    public enum ECollectName
     {
         StonePack = 0,
         StickPack = 1,

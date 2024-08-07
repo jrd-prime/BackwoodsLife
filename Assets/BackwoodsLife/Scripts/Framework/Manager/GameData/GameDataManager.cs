@@ -3,6 +3,7 @@ using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.GameData
@@ -11,7 +12,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
     {
         public string Description => "Game data manager";
 
-        public WarehouseData Warehouse { get; private set; }
+        public WarehouseDataModel Warehouse { get; private set; }
         public BuildingData Building { get; private set; }
         public SkillData Skill { get; private set; }
         public ToolData Tool { get; private set; }
@@ -25,10 +26,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
         }
 
         [Inject]
-        private void Construct(WarehouseData warehouseData, BuildingData buildingData, SkillData skillData,
+        private void Construct(WarehouseDataModel warehouseDataModel, BuildingData buildingData, SkillData skillData,
             ToolData toolData)
         {
-            Warehouse = warehouseData;
+            Warehouse = warehouseDataModel;
             Building = buildingData;
             Skill = skillData;
             Tool = toolData;

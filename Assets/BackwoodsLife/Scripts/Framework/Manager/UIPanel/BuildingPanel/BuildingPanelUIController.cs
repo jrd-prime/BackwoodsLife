@@ -110,6 +110,11 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
                 CrossIcon = crossIcon
             };
         }
+
+        public VisualTreeAsset GetTemplateFor(string inWindow)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public struct BuildingPanelElementsRef

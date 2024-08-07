@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
-using BackwoodsLife.Scripts.Data.Inventory;
+using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
 using R3;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.Warehouse
+namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
 {
     public class WarehouseManager : IInitializable
     {
         public string Description => "Inventory Manager";
 
-        private WarehouseModel _model;
+        private WarehouseDataModel _model;
         private UIButtonsController _uiButtonsController;
         private CompositeDisposable _disposable = new();
 
         [Inject]
-        private void Construct(WarehouseModel model, UIButtonsController uiButtonsController)
+        private void Construct(WarehouseDataModel model, UIButtonsController uiButtonsController)
         {
+            Debug.LogWarning("Warehouse manager init");
             _model = model;
             _uiButtonsController = uiButtonsController;
         }
