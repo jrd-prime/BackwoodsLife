@@ -8,11 +8,11 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
 {
     public interface IItemDataRepository : IInitializable
     {
-        public ReactiveProperty<List<ItemData>> OnItemsChanged { get; }
-        public void AddItem(string name, int count);
-        public void AddItem(in List<ItemData> inventoryElements);
-        public void RemoveItem(string name, int count);
-        public void RemoveItem(List<ItemData> inventoryElements);
+        public ReactiveProperty<List<ItemDataChanged>> OnRepositoryDataChanged { get; }
+        public void AddItem(string itemName, int quantity);
+        public void AddItem(in List<ItemData> itemsData);
+        public void RemoveItem(string itemName, int quantity);
+        public void RemoveItem(List<ItemData> itemsData);
 
         public ItemData GetItem(string itemName);
 
@@ -21,5 +21,6 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
         public bool IsEnough(KeyValuePair<SItemConfig, int> valuePair);
 
         public void SetItemsToInitialization(Dictionary<string, int> initItems);
+        public IReadOnlyDictionary<string, int> GetCacheData();
     }
 }

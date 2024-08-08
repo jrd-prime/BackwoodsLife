@@ -4,8 +4,8 @@ using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
 using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
-using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Framework.Extensions;
+using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.System;
 using UnityEngine;
@@ -34,8 +34,19 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
             else
             {
                 Debug.LogWarning($"{WorldItemConfig.itemName} has collectables, no requirements, just collect");
-                CurrentInteractableSystem.Collect(WorldItemConfig.collectConfig.returnedItems,
-                    callbackToInteractSystem);
+                
+                var processedItems = new List<ItemData>();
+
+                foreach (var item in WorldItemConfig.collectConfig.returnedItems)
+                {
+                    var itemAmount = RandomCollector.GetRandom(item.range.min, item.range.max);
+
+                    processedItems.Add(new ItemData { Name = item.item.itemName, Quantity = itemAmount });
+                }
+                
+                
+                // CurrentInteractableSystem.Process(CurrentInteractableSystem, processedItems,
+                //     callbackToInteractSystem);
             }
         }
     }

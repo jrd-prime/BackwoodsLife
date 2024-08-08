@@ -33,6 +33,10 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
             Model.SetItemsToInitialization(GetOnLoadItemsAndValues());
         }
 
+
+        public IReadOnlyDictionary<string, int> GetCacheData() => Model.GetCacheData();
+
+
         protected abstract Dictionary<string, int> GetOnLoadItemsAndValues();
     }
 }

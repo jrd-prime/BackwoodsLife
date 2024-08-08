@@ -12,7 +12,7 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse
 {
     public class WarehouseViewModel : IViewModel
     {
-        public ReadOnlyReactiveProperty<List<ItemData>> inventoryDataChanged => _model.OnInventoryChanged;
+        public ReadOnlyReactiveProperty<List<ItemDataChanged>> inventoryDataChanged => _model.OnRepositoryDataChanged;
 
         private WarehouseItemDataModel _model;
         private WarehouseManager _manager;
@@ -33,11 +33,8 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse
             Assert.IsNotNull(_assetProvider, "_assetProvider is null");
         }
 
-        public Dictionary<string, int> GetInventoryData()
-        {
-            throw new NotImplementedException();
-            // return _manager.GetInventoryData();
-        }
+        public IReadOnlyDictionary<string, int> GetInventoryData() => _manager.GetCacheData();
+
 
         public UniTask<Sprite> GetIcon(string tKey)
         {

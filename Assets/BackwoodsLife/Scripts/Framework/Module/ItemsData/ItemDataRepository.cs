@@ -2,7 +2,6 @@
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using R3;
 using UnityEngine;
 
@@ -13,50 +12,76 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
     /// </summary>
     public abstract class ItemDataRepository : IItemDataRepository
     {
-        public ReactiveProperty<List<ItemData>> OnItemsChanged { get; } = new();
+        // TODO load saved data and initialize
+        public ReactiveProperty<List<ItemDataChanged>> OnRepositoryDataChanged { get; } = new();
+        protected Dictionary<string, int> ItemsCache { get; set; } = new();
 
         /// <summary>
-        /// Initialized in <see cref="GameDataManager"/>
+        /// Используется для сбора данных. После оповещения об изменениях - очищается
         /// </summary>
-        protected Dictionary<string, int> ItemsCache { get; set; }
+        protected readonly List<ItemDataChanged> TempListForDataChanges = new();
 
-        protected readonly List<ItemData> TempList = new();
-        protected readonly List<ItemData> OneMoreList = new();
         public abstract void Initialize();
 
-        public void AddItem(string name, int count)
+        public void AddItem(string itemName, int quantity)
         {
-            Debug.LogWarning($"AddResource {name} {count}. Before {ItemsCache[name]}");
-            CheckItem(name);
-            ItemsCache[name] += count;
-            Debug.LogWarning($"After {ItemsCache[name]}");
+            CheckItem(itemName);
+            var currentAmount = ItemsCache[itemName];
+            Debug.LogWarning($"Add: {quantity} {itemName}");
+
+            var newAmount = ItemsCache[itemName] += quantity;
+            var changed = new ItemDataChanged { Name = itemName, From = currentAmount, To = newAmount };
+
+            TempListForDataChanges.Add(changed);
+            RepositoryDataChanged();
         }
 
-        public void AddItem(in List<ItemData> inventoryElements)
+        public void AddItem(in List<ItemData> itemsData)
         {
-            foreach (var element in inventoryElements)
+            foreach (var itemData in itemsData)
             {
-                Debug.LogWarning($"AddResource {element.Name} {element.Quantity}. Before {ItemsCache[element.Name]}");
-                CheckItem(element.Name);
-                ItemsCache[element.Name] += element.Quantity;
-                Debug.LogWarning($"After {ItemsCache[element.Name]}");
+                CheckItem(itemData.Name);
+                var currentAmount = ItemsCache[itemData.Name];
+                Debug.LogWarning($"Add: {itemData.Quantity} {itemData.Name}");
+
+                TempListForDataChanges.Add(new ItemDataChanged
+                {
+                    Name = itemData.Name, From = currentAmount, To = ItemsCache[itemData.Name] += itemData.Quantity
+                });
             }
+
+            RepositoryDataChanged();
         }
 
-        public void RemoveItem(string name, int count)
+        public void RemoveItem(string itemName, int quantity)
         {
-            Debug.LogWarning($"RemoveResource {name} {count}. Before {ItemsCache[name]}");
-            CheckItem(name);
-            // TODO check if -=  >= 0
-            ItemsCache[name] -= count;
-            Debug.LogWarning($"After {ItemsCache[name]}");
+            CheckItem(itemName);
+            var currentAmount = ItemsCache[itemName];
+            Debug.LogWarning($"Remove: {quantity} {itemName}");
+
+            var newAmount = ItemsCache[itemName] -= quantity;
+            var changed = new ItemDataChanged { Name = itemName, From = currentAmount, To = newAmount };
+
+            TempListForDataChanges.Add(changed);
+            RepositoryDataChanged();
         }
 
-        public void RemoveItem(List<ItemData> inventoryElements)
+        public void RemoveItem(List<ItemData> itemsData)
         {
-            foreach (var element in inventoryElements) RemoveItem(element.Name, element.Quantity);
-        }
+            foreach (var itemData in itemsData)
+            {
+                CheckItem(itemData.Name);
+                var currentAmount = ItemsCache[itemData.Name];
+                Debug.LogWarning($"Remove: {itemData.Quantity} {itemData.Name}");
 
+                var newAmount = ItemsCache[itemData.Name] -= itemData.Quantity;
+
+                TempListForDataChanges.Add(new ItemDataChanged
+                    { Name = itemData.Name, From = currentAmount, To = newAmount });
+            }
+
+            RepositoryDataChanged();
+        }
 
         public ItemData GetItem(string itemName)
         {
@@ -85,28 +110,21 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
         public void SetItemsToInitialization(Dictionary<string, int> initItems)
         {
             ItemsCache = initItems;
+            TempListForDataChanges.Clear();
+            TempListForDataChanges.AddRange(initItems
+                .Select(item => new ItemDataChanged { Name = item.Key, From = 0, To = item.Value })
+                .ToList());
 
-            var list = new List<ItemData>();
-            foreach (var item in initItems)
-            {
-                list.Add(ToItemData(item.Key, item.Value));
-            }
-
-            InventoryChanged(list);
+            RepositoryDataChanged();
         }
 
-        protected void InventoryChanged(List<ItemData> elements)
+        public IReadOnlyDictionary<string, int> GetCacheData() => ItemsCache;
+
+        protected void RepositoryDataChanged()
         {
-            TempList.Clear();
-            foreach (var element in elements)
-            {
-                TempList.Add(element);
-            }
-
-            OneMoreList.Clear();
-
-            OnItemsChanged.Value = TempList;
-            OnItemsChanged.ForceNotify();
+            OnRepositoryDataChanged.Value = TempListForDataChanges;
+            OnRepositoryDataChanged.ForceNotify();
+            TempListForDataChanges.Clear();
         }
 
         private void CheckItem(string name)
@@ -114,8 +132,12 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
             if (!ItemsCache.ContainsKey(name))
                 throw new KeyNotFoundException($"\"{name}\" not found in ItemsCache. Check config name or enum");
         }
+    }
 
-        protected static ItemData ToItemData(string itemName, int quantity) =>
-            new() { Name = itemName, Quantity = quantity };
+    public record ItemDataChanged
+    {
+        public string Name;
+        public int From;
+        public int To;
     }
 }

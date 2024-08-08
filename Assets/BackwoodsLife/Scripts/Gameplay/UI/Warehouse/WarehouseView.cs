@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Records;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using R3;
 using UnityEngine;
@@ -42,25 +42,24 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
                 .AddTo(_disposables);
         }
 
-        private void ElementsChanged(List<ItemData> changedElements)
+        private void ElementsChanged(List<ItemDataChanged> changedElements)
         {
             foreach (var q in changedElements)
             {
+                //TODO anim from to
                 var item = _container.ElementAt(_elementsPosition[q.Name]);
-                item.Q<Label>(WarehouseConst.InventoryHUDItemLabel).text = q.Quantity.ToString();
+                item.Q<Label>(WarehouseConst.InventoryHUDItemLabel).text = q.To.ToString();
             }
         }
 
         private async void InitializeView()
         {
-            var itemsForInventory = _viewModel.GetInventoryData();
             var i = 0;
-
-            foreach (var t in itemsForInventory)
+            foreach (var t in _viewModel.GetInventoryData())
             {
                 Debug.Log($"Add {t} to position {i}");
 
-                var icon = await _viewModel.GetIcon(t.Key);
+                var icon = await _viewModel.GetIcon(t.Key); // TODO переделать
                 var newItem = itemViewTemplate.Instantiate();
 
                 newItem.Q<Label>(WarehouseConst.InventoryHUDItemLabelId).text = t.Key;

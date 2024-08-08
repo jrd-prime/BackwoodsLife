@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Records;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Framework.Helpers;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -18,21 +16,25 @@ namespace BackwoodsLife.Scripts.Framework.System
     /// </summary>
     public class CollectSystem : IInteractableSystem
     {
-        private WarehouseManager _warehouseManager;
+        private IItemDataManager _currentManager;
 
-        [Inject]
-        private void Construct(WarehouseManager warehouseManager)
-        {
-            Debug.Log($"Inject CollectSystem");
-            _warehouseManager = warehouseManager;
-        }
+        // [Inject]
+        // private void Construct(WarehouseManager warehouseManager)
+        // {
+        //     Debug.Log($"Inject CollectSystem");
+        //     _warehouseManager = warehouseManager;
+        // }
 
-        public void Collect(List<ItemDataWithConfig> itemsWithConfigToCollect,
+        public void Process(IItemDataManager itemDataManager, List<ItemData> itemsWithConfigToCollect,
             Action<List<ItemData>> callback)
         {
-            Debug.LogWarning("COLLECT");
-            Assert.IsNotNull(_warehouseManager, "WarehouseManager is null");
-            Assert.IsNotNull(itemsWithConfigToCollect, "itemsToCollect is null");
+            Assert.IsNotNull(itemDataManager, "IItemDataManager is null");
+            Assert.IsNotNull(itemsWithConfigToCollect, "List<ItemDataWithConfig> is null");
+            Assert.IsNotNull(callback, "Action<List<ItemData>> is null");
+
+            _currentManager = itemDataManager;
+
+            Debug.LogWarning($"Collect system. {itemDataManager}");
 
             // TODO check bonuses from tool, skill, etc.
 
@@ -40,13 +42,13 @@ namespace BackwoodsLife.Scripts.Framework.System
 
             foreach (var item in itemsWithConfigToCollect)
             {
-                var itemAmount = RandomCollector.GetRandom(item.range.min, item.range.max);
+                // var itemAmount = RandomCollector.GetRandom(item.range.min, item.range.max);
 
-                processedItems.Add(new ItemData { Name = item.item.itemName, Quantity = itemAmount });
+                // processedItems.Add(new ItemData { Name = item.item.itemName, Quantity = itemAmount });
             }
 
-            callback?.Invoke(processedItems);
-            _warehouseManager.Increase(in processedItems);
+            callback.Invoke(processedItems);
+            _currentManager.Increase(in processedItems);
         }
     }
 }
