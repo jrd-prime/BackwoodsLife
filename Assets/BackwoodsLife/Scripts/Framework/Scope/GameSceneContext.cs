@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Player;
-using BackwoodsLife.Scripts.Framework.Interact.System;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel;

@@ -4,7 +4,7 @@ using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework;
 using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Framework.Interact.System;
+using BackwoodsLife.Scripts.Framework.System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;

@@ -13,25 +13,18 @@ MonoBehaviour:
   m_Name: Bonfire
   m_EditorClassIdentifier: 
   itemName: Bonfire
+  worldItemTypeName: 0
+  shortDescription: 
   iconReference:
     m_AssetGUID: f7fc1d09f8686f44dbe66713466fc7af
     m_SubObjectName: bonfire-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
-  worldItemTypeType: 0
-  WorldItemType: 0
-  InteractTypes: 3
-  requirementType: 
-  shortDescription: 
+  interactTypes: 3
+  interactAnimation: 0
   fixedPosition: 1
   fixedPositionValue: {x: 14, y: 0, z: 0}
-  collectConfig:
-    returnedItems: []
-    requirementForCollect:
-      tool: []
-      skill: []
-      building: []
   useConfig:
     useActions:
     - useType: 0
@@ -48,9 +41,9 @@ MonoBehaviour:
       reqForUpgrade:
         resource:
         - typeName: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
-          value: 30
+          value: 7
         - typeName: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
-          value: 15
+          value: 8
         tool: []
         skill: []
         building: []

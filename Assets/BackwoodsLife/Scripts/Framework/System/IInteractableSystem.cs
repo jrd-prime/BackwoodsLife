@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-
-namespace BackwoodsLife.Scripts.Framework.Interact.System
+﻿namespace BackwoodsLife.Scripts.Framework.System
 {
     public interface IInteractableSystem
     {

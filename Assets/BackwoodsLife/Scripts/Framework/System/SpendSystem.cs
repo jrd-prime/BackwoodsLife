@@ -4,7 +4,7 @@ using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
 using UnityEngine;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework.Interact.System
+namespace BackwoodsLife.Scripts.Framework.System
 {
     public class SpendSystem : IInteractableSystem
     {

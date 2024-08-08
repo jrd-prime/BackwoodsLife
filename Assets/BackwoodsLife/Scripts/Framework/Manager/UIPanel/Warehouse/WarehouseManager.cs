@@ -6,6 +6,7 @@ using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
 using R3;
 using UnityEngine;
+using UnityEngine.Assertions;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,27 +14,29 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
 {
     public class WarehouseManager : IInitializable
     {
-        public string Description => "Inventory Manager";
-
         private WarehouseDataModel _model;
         private UIButtonsController _uiButtonsController;
-        private CompositeDisposable _disposable = new();
+        private readonly CompositeDisposable _disposable = new();
 
         [Inject]
         private void Construct(WarehouseDataModel model, UIButtonsController uiButtonsController)
         {
-            Debug.LogWarning("Warehouse manager init");
             _model = model;
             _uiButtonsController = uiButtonsController;
         }
 
         public void Initialize()
         {
+            Assert.IsNotNull(_model, "Warehouse data model is null");
+            Assert.IsNotNull(_uiButtonsController, "UiButtonsController is null");
+
             _model.SetInitializedInventory(InitItems());
             _uiButtonsController.WarehouseButtonClicked
                 .Subscribe(_ => { WarehouseButtonClicked(); })
                 .AddTo(_disposable);
         }
+
+        public Dictionary<string, int> GetInventoryData() => InitItems();
 
         private void WarehouseButtonClicked()
         {
@@ -42,10 +45,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
 
         private Dictionary<string, int> InitItems()
         {
-            List<Type> list = new() { typeof(EResource), typeof(EFood) };
-
             return (
-                    from type in list
+                    from type in new List<Type> { typeof(EResource), typeof(EFood) }
                     from name in Enum.GetNames(type)
                     where name != "None"
                     select name)
@@ -61,27 +62,17 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
         public void DecreaseResource(string objResourceType, int amount)
         {
             if (_model.HasEnoughResource(objResourceType, amount))
-            {
                 _model.DecreaseResource(objResourceType, amount);
-            }
             else
-            {
                 Debug.LogWarning($"Not enough {objResourceType}");
-            }
         }
 
         public void DecreaseResources(List<InventoryElement> inventoryElements)
         {
             if (_model.HasEnoughResource(inventoryElements))
-            {
                 _model.DecreaseResource(inventoryElements);
-            }
             else
-            {
                 Debug.LogWarning($"Not enough {inventoryElements}");
-            }
         }
-
-        public Dictionary<string, int> GetInventoryData() => InitItems();
     }
 }

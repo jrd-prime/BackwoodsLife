@@ -1,4 +1,4 @@
-﻿namespace BackwoodsLife.Scripts.Framework.Interact.System
+﻿namespace BackwoodsLife.Scripts.Framework.System
 {
     public class UseAndUpgradeSystem : IInteractableSystem
     {

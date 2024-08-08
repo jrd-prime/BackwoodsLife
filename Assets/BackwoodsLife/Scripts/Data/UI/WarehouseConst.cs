@@ -1,4 +1,4 @@
-﻿namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
+﻿namespace BackwoodsLife.Scripts.Data.UI
 {
     public static class WarehouseConst
     {
