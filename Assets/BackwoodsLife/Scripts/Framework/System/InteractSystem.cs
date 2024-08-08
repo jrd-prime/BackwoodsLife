@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Data.Common.Structs;
@@ -22,10 +23,10 @@ namespace BackwoodsLife.Scripts.Framework.System
     public class InteractSystem : MonoBehaviour, IDisposable
     {
         public bool IsMoving { get; private set; }
-        public event Action<List<InventoryElement>> OnCollectFinished;
-        public event Action<List<InventoryElement>> OnUseFinished;
-        public event Action<List<InventoryElement>> OnUpgradeFinished;
-        public event Action<List<InventoryElement>> OnUseAndUpgradeFinished;
+        public event Action<List<ItemData>> OnCollectFinished;
+        public event Action<List<ItemData>> OnUseFinished;
+        public event Action<List<ItemData>> OnUpgradeFinished;
+        public event Action<List<ItemData>> OnUseAndUpgradeFinished;
 
         private CollectSystem _collectSystem;
         private IPlayerViewModel _playerViewModel;
@@ -97,7 +98,7 @@ namespace BackwoodsLife.Scripts.Framework.System
             interactableItem.Process(_configManager, _collectSystem, OnCollectFinished);
         }
 
-        private void CollectFinished(List<InventoryElement> obj)
+        private void CollectFinished(List<ItemData> obj)
         {
             _triggerCallback.Invoke();
             _characterOverUIHolder.ShowPopUpFor(obj);

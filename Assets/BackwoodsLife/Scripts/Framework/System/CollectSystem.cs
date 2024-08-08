@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
@@ -27,7 +28,7 @@ namespace BackwoodsLife.Scripts.Framework.System
         }
 
         public void Collect(List<ItemDataWithConfig> itemsWithConfigToCollect,
-            Action<List<InventoryElement>> callback)
+            Action<List<ItemData>> callback)
         {
             Debug.LogWarning("COLLECT");
             Assert.IsNotNull(_warehouseManager, "WarehouseManager is null");
@@ -35,17 +36,17 @@ namespace BackwoodsLife.Scripts.Framework.System
 
             // TODO check bonuses from tool, skill, etc.
 
-            var processedItems = new List<InventoryElement>();
+            var processedItems = new List<ItemData>();
 
             foreach (var item in itemsWithConfigToCollect)
             {
                 var itemAmount = RandomCollector.GetRandom(item.range.min, item.range.max);
 
-                processedItems.Add(new InventoryElement { typeName = item.item.itemName, Amount = itemAmount });
+                processedItems.Add(new ItemData { Name = item.item.itemName, Quantity = itemAmount });
             }
 
             callback?.Invoke(processedItems);
-            _warehouseManager.IncreaseResource(in processedItems);
+            _warehouseManager.Increase(in processedItems);
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
+namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
 {
     public class WarehousePanelUIController : MonoBehaviour, IUIPanelController
     {

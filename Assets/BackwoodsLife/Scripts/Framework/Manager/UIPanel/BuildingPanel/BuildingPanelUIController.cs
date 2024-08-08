@@ -122,7 +122,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         }
     }
 
-    public struct BuildingPanelElementsRef
+    public record  BuildingPanelElementsRef
     {
         public VisualElement IconRef;
         public Label NameRef;

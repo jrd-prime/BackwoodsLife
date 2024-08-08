@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using UnityEngine;
 using VContainer;
 

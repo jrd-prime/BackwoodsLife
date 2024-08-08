@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Structs;
-using BackwoodsLife.Scripts.Data.UI;
-using BackwoodsLife.Scripts.Gameplay.UI;
+using BackwoodsLife.Scripts.Data.Common.Records;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
+namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
 {
     public class WarehouseView : UIView
     {
@@ -43,12 +42,12 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
                 .AddTo(_disposables);
         }
 
-        private void ElementsChanged(List<InventoryElement> changedElements)
+        private void ElementsChanged(List<ItemData> changedElements)
         {
             foreach (var q in changedElements)
             {
-                var item = _container.ElementAt(_elementsPosition[q.typeName]);
-                item.Q<Label>(WarehouseConst.InventoryHUDItemLabel).text = q.Amount.ToString();
+                var item = _container.ElementAt(_elementsPosition[q.Name]);
+                item.Q<Label>(WarehouseConst.InventoryHUDItemLabel).text = q.Quantity.ToString();
             }
         }
 

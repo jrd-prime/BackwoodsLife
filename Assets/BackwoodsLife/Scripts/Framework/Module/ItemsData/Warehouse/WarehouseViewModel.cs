@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Structs;
+﻿using System;
+using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using Cysharp.Threading.Tasks;
 using R3;
@@ -7,18 +8,18 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
+namespace BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse
 {
     public class WarehouseViewModel : IViewModel
     {
-        public ReadOnlyReactiveProperty<List<InventoryElement>> inventoryDataChanged => _model.OnInventoryChanged;
+        public ReadOnlyReactiveProperty<List<ItemData>> inventoryDataChanged => _model.OnInventoryChanged;
 
-        private WarehouseDataModel _model;
+        private WarehouseItemDataModel _model;
         private WarehouseManager _manager;
         private IAssetProvider _assetProvider;
 
         [Inject]
-        private void Construct(WarehouseDataModel model, WarehouseManager manager, IAssetProvider assetProvider)
+        private void Construct(WarehouseItemDataModel model, WarehouseManager manager, IAssetProvider assetProvider)
         {
             _model = model;
             _manager = manager;
@@ -34,7 +35,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse
 
         public Dictionary<string, int> GetInventoryData()
         {
-            return _manager.GetInventoryData();
+            throw new NotImplementedException();
+            // return _manager.GetInventoryData();
         }
 
         public UniTask<Sprite> GetIcon(string tKey)

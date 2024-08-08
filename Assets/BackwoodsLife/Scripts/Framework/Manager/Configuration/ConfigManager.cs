@@ -74,7 +74,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 
         public T GetItemConfig<T>(string elementTypeName) where T : SItemConfig
         {
-            Debug.LogWarning($"GetItemConfig {elementTypeName} / {typeof(T)}");
+            // Debug.LogWarning($"GetItemConfig {elementTypeName} / {typeof(T)}");
             if (!ItemsConfigCache.ContainsKey(elementTypeName))
                 throw new KeyNotFoundException($"Config {elementTypeName} not found");
 

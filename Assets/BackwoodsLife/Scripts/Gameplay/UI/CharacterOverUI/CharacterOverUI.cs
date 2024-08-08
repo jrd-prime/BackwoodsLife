@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
@@ -41,7 +42,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
             _disposables.Dispose();
         }
 
-        public async void ShowPopUpFor(List<InventoryElement> inventoryElements)
+        public async void ShowPopUpFor(List<ItemData> inventoryElements)
         {
             foreach (var element in inventoryElements)
             {
@@ -53,12 +54,12 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
                 var text = inst.GetComponentInChildren<TMP_Text>();
                 var icon = inst.GetComponentInChildren<Image>();
 
-                var iconSprite = await _assetProvider.LoadIconAsync(element.typeName);
+                var iconSprite = await _assetProvider.LoadIconAsync(element.Name);
 
-                if (iconSprite == null) Debug.LogError("We need icon for " + element.typeName);
+                if (iconSprite == null) Debug.LogError("We need icon for " + element.Name);
 
 
-                text.text = $"+ {element.Amount}";
+                text.text = $"+ {element.Quantity}";
                 icon.sprite = iconSprite;
 
                 inst.transform.DOScale(new Vector3(.7f, .7f, .7f), .7f).SetEase(Ease.Flash);

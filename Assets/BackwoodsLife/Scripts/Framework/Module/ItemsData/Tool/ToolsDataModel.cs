@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
-using BackwoodsLife.Scripts.Framework.Helpers;
 
-namespace BackwoodsLife.Scripts.Data
+namespace BackwoodsLife.Scripts.Framework.Module.ItemsData.Tool
 {
-    public class SkillData : ItemDataHolder
+    public class ToolsDataModel : ItemDataRepository
     {
         public override void Initialize()
         {
@@ -14,17 +13,11 @@ namespace BackwoodsLife.Scripts.Data
 
             // TODO load saved data and initialize
 
-            // List of enums that can be stored in the warehouse
-            List<Type> list = new() { typeof(ESkill) };
+            List<Type> list = new() { typeof(ETool) };
 
             // Init to zero
             foreach (var name in list.SelectMany(Enum.GetNames))
                 ItemsCache.TryAdd(name, 0);
-
-            // foreach (var keyValuePair in ItemsCache)
-            // {
-            //     Debug.LogWarning($"{keyValuePair.Key} {keyValuePair.Value}");
-            // }
         }
     }
 }

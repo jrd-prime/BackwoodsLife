@@ -1,31 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
-using BackwoodsLife.Scripts.Framework.Helpers;
 
-namespace BackwoodsLife.Scripts.Data
+namespace BackwoodsLife.Scripts.Framework.Module.ItemsData.Building
 {
-    public class BuildingData : ItemDataHolder
+    public class BuildingsDataModel : ItemDataRepository
     {
         public override void Initialize()
         {
             ItemsCache = new Dictionary<string, int>();
 
             // TODO load saved data and initialize
-
-            // List of enums that can be stored in the warehouse
             List<Type> list = new() { typeof(EUseAndUpgradeName) };
 
             // Init to zero
             foreach (var name in list.SelectMany(Enum.GetNames))
-                ItemsCache.TryAdd(name,0);
-
-            // foreach (var keyValuePair in ItemsCache)
-            // {
-            //     Debug.LogWarning($"{keyValuePair.Key} {keyValuePair.Value}");
-            // }
+                ItemsCache.TryAdd(name, 0);
         }
     }
 }

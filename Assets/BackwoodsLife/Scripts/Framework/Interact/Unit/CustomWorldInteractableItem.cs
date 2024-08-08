@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
@@ -21,7 +22,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit
         protected TInteractSystem CurrentInteractableSystem;
 
         public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
-            Action<List<InventoryElement>> callbackToInteractSystem)
+            Action<List<ItemData>> callbackToInteractSystem)
         {
             Assert.IsNotNull(configManager, "configManager is null");
             Assert.IsNotNull(interactableSystem, "interactableSystem is null");

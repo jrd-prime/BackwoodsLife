@@ -4,7 +4,11 @@ using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Building;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Skill;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Tool;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
@@ -18,10 +22,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         private IAssetProvider _assetProvider;
         private BuildingPanelElementsRef _panelRef;
         private GameDataManager _gameDataManager;
-        private WarehouseDataModel _warehouse;
-        private BuildingData _building;
-        private SkillData _skill;
-        private ToolData _tool;
+        private WarehouseItemDataModel _warehouseItem;
+        private BuildingsDataModel _buildings;
+        private SkillsDataModel _skills;
+        private ToolsDataModel _tools;
 
         [Inject]
         private void Construct(IAssetProvider assetProvider, GameDataManager gameDataManager)
@@ -32,10 +36,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
 
         public void Initialize()
         {
-            _warehouse = _gameDataManager.Warehouse;
-            _building = _gameDataManager.Building;
-            _skill = _gameDataManager.Skill;
-            _tool = _gameDataManager.Tool;
+            _warehouseItem = _gameDataManager.warehouseItem;
+            _buildings = _gameDataManager.buildings;
+            _skills = _gameDataManager.skills;
+            _tools = _gameDataManager.tools;
         }
 
         public void Fill(Dictionary<EItemData, Dictionary<SItemConfig, int>> level,
@@ -100,8 +104,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
 
         private string ReqStatText(EItemData itemDataType, string itemName, int reqValue)
         {
-            var itemDataHolder = ChooseDataHolder(itemDataType).GetItem(itemName);
-            return itemDataHolder.Count < reqValue ? $"{itemDataHolder.Count}/{reqValue}" : $"{reqValue}/{reqValue}";
+            var itemData = ChooseDataHolder(itemDataType).GetItem(itemName);
+            return itemData.Quantity < reqValue
+                ? $"{itemData.Quantity}/{reqValue}"
+                : $"{reqValue}/{reqValue}";
         }
 
         private void FillReqForOther(EItemData itemDataType, Dictionary<SItemConfig, int> itemDictionary)
@@ -141,14 +147,14 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
                 : _panelRef.CrossIcon);
         }
 
-        private ItemDataHolder ChooseDataHolder(EItemData itemDataType)
+        private ItemDataRepository ChooseDataHolder(EItemData itemDataType)
         {
             return itemDataType switch
             {
-                EItemData.Resource => _warehouse,
-                EItemData.Building => _building,
-                EItemData.Skill => _skill,
-                EItemData.Tool => _tool,
+                EItemData.Resource => _warehouseItem,
+                EItemData.Building => _buildings,
+                EItemData.Skill => _skills,
+                EItemData.Tool => _tools,
                 _ => throw new ArgumentOutOfRangeException(nameof(itemDataType), itemDataType, null)
             };
         }

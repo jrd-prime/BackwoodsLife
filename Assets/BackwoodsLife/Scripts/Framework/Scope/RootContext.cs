@@ -11,7 +11,10 @@ using BackwoodsLife.Scripts.Framework.Manager.DB;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.Input;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Warehouse;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Building;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Skill;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Tool;
+using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -61,10 +64,10 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(eventSystem).AsSelf();
 
             // Data
-            builder.Register<WarehouseDataModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<BuildingData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<SkillData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<ToolData>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<WarehouseItemDataModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<BuildingsDataModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<SkillsDataModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<ToolsDataModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             // Services
             builder.Register<ConfigManager>(Lifetime.Singleton).AsImplementedInterfaces();
