@@ -15,7 +15,7 @@ namespace BackwoodsLife.Scripts.Framework.InteractableItem
     /// <summary>
     /// Предмет, который находится в игровом мире и который можно собрать. Растения, руда, деревья и т.д.
     /// </summary>
-    public abstract class Collectable : InteractableItem<SCollectOnlyItem, Collect, ECollectName>
+    public abstract class Collectable : InteractableItem<SCollectableItem, Collect, ECollectName>
     {
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.Collect;
 

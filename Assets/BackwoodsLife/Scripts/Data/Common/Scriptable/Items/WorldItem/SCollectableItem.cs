@@ -12,7 +12,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
         fileName = "CollectableItem",
         menuName = SOPathName.WorldItemPath + "Collectable Item",
         order = 1)]
-    public class SCollectOnlyItem : SWorldItemConfig
+    public class SCollectableItem : SWorldItemConfig
     {
         [Title("Collectable Setup")] public List<CollectableLevel> collectableLevels;
 

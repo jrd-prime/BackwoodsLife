@@ -86,7 +86,7 @@ namespace BackwoodsLife.Scripts.Framework.System.WorldItem
             if (collectable == null)
                 throw new NullReferenceException("Interactable obj is null. As collectable item");
 
-            var config = _configManager.GetItemConfig<SCollectOnlyItem>(collectable.itemName.ToString());
+            var config = _configManager.GetItemConfig<SCollectableItem>(collectable.itemName.ToString());
 
             await _playerViewModel.SetCollectableActionForAnimationAsync(config.interactAnimation);
 

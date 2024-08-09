@@ -5,12 +5,12 @@ namespace BackwoodsLife.Scripts.Framework.Extensions
 {
     public static class ItemConfigExtensions
     {
-        public static bool HasCollectables(this SCollectOnlyItem itemConfig)
+        public static bool HasCollectables(this SCollectableItem itemConfig)
         {
             return itemConfig.collectConfig.returnedItems.Count > 0;
         }
 
-        public static bool HasRequirements(this SCollectOnlyItem itemConfig)
+        public static bool HasRequirements(this SCollectableItem itemConfig)
         {
             Debug.Log("We check 3 requirements");
             return itemConfig.collectConfig.requirementForCollect.building.Count > 0 ||

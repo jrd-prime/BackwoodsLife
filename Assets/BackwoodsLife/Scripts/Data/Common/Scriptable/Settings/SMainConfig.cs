@@ -61,7 +61,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Settings
     public struct WorldItemsList
     {
         public List<CustomItemConfig<SUseAndUpgradeItem>> buildingItems;
-        public List<CustomItemConfig<SCollectOnlyItem>> collectableItems;
+        public List<CustomItemConfig<SCollectableItem>> collectableItems;
         public List<CustomItemConfig<SUseOnlyItem>> placeItems;
     }
 

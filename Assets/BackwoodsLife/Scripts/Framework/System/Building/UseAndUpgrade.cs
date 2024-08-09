@@ -2,7 +2,7 @@
 
 namespace BackwoodsLife.Scripts.Framework.System.Building
 {
-    public class UseAndUpgrade : IBuildingSystem
+    public sealed class UseAndUpgrade : IBuildingSystem
     {
         private Use _use;
         private Upgrade _upgrade;

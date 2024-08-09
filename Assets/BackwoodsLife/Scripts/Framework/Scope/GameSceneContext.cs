@@ -6,6 +6,7 @@ using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
+using BackwoodsLife.Scripts.Framework.System;
 using BackwoodsLife.Scripts.Framework.System.Item;
 using BackwoodsLife.Scripts.Framework.System.WorldItem;
 using BackwoodsLife.Scripts.Gameplay.Player;
@@ -48,6 +49,8 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.Register<JoystickViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<WarehouseViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
+            // System
+            builder.Register<ItemSystem>(Lifetime.Singleton).AsSelf();
             builder.Register<Collect>(Lifetime.Singleton).AsSelf();
             builder.Register<Spend>(Lifetime.Singleton).AsSelf();
 

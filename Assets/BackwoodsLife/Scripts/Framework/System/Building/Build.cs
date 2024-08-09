@@ -7,7 +7,7 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.System.Building
 {
-    public class Build : IBuildingSystem
+    public sealed class Build : IBuildingSystem
     {
         private IAssetProvider _assetProvider;
 

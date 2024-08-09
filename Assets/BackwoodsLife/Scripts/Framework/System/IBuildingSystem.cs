@@ -1,4 +1,4 @@
-﻿namespace BackwoodsLife.Scripts.Framework.System.Building
+﻿namespace BackwoodsLife.Scripts.Framework.System
 {
     public interface IBuildingSystem : IBaseSystem
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Records;
 
-namespace BackwoodsLife.Scripts.Framework.System.Item
+namespace BackwoodsLife.Scripts.Framework.System
 {
     /// <summary>
     /// Система, которая подразумевает какие-либо действия над предметами (Ресурс, еда, и т.д.)

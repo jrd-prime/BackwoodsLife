@@ -1,6 +1,6 @@
 ﻿namespace BackwoodsLife.Scripts.Framework.System.Building
 {
-    public class Upgrade : IBuildingSystem
+    public sealed class Upgrade : IBuildingSystem
     {
     }
 }
