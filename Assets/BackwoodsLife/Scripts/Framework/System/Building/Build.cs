@@ -5,9 +5,9 @@ using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework
+namespace BackwoodsLife.Scripts.Framework.System.Building
 {
-    public class BuildSystem
+    public class Build : IBuildingSystem
     {
         private IAssetProvider _assetProvider;
 

@@ -1,5 +1,4 @@
 ﻿using BackwoodsLife.Scripts.Gameplay.Player;
-using DG.Tweening;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;

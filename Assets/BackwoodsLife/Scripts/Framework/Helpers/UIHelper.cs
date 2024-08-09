@@ -1,5 +1,4 @@
-﻿using BackwoodsLife.Scripts.Data;
-using BackwoodsLife.Scripts.Data.UI;
+﻿using BackwoodsLife.Scripts.Data.UI;
 using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 

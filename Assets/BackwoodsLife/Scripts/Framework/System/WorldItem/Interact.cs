@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
-using BackwoodsLife.Scripts.Framework.Interact.Unit;
-using BackwoodsLife.Scripts.Framework.Interact.Unit.Custom;
+using BackwoodsLife.Scripts.Framework.InteractableItem;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
+using BackwoodsLife.Scripts.Framework.System.Item;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using R3;
 using UnityEngine;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework.System
+namespace BackwoodsLife.Scripts.Framework.System.WorldItem
 {
     /// <summary>
     /// Placed on character prefab
     /// </summary>
-    public class InteractSystem : MonoBehaviour, IDisposable
+    public class Interact : MonoBehaviour, IDisposable
     {
         public bool IsMoving { get; private set; }
         public event Action<List<ItemData>> OnCollectFinished;
@@ -27,29 +26,27 @@ namespace BackwoodsLife.Scripts.Framework.System
         public event Action<List<ItemData>> OnUpgradeFinished;
         public event Action<List<ItemData>> OnUseAndUpgradeFinished;
 
-        private CollectSystem _collectSystem;
         private IPlayerViewModel _playerViewModel;
-        private IInteractableSystem _usableSystem;
-        private IInteractableSystem _upgradableSystem;
-        private IInteractableSystem _usableAndUpgradableSystem;
-        private SpendSystem _spendSystem;
+        private IItemSystem _usableSystem;
+        private IItemSystem _upgradableSystem;
+        private IItemSystem _usableAndUpgradableSystem;
+        private Spend _spend;
         private CharacterOverUI _characterOverUIHolder;
         private IConfigManager _configManager;
         private Action _triggerCallback;
-        private CompositeDisposable _disposable = new();
+        private readonly CompositeDisposable _disposable = new();
         private BuildingPanelUIController _buildingPanelUIController;
 
         [Inject]
-        private void Construct(IPlayerViewModel playerViewModel, CollectSystem collectSystem, SpendSystem spendSystem,
+        private void Construct(IPlayerViewModel playerViewModel, Spend spend,
             CharacterOverUI characterOverUIHolder, IConfigManager configManager,
             BuildingPanelUIController buildingPanelUIController)
         {
             _configManager = configManager;
             _playerViewModel = playerViewModel;
-            _collectSystem = collectSystem;
             _characterOverUIHolder = characterOverUIHolder;
             _buildingPanelUIController = buildingPanelUIController;
-            _spendSystem = spendSystem;
+            _spend = spend;
         }
 
         private void Awake()
@@ -60,18 +57,18 @@ namespace BackwoodsLife.Scripts.Framework.System
                 .AddTo(_disposable);
         }
 
-        public void Interact(WorldInteractableItem worldInteractableItem, Action onInteractCompleted)
+        public void Interaction(InteractableItemBase interactableItem, Action triggerCallback)
         {
             Debug.LogWarning($"<color=red>Interact system.</color>");
 
-            _triggerCallback = onInteractCompleted;
+            _triggerCallback = triggerCallback;
 
-            if (worldInteractableItem == null) throw new NullReferenceException("Interactable obj is null");
+            if (interactableItem == null) throw new NullReferenceException("InteractableItem is null");
 
-            switch (worldInteractableItem.interactType)
+            switch (interactableItem.interactType)
             {
                 case EInteractTypes.Collect:
-                    CollectInteraction(worldInteractableItem);
+                    CollectInteraction(interactableItem as Collectable);
                     break;
                 case EInteractTypes.Use:
                     break;
@@ -84,26 +81,26 @@ namespace BackwoodsLife.Scripts.Framework.System
             }
         }
 
-        private async void CollectInteraction(WorldInteractableItem interactableItem)
+        private async void CollectInteraction(Collectable collectable)
         {
-            CollectableItem item = interactableItem as CollectableItem;
-            if (item == null)
+            if (collectable == null)
                 throw new NullReferenceException("Interactable obj is null. As collectable item");
 
-            var config = _configManager.GetItemConfig<SCollectOnlyItem>(item.itemName.ToString());
+            var config = _configManager.GetItemConfig<SCollectOnlyItem>(collectable.itemName.ToString());
 
             await _playerViewModel.SetCollectableActionForAnimationAsync(config.interactAnimation);
 
-            interactableItem.Process(_configManager, _collectSystem, OnCollectFinished);
+            collectable.Process(OnCollectFinished);
         }
 
-        private void CollectFinished(List<ItemData> obj)
+        private void CollectFinished(List<ItemData> itemsData)
         {
             _triggerCallback.Invoke();
-            _characterOverUIHolder.ShowPopUpFor(obj);
+            _characterOverUIHolder.ShowPopUpFor(itemsData);
         }
 
-        public void OnBuildZoneEnter(in SWorldItemConfig worldItemConfig, Action<Dictionary<SItemConfig, int>> buildZoneCallback)
+        public void OnBuildZoneEnter(in SWorldItemConfig worldItemConfig,
+            Action<Dictionary<SItemConfig, int>> buildZoneCallback)
         {
             Debug.LogWarning("Interact system. On build Zone enter");
             _buildingPanelUIController.OnBuildZoneEnter(in worldItemConfig, buildZoneCallback);
@@ -118,7 +115,7 @@ namespace BackwoodsLife.Scripts.Framework.System
 
         public void SpendResourcesForBuild(Dictionary<SItemConfig, int> levelResources)
         {
-            _spendSystem.Spend(levelResources.ToList());
+            // _spend.Process(levelResources.ToList());
         }
     }
 }

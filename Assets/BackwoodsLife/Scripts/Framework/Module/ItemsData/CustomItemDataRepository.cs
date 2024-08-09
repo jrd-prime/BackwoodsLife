@@ -20,10 +20,10 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
             // _uiButtonsController = uiButtonsController;
         }
 
-        public void Increase(string res, int amount) => Model.AddItem(res, amount);
-        public void Increase(in List<ItemData> inventoryElements) => Model.AddItem(inventoryElements);
-        public void DecreaseResource(string objResourceType, int amount) => Model.RemoveItem(objResourceType, amount);
-        public void DecreaseResource(in List<ItemData> inventoryElements) => Model.RemoveItem(inventoryElements);
+        public bool Increase(string res, int amount) => Model.AddItem(res, amount);
+        public bool Increase(in List<ItemData> inventoryElements) => Model.AddItem(inventoryElements);
+        public bool DecreaseResource(string objResourceType, int amount) => Model.RemoveItem(objResourceType, amount);
+        public bool DecreaseResource(in List<ItemData> inventoryElements) => Model.RemoveItem(inventoryElements);
 
         public void Initialize()
         {

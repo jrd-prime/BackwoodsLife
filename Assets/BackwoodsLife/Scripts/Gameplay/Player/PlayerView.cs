@@ -1,9 +1,10 @@
 ﻿using BackwoodsLife.Scripts.Data.Animation.Character;
-using BackwoodsLife.Scripts.Framework.System;
+using BackwoodsLife.Scripts.Framework.System.WorldItem;
 using BackwoodsLife.Scripts.Gameplay.UI;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.Player
@@ -11,7 +12,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
     [RequireComponent(typeof(Rigidbody), typeof(Animator), typeof(CapsuleCollider))]
     public class PlayerView : UIView
     {
-        public InteractSystem InteractSystem;
+        [FormerlySerializedAs("InteractSystem")] public Interact interact;
         
         private IPlayerViewModel _viewModel;
         private readonly CompositeDisposable _disposables = new();
@@ -24,10 +25,10 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private bool _movementBlocked;
 
         [Inject]
-        private void Construct(IPlayerViewModel viewModel, InteractSystem interactSystem)
+        private void Construct(IPlayerViewModel viewModel, Interact interact)
         {
             _viewModel = viewModel;
-            InteractSystem = interactSystem; // TODO удалить костыль. Прокидываем в треггер зон через тут )
+            this.interact = interact; // TODO удалить костыль. Прокидываем в треггер зон через тут )
         }
 
         private void Awake()

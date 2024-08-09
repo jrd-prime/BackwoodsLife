@@ -1,8 +1,4 @@
-﻿using System;
-using UnityEngine.UIElements;
-using VContainer.Unity;
-
-namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
+﻿namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 {
     public interface IUIFrame
     {

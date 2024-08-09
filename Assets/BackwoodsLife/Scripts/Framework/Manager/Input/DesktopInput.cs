@@ -20,7 +20,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
             _gameInputActions = new JInputActions();
             _gameInputActions.Enable();
 
-            UnityEngine.Debug.LogWarning("OnEnable");
+            Debug.LogWarning("OnEnable");
             // _gameInputActions.UI.SingleClick.performed += OnSinClick;
         }
 
@@ -33,9 +33,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
 
         private void OnSinClick(CallbackContext obj)
         {
-            UnityEngine.Debug.LogWarning("OnSinClick");
+            Debug.LogWarning("OnSinClick");
 
-            UnityEngine.Debug.LogWarning(this + " " + obj);
+            Debug.LogWarning(this + " " + obj);
 
             OnSingleClick?.Invoke(obj.ReadValue<Vector3>());
         }
@@ -43,7 +43,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Input
 
         private void OnMenu(CallbackContext obj)
         {
-            UnityEngine.Debug.LogWarning("OnMenu");
+            Debug.LogWarning("OnMenu");
         }
 
         private void OnDisable()

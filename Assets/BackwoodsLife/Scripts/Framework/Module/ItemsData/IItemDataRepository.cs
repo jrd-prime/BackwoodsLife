@@ -9,10 +9,10 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
     public interface IItemDataRepository : IInitializable
     {
         public ReactiveProperty<List<ItemDataChanged>> OnRepositoryDataChanged { get; }
-        public void AddItem(string itemName, int quantity);
-        public void AddItem(in List<ItemData> itemsData);
-        public void RemoveItem(string itemName, int quantity);
-        public void RemoveItem(List<ItemData> itemsData);
+        public bool AddItem(string itemName, int quantity);
+        public bool AddItem(in List<ItemData> itemsData);
+        public bool RemoveItem(string itemName, int quantity);
+        public bool RemoveItem(List<ItemData> itemsData);
 
         public ItemData GetItem(string itemName);
 

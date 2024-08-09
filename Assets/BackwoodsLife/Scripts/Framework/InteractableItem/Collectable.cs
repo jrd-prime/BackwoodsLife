@@ -6,20 +6,22 @@ using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Extensions;
 using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Framework.Manager.Configuration;
-using BackwoodsLife.Scripts.Framework.System;
+using BackwoodsLife.Scripts.Framework.System.Item;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
+namespace BackwoodsLife.Scripts.Framework.InteractableItem
 {
-    public abstract class CollectableItem : CustomWorldInteractableItem<SCollectOnlyItem, CollectSystem, ECollectName>
+    /// <summary>
+    /// Предмет, который находится в игровом мире и который можно собрать. Растения, руда, деревья и т.д.
+    /// </summary>
+    public abstract class Collectable : InteractableItem<SCollectOnlyItem, Collect, ECollectName>
     {
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.Collect;
 
-        public override void Process(IConfigManager configManager, IInteractableSystem interactableSystem,
-            Action<List<ItemData>> callbackToInteractSystem)
+        public override void Process(Action<List<ItemData>> interactSystemCallback)
         {
-            base.Process(configManager, interactableSystem, callbackToInteractSystem);
+            Assert.IsNotNull(interactSystemCallback, "interactSystemCallback is null");
 
             if (!WorldItemConfig.HasCollectables())
             {
@@ -34,7 +36,7 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
             else
             {
                 Debug.LogWarning($"{WorldItemConfig.itemName} has collectables, no requirements, just collect");
-                
+
                 var processedItems = new List<ItemData>();
 
                 foreach (var item in WorldItemConfig.collectConfig.returnedItems)
@@ -43,10 +45,13 @@ namespace BackwoodsLife.Scripts.Framework.Interact.Unit.Custom
 
                     processedItems.Add(new ItemData { Name = item.item.itemName, Quantity = itemAmount });
                 }
-                
-                
-                // CurrentInteractableSystem.Process(CurrentInteractableSystem, processedItems,
-                //     callbackToInteractSystem);
+
+                var systemResult = CurrentInteractableSystem.Process(processedItems);
+
+                if (systemResult)
+                    interactSystemCallback.Invoke(processedItems);
+                else
+                    Debug.LogError($"{CurrentInteractableSystem.GetType()} failed to process items");
             }
         }
     }

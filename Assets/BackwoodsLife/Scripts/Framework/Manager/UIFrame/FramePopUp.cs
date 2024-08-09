@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Enums.UI;
-using BackwoodsLife.Scripts.Framework.Helpers.Extensions;
+﻿using BackwoodsLife.Scripts.Data.Common.Enums.UI;
 using BackwoodsLife.Scripts.Gameplay.UI;
 using UnityEngine.UIElements;
 

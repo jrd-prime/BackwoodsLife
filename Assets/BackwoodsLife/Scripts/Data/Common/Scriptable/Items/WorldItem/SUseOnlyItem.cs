@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem
 {

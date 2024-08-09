@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Common.Enums.UI;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;

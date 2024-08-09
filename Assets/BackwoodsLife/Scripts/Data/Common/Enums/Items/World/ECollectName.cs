@@ -1,5 +1,8 @@
 ﻿namespace BackwoodsLife.Scripts.Data.Common.Enums.Items.World
 {
+    /// <summary>
+    /// Именованные идентификаторы предметов, с которых можно собиграть какие-либо ресурсы
+    /// </summary>
     public enum ECollectName
     {
         StonePack = 0,

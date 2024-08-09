@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Framework;
 using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Framework.System;
+using BackwoodsLife.Scripts.Framework.System.Building;
+using BackwoodsLife.Scripts.Framework.System.WorldItem;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -18,16 +17,16 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
         public Action<Dictionary<SItemConfig, int>> OnBuildStarted;
         public Action OnBuildFinished;
 
-        private InteractSystem _interactSystem;
+        private Interact _interact;
         private bool _isInTriggerZone;
-        private BuildSystem _buildSystem;
+        private Build _build;
 
 
         [Inject]
-        private void Construct(InteractSystem interactSystem, BuildSystem buildSystem)
+        private void Construct(Interact interact, Build build)
         {
-            _interactSystem = interactSystem;
-            _buildSystem = buildSystem;
+            _interact = interact;
+            _build = build;
         }
 
         private void Awake()
@@ -35,9 +34,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
             if (worldItemConfig == null)
                 throw new NullReferenceException(
                     $"{worldItemConfig.name} upgradeConfig is null! Check {worldItemConfig.name} config!");
-            if (_interactSystem == null)
+            if (_interact == null)
                 throw new NullReferenceException("InteractSystem does not inject!");
-            if (_buildSystem == null)
+            if (_build == null)
                 throw new NullReferenceException("BuildSystem does not inject!");
 
             OnBuildStarted += OnBuildStart;
@@ -51,25 +50,25 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
 
             _isInTriggerZone = true;
 
-            while (_isInTriggerZone && _interactSystem.IsMoving)
+            while (_isInTriggerZone && _interact.IsMoving)
             {
                 // Debug.LogWarning("In zone but still moving, waiting 100ms");
                 await UniTask.Delay(100);
             }
 
-            if (!_isInTriggerZone || _interactSystem.IsMoving) return;
+            if (!_isInTriggerZone || _interact.IsMoving) return;
 
             Debug.LogWarning("In zone and not moving, building!");
             Debug.Log($"Char in trigger zone! {name} / {worldItemConfig.interactTypes}");
-            _interactSystem.OnBuildZoneEnter(in worldItemConfig, OnBuildStarted);
+            _interact.OnBuildZoneEnter(in worldItemConfig, OnBuildStarted);
         }
 
         private void OnBuildStart(Dictionary<SItemConfig, int> levelResources)
         {
             Debug.LogWarning("On build start");
 
-            _interactSystem.SpendResourcesForBuild(levelResources);
-            _buildSystem.BuildAsync(worldItemConfig, OnBuildFinish);
+            _interact.SpendResourcesForBuild(levelResources);
+            _build.BuildAsync(worldItemConfig, OnBuildFinish);
         }
 
         private void OnBuildFinish()
@@ -83,7 +82,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
         {
             _isInTriggerZone = false;
             Debug.LogWarning($"Char leave zone! {name} / {worldItemConfig.interactTypes}");
-            _interactSystem.OnBuildZoneExit();
+            _interact.OnBuildZoneExit();
         }
 
         private void OnTriggerExit(Collider other)

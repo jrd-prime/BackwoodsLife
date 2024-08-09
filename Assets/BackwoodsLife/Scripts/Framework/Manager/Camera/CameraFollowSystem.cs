@@ -1,5 +1,4 @@
 ﻿using BackwoodsLife.Scripts.Gameplay.Player;
-using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
 

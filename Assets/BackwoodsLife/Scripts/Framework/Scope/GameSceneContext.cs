@@ -6,7 +6,8 @@ using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
-using BackwoodsLife.Scripts.Framework.System;
+using BackwoodsLife.Scripts.Framework.System.Item;
+using BackwoodsLife.Scripts.Framework.System.WorldItem;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
@@ -14,6 +15,7 @@ using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using BackwoodsLife.Scripts.Gameplay.UI.Warehouse;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -23,7 +25,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
     {
         [SerializeField] private UIFrameController uiFrameController;
         [SerializeField] private UIButtonsController uiButtonsController;
-        [SerializeField] private InteractSystem interactSystem;
+        [FormerlySerializedAs("interactSystem")] [SerializeField] private Interact interact;
         [SerializeField] private CharacterOverUI characterOverUIHolder;
         [SerializeField] private InteractPanelUI interactPanelUIHolder;
         [SerializeField] private BuildingPanelUIController buildingPanelUIController;
@@ -46,8 +48,8 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.Register<JoystickViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<WarehouseViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
-            builder.Register<CollectSystem>(Lifetime.Singleton).AsSelf();
-            builder.Register<SpendSystem>(Lifetime.Singleton).AsSelf();
+            builder.Register<Collect>(Lifetime.Singleton).AsSelf();
+            builder.Register<Spend>(Lifetime.Singleton).AsSelf();
 
             builder.Register<WarehouseManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<QuestManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
@@ -61,7 +63,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(buildingPanelUIController).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(uiFrameController).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(uiButtonsController).AsSelf().AsImplementedInterfaces();
-            builder.RegisterComponent(interactSystem).AsSelf().AsImplementedInterfaces();
+            builder.RegisterComponent(interact).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(characterOverUIHolder).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(interactPanelUIHolder).AsSelf().AsImplementedInterfaces();
 

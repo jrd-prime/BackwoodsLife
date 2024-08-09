@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Records;
+﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using Cysharp.Threading.Tasks;
 using R3;

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Bootstrap;

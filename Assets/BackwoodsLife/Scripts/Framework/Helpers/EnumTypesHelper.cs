@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
 
 namespace BackwoodsLife.Scripts.Framework.Helpers

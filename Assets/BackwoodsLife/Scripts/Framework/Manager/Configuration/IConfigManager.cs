@@ -4,7 +4,6 @@ using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using Object = UnityEngine.Object;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 {

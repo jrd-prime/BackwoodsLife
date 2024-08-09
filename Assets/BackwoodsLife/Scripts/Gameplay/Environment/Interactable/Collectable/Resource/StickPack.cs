@@ -1,6 +1,6 @@
 ﻿namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.Collectable.Resource
 {
-    public class StickPack  : Framework.Interact.Unit.Custom.CollectableItem
+    public class StickPack  : Framework.InteractableItem.Collectable
     {
    
     }

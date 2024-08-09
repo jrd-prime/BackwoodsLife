@@ -1,8 +1,8 @@
-﻿using BackwoodsLife.Scripts.Framework.Interact.Unit.Custom;
+﻿using BackwoodsLife.Scripts.Framework.InteractableItem;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.Interactable.UsableAndUpgradable
 {
-    public class House : UseAndUpgradeItem
+    public class House : UsableAndUpgradeable
     {
      
     }

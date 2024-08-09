@@ -1,6 +1,5 @@
-﻿using BackwoodsLife.Scripts.Framework.Scope;
-using BackwoodsLife.Scripts.Gameplay.Player;
-using R3;
+﻿using R3;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
@@ -43,7 +42,7 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
             _btnExit.clicked += () =>
             {
 #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
+                EditorApplication.isPlaying = false;
 #else
                 Application.Quit();
 #endif

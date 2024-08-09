@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
-using BackwoodsLife.Scripts.Framework.Interact.Unit.Custom;
 using BackwoodsLife.Scripts.Framework.Manager.Audio;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;

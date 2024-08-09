@@ -1,6 +1,4 @@
-﻿using System;
-using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Common.Enums.Items;
+﻿using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Data.Common.Scriptable.Items.GameItem

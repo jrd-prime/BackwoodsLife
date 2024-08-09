@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using Sirenix.OdinInspector;
 using UnityEngine;

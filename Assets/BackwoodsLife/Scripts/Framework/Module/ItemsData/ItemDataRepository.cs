@@ -23,7 +23,7 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
 
         public abstract void Initialize();
 
-        public void AddItem(string itemName, int quantity)
+        public bool AddItem(string itemName, int quantity)
         {
             CheckItem(itemName);
             var currentAmount = ItemsCache[itemName];
@@ -34,9 +34,10 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
 
             TempListForDataChanges.Add(changed);
             RepositoryDataChanged();
+            return true;
         }
 
-        public void AddItem(in List<ItemData> itemsData)
+        public bool AddItem(in List<ItemData> itemsData)
         {
             foreach (var itemData in itemsData)
             {
@@ -51,9 +52,10 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
             }
 
             RepositoryDataChanged();
+            return true;
         }
 
-        public void RemoveItem(string itemName, int quantity)
+        public bool RemoveItem(string itemName, int quantity)
         {
             CheckItem(itemName);
             var currentAmount = ItemsCache[itemName];
@@ -64,9 +66,10 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
 
             TempListForDataChanges.Add(changed);
             RepositoryDataChanged();
+            return true;
         }
 
-        public void RemoveItem(List<ItemData> itemsData)
+        public bool RemoveItem(List<ItemData> itemsData)
         {
             foreach (var itemData in itemsData)
             {
@@ -81,6 +84,7 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
             }
 
             RepositoryDataChanged();
+            return true;
         }
 
         public ItemData GetItem(string itemName)

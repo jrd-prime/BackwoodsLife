@@ -1,6 +1,6 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Framework.Interact.Unit;
+using BackwoodsLife.Scripts.Framework.InteractableItem;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using UnityEngine;
 using VContainer;
@@ -32,18 +32,18 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
 
             if (parentTransform != null)
             {
-                var interactable = parentTransform.GetComponent<WorldInteractableItem>();
+                var interactable = parentTransform.GetComponent<InteractableItemBase>();
                 if (interactable == null)
                     throw new NullReferenceException(
                         $"Interactable is null on {parentTransform.name} prefab. You must set to object Interactable component. ");
 
                 Debug.LogWarning($"<color=red>Trigger zone: </color> {interactable.GetType().Name}");
 
-                var interactSystem = other.GetComponent<PlayerView>().InteractSystem;
+                var interactSystem = other.GetComponent<PlayerView>().interact;
                 if (interactSystem == null)
                     throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
 
-                interactSystem.Interact(interactable, _onInteractCompleted);
+                interactSystem.Interaction(interactable, _onInteractCompleted);
             }
             else Debug.LogWarning("Текущий объект не имеет родителя.");
         }

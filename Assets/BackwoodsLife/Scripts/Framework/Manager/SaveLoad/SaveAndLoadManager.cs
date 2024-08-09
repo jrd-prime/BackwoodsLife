@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Helpers;
-using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using UnityEngine;
 using UnityEngine.Assertions;

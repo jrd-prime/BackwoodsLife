@@ -1,6 +1,5 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework;
 using Cysharp.Threading.Tasks;
 using R3;
