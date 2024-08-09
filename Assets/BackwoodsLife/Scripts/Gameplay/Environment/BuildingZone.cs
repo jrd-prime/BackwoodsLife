@@ -78,16 +78,15 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
         }
 
 
-        private void BuildButtonClicked(List<ItemData> itemsData)
+        private void BuildButtonClicked(List<ItemData> itemsForSpendData)
         {
-            Assert.IsNotNull(itemsData, "ItemsData is null!");
-            Debug.LogWarning("btn clcked");
+            Assert.IsNotNull(itemsForSpendData, "ItemsData is null!");
 
             Destroy(gameObject); // TODO pool or something
 
             BuildZoneInteractionFinished();
 
-            _spend.Process(itemsData);
+            _spend.Process(itemsForSpendData);
             _build.BuildAsync(itemConfigForBuild);
         }
 

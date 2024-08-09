@@ -7,7 +7,6 @@ using BackwoodsLife.Scripts.Data.Const.UI;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
-using R3;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
@@ -38,6 +37,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         private Action<Dictionary<SItemConfig, int>> _buildZoneCallback;
         private Dictionary<EItemData, Dictionary<SItemConfig, int>> _currentLevelConfig;
 
+        private readonly List<ItemData> _tempItemsData = new();
+
         [Inject]
         private void Construct(UIFrameController uiFrameController, BuildingPanelFiller buildingPanelFiller,
             GameDataManager gameDataManager)
@@ -58,13 +59,19 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         {
             Debug.LogWarning("OnBuildZoneEnter");
 
-            _buildButton.clicked += () => OnBuildButtonClicked1?.Invoke(new List<ItemData>());
-
 
             if (!worldItemConfig.GetLevelReq(ELevel.Level_1, out _currentLevelConfig))
                 throw new NullReferenceException(
                     $"Level 1 not found in UpgradeCache. Check config: {worldItemConfig.itemName}");
 
+            _tempItemsData.Clear();
+            
+            foreach (var q in _currentLevelConfig[EItemData.Resource])
+            {
+                _tempItemsData.Add(new ItemData { Name = q.Key.itemName, Quantity = q.Value });
+            }
+
+            _buildButton.clicked += OnBuildButtonClicked;
 
             var isEnough = _gameDataManager.IsEnoughForBuild(_currentLevelConfig);
 
@@ -75,21 +82,14 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
             _framePopUpFrame = _uiFrameController.GetPopUpFrame();
             _framePopUpFrame.ShowIn(EPopUpSubFrame.Left, in _buildingPanel);
         }
-
-        private void OnBuildButtonClicked()
-        {
-            Debug.LogWarning("On build button clicked");
-            if (_buildZoneCallback == null) throw new NullReferenceException("Interact system callback is null");
-            if (_currentLevelConfig == null) throw new NullReferenceException("Current level config is null");
-
-            _buildZoneCallback.Invoke(_currentLevelConfig[EItemData.Resource]);
-        }
-
+        
         public void HideBuildingPanel()
         {
             _buildButton.clicked -= OnBuildButtonClicked;
             _framePopUpFrame?.HideIn(EPopUpSubFrame.Left, in _buildingPanel);
         }
+
+        private void OnBuildButtonClicked() => OnBuildButtonClicked1?.Invoke(_tempItemsData);
 
         private void InitializeBuildingPanelElementsReferences()
         {
