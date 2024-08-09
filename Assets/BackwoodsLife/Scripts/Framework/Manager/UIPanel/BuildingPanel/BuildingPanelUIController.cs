@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
+using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Const.UI;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
+using R3;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
@@ -30,6 +32,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         private Button _buildButton;
         private BuildingPanelElementsRef _buildingPanelElementsRef;
         private GameDataManager _gameDataManager;
+
+
+        public Action<List<ItemData>> OnBuildButtonClicked1;
         private Action<Dictionary<SItemConfig, int>> _buildZoneCallback;
         private Dictionary<EItemData, Dictionary<SItemConfig, int>> _currentLevelConfig;
 
@@ -49,12 +54,12 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
             _buildButton = _buildingPanelElementsRef.BuildButton;
         }
 
-        public void OnBuildZoneEnter(in SWorldItemConfig worldItemConfig,
-            Action<Dictionary<SItemConfig, int>> buildZoneCallback)
+        public void ShowBuildingPanelFor(in SWorldItemConfig worldItemConfig)
         {
             Debug.LogWarning("OnBuildZoneEnter");
-            _buildZoneCallback = buildZoneCallback;
-            _buildButton.clicked += OnBuildButtonClicked;
+
+            _buildButton.clicked += () => OnBuildButtonClicked1?.Invoke(new List<ItemData>());
+
 
             if (!worldItemConfig.GetLevelReq(ELevel.Level_1, out _currentLevelConfig))
                 throw new NullReferenceException(
@@ -80,7 +85,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
             _buildZoneCallback.Invoke(_currentLevelConfig[EItemData.Resource]);
         }
 
-        public void OnBuildZoneExit()
+        public void HideBuildingPanel()
         {
             _buildButton.clicked -= OnBuildButtonClicked;
             _framePopUpFrame?.HideIn(EPopUpSubFrame.Left, in _buildingPanel);
@@ -122,7 +127,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         }
     }
 
-    public record  BuildingPanelElementsRef
+    public record BuildingPanelElementsRef
     {
         public VisualElement IconRef;
         public Label NameRef;

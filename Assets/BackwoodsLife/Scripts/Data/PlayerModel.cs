@@ -15,6 +15,7 @@ namespace BackwoodsLife.Scripts.Data
         public ReactiveProperty<Vector3> MoveDirection { get; } = new();
         public ReactiveProperty<float> MoveSpeed { get; } = new();
         public ReactiveProperty<float> RotationSpeed { get; } = new();
+        public ReactiveProperty<bool> IsMoving { get; } = new();
 
         private Dictionary<Enum, Int32> _stats = new();
 
@@ -25,7 +26,13 @@ namespace BackwoodsLife.Scripts.Data
 
         public void SetPosition(Vector3 position) => Position.Value = position;
         public void SetRotation(Quaternion rotation) => Rotation.Value = rotation;
-        public void SetMoveDirection(Vector3 moveDirection) => MoveDirection.Value = moveDirection;
+
+        public void SetMoveDirection(Vector3 moveDirection)
+        {
+            MoveDirection.Value = moveDirection;
+            IsMoving.Value = moveDirection.magnitude > 0;
+        }
+
         public void SetMoveSpeed(float value) => MoveSpeed.Value = value;
         public void SetRotationSpeed(float value) => RotationSpeed.Value = value;
 

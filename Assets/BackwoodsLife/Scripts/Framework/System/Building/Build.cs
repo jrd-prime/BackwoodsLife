@@ -17,7 +17,7 @@ namespace BackwoodsLife.Scripts.Framework.System.Building
             _assetProvider = assetProvider;
         }
 
-        public async void BuildAsync(SWorldItemConfig worldItemConfig, Action onBuildFinish)
+        public async void BuildAsync(SWorldItemConfig worldItemConfig)
         {
             Debug.LogWarning("Build");
 
@@ -28,7 +28,7 @@ namespace BackwoodsLife.Scripts.Framework.System.Building
 
             if (worldItemConfig.fixedPosition) prefab.transform.position = worldItemConfig.fixedPositionValue;
 
-            onBuildFinish.Invoke();
+            // add building to buildings cache
         }
     }
 }

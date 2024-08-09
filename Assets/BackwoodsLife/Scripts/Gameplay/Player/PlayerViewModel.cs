@@ -19,6 +19,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReadOnlyReactiveProperty<Vector3> Position => _model.Position;
         public ReadOnlyReactiveProperty<Quaternion> Rotation => _model.Rotation;
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _model.MoveDirection;
+        public ReadOnlyReactiveProperty<bool> IsMoving => _model.IsMoving;
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
         public ReactiveProperty<CharacterAction> CharacterAction { get; } = new();

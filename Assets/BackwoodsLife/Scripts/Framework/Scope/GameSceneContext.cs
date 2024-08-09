@@ -26,7 +26,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
     {
         [SerializeField] private UIFrameController uiFrameController;
         [SerializeField] private UIButtonsController uiButtonsController;
-        [FormerlySerializedAs("interactSystem")] [SerializeField] private Interact interact;
+        [FormerlySerializedAs("interactor")] [FormerlySerializedAs("interact")] [FormerlySerializedAs("interactSystem")] [SerializeField] private ItemInteractor itemInteractor;
         [SerializeField] private CharacterOverUI characterOverUIHolder;
         [SerializeField] private InteractPanelUI interactPanelUIHolder;
         [SerializeField] private BuildingPanelUIController buildingPanelUIController;
@@ -66,7 +66,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(buildingPanelUIController).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(uiFrameController).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(uiButtonsController).AsSelf().AsImplementedInterfaces();
-            builder.RegisterComponent(interact).AsSelf().AsImplementedInterfaces();
+            builder.RegisterComponent(itemInteractor).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(characterOverUIHolder).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(interactPanelUIHolder).AsSelf().AsImplementedInterfaces();
 

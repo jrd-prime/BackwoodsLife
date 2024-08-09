@@ -39,7 +39,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
 
                 Debug.LogWarning($"<color=red>Trigger zone: </color> {interactable.GetType().Name}");
 
-                var interactSystem = other.GetComponent<PlayerView>().interact;
+                var interactSystem = other.GetComponent<PlayerView>().itemInteractor;
                 if (interactSystem == null)
                     throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
 

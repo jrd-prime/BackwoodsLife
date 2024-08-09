@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
@@ -19,7 +20,7 @@ namespace BackwoodsLife.Scripts.Framework.System.WorldItem
     /// <summary>
     /// Placed on character prefab
     /// </summary>
-    public class Interact : MonoBehaviour, IDisposable
+    public class ItemInteractor : MonoBehaviour, IDisposable
     {
         public bool IsMoving { get; private set; }
         public event Action<List<ItemData>> OnCollectFinished;
@@ -31,23 +32,18 @@ namespace BackwoodsLife.Scripts.Framework.System.WorldItem
         private IItemSystem _usableSystem;
         private IItemSystem _upgradableSystem;
         private IItemSystem _usableAndUpgradableSystem;
-        private Spend _spend;
         private CharacterOverUI _characterOverUIHolder;
         private IConfigManager _configManager;
         private Action _triggerCallback;
         private readonly CompositeDisposable _disposable = new();
-        private BuildingPanelUIController _buildingPanelUIController;
 
         [Inject]
-        private void Construct(IPlayerViewModel playerViewModel, Spend spend,
-            CharacterOverUI characterOverUIHolder, IConfigManager configManager,
-            BuildingPanelUIController buildingPanelUIController)
+        private void Construct(IPlayerViewModel playerViewModel,
+            CharacterOverUI characterOverUIHolder, IConfigManager configManager)
         {
             _configManager = configManager;
             _playerViewModel = playerViewModel;
             _characterOverUIHolder = characterOverUIHolder;
-            _buildingPanelUIController = buildingPanelUIController;
-            _spend = spend;
         }
 
         private void Awake()
@@ -100,23 +96,6 @@ namespace BackwoodsLife.Scripts.Framework.System.WorldItem
             _characterOverUIHolder.ShowPopUpFor(itemsData);
         }
 
-        public void OnBuildZoneEnter(in SWorldItemConfig worldItemConfig,
-            Action<Dictionary<SItemConfig, int>> buildZoneCallback)
-        {
-            Debug.LogWarning("Interact system. On build Zone enter");
-            _buildingPanelUIController.OnBuildZoneEnter(in worldItemConfig, buildZoneCallback);
-        }
-
-        public void OnBuildZoneExit()
-        {
-            _buildingPanelUIController.OnBuildZoneExit();
-        }
-
         public void Dispose() => _disposable?.Dispose();
-
-        public void SpendResourcesForBuild(Dictionary<SItemConfig, int> levelResources)
-        {
-            // _spend.Process(levelResources.ToList());
-        }
     }
 }

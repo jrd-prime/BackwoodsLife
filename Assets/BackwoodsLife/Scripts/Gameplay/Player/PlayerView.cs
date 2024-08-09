@@ -12,7 +12,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
     [RequireComponent(typeof(Rigidbody), typeof(Animator), typeof(CapsuleCollider))]
     public class PlayerView : UIView
     {
-        [FormerlySerializedAs("InteractSystem")] public Interact interact;
+        [FormerlySerializedAs("interactor")] [FormerlySerializedAs("interact")] [FormerlySerializedAs("InteractSystem")] public ItemInteractor itemInteractor;
         
         private IPlayerViewModel _viewModel;
         private readonly CompositeDisposable _disposables = new();
@@ -25,10 +25,10 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private bool _movementBlocked;
 
         [Inject]
-        private void Construct(IPlayerViewModel viewModel, Interact interact)
+        private void Construct(IPlayerViewModel viewModel, ItemInteractor itemInteractor)
         {
             _viewModel = viewModel;
-            this.interact = interact; // TODO удалить костыль. Прокидываем в треггер зон через тут )
+            this.itemInteractor = itemInteractor; // TODO удалить костыль. Прокидываем в треггер зон через тут )
         }
 
         private void Awake()

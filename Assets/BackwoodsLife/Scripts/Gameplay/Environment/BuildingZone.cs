@@ -1,95 +1,104 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Common.Records;
+using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Helpers;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
 using BackwoodsLife.Scripts.Framework.System.Building;
-using BackwoodsLife.Scripts.Framework.System.WorldItem;
+using BackwoodsLife.Scripts.Framework.System.Item;
+using BackwoodsLife.Scripts.Gameplay.Player;
 using Cysharp.Threading.Tasks;
+using R3;
 using UnityEngine;
+using UnityEngine.Assertions;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment
 {
-    public class BuildingZone : MonoBehaviour
+    public class BuildingZone : MonoBehaviour, IDisposable
     {
-        [SerializeField] private SWorldItemConfig worldItemConfig;
+        [SerializeField] private SUseAndUpgradeItem itemConfigForBuild;
 
-        public Action<Dictionary<SItemConfig, int>> OnBuildStarted;
-        public Action OnBuildFinished;
-
-        private Interact _interact;
-        private bool _isInTriggerZone;
+        private IPlayerViewModel _playerViewModel;
         private Build _build;
+        private Spend _spend;
+        private BuildingPanelUIController _buildingPanel;
+        private readonly CompositeDisposable _disposable = new();
 
+        private bool _isMoving;
+        private bool _isInTriggerZone;
 
         [Inject]
-        private void Construct(Interact interact, Build build)
+        private void Construct(IPlayerViewModel playerViewModel, Spend spend, Build build,
+            BuildingPanelUIController buildingPanelUIController)
         {
-            _interact = interact;
+            _playerViewModel = playerViewModel;
             _build = build;
+            _spend = spend;
+            _buildingPanel = buildingPanelUIController;
         }
 
         private void Awake()
         {
-            if (worldItemConfig == null)
-                throw new NullReferenceException(
-                    $"{worldItemConfig.name} upgradeConfig is null! Check {worldItemConfig.name} config!");
-            if (_interact == null)
-                throw new NullReferenceException("InteractSystem does not inject!");
-            if (_build == null)
-                throw new NullReferenceException("BuildSystem does not inject!");
+            Assert.IsNotNull(itemConfigForBuild, "ItemConfigForBuild is null!");
+            Assert.IsNotNull(_playerViewModel, "PlayerViewModel is null!");
+            Assert.IsNotNull(_buildingPanel, "BuildingPanel is null!");
+            Assert.IsNotNull(_build, "BuildSystem is null!");
+            Assert.IsNotNull(_spend, "SpendSystem is null!");
 
-            OnBuildStarted += OnBuildStart;
-            OnBuildFinished += OnBuildFinish;
+            _playerViewModel.IsMoving.Subscribe(x => _isMoving = x).AddTo(_disposable);
         }
 
 
-        private async void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer != (int)JLayers.Player) return;
-
-            _isInTriggerZone = true;
-
-            while (_isInTriggerZone && _interact.IsMoving)
-            {
-                // Debug.LogWarning("In zone but still moving, waiting 100ms");
-                await UniTask.Delay(100);
-            }
-
-            if (!_isInTriggerZone || _interact.IsMoving) return;
-
-            Debug.LogWarning("In zone and not moving, building!");
-            Debug.Log($"Char in trigger zone! {name} / {worldItemConfig.interactTypes}");
-            _interact.OnBuildZoneEnter(in worldItemConfig, OnBuildStarted);
-        }
-
-        private void OnBuildStart(Dictionary<SItemConfig, int> levelResources)
-        {
-            Debug.LogWarning("On build start");
-
-            _interact.SpendResourcesForBuild(levelResources);
-            _build.BuildAsync(worldItemConfig, OnBuildFinish);
-        }
-
-        private void OnBuildFinish()
-        {
-            Debug.LogWarning("On build finish");
-            Destroy(gameObject);
-            OnLeaveZone();
-        }
-
-        private void OnLeaveZone()
-        {
-            _isInTriggerZone = false;
-            Debug.LogWarning($"Char leave zone! {name} / {worldItemConfig.interactTypes}");
-            _interact.OnBuildZoneExit();
+            if (other.gameObject.layer == (int)JLayers.Player) BuildZoneInteractionStarted();
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (!_isInTriggerZone) return;
-            Debug.LogWarning($"Char exit from trigger zone! {name} / {worldItemConfig.interactTypes}");
-            OnLeaveZone();
+            if (other.gameObject.layer != (int)JLayers.Player || !_isInTriggerZone) return;
+            BuildZoneInteractionFinished();
         }
+
+        private async void BuildZoneInteractionStarted()
+        {
+            _isInTriggerZone = true;
+
+            /* Wait for the character to stop and only then show the panel.
+             Made so that the panel doesn't pop up if the character accidentally hits the build zone trigger*/
+            while (_isInTriggerZone && _isMoving) await UniTask.Delay(100);
+
+            if (!_isInTriggerZone || _isMoving) return;
+
+            Debug.LogWarning($"Char in trigger zone and not moving! {name} / {itemConfigForBuild.interactTypes}");
+
+            _buildingPanel.OnBuildButtonClicked1 += BuildButtonClicked;
+            _buildingPanel.ShowBuildingPanelFor(itemConfigForBuild);
+        }
+
+
+        private void BuildButtonClicked(List<ItemData> itemsData)
+        {
+            Assert.IsNotNull(itemsData, "ItemsData is null!");
+            Debug.LogWarning("btn clcked");
+
+            Destroy(gameObject); // TODO pool or something
+
+            BuildZoneInteractionFinished();
+
+            _spend.Process(itemsData);
+            _build.BuildAsync(itemConfigForBuild);
+        }
+
+        private void BuildZoneInteractionFinished()
+        {
+            Debug.LogWarning($"Char leave zone or finish interaction! {name} / {itemConfigForBuild.interactTypes}");
+            _isInTriggerZone = false;
+            _buildingPanel.HideBuildingPanel();
+            _buildingPanel.OnBuildButtonClicked1 -= BuildButtonClicked;
+        }
+
+        public void Dispose() => _disposable?.Dispose();
     }
 }

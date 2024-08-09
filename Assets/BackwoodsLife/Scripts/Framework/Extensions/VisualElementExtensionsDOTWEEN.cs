@@ -4,7 +4,7 @@ using UnityEngine.UIElements.Experimental;
 
 namespace BackwoodsLife.Scripts.Gameplay
 {
-    public static class VisualElementExtensions
+    public static class VisualElementExtensionsDOTWEEN
     {
         public static void DoFadeIn(this VisualElement element, float duration)
         {

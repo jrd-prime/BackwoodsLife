@@ -1140,6 +1140,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 597102a6c8e75bf4baebf53aa80da2fd,
         type: 2}
+    - target: {fileID: 4488139838618065344, guid: 8e8989d4d8e66e3499abd484d3cf9686,
+        type: 3}
+      propertyPath: itemConfigForBuild
+      value: 
+      objectReference: {fileID: 11400000, guid: 597102a6c8e75bf4baebf53aa80da2fd,
+        type: 2}
     - target: {fileID: 7249773762135430882, guid: 8e8989d4d8e66e3499abd484d3cf9686,
         type: 3}
       propertyPath: m_Name
@@ -3933,6 +3939,12 @@ PrefabInstance:
     - target: {fileID: 4488139838618065344, guid: 8e8989d4d8e66e3499abd484d3cf9686,
         type: 3}
       propertyPath: worldItemConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 8540679380a77794685e8f2051375b68,
+        type: 2}
+    - target: {fileID: 4488139838618065344, guid: 8e8989d4d8e66e3499abd484d3cf9686,
+        type: 3}
+      propertyPath: itemConfigForBuild
       value: 
       objectReference: {fileID: 11400000, guid: 8540679380a77794685e8f2051375b68,
         type: 2}

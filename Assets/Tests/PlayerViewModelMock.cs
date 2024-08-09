@@ -17,6 +17,7 @@ namespace Tests
         public Subject<Unit> IsGathering { get; }
         public ReactiveProperty<string> CancelCharacterAction { get; }
         public ReactiveProperty<bool> IsInAction { get; }
+        public ReadOnlyReactiveProperty<bool> IsMoving { get; }
         public ReactiveProperty<string> PlayAnimationByName { get; } = new();
         public ReadOnlyReactiveProperty<float> MoveSpeed => _model.MoveSpeed;
         public ReadOnlyReactiveProperty<float> RotationSpeed => _model.RotationSpeed;
