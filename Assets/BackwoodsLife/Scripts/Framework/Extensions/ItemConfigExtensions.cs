@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
+﻿using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using UnityEngine;
 
 namespace BackwoodsLife.Scripts.Framework.Extensions

@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Data.Player;
+﻿using BackwoodsLife.Scripts.Data;
 using NUnit.Framework;
 using R3;
 using UnityEngine;

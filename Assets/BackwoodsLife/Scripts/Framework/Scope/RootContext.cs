@@ -1,4 +1,4 @@
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
+using BackwoodsLife.Scripts.Data.Scriptable.Settings;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
 using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
 using BackwoodsLife.Scripts.Framework.Manager.Audio;

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Framework.Helpers.Extensions;
+using BackwoodsLife.Scripts.Framework.Extensions;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
 using R3;

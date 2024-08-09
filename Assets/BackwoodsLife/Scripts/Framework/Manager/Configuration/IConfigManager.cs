@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Records;
-using BackwoodsLife.Scripts.Data.Player;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using DG.Tweening;
 using R3;

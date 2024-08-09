@@ -1,5 +1,5 @@
 ﻿using System;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Scope;
 using BackwoodsLife.Scripts.Framework.System;

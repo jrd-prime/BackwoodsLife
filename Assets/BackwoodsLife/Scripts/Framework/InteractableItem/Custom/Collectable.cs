@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
 using BackwoodsLife.Scripts.Data.Common.Records;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
+using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Extensions;
 using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.System.Item;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace BackwoodsLife.Scripts.Framework.InteractableItem
+namespace BackwoodsLife.Scripts.Framework.InteractableItem.Custom
 {
     /// <summary>
     /// Предмет, который находится в игровом мире и который можно собрать. Растения, руда, деревья и т.д.

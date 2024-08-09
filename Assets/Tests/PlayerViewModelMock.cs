@@ -1,5 +1,5 @@
-﻿using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Player;
+﻿using BackwoodsLife.Scripts.Data;
+using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using Cysharp.Threading.Tasks;
 using R3;

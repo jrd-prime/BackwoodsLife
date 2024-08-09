@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Records;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items.WorldItem;
+using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.InteractableItem;
+using BackwoodsLife.Scripts.Framework.InteractableItem.Custom;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
 using BackwoodsLife.Scripts.Framework.System.Item;

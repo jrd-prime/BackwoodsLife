@@ -1,6 +1,6 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
 using VContainer;

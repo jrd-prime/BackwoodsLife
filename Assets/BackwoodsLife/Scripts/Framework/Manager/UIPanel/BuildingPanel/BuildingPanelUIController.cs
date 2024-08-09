@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Data.UI;
+using BackwoodsLife.Scripts.Data.Const.UI;
+using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using UnityEngine;

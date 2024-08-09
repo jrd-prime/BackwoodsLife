@@ -1,6 +1,6 @@
 ﻿using System;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Data.Player;
+using BackwoodsLife.Scripts.Data;
+using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using R3;

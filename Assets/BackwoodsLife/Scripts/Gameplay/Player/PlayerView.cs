@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Data.Animation.Character;
+﻿using BackwoodsLife.Scripts.Data.Const.Animation.Character;
 using BackwoodsLife.Scripts.Framework.System.WorldItem;
 using BackwoodsLife.Scripts.Gameplay.UI;
 using R3;

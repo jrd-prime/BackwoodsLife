@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
+using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Settings;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;

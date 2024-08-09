@@ -1,8 +1,8 @@
 ﻿using System;
-using BackwoodsLife.Scripts.Data.Animation.Character;
+using BackwoodsLife.Scripts.Data;
 using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Settings;
-using BackwoodsLife.Scripts.Data.Player;
+using BackwoodsLife.Scripts.Data.Const.Animation.Character;
+using BackwoodsLife.Scripts.Data.Scriptable.Settings;
 using BackwoodsLife.Scripts.Framework.Manager.Camera;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;

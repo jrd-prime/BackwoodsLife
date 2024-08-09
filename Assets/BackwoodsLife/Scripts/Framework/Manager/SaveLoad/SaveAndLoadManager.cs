@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Player;
+using BackwoodsLife.Scripts.Data.Const.Player;
 using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.Manager.DB;
 using UnityEngine;

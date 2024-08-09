@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BackwoodsLife.Scripts.Framework.Helpers.Extensions;
+using BackwoodsLife.Scripts.Framework.Extensions;
 using UnityEngine;
 using UnityEngine.UIElements;
 

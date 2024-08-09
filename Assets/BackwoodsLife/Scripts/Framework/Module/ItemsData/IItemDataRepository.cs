@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Records;
-using BackwoodsLife.Scripts.Data.Common.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using R3;
 using VContainer.Unity;
 
