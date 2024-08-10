@@ -9,7 +9,6 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
     public abstract class SItemConfig : ScriptableObject
     {
         [Title("Item Config")] [ReadOnly] public string itemName;
-        public EWorldItemName worldItemTypeName;
         public string shortDescription;
         public AssetReferenceTexture2D iconReference;
 

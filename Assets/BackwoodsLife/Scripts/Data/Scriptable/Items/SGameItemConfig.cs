@@ -1,4 +1,5 @@
 ﻿using System;
+using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using Sirenix.OdinInspector;
 using UnityEngine;

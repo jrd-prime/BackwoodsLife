@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
-using BackwoodsLife.Scripts.Data.Common.Records;
-using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Extensions;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,13 +14,15 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
 {
     public class InteractItemInfoPanelUI : MonoBehaviour, IUIPanelController
     {
-        [SerializeField] private VisualTreeAsset _itemInfoPanelMainTemplate;
-        [SerializeField] private VisualTreeAsset _reqOtherItemTemplate;
+        [SerializeField] private VisualTreeAsset itemInfoPanelMainTemplate;
+        [SerializeField] private VisualTreeAsset reqOtherItemTemplate;
+        
         private UIFrameController _uiFrameController;
         private GameDataManager _gameDataManager;
         private TemplateContainer _itemInfoPanel;
         private FramePopUp _framePopUpFrame;
         private IAssetProvider _assetProvider;
+        private const string ReqOtherContainer = "req-other-container";
 
         [Inject]
         private void Construct(UIFrameController uiFrameController, GameDataManager gameDataManager,
@@ -37,45 +35,32 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
 
         private void Awake()
         {
-            _itemInfoPanel = _itemInfoPanelMainTemplate.Instantiate();
+            _itemInfoPanel = itemInfoPanelMainTemplate.Instantiate();
             _itemInfoPanel.ToAbsolute();
-            // InitializeBuildingPanelElementsReferences();
-            // _buildButton = _buildingPanelElementsRef.BuildButton;
         }
 
-
-        public async void ShowNotEnoughPanelFor(SCollectableItem gg)
+        public void ShowNotEnoughPanelFor(SCollectableItem itemConfig)
         {
-            Debug.LogWarning("show panel for not enough requirements");
+            var notEnoughRequirements =
+                _gameDataManager.CheckRequirementsForCollect(itemConfig.collectConfig
+                    .requirementForCollect); //TODO refact this sh*t
 
-            //TODO refact this sh*t
-            List<ItemDataWithConfigAndActual> notEnoughRequirements =
-                _gameDataManager.CheckRequirementsForCollect(gg.collectConfig.requirementForCollect);
+            _itemInfoPanel.Q<Label>("panel-name-label").text = itemConfig.itemName;
 
-            _itemInfoPanel.Q<Label>("building-name-label").text = gg.itemName;
+            var panelIcon = _assetProvider.GetIconFromRef(itemConfig.iconReference);
+            _itemInfoPanel.Q<VisualElement>("panel-icon").style.backgroundImage = new StyleBackground(panelIcon);
 
-            _itemInfoPanel.Q<VisualElement>("building-icon").style.backgroundImage =
-                new StyleBackground(_assetProvider.GetIconFromRef(gg.iconReference));
-
-            var reqOtherContainer = _itemInfoPanel.Q<VisualElement>("req-other-container");
+            var reqOtherContainer = _itemInfoPanel.Q<VisualElement>(ReqOtherContainer);
 
             foreach (var itemData in notEnoughRequirements)
             {
-                Debug.LogWarning($"new item {itemData.item}");
-                var reqOtherItem = _reqOtherItemTemplate.Instantiate();
-                // reqOtherItem.ToAbsolute();
+                var reqOtherItem = reqOtherItemTemplate.Instantiate();
 
                 reqOtherItem.Q<Label>("name").text = itemData.item.itemName;
+                reqOtherItem.Q<Label>("count").text = $"{itemData.actual} / {itemData.required}";
 
-
-                var aaa = $"{itemData.actual} / {itemData.required}";
-                reqOtherItem.Q<Label>("count").text = aaa;
-
-
-                var icon = _assetProvider.GetIconFromRef(itemData.item.iconReference);
-
-                reqOtherItem.Q<VisualElement>("icon").style.backgroundImage = new StyleBackground(icon);
-
+                var itemIcon = _assetProvider.GetIconFromRef(itemData.item.iconReference);
+                reqOtherItem.Q<VisualElement>("icon").style.backgroundImage = new StyleBackground(itemIcon);
 
                 reqOtherContainer.Add(reqOtherItem);
             }
@@ -86,18 +71,18 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
 
         public void HidePanel()
         {
+            _itemInfoPanel.Q<VisualElement>(ReqOtherContainer).Clear();
             _framePopUpFrame?.HideIn(EPopUpSubFrame.Left, in _itemInfoPanel);
         }
 
 
         public VisualTreeAsset GetTemplateFor(string inWindow)
         {
-            switch (inWindow)
+            return inWindow switch
             {
-                case "Main": return _itemInfoPanelMainTemplate;
-            }
-
-            throw new System.NotImplementedException();
+                "Main" => itemInfoPanelMainTemplate,
+                _ => throw new NotImplementedException()
+            };
         }
     }
 }

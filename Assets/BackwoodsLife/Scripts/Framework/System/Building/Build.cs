@@ -17,11 +17,12 @@ namespace BackwoodsLife.Scripts.Framework.System.Building
             _assetProvider = assetProvider;
         }
 
-        public async void BuildAsync(SWorldItemConfig worldItemConfig)
+        public async void BuildAsync(SWorldItemConfig worldItemConfig, ELevel level,
+            Action<string, ELevel> onBuildComplete)
         {
             Debug.LogWarning("Build");
 
-            var levelConfig = worldItemConfig.upgradeConfig.GetLevel(ELevel.Level_1);
+            var levelConfig = worldItemConfig.upgradeConfig.GetLevel(level);
 
             var prefabRef = levelConfig.levelPrefabReference;
             var prefab = await _assetProvider.InstantiateAsync(prefabRef);
@@ -29,6 +30,7 @@ namespace BackwoodsLife.Scripts.Framework.System.Building
             if (worldItemConfig.fixedPosition) prefab.transform.position = worldItemConfig.fixedPositionValue;
 
             // add building to buildings cache
+            onBuildComplete.Invoke(worldItemConfig.itemName, level);
         }
     }
 }

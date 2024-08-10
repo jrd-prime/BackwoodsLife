@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
-using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
@@ -11,7 +10,6 @@ using BackwoodsLife.Scripts.Framework.Module.ItemsData.Skill;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Tool;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using VContainer;
-using NotImplementedException = System.NotImplementedException;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.GameData
 {
@@ -49,10 +47,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
                 level.TryGetValue(EItemData.Resource, out var resource)
                     ? warehouseItem.IsEnough(resource)
                     : level.TryGetValue(EItemData.Building, out var building)
-                        ? this.buildings.IsEnough(building)
+                        ? buildings.IsEnough(building)
                         : level.TryGetValue(EItemData.Skill, out var skill)
-                            ? this.skills.IsEnough(skill)
-                            : !level.TryGetValue(EItemData.Tool, out var tool) || this.tools.IsEnough(tool);
+                            ? skills.IsEnough(skill)
+                            : !level.TryGetValue(EItemData.Tool, out var tool) || tools.IsEnough(tool);
         }
 
         public List<ItemDataWithConfigAndActual> CheckRequirementsForCollect(
@@ -61,43 +59,45 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
             // TODO refact this sh
             var result = new List<ItemDataWithConfigAndActual>();
 
-            foreach (var requirement in requirementsForCollect.building)
-            {
-                if (!buildings.IsEnough(requirement.typeName.itemName, requirement.value))
+            result.AddRange(from requirement in requirementsForCollect.building
+                where !buildings.IsEnough(requirement.typeName.itemName, requirement.value)
+                select new ItemDataWithConfigAndActual()
                 {
-                    result.Add(new ItemDataWithConfigAndActual()
-                    {
-                        item = requirement.typeName, required = requirement.value,
-                        actual = buildings.GetValue(requirement.typeName.itemName)
-                    });
-                }
-            }
+                    item = requirement.typeName, required = requirement.value,
+                    actual = buildings.GetValue(requirement.typeName.itemName)
+                });
+            result.AddRange(from requirement in requirementsForCollect.skill
+                where !skills.IsEnough(requirement.typeName.itemName, requirement.value)
+                select new ItemDataWithConfigAndActual()
+                {
+                    item = requirement.typeName, required = requirement.value,
+                    actual = skills.GetValue(requirement.typeName.itemName)
+                });
 
-            foreach (var requirement in requirementsForCollect.skill)
-            {
-                if (!skills.IsEnough(requirement.typeName.itemName, requirement.value))
+            result.AddRange(from requirement in requirementsForCollect.tool
+                where !tools.IsEnough(requirement.typeName.itemName, requirement.value)
+                select new ItemDataWithConfigAndActual()
                 {
-                    result.Add(new ItemDataWithConfigAndActual()
-                    {
-                        item = requirement.typeName, required = requirement.value,
-                        actual = skills.GetValue(requirement.typeName.itemName)
-                    });
-                }
-            }
-
-            foreach (var requirement in requirementsForCollect.tool)
-            {
-                if (!tools.IsEnough(requirement.typeName.itemName, requirement.value))
-                {
-                    result.Add(new ItemDataWithConfigAndActual()
-                    {
-                        item = requirement.typeName, required = requirement.value,
-                        actual = tools.GetValue(requirement.typeName.itemName)
-                    });
-                }
-            }
+                    item = requirement.typeName, required = requirement.value,
+                    actual = tools.GetValue(requirement.typeName.itemName)
+                });
 
             return result;
+        }
+
+        public bool IsEnoughForCollect(RequirementForCollect requirements)
+        {
+            // TODO refact this sh
+            if (requirements.building.Any(req =>
+                    !buildings.IsEnough(req.typeName.itemName, req.value))) return false;
+
+            if (requirements.skill.Any(req =>
+                    !skills.IsEnough(req.typeName.itemName, req.value))) return false;
+
+            if (requirements.tool.Any(req =>
+                    !tools.IsEnough(req.typeName.itemName, req.value))) return false;
+
+            return true;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace BackwoodsLife.Scripts.Framework.Bootstrap
             {
                 try
                 {
-                    Debug.LogWarning(
+                    Debug.Log(
                         $"\t<color=cyan>{count++}/{_loadingQueue.Count} / Init Service: {service.GetType().Name}</color>"); //TODO remove
                     LoadingText.Value = $"Loading: {service.Description}..";
                     service.ServiceInitialization();
@@ -46,7 +46,7 @@ namespace BackwoodsLife.Scripts.Framework.Bootstrap
                 }
             }
 
-            Debug.LogWarning($"\t<color=cyan>Services initialized.</color>"); //TODO remove
+            Debug.Log($"\t<color=cyan>Services initialized.</color>"); //TODO remove
             await UniTask.CompletedTask;
         }
     }

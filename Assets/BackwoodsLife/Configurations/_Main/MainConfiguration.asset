@@ -23,6 +23,7 @@ MonoBehaviour:
     toolItems:
     - config: {fileID: 11400000, guid: 4a49fd94b87c28944bfecf0c700f2e57, type: 2}
     - config: {fileID: 11400000, guid: 14abc33a29a934448996187b4e8ae3f4, type: 2}
+    - config: {fileID: 11400000, guid: 0d12ac1f2de4f1044941d256c96c5fec, type: 2}
     - config: {fileID: 11400000, guid: 47dcd9baea59feb47a6c7b52830128ea, type: 2}
     skillItems:
     - config: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}

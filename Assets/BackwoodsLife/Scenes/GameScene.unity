@@ -4199,6 +4199,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7992688224498817039, guid: 89e58d6bc13f89c45b03a5e659536e2c,
         type: 3}
+      propertyPath: reqOtherItemTemplate
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: 3a9d4b11fa8d0c64ba3126a3a8ed86fb,
+        type: 3}
+    - target: {fileID: 7992688224498817039, guid: 89e58d6bc13f89c45b03a5e659536e2c,
+        type: 3}
       propertyPath: _reqOtherItemTemplate
       value: 
       objectReference: {fileID: 9197481963319205126, guid: 3a9d4b11fa8d0c64ba3126a3a8ed86fb,
@@ -4208,6 +4214,12 @@ PrefabInstance:
       propertyPath: _reqOtherTypeTemplate
       value: 
       objectReference: {fileID: 9197481963319205126, guid: 5fdaa8309bac1d04ebcaf04e8ba34cde,
+        type: 3}
+    - target: {fileID: 7992688224498817039, guid: 89e58d6bc13f89c45b03a5e659536e2c,
+        type: 3}
+      propertyPath: itemInfoPanelMainTemplate
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: b4707ca9e9efcb947afb2b36bd76894d,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -54,7 +54,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Settings
                 throw new Exception(
                     $"{prefix} Count of {id}({resourceItems.Count}) in {name} is not equal enum E{id}({count})");
 
-            Debug.LogWarning($"{prefix} {id}: <color=green>OK</color>");
+            Debug.Log($"{prefix} {id}: <color=green>OK</color>");
         }
     }
 

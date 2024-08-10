@@ -5,7 +5,7 @@ using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
 
 namespace BackwoodsLife.Scripts.Framework.Module.ItemsData.Skill
 {
-    public class SkillsDataModel : ItemDataRepository
+    public class SkillsDataModel : DontKnowRepository
     {
         public override void Initialize()
         {

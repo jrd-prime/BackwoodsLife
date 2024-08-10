@@ -9,6 +9,7 @@ using BackwoodsLife.Scripts.Framework.Module.ItemsData.Skill;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Tool;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 using VContainer;
@@ -141,12 +142,23 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
         private void SetIsEnoughIcon(VisualElement iconHolder, EItemData itemDataType,
             Dictionary<SItemConfig, int> itemDictionary)
         {
+            foreach (var i in itemDictionary)
+            {
+                Debug.LogWarning("req = " + i.Key.itemName + " " + i.Value);
+            }
+            
+            Debug.LogWarning(_gameDataManager.buildings.GetValue("Bonfire") + " v");
+
+            Debug.LogWarning($"data holder = {ChooseDataHolder(itemDataType)}");
+
+            Debug.LogWarning($"is enough = {ChooseDataHolder(itemDataType).IsEnough(itemDictionary)}");
+
             LoadAndSetIcon(iconHolder, ChooseDataHolder(itemDataType).IsEnough(itemDictionary)
                 ? _panelRef.CheckIcon
                 : _panelRef.CrossIcon);
         }
 
-        private ItemDataRepository ChooseDataHolder(EItemData itemDataType)
+        private IDataRepository ChooseDataHolder(EItemData itemDataType)
         {
             return itemDataType switch
             {

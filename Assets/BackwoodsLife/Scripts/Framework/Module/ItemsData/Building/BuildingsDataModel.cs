@@ -5,7 +5,7 @@ using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
 
 namespace BackwoodsLife.Scripts.Framework.Module.ItemsData.Building
 {
-    public class BuildingsDataModel : ItemDataRepository
+    public class BuildingsDataModel : DontKnowRepository
     {
         public override void Initialize()
         {
