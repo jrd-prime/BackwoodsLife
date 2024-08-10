@@ -93,6 +93,13 @@ namespace BackwoodsLife.Scripts.Framework.Module.ItemsData
             return new ItemData { Name = itemName, Quantity = ItemsCache[itemName] };
         }
 
+
+        public int GetValue(string typeNameItemName)
+        {
+            CheckItem(typeNameItemName);
+            return ItemsCache[typeNameItemName];
+        }
+
         public bool IsEnough(Dictionary<SItemConfig, int> itemsDictionary)
         {
             var result = true;

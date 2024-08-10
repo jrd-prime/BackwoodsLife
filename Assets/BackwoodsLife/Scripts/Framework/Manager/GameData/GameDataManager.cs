@@ -55,16 +55,21 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
                             : !level.TryGetValue(EItemData.Tool, out var tool) || this.tools.IsEnough(tool);
         }
 
-        public List<ItemDataWithConfig> CheckRequirementsForCollect(RequirementForCollect requirementsForCollect)
+        public List<ItemDataWithConfigAndActual> CheckRequirementsForCollect(
+            RequirementForCollect requirementsForCollect)
         {
             // TODO refact this sh
-            var result = new List<ItemDataWithConfig>();
+            var result = new List<ItemDataWithConfigAndActual>();
 
             foreach (var requirement in requirementsForCollect.building)
             {
                 if (!buildings.IsEnough(requirement.typeName.itemName, requirement.value))
                 {
-                    result.Add(new ItemDataWithConfig { item = requirement.typeName, quantity = requirement.value });
+                    result.Add(new ItemDataWithConfigAndActual()
+                    {
+                        item = requirement.typeName, required = requirement.value,
+                        actual = buildings.GetValue(requirement.typeName.itemName)
+                    });
                 }
             }
 
@@ -72,7 +77,11 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
             {
                 if (!skills.IsEnough(requirement.typeName.itemName, requirement.value))
                 {
-                    result.Add(new ItemDataWithConfig { item = requirement.typeName, quantity = requirement.value });
+                    result.Add(new ItemDataWithConfigAndActual()
+                    {
+                        item = requirement.typeName, required = requirement.value,
+                        actual = skills.GetValue(requirement.typeName.itemName)
+                    });
                 }
             }
 
@@ -80,7 +89,11 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
             {
                 if (!tools.IsEnough(requirement.typeName.itemName, requirement.value))
                 {
-                    result.Add(new ItemDataWithConfig { item = requirement.typeName, quantity = requirement.value });
+                    result.Add(new ItemDataWithConfigAndActual()
+                    {
+                        item = requirement.typeName, required = requirement.value,
+                        actual = tools.GetValue(requirement.typeName.itemName)
+                    });
                 }
             }
 

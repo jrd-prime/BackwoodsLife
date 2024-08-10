@@ -61,14 +61,15 @@ namespace BackwoodsLife.Scripts.Framework.InteractableItem.Custom
         {
             Debug.LogWarning($"{WorldItemConfig.itemName} Checking requirements");
 
-            List<ItemDataWithConfig> notEnoughRequirements =
+            List<ItemDataWithConfigAndActual> notEnoughRequirements =
                 GameDataManager.CheckRequirementsForCollect(WorldItemConfig.collectConfig.requirementForCollect);
 
             if (notEnoughRequirements.Count == 0) return true;
 
             foreach (var requirement in notEnoughRequirements)
             {
-                Debug.LogWarning($"Not enough {requirement.item.itemName} {requirement.quantity}");
+                Debug.LogWarning(
+                    $"Not enough {requirement.item.itemName} {requirement.actual} / {requirement.required}");
             }
 
             InteractZoneCallback.Invoke(new NotEnoughForCollect(WorldItemConfig, InteractItemInfoPanelUI));

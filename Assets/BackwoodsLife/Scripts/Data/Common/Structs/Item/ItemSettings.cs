@@ -28,6 +28,14 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Item
     }
 
     [Serializable]
+    public struct ItemDataWithConfigAndActual
+    {
+        public SItemConfig item;
+        public int actual;
+        public int required;
+    }
+
+    [Serializable]
     public struct ItemDataWithConfigAndRange<T> where T : SGameItemConfig
     {
         public T item;

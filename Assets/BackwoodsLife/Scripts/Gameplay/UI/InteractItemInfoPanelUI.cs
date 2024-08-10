@@ -49,7 +49,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
             Debug.LogWarning("show panel for not enough requirements");
 
             //TODO refact this sh*t
-            List<ItemDataWithConfig> notEnoughRequirements =
+            List<ItemDataWithConfigAndActual> notEnoughRequirements =
                 _gameDataManager.CheckRequirementsForCollect(gg.collectConfig.requirementForCollect);
 
             _itemInfoPanel.Q<Label>("building-name-label").text = gg.itemName;
@@ -61,13 +61,16 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
 
             foreach (var itemData in notEnoughRequirements)
             {
-                Debug.LogWarning($"new item {itemData.item.itemName}");
+                Debug.LogWarning($"new item {itemData.item}");
                 var reqOtherItem = _reqOtherItemTemplate.Instantiate();
                 // reqOtherItem.ToAbsolute();
 
                 reqOtherItem.Q<Label>("name").text = itemData.item.itemName;
 
-                reqOtherItem.Q<Label>("count").text = itemData.quantity.ToString();
+
+                var aaa = $"{itemData.actual} / {itemData.required}";
+                reqOtherItem.Q<Label>("count").text = aaa;
+
 
                 var icon = _assetProvider.GetIconFromRef(itemData.item.iconReference);
 
