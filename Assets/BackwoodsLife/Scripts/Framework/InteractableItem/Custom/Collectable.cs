@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
 using BackwoodsLife.Scripts.Data.Common.Records;
+using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Extensions;
 using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.System.Item;
+using BackwoodsLife.Scripts.Gameplay.Environment;
+using BackwoodsLife.Scripts.Gameplay.Environment.InteractZoneState;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -19,9 +22,10 @@ namespace BackwoodsLife.Scripts.Framework.InteractableItem.Custom
     {
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.Collect;
 
-        public override void Process(Action<List<ItemData>> interactSystemCallback)
+        public override void Process(Action<IInteractZoneState> onInteractionFinished)
         {
-            Assert.IsNotNull(interactSystemCallback, "interactSystemCallback is null");
+            Assert.IsNotNull(onInteractionFinished, "interactSystemCallback is null");
+            InteractZoneCallback = onInteractionFinished;
 
             if (!WorldItemConfig.HasCollectables())
             {
@@ -29,30 +33,46 @@ namespace BackwoodsLife.Scripts.Framework.InteractableItem.Custom
                 return;
             }
 
-            if (WorldItemConfig.HasRequirements())
+            if (!WorldItemConfig.HasRequirements() || CheckRequirements()) StartCollect();
+        }
+
+        private async void StartCollect()
+        {
+            Debug.LogWarning($"{WorldItemConfig.itemName} Starting collect");
+            await PlayerViewModel.SetCollectableActionForAnimationAsync(WorldItemConfig.interactAnimation);
+            var processedItems = new List<ItemData>();
+
+            foreach (var item in WorldItemConfig.collectConfig.returnedItems)
             {
-                Debug.LogWarning($"{WorldItemConfig.itemName}  has collectables, has requirements");
+                var itemAmount = RandomCollector.GetRandom(item.range.min, item.range.max);
+
+                processedItems.Add(new ItemData { Name = item.item.itemName, Quantity = itemAmount });
             }
+
+            var systemResult = CurrentInteractableSystem.Process(processedItems);
+
+            if (systemResult)
+                InteractZoneCallback.Invoke(new SuccessCollected(processedItems, CharacterOverUIHolder));
             else
+                Debug.LogError($"{CurrentInteractableSystem.GetType()} failed to process items");
+        }
+
+        private bool CheckRequirements()
+        {
+            Debug.LogWarning($"{WorldItemConfig.itemName} Checking requirements");
+
+            List<ItemDataWithConfig> notEnoughRequirements =
+                GameDataManager.CheckRequirementsForCollect(WorldItemConfig.collectConfig.requirementForCollect);
+
+            if (notEnoughRequirements.Count == 0) return true;
+
+            foreach (var requirement in notEnoughRequirements)
             {
-                Debug.LogWarning($"{WorldItemConfig.itemName} has collectables, no requirements, just collect");
-
-                var processedItems = new List<ItemData>();
-
-                foreach (var item in WorldItemConfig.collectConfig.returnedItems)
-                {
-                    var itemAmount = RandomCollector.GetRandom(item.range.min, item.range.max);
-
-                    processedItems.Add(new ItemData { Name = item.item.itemName, Quantity = itemAmount });
-                }
-
-                var systemResult = CurrentInteractableSystem.Process(processedItems);
-
-                if (systemResult)
-                    interactSystemCallback.Invoke(processedItems);
-                else
-                    Debug.LogError($"{CurrentInteractableSystem.GetType()} failed to process items");
+                Debug.LogWarning($"Not enough {requirement.item.itemName} {requirement.quantity}");
             }
+
+            InteractZoneCallback.Invoke(new NotEnoughForCollect(WorldItemConfig, InteractItemInfoPanelUI));
+            return false;
         }
     }
 }

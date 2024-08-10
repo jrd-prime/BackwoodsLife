@@ -1,10 +1,8 @@
 ﻿using BackwoodsLife.Scripts.Data.Const.Animation.Character;
-using BackwoodsLife.Scripts.Framework.System.WorldItem;
 using BackwoodsLife.Scripts.Gameplay.UI;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.Player
@@ -12,8 +10,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
     [RequireComponent(typeof(Rigidbody), typeof(Animator), typeof(CapsuleCollider))]
     public class PlayerView : UIView
     {
-        [FormerlySerializedAs("interactor")] [FormerlySerializedAs("interact")] [FormerlySerializedAs("InteractSystem")] public ItemInteractor itemInteractor;
-        
         private IPlayerViewModel _viewModel;
         private readonly CompositeDisposable _disposables = new();
         private float _moveSpeed;
@@ -25,10 +21,9 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         private bool _movementBlocked;
 
         [Inject]
-        private void Construct(IPlayerViewModel viewModel, ItemInteractor itemInteractor)
+        private void Construct(IPlayerViewModel viewModel)
         {
             _viewModel = viewModel;
-            this.itemInteractor = itemInteractor; // TODO удалить костыль. Прокидываем в треггер зон через тут )
         }
 
         private void Awake()

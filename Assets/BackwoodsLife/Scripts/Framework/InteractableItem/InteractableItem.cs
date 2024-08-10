@@ -1,16 +1,21 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Manager.Configuration;
+using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Scope;
 using BackwoodsLife.Scripts.Framework.System;
+using BackwoodsLife.Scripts.Gameplay.Environment;
+using BackwoodsLife.Scripts.Gameplay.Player;
+using BackwoodsLife.Scripts.Gameplay.UI;
+using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.InteractableItem
 {
-    public abstract class InteractableItem<TSWorldItemConfigType, TInteractSystem, TEnumItemName> : InteractableItemBase
-        where TSWorldItemConfigType : SWorldItemConfig
+    public abstract class InteractableItem<TItemConfig, TInteractSystem, TEnumItemName> : InteractableItemBase
+        where TItemConfig : SWorldItemConfig
         where TEnumItemName : Enum
         where TInteractSystem : class, IBaseSystem
     {
@@ -18,8 +23,16 @@ namespace BackwoodsLife.Scripts.Framework.InteractableItem
 
         protected IObjectResolver Container;
         protected IConfigManager ConfigManager;
-        protected TSWorldItemConfigType WorldItemConfig;
+        public TItemConfig WorldItemConfig { get; private set; }
         protected TInteractSystem CurrentInteractableSystem;
+        protected IPlayerViewModel PlayerViewModel;
+        protected CharacterOverUI CharacterOverUIHolder;
+        protected InteractItemInfoPanelUI InteractItemInfoPanelUI;
+        protected GameDataManager GameDataManager;
+
+
+        protected Action<IInteractZoneState> InteractZoneCallback;
+
 
         private void Awake()
         {
@@ -35,8 +48,20 @@ namespace BackwoodsLife.Scripts.Framework.InteractableItem
             CurrentInteractableSystem = Container.Resolve<TInteractSystem>();
             Assert.IsNotNull(CurrentInteractableSystem, $"{typeof(TInteractSystem)} is null ");
 
-            WorldItemConfig = ConfigManager.GetItemConfig<TSWorldItemConfigType>(itemName.ToString());
+            WorldItemConfig = ConfigManager.GetItemConfig<TItemConfig>(itemName.ToString());
             Assert.IsNotNull(WorldItemConfig, $"{itemName}. Config not set");
+
+            PlayerViewModel = Container.Resolve<IPlayerViewModel>();
+            Assert.IsNotNull(PlayerViewModel, "PlayerViewModel is null");
+
+            CharacterOverUIHolder = Container.Resolve<CharacterOverUI>();
+            Assert.IsNotNull(CharacterOverUIHolder, "CharacterOverUIHolder is null");
+
+            GameDataManager = Container.Resolve<GameDataManager>();
+            Assert.IsNotNull(GameDataManager, "GameDataManager is null");
+
+            InteractItemInfoPanelUI = Container.Resolve<InteractItemInfoPanelUI>();
+            Assert.IsNotNull(InteractItemInfoPanelUI, "InteractItemInfoPanelUI is null");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace BackwoodsLife.Scripts.Framework.Helpers.Reflection
     {
         public static void CompileReturnableElements(
             ref List<CollectableElement> listToSave,
-            ref List<ItemDataWithConfig> returnCollectablesList)
+            ref List<ItemDataWithConfigAndRange> returnCollectablesList)
         {
             listToSave.Clear();
             foreach (var collectable in returnCollectablesList)

@@ -8,15 +8,15 @@ using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using BackwoodsLife.Scripts.Framework.System;
 using BackwoodsLife.Scripts.Framework.System.Item;
-using BackwoodsLife.Scripts.Framework.System.WorldItem;
+using BackwoodsLife.Scripts.Gameplay.Environment;
 using BackwoodsLife.Scripts.Gameplay.Player;
+using BackwoodsLife.Scripts.Gameplay.UI;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using BackwoodsLife.Scripts.Gameplay.UI.Warehouse;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -26,12 +26,12 @@ namespace BackwoodsLife.Scripts.Framework.Scope
     {
         [SerializeField] private UIFrameController uiFrameController;
         [SerializeField] private UIButtonsController uiButtonsController;
-        [FormerlySerializedAs("interactor")] [FormerlySerializedAs("interact")] [FormerlySerializedAs("interactSystem")] [SerializeField] private ItemInteractor itemInteractor;
         [SerializeField] private CharacterOverUI characterOverUIHolder;
         [SerializeField] private InteractPanelUI interactPanelUIHolder;
         [SerializeField] private BuildingPanelUIController buildingPanelUIController;
         [SerializeField] private QuestPanelUIController questPanelUIController;
         [SerializeField] private WarehousePanelUIController warehousePanelUIController;
+        [SerializeField] private InteractItemInfoPanelUI interactItemInfoPanelUIController;
 
 
         protected override void Configure(IContainerBuilder builder)
@@ -66,9 +66,9 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(buildingPanelUIController).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(uiFrameController).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(uiButtonsController).AsSelf().AsImplementedInterfaces();
-            builder.RegisterComponent(itemInteractor).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(characterOverUIHolder).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(interactPanelUIHolder).AsSelf().AsImplementedInterfaces();
+            builder.RegisterComponent(interactItemInfoPanelUIController).AsSelf().AsImplementedInterfaces();
 
 
             builder.Register(

@@ -192,7 +192,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
     [Serializable]
     public struct CollectConfig
     {
-        public List<ItemDataWithConfig> returnedItems;
+        public List<ItemDataWithConfigAndRange> returnedItems;
         public RequirementForCollect requirementForCollect;
     }
 

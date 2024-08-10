@@ -65,7 +65,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
                     $"Level 1 not found in UpgradeCache. Check config: {worldItemConfig.itemName}");
 
             _tempItemsData.Clear();
-            
+
             foreach (var q in _currentLevelConfig[EItemData.Resource])
             {
                 _tempItemsData.Add(new ItemData { Name = q.Key.itemName, Quantity = q.Value });
@@ -82,7 +82,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
             _framePopUpFrame = _uiFrameController.GetPopUpFrame();
             _framePopUpFrame.ShowIn(EPopUpSubFrame.Left, in _buildingPanel);
         }
-        
+
         public void HideBuildingPanel()
         {
             _buildButton.clicked -= OnBuildButtonClicked;

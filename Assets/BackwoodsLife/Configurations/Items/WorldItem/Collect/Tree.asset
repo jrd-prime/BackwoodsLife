@@ -53,7 +53,7 @@ MonoBehaviour:
         - typeName: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
           value: 1
         building:
-        - typeName: {fileID: 11400000, guid: 39081289efa4f1a41a6be7e354071ea5, type: 2}
+        - typeName: {fileID: 0}
           value: 1
   collectableLevels: []
   collectConfig:
@@ -63,6 +63,8 @@ MonoBehaviour:
         min: 1
         max: 3
     requirementForCollect:
-      tool: []
+      tool:
+      - typeName: {fileID: 11400000, guid: 47dcd9baea59feb47a6c7b52830128ea, type: 2}
+        value: 1
       skill: []
       building: []

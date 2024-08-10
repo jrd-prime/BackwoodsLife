@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Records;
+using BackwoodsLife.Scripts.Data.Common.Structs.Item;
+using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Building;
@@ -7,6 +11,7 @@ using BackwoodsLife.Scripts.Framework.Module.ItemsData.Skill;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Tool;
 using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using VContainer;
+using NotImplementedException = System.NotImplementedException;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.GameData
 {
@@ -28,7 +33,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
         }
 
         [Inject]
-        private void Construct(WarehouseItemDataModel warehouseItemDataModel, BuildingsDataModel buildingsDataModel, SkillsDataModel skillsDataModel,
+        private void Construct(WarehouseItemDataModel warehouseItemDataModel, BuildingsDataModel buildingsDataModel,
+            SkillsDataModel skillsDataModel,
             ToolsDataModel toolsDataModel)
         {
             warehouseItem = warehouseItemDataModel;
@@ -47,6 +53,38 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
                         : level.TryGetValue(EItemData.Skill, out var skill)
                             ? this.skills.IsEnough(skill)
                             : !level.TryGetValue(EItemData.Tool, out var tool) || this.tools.IsEnough(tool);
+        }
+
+        public List<ItemDataWithConfig> CheckRequirementsForCollect(RequirementForCollect requirementsForCollect)
+        {
+            // TODO refact this sh
+            var result = new List<ItemDataWithConfig>();
+
+            foreach (var requirement in requirementsForCollect.building)
+            {
+                if (!buildings.IsEnough(requirement.typeName.itemName, requirement.value))
+                {
+                    result.Add(new ItemDataWithConfig { item = requirement.typeName, quantity = requirement.value });
+                }
+            }
+
+            foreach (var requirement in requirementsForCollect.skill)
+            {
+                if (!skills.IsEnough(requirement.typeName.itemName, requirement.value))
+                {
+                    result.Add(new ItemDataWithConfig { item = requirement.typeName, quantity = requirement.value });
+                }
+            }
+
+            foreach (var requirement in requirementsForCollect.tool)
+            {
+                if (!tools.IsEnough(requirement.typeName.itemName, requirement.value))
+                {
+                    result.Add(new ItemDataWithConfig { item = requirement.typeName, quantity = requirement.value });
+                }
+            }
+
+            return result;
         }
     }
 }

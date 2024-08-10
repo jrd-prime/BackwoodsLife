@@ -10,7 +10,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Item
     {
         [Range(0, 3)] public int level;
         public AssetReferenceGameObject levelPrefab;
-        public List<ItemDataWithConfig> returnedItems;
-        public List<ItemDataWithConfig> requiredItems;
+        public List<ItemDataWithConfigAndRange> returnedItems;
+        public List<ItemDataWithConfigAndRange> requiredItems;
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 
-namespace BackwoodsLife.Scripts.Gameplay
+namespace BackwoodsLife.Scripts.Framework.Extensions
 {
     public static class VisualElementExtensionsDOTWEEN
     {

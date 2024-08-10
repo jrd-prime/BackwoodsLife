@@ -125,3 +125,18 @@
     align-items: center;
     justify-content: center;
 }
+
+.req-item {
+    flex-grow: 0;
+    height: 20px;
+    left: auto;
+    right: auto;
+    width: 110px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    position: relative;
+    flex-direction: row;
+    font-size: 10px;
+}

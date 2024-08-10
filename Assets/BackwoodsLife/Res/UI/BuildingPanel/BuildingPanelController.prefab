@@ -48,5 +48,17 @@ MonoBehaviour:
     type: 3}
   buildingReqResourceItemTemplate: {fileID: 9197481963319205126, guid: eb24c729044c67448ae399e3e2bd1fd6,
     type: 3}
-  buildingReqOtherItemTemplate: {fileID: 9197481963319205126, guid: 5fdaa8309bac1d04ebcaf04e8ba34cde,
+  buildingOtherTypeItemTemplate: {fileID: 9197481963319205126, guid: 5fdaa8309bac1d04ebcaf04e8ba34cde,
     type: 3}
+  buildingOtherItemTemplate: {fileID: 9197481963319205126, guid: 75d5ba2ee5e004e4995a0959a36c2b2c,
+    type: 3}
+  checkIcon:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  crossIcon:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

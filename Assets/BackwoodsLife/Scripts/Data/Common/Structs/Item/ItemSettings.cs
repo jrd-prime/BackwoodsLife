@@ -14,10 +14,17 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Item
     }
 
     [Serializable]
-    public struct ItemDataWithConfig
+    public struct ItemDataWithConfigAndRange
     {
         public SGameItemConfig item;
         public CollectRange range;
+    }
+
+    [Serializable]
+    public struct ItemDataWithConfig
+    {
+        public SItemConfig item;
+        public int quantity;
     }
 
     [Serializable]
@@ -26,6 +33,7 @@ namespace BackwoodsLife.Scripts.Data.Common.Structs.Item
         public T item;
         public CollectRange range;
     }
+
     [Serializable]
     public struct ItemDataWithConfig<T> where T : SGameItemConfig
     {
