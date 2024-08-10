@@ -3,6 +3,7 @@ using BackwoodsLife.Scripts.Framework.Helpers;
 using BackwoodsLife.Scripts.Framework.InteractableItem;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using UnityEngine;
+using UnityEngine.Assertions;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment
@@ -11,7 +12,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
     /// При входе игрока получает с родителя данные объекта и InteractSystem
     /// </summary>
     [RequireComponent(typeof(CapsuleCollider))]
-    public class TriggerZone : MonoBehaviour
+    public sealed class TriggerZone : MonoBehaviour
     {
         private Action _onInteractCompleted;
 
@@ -33,15 +34,12 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
             if (parentTransform != null)
             {
                 var interactable = parentTransform.GetComponent<InteractableItemBase>();
-                if (interactable == null)
-                    throw new NullReferenceException(
-                        $"Interactable is null on {parentTransform.name} prefab. You must set to object Interactable component. ");
+                Assert.IsNotNull(interactable, $"Interactable is null on {parentTransform.name} prefab");
 
                 Debug.LogWarning($"<color=red>Trigger zone: </color> {interactable.GetType().Name}");
 
                 var interactSystem = other.GetComponent<PlayerView>().itemInteractor;
-                if (interactSystem == null)
-                    throw new NullReferenceException($"PlayerInteractSystem is null on {other.name}");
+                Assert.IsNotNull(interactSystem, $"InteractSystem is null on {other.name}");
 
                 interactSystem.Interaction(interactable, _onInteractCompleted);
             }

@@ -15,7 +15,7 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment
 {
-    public class BuildingZone : MonoBehaviour, IDisposable
+    public sealed class BuildingZone : MonoBehaviour, IDisposable
     {
         [SerializeField] private SUseAndUpgradeItem itemConfigForBuild;
 
@@ -48,7 +48,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment
 
             _playerViewModel.IsMoving.Subscribe(x => _isMoving = x).AddTo(_disposable);
         }
-
 
         private void OnTriggerEnter(Collider other)
         {
