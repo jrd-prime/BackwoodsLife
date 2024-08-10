@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Bonfire
   m_EditorClassIdentifier: 
   itemName: Bonfire
-  worldItemTypeName: 0
   shortDescription: 
   iconReference:
     m_AssetGUID: f7fc1d09f8686f44dbe66713466fc7af
@@ -32,7 +31,7 @@ MonoBehaviour:
     - useType: 2
   upgradeConfig:
     upgradeLevels:
-    - level: 0
+    - level: 1
       levelPrefabReference:
         m_AssetGUID: 80c6246fef9bfeb44b8696127cef6560
         m_SubObjectName: 
@@ -41,9 +40,9 @@ MonoBehaviour:
       reqForUpgrade:
         resource:
         - typeName: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
-          value: 7
+          value: 2
         - typeName: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
-          value: 8
+          value: 2
         tool: []
         skill: []
         building: []

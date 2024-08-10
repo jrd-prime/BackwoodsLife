@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: House
   m_EditorClassIdentifier: 
   itemName: House
-  worldItemTypeName: 1
   shortDescription: 
   iconReference:
     m_AssetGUID: 19c9549112dffb146a5e49e93d194902
@@ -31,7 +30,7 @@ MonoBehaviour:
     - useType: 4
   upgradeConfig:
     upgradeLevels:
-    - level: 0
+    - level: 1
       levelPrefabReference:
         m_AssetGUID: 080cbeb4618525e41866b0af8c565c59
         m_SubObjectName: 
@@ -40,9 +39,9 @@ MonoBehaviour:
       reqForUpgrade:
         resource:
         - typeName: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
-          value: 60
+          value: 4
         - typeName: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
-          value: 20
+          value: 2
         tool: []
         skill: []
         building:
