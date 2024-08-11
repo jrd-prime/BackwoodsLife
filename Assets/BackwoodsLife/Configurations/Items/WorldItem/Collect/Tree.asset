@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Tree
   m_EditorClassIdentifier: 
   itemName: Tree
-  worldItemTypeName: 0
   shortDescription: A place to set a fish trap. Bait is also required.
   iconReference:
     m_AssetGUID: fd0264fd135d5fc4ba76a543b2a2d459
@@ -64,7 +63,7 @@ MonoBehaviour:
         max: 3
     requirementForCollect:
       tool:
-      - typeName: {fileID: 11400000, guid: 47dcd9baea59feb47a6c7b52830128ea, type: 2}
+      - typeName: {fileID: 11400000, guid: 4d98fb825f5d99345bde82a6774844ae, type: 2}
         value: 1
       skill: []
       building: []

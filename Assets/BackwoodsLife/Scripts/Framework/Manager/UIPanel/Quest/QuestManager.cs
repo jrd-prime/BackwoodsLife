@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Framework.Extensions;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
-using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
+using BackwoodsLife.Scripts.Gameplay.UI.UIButtons;
 using R3;
 using UnityEngine;
 using UnityEngine.UIElements;

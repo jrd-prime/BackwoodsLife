@@ -5,10 +5,10 @@ using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Framework.Bootstrap;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Building;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Skill;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Tool;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Building;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Skill;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Tool;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Warehouse;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.GameData

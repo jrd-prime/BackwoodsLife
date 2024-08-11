@@ -1,4 +1,4 @@
-﻿using BackwoodsLife.Scripts.Framework.System.Building;
+﻿using BackwoodsLife.Scripts.Framework.Item.System.Building;
 using VContainer;
 using VContainer.Unity;
 
@@ -10,7 +10,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         {
             base.Configure(builder);
 
-            builder.Register<Build>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<BuildSystem>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
     }
 }

@@ -5,6 +5,7 @@
         Knife = 0,
         Axe = 1,
         StoneKnife = 2,
-        Pickaxe = 3
+        Pickaxe = 3,
+        StoneAxe = 4
     }
 }

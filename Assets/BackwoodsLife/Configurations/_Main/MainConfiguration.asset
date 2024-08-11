@@ -25,6 +25,7 @@ MonoBehaviour:
     - config: {fileID: 11400000, guid: 14abc33a29a934448996187b4e8ae3f4, type: 2}
     - config: {fileID: 11400000, guid: 0d12ac1f2de4f1044941d256c96c5fec, type: 2}
     - config: {fileID: 11400000, guid: 47dcd9baea59feb47a6c7b52830128ea, type: 2}
+    - config: {fileID: 11400000, guid: 4d98fb825f5d99345bde82a6774844ae, type: 2}
     skillItems:
     - config: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
     - config: {fileID: 11400000, guid: e5cf509cc005144408a89c0d8452af3a, type: 2}

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: CooperVein
   m_EditorClassIdentifier: 
   itemName: CooperVein
-  worldItemTypeName: 0
   shortDescription: A place to set a fish trap. Bait is also required.
   iconReference:
     m_AssetGUID: 108a8d9b797c13244b4c6d208fd2f957
@@ -60,15 +59,15 @@ MonoBehaviour:
     returnedItems:
     - item: {fileID: 11400000, guid: 05bc6d68211d3e741b5d8583e5fa6a78, type: 2}
       range:
-        min: 2
-        max: 4
+        min: 1
+        max: 3
     - item: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
       range:
         min: 0
         max: 2
     requirementForCollect:
       tool:
-      - typeName: {fileID: 0}
-        value: 0
+      - typeName: {fileID: 11400000, guid: 0d12ac1f2de4f1044941d256c96c5fec, type: 2}
+        value: 1
       skill: []
       building: []

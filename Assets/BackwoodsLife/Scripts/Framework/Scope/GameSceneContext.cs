@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Warehouse;
+using BackwoodsLife.Scripts.Framework.Item.System;
+using BackwoodsLife.Scripts.Framework.Item.System.Building;
+using BackwoodsLife.Scripts.Framework.Item.System.Item;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
-using BackwoodsLife.Scripts.Framework.Manager.UIFrame.UIButtons;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
 using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
-using BackwoodsLife.Scripts.Framework.System;
-using BackwoodsLife.Scripts.Framework.System.Item;
 using BackwoodsLife.Scripts.Gameplay.Environment;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
+using BackwoodsLife.Scripts.Gameplay.UI.UIButtons;
 using BackwoodsLife.Scripts.Gameplay.UI.Warehouse;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -51,8 +52,11 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
             // System
             builder.Register<ItemSystem>(Lifetime.Singleton).AsSelf();
-            builder.Register<Collect>(Lifetime.Singleton).AsSelf();
-            builder.Register<Spend>(Lifetime.Singleton).AsSelf();
+            builder.Register<CollectSystem>(Lifetime.Singleton).AsSelf();
+            builder.Register<SpendSystem>(Lifetime.Singleton).AsSelf();
+            builder.Register<UseSystem>(Lifetime.Singleton).AsSelf();
+            builder.Register<UpgradeSystem>(Lifetime.Singleton).AsSelf();
+            builder.Register<UseAndUpgradeSystem>(Lifetime.Singleton).AsSelf();
 
             builder.Register<WarehouseManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<QuestManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

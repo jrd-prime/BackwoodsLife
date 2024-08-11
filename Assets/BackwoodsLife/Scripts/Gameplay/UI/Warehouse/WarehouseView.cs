@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
+using BackwoodsLife.Scripts.Framework.Item.DataModel;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Warehouse;
 using R3;
 using UnityEngine;
 using UnityEngine.Assertions;

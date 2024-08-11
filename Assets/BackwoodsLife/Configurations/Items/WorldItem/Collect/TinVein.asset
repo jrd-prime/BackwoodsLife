@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: TinVein
   m_EditorClassIdentifier: 
   itemName: TinVein
-  worldItemTypeName: 0
   shortDescription: A place to set a fish trap. Bait is also required.
   iconReference:
     m_AssetGUID: 142d9e91d38a45d4ea34d18e8f1777a2
@@ -53,16 +52,20 @@ MonoBehaviour:
         - typeName: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
           value: 1
         building:
-        - typeName: {fileID: 11400000, guid: 39081289efa4f1a41a6be7e354071ea5, type: 2}
+        - typeName: {fileID: 0}
           value: 1
   collectableLevels: []
   collectConfig:
     returnedItems:
     - item: {fileID: 11400000, guid: 9799e7405dfe6a54babd9ac223aa686d, type: 2}
       range:
-        min: 3
-        max: 6
+        min: 1
+        max: 3
     requirementForCollect:
-      tool: []
+      tool:
+      - typeName: {fileID: 11400000, guid: 0d12ac1f2de4f1044941d256c96c5fec, type: 2}
+        value: 1
       skill: []
-      building: []
+      building:
+      - typeName: {fileID: 11400000, guid: c01ecb6cadd0e6448b473184846bb5e7, type: 2}
+        value: 0

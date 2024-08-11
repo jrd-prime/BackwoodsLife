@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: MushroomPack
   m_EditorClassIdentifier: 
   itemName: MushroomPack
-  worldItemTypeName: 0
   shortDescription: A place to set a fish trap. Bait is also required.
   iconReference:
     m_AssetGUID: c8dedd39500d93f49b6768829b90d41b
@@ -53,16 +52,18 @@ MonoBehaviour:
         - typeName: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
           value: 1
         building:
-        - typeName: {fileID: 11400000, guid: 39081289efa4f1a41a6be7e354071ea5, type: 2}
+        - typeName: {fileID: 0}
           value: 1
   collectableLevels: []
   collectConfig:
     returnedItems:
     - item: {fileID: 11400000, guid: 5b422285c117d034bb6c3e5833c88fb4, type: 2}
       range:
-        min: 2
+        min: 1
         max: 4
     requirementForCollect:
       tool: []
-      skill: []
+      skill:
+      - typeName: {fileID: 11400000, guid: 4854efd0579a44b4186eb02721a35a6a, type: 2}
+        value: 2
       building: []

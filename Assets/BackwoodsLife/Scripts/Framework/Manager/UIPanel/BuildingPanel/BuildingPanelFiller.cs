@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Framework.Item.DataModel;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Building;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Skill;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Tool;
+using BackwoodsLife.Scripts.Framework.Item.DataModel.Warehouse;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Building;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Skill;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Tool;
-using BackwoodsLife.Scripts.Framework.Module.ItemsData.Warehouse;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
