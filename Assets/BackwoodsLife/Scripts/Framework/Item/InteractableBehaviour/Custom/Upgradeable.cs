@@ -11,7 +11,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom
     {
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.Upgrade;
 
-        public override void Process(Action<IInteractZoneState> onInteractionFinished)
+        public override void Process(Action<IInteractZoneState> interactZoneCallback)
         {
         }
     }

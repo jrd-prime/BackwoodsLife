@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
@@ -43,14 +44,44 @@ namespace BackwoodsLife.Scripts.Framework.Manager.GameData
 
         public bool IsEnoughForBuild(Dictionary<EItemData, Dictionary<SItemConfig, int>> level)
         {
-            return
-                level.TryGetValue(EItemData.Resource, out var resource)
-                    ? warehouseItem.IsEnough(resource)
-                    : level.TryGetValue(EItemData.Building, out var building)
-                        ? buildings.IsEnough(building)
-                        : level.TryGetValue(EItemData.Skill, out var skill)
-                            ? skills.IsEnough(skill)
-                            : !level.TryGetValue(EItemData.Tool, out var tool) || tools.IsEnough(tool);
+            foreach (var lec in level)
+            {
+                switch (lec.Key)
+                {
+                    case EItemData.Resource:
+                        foreach (var res in level[EItemData.Resource])
+                        {
+                            if (!warehouseItem.IsEnough(res.Key.itemName, res.Value)) return false;
+                        }
+
+                        break;
+                    case EItemData.Building:
+                        foreach (var res in level[EItemData.Building])
+                        {
+                            if (!buildings.IsEnough(res.Key.itemName, res.Value)) return false;
+                        }
+
+                        break;
+                    case EItemData.Skill:
+                        foreach (var res in level[EItemData.Skill])
+                        {
+                            if (!skills.IsEnough(res.Key.itemName, res.Value)) return false;
+                        }
+
+                        break;
+                    case EItemData.Tool:
+                        foreach (var res in level[EItemData.Tool])
+                        {
+                            if (!tools.IsEnough(res.Key.itemName, res.Value)) return false;
+                        }
+
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            return true;
         }
 
         public List<ItemDataWithConfigAndActual> CheckRequirementsForCollect(

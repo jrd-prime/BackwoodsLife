@@ -5,7 +5,7 @@ using BackwoodsLife.Scripts.Data.Common.Records;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Extensions;
-using BackwoodsLife.Scripts.Framework.Helpers;
+using BackwoodsLife.Scripts.Framework.Extensions.Helpers;
 using BackwoodsLife.Scripts.Framework.Item.System.Item;
 using BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.InteractZoneState;
 using UnityEngine;
@@ -20,10 +20,10 @@ namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom
     {
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.Collect;
 
-        public override void Process(Action<IInteractZoneState> onInteractionFinished)
+        public override void Process(Action<IInteractZoneState> interactZoneCallback)
         {
-            Assert.IsNotNull(onInteractionFinished, "interactSystemCallback is null");
-            InteractZoneCallback = onInteractionFinished;
+            Assert.IsNotNull(interactZoneCallback, "interactSystemCallback is null");
+            InteractZoneCallback = interactZoneCallback;
 
             if (!WorldItemConfig.HasCollectables())
             {

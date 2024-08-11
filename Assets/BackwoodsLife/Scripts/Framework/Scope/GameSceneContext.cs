@@ -12,10 +12,12 @@ using BackwoodsLife.Scripts.Gameplay.Environment;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
-using BackwoodsLife.Scripts.Gameplay.UI.InteractPanel;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
+using BackwoodsLife.Scripts.Gameplay.UI.Panel.InteractPanel;
+using BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActionsPanel;
+using BackwoodsLife.Scripts.Gameplay.UI.Panel.Warehouse;
 using BackwoodsLife.Scripts.Gameplay.UI.UIButtons;
-using BackwoodsLife.Scripts.Gameplay.UI.Warehouse;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Assertions;
 using VContainer;
@@ -29,10 +31,12 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private UIButtonsController uiButtonsController;
         [SerializeField] private CharacterOverUI characterOverUIHolder;
         [SerializeField] private InteractPanelUI interactPanelUIHolder;
-        [SerializeField] private BuildingPanelUIController buildingPanelUIController;
+
+        [Title("Panels ")] [SerializeField] private BuildingPanelUIController buildingPanelUIController;
         [SerializeField] private QuestPanelUIController questPanelUIController;
         [SerializeField] private WarehousePanelUIController warehousePanelUIController;
         [SerializeField] private InteractItemInfoPanelUI interactItemInfoPanelUIController;
+        [SerializeField] private UseActionsPanelUIController useActionsPanelUIController;
 
 
         protected override void Configure(IContainerBuilder builder)
@@ -73,6 +77,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(characterOverUIHolder).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(interactPanelUIHolder).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(interactItemInfoPanelUIController).AsSelf().AsImplementedInterfaces();
+            builder.RegisterComponent(useActionsPanelUIController).AsSelf().AsImplementedInterfaces();
 
 
             builder.Register(

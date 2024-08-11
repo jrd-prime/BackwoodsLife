@@ -8,6 +8,6 @@ namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour
     public abstract class InteractableItemBase : MonoBehaviour
     {
         public abstract EInteractTypes interactType { get; protected set; }
-        public abstract void Process(Action<IInteractZoneState> onInteractionFinished);
+        public abstract void Process(Action<IInteractZoneState> interactZoneCallback);
     }
 }

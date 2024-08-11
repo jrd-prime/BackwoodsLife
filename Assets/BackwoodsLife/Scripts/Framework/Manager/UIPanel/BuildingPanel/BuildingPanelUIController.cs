@@ -75,6 +75,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel
 
             var isEnough = _gameDataManager.IsEnoughForBuild(_currentLevelConfig);
 
+            Debug.LogWarning($"IsEnough: {isEnough}");
+
             _buildButton.SetEnabled(isEnough);
 
             _buildingPanelFiller.Fill(_currentLevelConfig, in _buildingPanelElementsRef, in worldItemConfig);

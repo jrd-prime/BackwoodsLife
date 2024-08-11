@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
+namespace BackwoodsLife.Scripts.Framework.Extensions.Helpers.JDebug.MemoryEtc
 {
     public class DebugMemoryAndEtcView : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using BackwoodsLife.Scripts.Data.Scriptable.Settings;
-using BackwoodsLife.Scripts.Framework.Helpers.JDebug;
-using BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc;
+using BackwoodsLife.Scripts.Framework.Extensions.Helpers.JDebug;
+using BackwoodsLife.Scripts.Framework.Extensions.Helpers.JDebug.MemoryEtc;
 using BackwoodsLife.Scripts.Framework.Item.DataModel.Building;
 using BackwoodsLife.Scripts.Framework.Item.DataModel.Skill;
 using BackwoodsLife.Scripts.Framework.Item.DataModel.Tool;

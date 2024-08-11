@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 using VContainer;
 using VContainer.Unity;
 
-namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
+namespace BackwoodsLife.Scripts.Framework.Extensions.Helpers.JDebug.MemoryEtc
 {
     public class DebugMemoryAndEtcViewModel : IInitializable, IDisposable
     {

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055f3ee22115451b9e7cb83bf4f1965b, type: 3}
   m_Name: Basket
   m_EditorClassIdentifier: 
-  itemName: Knife
-  worldItemTypeName: 0
+  itemName: Basket
   shortDescription: 
   iconReference:
     m_AssetGUID: f5cd43095f9e58f4c8fc8df42280139d
@@ -25,8 +24,11 @@ MonoBehaviour:
   itemStorage: 2
   warehouseItemSetting:
     stackSize: 0
-  craftable: 0
+  craftable: 1
   craftItemSetting:
-    craftingType: 0
-    craftingTime: 0
+    craftingType: 1
+    craftingTime: 30
     recipeForOneItem: []
+  canBuy: 0
+  buySetting:
+    price: 0

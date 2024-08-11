@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace BackwoodsLife.Scripts.Framework.Helpers
+namespace BackwoodsLife.Scripts.Framework.Extensions.Helpers
 {
     public static class JUtils
     {

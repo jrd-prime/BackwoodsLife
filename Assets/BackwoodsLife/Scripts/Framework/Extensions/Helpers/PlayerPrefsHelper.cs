@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BackwoodsLife.Scripts.Framework.Helpers
+namespace BackwoodsLife.Scripts.Framework.Extensions.Helpers
 {
     public static class PlayerPrefsHelper
     {

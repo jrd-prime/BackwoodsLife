@@ -7,7 +7,7 @@ using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using UnityEngine.Assertions;
 
-namespace BackwoodsLife.Scripts.Framework.Helpers.Reflection
+namespace BackwoodsLife.Scripts.Framework.Extensions.Helpers.Reflection
 {
 // TODO rename
     public static class JStructHelper

@@ -39,9 +39,9 @@ MonoBehaviour:
       reqForUpgrade:
         resource:
         - typeName: {fileID: 11400000, guid: 6db3deead613f234e94a542b9f14e661, type: 2}
-          value: 4
+          value: 0
         - typeName: {fileID: 11400000, guid: a09e0f32ae5324843a161298d56dc830, type: 2}
-          value: 2
+          value: 0
         tool: []
         skill: []
         building:

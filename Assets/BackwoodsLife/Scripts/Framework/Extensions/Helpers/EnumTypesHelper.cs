@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
 
-namespace BackwoodsLife.Scripts.Framework.Helpers
+namespace BackwoodsLife.Scripts.Framework.Extensions.Helpers
 {
     public static class EnumTypesHelper
     {

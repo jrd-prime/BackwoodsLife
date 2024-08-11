@@ -1,5 +1,5 @@
 ﻿using System;
-using BackwoodsLife.Scripts.Framework.Helpers;
+using BackwoodsLife.Scripts.Framework.Extensions.Helpers;
 using BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour;
 using BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.InteractZoneState;
 using UnityEngine;
@@ -24,15 +24,14 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact
         private void InteractZoneStateCallback(IInteractZoneState state)
         {
             // TODO states
-            Debug.LogWarning("Collect zone callback");
-            _currentState = state;
-            state.Enter(this);
+            Debug.LogWarning($"Zone callback. {state.StateDesc}");
+
+            ChangeState(state);
         }
 
         [Inject]
         private void Construct()
         {
-            // TODO inject interact system
             Debug.LogWarning("Trigger zone init");
         }
 
@@ -71,6 +70,14 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact
         {
             transform.parent.gameObject.SetActive(false);
             Destroy(transform.parent.gameObject);
+        }
+
+        private void ChangeState(IInteractZoneState state)
+        {
+            if (_currentState == state) return;
+            _currentState?.Exit();
+            _currentState = state;
+            state.Enter(this);
         }
     }
 }

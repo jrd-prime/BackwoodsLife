@@ -9,7 +9,7 @@ using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 using VContainer;
 
-namespace BackwoodsLife.Scripts.Gameplay.UI.InteractPanel
+namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.InteractPanel
 {
     /// <summary>
     /// Находится на холдере персонажа

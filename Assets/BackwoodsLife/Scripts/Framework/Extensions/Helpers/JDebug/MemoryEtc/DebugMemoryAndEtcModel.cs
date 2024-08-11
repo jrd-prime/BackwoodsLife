@@ -3,7 +3,7 @@ using R3;
 using UnityEngine.Profiling;
 using VContainer.Unity;
 
-namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug.MemoryEtc
+namespace BackwoodsLife.Scripts.Framework.Extensions.Helpers.JDebug.MemoryEtc
 {
     public class DebugMemoryAndEtcModel : IStartable
     {

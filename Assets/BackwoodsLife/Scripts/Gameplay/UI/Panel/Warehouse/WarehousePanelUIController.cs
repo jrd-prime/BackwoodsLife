@@ -3,7 +3,7 @@ using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace BackwoodsLife.Scripts.Gameplay.UI.Warehouse
+namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.Warehouse
 {
     public class WarehousePanelUIController : MonoBehaviour, IUIPanelController
     {

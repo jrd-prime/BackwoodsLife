@@ -1,4 +1,4 @@
-﻿namespace BackwoodsLife.Scripts.Framework.Helpers.JDebug
+﻿namespace BackwoodsLife.Scripts.Framework.Extensions.Helpers.JDebug
 {
     public static class DebugConst
     {
