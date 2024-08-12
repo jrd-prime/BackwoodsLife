@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Framework.Item.UseAction;
 using BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActionsPanel;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -12,7 +13,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
     {
         private UseActionsPanelUIController _useActionsPanelUIController;
         private readonly List<UseAction> _useActions;
-        private readonly Action<UseAction> _selectedUseActionCallback;
+        private readonly Action<IUseAction> _selectedUseActionCallback;
         private Action<IInteractZoneState> _interactZone;
         public string StateDesc => "Use actions state";
 
@@ -32,32 +33,10 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
             _selectedUseActionCallback += OnSelectedUseActionCallback;
         }
 
-        private void OnSelectedUseActionCallback(UseAction obj)
+        private void OnSelectedUseActionCallback(IUseAction useAction)
         {
-            Debug.LogWarning("Action selected: " + obj.useType);
-
-            // TODO polymorphism
-            switch (obj.useType)
-            {
-                case EUseType.Cooking:
-                    break;
-                case EUseType.PutItems:
-                    break;
-                case EUseType.TakeItems:
-                    break;
-                case EUseType.Crafting:
-                    break;
-                case EUseType.Resting:
-                    break;
-                case EUseType.Fishing:
-                    break;
-                case EUseType.Drinking:
-                    break;
-                case EUseType.Eating:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            Debug.LogWarning("Action selected: " + useAction.Description);
+            useAction.Activate();
 
             // _interactZone.Invoke(obj);
         }

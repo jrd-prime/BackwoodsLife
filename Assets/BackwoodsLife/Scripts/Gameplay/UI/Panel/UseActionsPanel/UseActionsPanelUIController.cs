@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Framework.Item.UseAction;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -12,31 +13,32 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActionsPanel
     public class UseActionsPanelUIController : UIPanelController
     {
         [SerializeField] private VisualTreeAsset btnTemplate;
-        private readonly List<(Button button, EventCallback<ClickEvent> callback)> _btns = new();
 
         private FramePopUp _frame;
+        private readonly List<(Button button, EventCallback<ClickEvent> callback)> _buttonsCacheTuple = new();
 
-        public void ShowUseActionsWindow(List<UseAction> useConfigUseActions,
-            Action<UseAction> selectedUseActionCallback)
+        public void ShowUseActionsWindow(List<UseAction> useActionConfigs,
+            Action<IUseAction> selectedUseActionCallback)
         {
+            Assert.IsNotNull(useActionConfigs, "useActionConfigs is null");
             Assert.IsNotNull(selectedUseActionCallback, "selectedUseActionCallback is null");
 
             var panel = PanelTemplate.Instantiate();
 
-            var btnContainer = panel.Q<VisualElement>("btns-container");
-            btnContainer.Clear();
+            var buttonsContainer = panel.Q<VisualElement>("btns-container");
+            buttonsContainer.Clear();
 
-            foreach (var useAction in useConfigUseActions)
+            foreach (var useAction in useActionConfigs)
             {
-                var btn = btnTemplate.Instantiate();
-                btn.Q<Label>().text = useAction.useType.ToString();
-                btnContainer.Add(btn);
+                IUseAction action = CustomUseAction.CreateUseAction(useAction.useType);
 
-                var button = btn.Q<Button>("craft-button");
+                var buttonTemplate = btnTemplate.Instantiate();
+                buttonTemplate.Q<Label>().text = action.Description;
+                var button = buttonTemplate.Q<Button>("craft-button");
 
-                EventCallback<ClickEvent> callback = _ => { selectedUseActionCallback.Invoke(useAction); };
-                button.RegisterCallback(callback);
-                _btns.Add((button, callback));
+                buttonsContainer.Add(buttonTemplate);
+
+                SubscribeButton(selectedUseActionCallback, action, button);
             }
 
             _frame = UIFrameController.GetPopUpFrame();
@@ -46,8 +48,20 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActionsPanel
 
         public void Hide()
         {
-            foreach (var (button, callback) in _btns) button.UnregisterCallback(callback);
+            UnSubscribeButtons();
             _frame?.Hide();
+        }
+
+        private void SubscribeButton(Action<IUseAction> selectedUseActionCallback, IUseAction action, Button button)
+        {
+            EventCallback<ClickEvent> callback = _ => { selectedUseActionCallback.Invoke(action); };
+            button.RegisterCallback(callback);
+            _buttonsCacheTuple.Add((button, callback));
+        }
+
+        private void UnSubscribeButtons()
+        {
+            foreach (var (button, callback) in _buttonsCacheTuple) button.UnregisterCallback(callback);
         }
     }
 }
