@@ -4,7 +4,7 @@ using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Extensions;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanels;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using UnityEngine;
 using UnityEngine.UIElements;

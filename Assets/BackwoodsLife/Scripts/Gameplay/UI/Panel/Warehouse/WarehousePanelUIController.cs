@@ -1,5 +1,5 @@
 ﻿using System;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanels;
 using UnityEngine;
 using UnityEngine.UIElements;
 

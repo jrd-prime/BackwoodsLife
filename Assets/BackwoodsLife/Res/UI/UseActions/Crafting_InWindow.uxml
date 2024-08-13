@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/build-panel.uss?fileID=7433441132597879392&amp;guid=a873d28cbeb18ef45aae7d638cad659f&amp;type=3#build-panel" />
+    <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/in-window-panel.uss?fileID=7433441132597879392&amp;guid=01eb85a0cbd9db44489743b2cc0e50e9&amp;type=3#in-window-panel" />
+    <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" name="iwp-scroll-view" class="iwp-container" />
+</ui:UXML>

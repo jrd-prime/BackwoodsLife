@@ -8,6 +8,9 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact
 {
+    /// <summary>
+    /// Вызывает метод Process у интерактабл объекта в триггер зону которого вошел игрок
+    /// </summary>
     [RequireComponent(typeof(CapsuleCollider))]
     public sealed class InteractZone : MonoBehaviour
     {
@@ -25,7 +28,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact
         {
             // TODO states
             Debug.LogWarning($"Zone callback. {state.StateDesc}");
-
             ChangeState(state);
         }
 

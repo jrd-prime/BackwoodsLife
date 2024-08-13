@@ -4,22 +4,24 @@ using BackwoodsLife.Scripts.Framework.Item.DataModel.Warehouse;
 using BackwoodsLife.Scripts.Framework.Item.System;
 using BackwoodsLife.Scripts.Framework.Item.System.Building;
 using BackwoodsLife.Scripts.Framework.Item.System.Item;
+using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel.Quest;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanels;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanels.Quest;
 using BackwoodsLife.Scripts.Gameplay.Environment;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using BackwoodsLife.Scripts.Gameplay.UI;
 using BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI;
 using BackwoodsLife.Scripts.Gameplay.UI.Joystick;
 using BackwoodsLife.Scripts.Gameplay.UI.Panel.InteractPanel;
-using BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActionsPanel;
+using BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions;
 using BackwoodsLife.Scripts.Gameplay.UI.Panel.Warehouse;
 using BackwoodsLife.Scripts.Gameplay.UI.UIButtons;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -33,10 +35,15 @@ namespace BackwoodsLife.Scripts.Framework.Scope
         [SerializeField] private InteractPanelUI interactPanelUIHolder;
 
         [Title("Panels ")] [SerializeField] private BuildingPanelUIController buildingPanelUIController;
-        [SerializeField] private QuestPanelUIController questPanelUIController;
+
+        [FormerlySerializedAs("questPanelUIController")] [SerializeField]
+        private QuestPanelUI questPanelUI;
+
         [SerializeField] private WarehousePanelUIController warehousePanelUIController;
         [SerializeField] private InteractItemInfoPanelUI interactItemInfoPanelUIController;
-        [SerializeField] private UseActionsPanelUIController useActionsPanelUIController;
+
+        [FormerlySerializedAs("useActionsPanelUIController")] [SerializeField]
+        private UseActionsPanelUI useActionsPanelUI;
 
 
         protected override void Configure(IContainerBuilder builder)
@@ -45,7 +52,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
 
             Assert.IsNotNull(buildingPanelUIController,
                 "buildingPanelController is null. Add prefab to scene and set prefab to " + name);
-            Assert.IsNotNull(questPanelUIController,
+            Assert.IsNotNull(questPanelUI,
                 "questPanelController is null. Add prefab to scene and set prefab to " + name);
             Assert.IsNotNull(warehousePanelUIController,
                 "warehousePanelController is null. Add prefab to scene and set prefab to " + name);
@@ -77,12 +84,23 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             builder.RegisterComponent(characterOverUIHolder).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(interactPanelUIHolder).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponent(interactItemInfoPanelUIController).AsSelf().AsImplementedInterfaces();
-            builder.RegisterComponent(useActionsPanelUIController).AsSelf().AsImplementedInterfaces();
+            builder.RegisterComponent(useActionsPanelUI).AsSelf().AsImplementedInterfaces();
 
 
+            // ViewModel
+            builder.Register<CraftingViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            // builder.Register<CookingActionViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            // builder.Register<PutActionViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            // builder.Register<TakeActionViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            // builder.Register<FishingActionViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            // builder.Register<RestingActionViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            // builder.Register<DrinkingActionViewModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+
+            // Model
+            builder.Register<CraftingModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register(
                 _ => new PanelUIController(new List<IUIPanelController>
-                    { buildingPanelUIController, questPanelUIController, warehousePanelUIController }),
+                    { buildingPanelUIController, questPanelUI, warehousePanelUIController }),
                 Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
     }

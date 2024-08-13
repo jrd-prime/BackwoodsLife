@@ -7,7 +7,7 @@ using BackwoodsLife.Scripts.Framework.Extensions.Helpers;
 using BackwoodsLife.Scripts.Framework.Item.System.Building;
 using BackwoodsLife.Scripts.Framework.Item.System.Item;
 using BackwoodsLife.Scripts.Framework.Manager.GameData;
-using BackwoodsLife.Scripts.Framework.Manager.UIPanel.BuildingPanel;
+using BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel;
 using BackwoodsLife.Scripts.Gameplay.Player;
 using Cysharp.Threading.Tasks;
 using R3;
