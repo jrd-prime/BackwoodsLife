@@ -1,7 +1,6 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
-using R3;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 {
@@ -9,18 +8,23 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
     {
         public override string Description => "Crafting";
 
-        public async override void Activate(Action onCompleteUseActionCallback)
+        public override async void Activate(Action onCompleteUseActionCallback)
         {
-            Show.Value = 2;
             // interactZoneStateCallback.Invoke();
-            await UniTask.Delay(3000);
+            // await UniTask.Delay(3000);
 
-            onCompleteUseActionCallback.Invoke();
+            PanelToShow.Value = FillPanel();
+            // onCompleteUseActionCallback.Invoke();
         }
 
         public override void Deactivate()
         {
             Debug.LogWarning("Crafting action deactivated");
+        }
+
+        protected override TemplateContainer FillPanel()
+        {
+            return new TemplateContainer();
         }
     }
 }

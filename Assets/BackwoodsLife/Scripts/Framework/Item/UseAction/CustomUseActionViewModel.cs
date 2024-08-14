@@ -4,16 +4,19 @@ using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
 using BackwoodsLife.Scripts.Framework.Item.UseAction.sort;
 using R3;
 using UnityEngine;
+using UnityEngine.UIElements;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction
 {
     public abstract class UseActionViewModelBase : IUseActionViewModel
     {
-        public ReactiveProperty<int> Show = new();
+        public ReactiveProperty<TemplateContainer> PanelToShow = new();
         public abstract string Description { get; }
         public abstract void Activate(Action onCompleteUseActionCallback);
         public abstract void Deactivate();
+
+        protected abstract TemplateContainer FillPanel();
 
         public static IUseActionViewModel CreateUseAction(EUseType useType)
         {

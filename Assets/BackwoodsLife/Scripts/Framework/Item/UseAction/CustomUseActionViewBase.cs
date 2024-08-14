@@ -28,16 +28,20 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
             _uiFrameController = uiFrameController;
         }
 
-        public void Show()
+        public void Show(TemplateContainer templateContainer)
         {
-            _uiFrameController.ShowMainPopUpWindow(_mainView);
+            _uiFrameController.ShowMainPopUpWindow(templateContainer);
             Debug.LogWarning("<color=green>" + ViewModel.Description + "</color>");
         }
 
         private void Awake()
         {
             _mainView = MainTemplate.Instantiate();
-            ViewModel.Show.Skip(1).Subscribe(_ => { Show(); }).AddTo(new CompositeDisposable());
+
+            ViewModel.PanelToShow
+                .Skip(1)
+                .Subscribe(x => { Show(x); })
+                .AddTo(new CompositeDisposable());
         }
     }
 }
