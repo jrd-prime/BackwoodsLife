@@ -4,6 +4,7 @@ using R3;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
+using NotImplementedException = System.NotImplementedException;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction
 {
@@ -16,9 +17,13 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
     {
         protected TViewModel ViewModel;
 
+        /// <summary>
+        /// Set this template to the view model on awake
+        /// </summary>
         [SerializeField] protected VisualTreeAsset MainTemplate;
+
         protected UIFrameController _uiFrameController;
-        protected TemplateContainer _mainView;
+        private FramePopUpWindow frame;
 
         [Inject]
         private void Construct(TViewModel viewModel, UIFrameController uiFrameController)
@@ -28,20 +33,37 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
             _uiFrameController = uiFrameController;
         }
 
-        public void Show(TemplateContainer templateContainer)
-        {
-            _uiFrameController.ShowMainPopUpWindow(templateContainer);
-            Debug.LogWarning("<color=green>" + ViewModel.Description + "</color>");
-        }
-
         private void Awake()
         {
-            _mainView = MainTemplate.Instantiate();
-
+            frame = _uiFrameController.GetPopUpWindowFrame();
             ViewModel.PanelToShow
                 .Skip(1)
                 .Subscribe(x => { Show(x); })
                 .AddTo(new CompositeDisposable());
+
+            ViewModel.PanelDescription
+                .Skip(1)
+                .Subscribe(x => { FillDescription(x); })
+                .AddTo(new CompositeDisposable());
+
+            ViewModel.SetMainTemplate(MainTemplate);
+
+            InitializeElementsRefs();
+        }
+
+
+        private void FillDescription(PanelDescriptionData panelDescriptionData)
+        {
+            frame.SetDescription(panelDescriptionData);
+        }
+
+        protected abstract void InitializeElementsRefs();
+
+        public void Show(TemplateContainer templateContainer)
+        {
+            _uiFrameController.ShowMainPopUpWindowWithScroll(templateContainer);
+            _uiFrameController.ShowMainPopUpWindow(templateContainer);
+            Debug.LogWarning("<color=green>" + ViewModel.Description + "</color>");
         }
     }
 }

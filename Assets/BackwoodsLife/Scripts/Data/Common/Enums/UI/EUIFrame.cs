@@ -9,7 +9,9 @@
 
     public enum EMainPopUpSubFrame
     {
-        Full = 0
+        Root = 0,
+        Main = 1,
+        Description = 2
     }
 
     public enum EMainSubFrame

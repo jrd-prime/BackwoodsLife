@@ -45,10 +45,31 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 
         public FramePopUp GetPopUpFrame() => framePopUpAsset;
         public FrameMain GetMainFrame() => frameMainAsset;
+        public FramePopUpWindow GetPopUpWindowFrame() => framePopUpWindow;
+
+        public void ShowMainPopUpWindowWithScroll(TemplateContainer instantiate)
+        {
+            var root = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Root);
+            Debug.LogWarning(root);
+            var fp = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Main);
+
+            _closeBtn = root.Q<Button>("close");
+
+            _closeBtn.clicked += CloseMainPopUpWindow;
+
+            fp.Add(instantiate);
+            framePopUpWindow.Show();
+        }
+
+        private void CloseMainPopUpWindow()
+        {
+            framePopUpWindow.Hide();
+            _closeBtn.clicked -= CloseMainPopUpWindow;
+        }
 
         public void ShowMainPopUpWindow(TemplateContainer instantiate)
         {
-            var fp = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Full);
+            var fp = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Description);
             var ap = fp.Q<VisualElement>("in-window-container");
 
             _closeBtn = fp.Q<Button>("close");
@@ -57,12 +78,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 
             ap.Add(instantiate);
             framePopUpWindow.Show();
-        }
-
-        private void CloseMainPopUpWindow()
-        {
-            framePopUpWindow.Hide();
-            _closeBtn.clicked -= CloseMainPopUpWindow;
         }
     }
 }

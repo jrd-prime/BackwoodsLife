@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 namespace BackwoodsLife.Scripts.Gameplay.UI
 {
+    [RequireComponent(typeof(UIDocument))]
     public abstract class UIFrameView<TEnum> : MonoBehaviour where TEnum : Enum
     {
         protected readonly Dictionary<TEnum, VisualElement> SubFrames = new();
@@ -13,11 +14,11 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
 
         public virtual VisualElement GetSubFrame1(TEnum subFrame)
         {
-            if (!SubFrames.TryGetValue((TEnum)subFrame, out var frame))
+            if (!SubFrames.TryGetValue(subFrame, out var frame))
             {
                 throw new KeyNotFoundException("No subframe " + subFrame);
             }
-
+            
             return frame;
         }
 

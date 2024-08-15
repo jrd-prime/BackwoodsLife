@@ -12,11 +12,20 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
     public abstract class UseActionViewModelBase : IUseActionViewModel
     {
         public ReactiveProperty<TemplateContainer> PanelToShow = new();
+        public ReactiveProperty<PanelDescriptionData> PanelDescription = new();
+
+        /// <summary>
+        /// This template is set on awake in view
+        /// </summary>
+        protected VisualTreeAsset MainTemplate;
+
         public abstract string Description { get; }
         public abstract void Activate(Action onCompleteUseActionCallback);
         public abstract void Deactivate();
 
         protected abstract TemplateContainer FillPanel();
+
+        public void SetMainTemplate(VisualTreeAsset mainTemplate) => MainTemplate = mainTemplate;
 
         public static IUseActionViewModel CreateUseAction(EUseType useType)
         {
@@ -34,6 +43,12 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
                     "Unknown use type! Need to add new use type")
             };
         }
+    }
+
+    public struct PanelDescriptionData
+    {
+        public string Title;
+        public string Description;
     }
 
     public abstract class CustomUseActionViewModel<TModel> : UseActionViewModelBase

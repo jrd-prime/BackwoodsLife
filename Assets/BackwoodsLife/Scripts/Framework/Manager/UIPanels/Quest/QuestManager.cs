@@ -59,9 +59,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.Quest
         private void QuestButtonClicked()
         {
             Debug.LogWarning("Quest clicked");
-
-
-            _uiFrameController.ShowMainPopUpWindow(FillInWindowQuests());
+            
+            _uiFrameController.ShowMainPopUpWindowWithScroll(FillInWindowQuests());
         }
 
         private TemplateContainer FillInWindowQuests()
