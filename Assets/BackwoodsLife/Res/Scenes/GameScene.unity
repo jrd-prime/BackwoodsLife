@@ -3161,6 +3161,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9197481963319205126, guid: 769ec99ba8f51754dbf087782c5eac72,
         type: 3}
+    - target: {fileID: 6864131748059341059, guid: ee9c4332412fe3949a5bca16f60611c7,
+        type: 3}
+      propertyPath: mainTemplate
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: 769ec99ba8f51754dbf087782c5eac72,
+        type: 3}
+    - target: {fileID: 6864131748059341059, guid: ee9c4332412fe3949a5bca16f60611c7,
+        type: 3}
+      propertyPath: requiredItemTemplate
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: c410b869b6ff423498af19476902f342,
+        type: 3}
     - target: {fileID: 8058584841711531021, guid: ee9c4332412fe3949a5bca16f60611c7,
         type: 3}
       propertyPath: m_Name

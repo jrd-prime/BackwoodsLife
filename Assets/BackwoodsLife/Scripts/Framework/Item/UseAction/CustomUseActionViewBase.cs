@@ -1,10 +1,10 @@
-﻿using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
+﻿using System;
+using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
 using BackwoodsLife.Scripts.Gameplay.UI;
 using R3;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
-using NotImplementedException = System.NotImplementedException;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction
 {
@@ -15,55 +15,61 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
     public abstract class CustomUseActionViewBase<TViewModel> : UseActionViewBase
         where TViewModel : UseActionViewModelBase
     {
-        protected TViewModel ViewModel;
-
         /// <summary>
         /// Set this template to the view model on awake
         /// </summary>
-        [SerializeField] protected VisualTreeAsset MainTemplate;
+        [SerializeField] protected VisualTreeAsset mainTemplate;
 
-        protected UIFrameController _uiFrameController;
-        private FramePopUpWindow frame;
+        protected TViewModel ViewModel;
+        protected UIFrameController UIFrameController;
+        protected TemplateContainer Panel;
+
+        protected abstract void InitializeElementsRefs();
+
+        private FramePopUpWindow _frame;
+        protected readonly CompositeDisposable Disposables = new();
 
         [Inject]
         private void Construct(TViewModel viewModel, UIFrameController uiFrameController)
         {
             Debug.LogWarning("Custom use action view construct with: " + viewModel.Description);
             ViewModel = viewModel;
-            _uiFrameController = uiFrameController;
+            UIFrameController = uiFrameController;
         }
+
 
         private void Awake()
         {
-            frame = _uiFrameController.GetPopUpWindowFrame();
-            ViewModel.PanelToShow
-                .Skip(1)
-                .Subscribe(x => { Show(x); })
-                .AddTo(new CompositeDisposable());
+            _frame = UIFrameController.GetPopUpWindowFrame();
+            UIFrameController.OnCloseButtonClicked += OnCloseButtonClicked;
 
-            ViewModel.PanelDescription
-                .Skip(1)
-                .Subscribe(x => { FillDescription(x); })
-                .AddTo(new CompositeDisposable());
+            ViewModel.IsPanelActive.Skip(1)
+                .Subscribe(x => Show(x))
+                .AddTo(Disposables);
 
-            ViewModel.SetMainTemplate(MainTemplate);
+            ViewModel.DescriptionPanelData
+                .Skip(1)
+                .Subscribe(x =>
+                {
+                    Debug.LogWarning("<color=green>Use action view base. Desc panel</color>");
+                    FillDescription(x);
+                })
+                .AddTo(Disposables);
+
+            ViewModel.SetMainTemplate(mainTemplate);
 
             InitializeElementsRefs();
         }
 
 
+
         private void FillDescription(PanelDescriptionData panelDescriptionData)
         {
-            frame.SetDescription(panelDescriptionData);
+            _frame.SetDescription(panelDescriptionData);
         }
 
-        protected abstract void InitializeElementsRefs();
 
-        public void Show(TemplateContainer templateContainer)
-        {
-            _uiFrameController.ShowMainPopUpWindowWithScroll(templateContainer);
-            _uiFrameController.ShowMainPopUpWindow(templateContainer);
-            Debug.LogWarning("<color=green>" + ViewModel.Description + "</color>");
-        }
+        protected abstract void Show(bool s);
+        protected abstract void OnCloseButtonClicked();
     }
 }

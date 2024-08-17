@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Item.UseAction;
 using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
 using BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions;
@@ -11,19 +12,20 @@ using VContainer;
 namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.InteractZoneState
 {
     /// <summary>
-    /// Состояние <see cref="InteractZone"/>, в котором октрывается окно (<see cref="UseActionsPanelUI"/>) выбора метода взаимодействия с <see cref="InteractableItem"/>
+    /// Состояние <see cref="InteractZone"/>,
+    /// в котором октрывается окно (<see cref="UseActionsPanelUI"/>) выбора метода взаимодействия с <see cref="InteractableItem"/>
     /// </summary>
     public sealed class UseActionsState : IInteractZoneState
     {
-        private UseActionsPanelUI _useActionsPanelUI;
-        private readonly List<UseAction> _useActions;
-        private readonly Action<UseAction> _selectedUseActionCallback;
-        private Action<IInteractZoneState> _interactZoneStateCallback;
-        private event Action _onCompleteUseActionCallback;
-
-        private IUseActionViewModel _selectedUseActionViewModel;
         public string StateDesc => "Use actions state";
 
+        private Action<IInteractZoneState> _interactZoneStateCallback;
+        private Action _onCompleteUseActionCallback;
+
+        private UseActionsPanelUI _useActionsPanelUI;
+        private readonly SUseAndUpgradeItem _itemConfig;
+        private readonly Action<UseAction> _selectedUseActionCallback;
+        private IUseActionViewModel _selectedUseActionViewModel;
         private IObjectResolver _container;
 
         [Inject]
@@ -34,11 +36,12 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
             _useActionsPanelUI = useActionsPanelUI;
         }
 
-        public UseActionsState(List<UseAction> useActions, Action<IInteractZoneState> interactZoneStateCallbackCallback)
+        public UseActionsState(SUseAndUpgradeItem itemConfig,
+            Action<IInteractZoneState> interactZoneStateCallbackCallback)
         {
-            Assert.IsNotNull(useActions, "useActions is null");
+            Assert.IsNotNull(itemConfig, "itemConfig is null");
 
-            _useActions = useActions;
+            _itemConfig = itemConfig;
             _interactZoneStateCallback = interactZoneStateCallbackCallback;
             _selectedUseActionCallback += OnSelectedUseActionCallback;
             _onCompleteUseActionCallback += OnCompleteUseActionCallback;
@@ -70,7 +73,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
 
             Debug.LogWarning("Action selected: " + _selectedUseActionViewModel.Description);
             _useActionsPanelUI.Hide();
-            _selectedUseActionViewModel.Activate(_onCompleteUseActionCallback);
+            _selectedUseActionViewModel.Activate(_itemConfig, _onCompleteUseActionCallback);
         }
 
         private void OnCompleteUseActionCallback()
@@ -82,7 +85,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
 
         public void Enter(InteractZone interactZone)
         {
-            _useActionsPanelUI.CreateAndShow(_useActions, _selectedUseActionCallback);
+            _useActionsPanelUI.CreateAndShow(_itemConfig.useConfig.useActions, _selectedUseActionCallback);
         }
 
         public void Exit()

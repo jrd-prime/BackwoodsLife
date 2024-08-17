@@ -46,4 +46,4 @@ MonoBehaviour:
         skill: []
         building:
         - typeName: {fileID: 11400000, guid: 8540679380a77794685e8f2051375b68, type: 2}
-          value: 1
+          value: 0

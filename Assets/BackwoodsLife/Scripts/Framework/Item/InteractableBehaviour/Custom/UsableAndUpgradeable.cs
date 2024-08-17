@@ -21,7 +21,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom
             foreach (var useAction in WorldItemConfig.useConfig.useActions)
                 Debug.LogWarning($"Use action: {useAction.useType}");
 
-            var useActionsState = new UseActionsState(WorldItemConfig.useConfig.useActions, interactZoneCallback);
+            var useActionsState = new UseActionsState(WorldItemConfig, interactZoneCallback);
 
             Container.Inject(useActionsState);
 

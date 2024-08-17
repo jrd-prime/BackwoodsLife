@@ -144,14 +144,14 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
         {
             foreach (var i in itemDictionary)
             {
-                Debug.LogWarning("req = " + i.Key.itemName + " " + i.Value);
+                // Debug.LogWarning("req = " + i.Key.itemName + " " + i.Value);
             }
             
-            Debug.LogWarning(_gameDataManager.buildings.GetValue("Bonfire") + " v");
+            // Debug.LogWarning(_gameDataManager.buildings.GetValue("Bonfire") + " v");
 
-            Debug.LogWarning($"data holder = {ChooseDataHolder(itemDataType)}");
+            // Debug.LogWarning($"data holder = {ChooseDataHolder(itemDataType)}");
 
-            Debug.LogWarning($"is enough = {ChooseDataHolder(itemDataType).IsEnough(itemDictionary)}");
+            // Debug.LogWarning($"is enough = {ChooseDataHolder(itemDataType).IsEnough(itemDictionary)}");
 
             LoadAndSetIcon(iconHolder, ChooseDataHolder(itemDataType).IsEnough(itemDictionary)
                 ? _panelRef.CheckIcon

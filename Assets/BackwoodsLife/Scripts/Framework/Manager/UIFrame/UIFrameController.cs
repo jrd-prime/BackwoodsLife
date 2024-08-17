@@ -15,6 +15,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
         [SerializeField] private FramePopUp framePopUpAsset;
         [SerializeField] private FramePopUpWindow framePopUpWindow;
 
+        public Action OnCloseButtonClicked;
+        
         private VisualElement _mu;
         private VisualElement _pu;
         private UIDocument uiDocument;
@@ -63,6 +65,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 
         private void CloseMainPopUpWindow()
         {
+            OnCloseButtonClicked.Invoke();
             framePopUpWindow.Hide();
             _closeBtn.clicked -= CloseMainPopUpWindow;
         }

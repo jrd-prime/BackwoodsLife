@@ -48,7 +48,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact
                 var interactable = parentTransform.GetComponent<InteractableItemBase>();
                 Assert.IsNotNull(interactable, $"Interactable is null on {parentTransform.name} prefab");
 
-
                 Debug.LogWarning(
                     $"<color=yellow>Interact zone:\t{interactable.GetType().Name}\t{interactable.interactType}</color>");
 

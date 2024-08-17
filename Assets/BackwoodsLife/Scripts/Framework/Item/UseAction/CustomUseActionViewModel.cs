@@ -1,5 +1,6 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
 using BackwoodsLife.Scripts.Framework.Item.UseAction.sort;
 using R3;
@@ -9,10 +10,12 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction
 {
-    public abstract class UseActionViewModelBase : IUseActionViewModel
+    public abstract class UseActionViewModelBase : IUseActionViewModel, IUseActionReactive
     {
-        public ReactiveProperty<TemplateContainer> PanelToShow = new();
-        public ReactiveProperty<PanelDescriptionData> PanelDescription = new();
+        public abstract ReactiveProperty<PanelDescriptionData> DescriptionPanelData { get; }
+        public ReactiveProperty<bool> IsPanelActive { get; } = new();
+
+        protected Action OnCompleteUseActionCallback;
 
         /// <summary>
         /// This template is set on awake in view
@@ -20,10 +23,8 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
         protected VisualTreeAsset MainTemplate;
 
         public abstract string Description { get; }
-        public abstract void Activate(Action onCompleteUseActionCallback);
+        public abstract void Activate(SUseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback);
         public abstract void Deactivate();
-
-        protected abstract TemplateContainer FillPanel();
 
         public void SetMainTemplate(VisualTreeAsset mainTemplate) => MainTemplate = mainTemplate;
 
@@ -52,9 +53,11 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
     }
 
     public abstract class CustomUseActionViewModel<TModel> : UseActionViewModelBase
-        where TModel : class, IUseActionModel
+        where TModel : class, IUseActionModelBase
     {
-        public TModel Model { get; private set; }
+        protected TModel Model { get; private set; }
+
+        public override ReactiveProperty<PanelDescriptionData> DescriptionPanelData => Model.DescriptionPanelData;
 
         [Inject]
         private void Construct(TModel model)
