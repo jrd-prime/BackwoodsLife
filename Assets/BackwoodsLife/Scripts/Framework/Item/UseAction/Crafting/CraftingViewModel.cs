@@ -13,15 +13,16 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
         public ReactiveProperty<CraftingProcessPanelData> ProcessPanelData => Model.ProcessPanelData;
         public override string Description => "Crafting";
 
-        public override async void Activate(SUseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback)
+        public override void Activate(SUseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback)
         {
+            Debug.LogWarning($"Crafting action activated: {itemConfig.itemName}");
+
             OnCompleteUseActionCallback = onCompleteUseActionCallback;
             Assert.IsNotNull(MainTemplate, $"MainTemplate is null: {this}");
             IsPanelActive.Value = true;
 
             Model.SetDataTo(itemConfig);
             // interactZoneStateCallback.Invoke();
-            // await UniTask.Delay(3000);
 
             // onCompleteUseActionCallback.Invoke();
         }
@@ -29,7 +30,12 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
         public override void Deactivate()
         {
             Debug.LogWarning("Crafting action deactivated");
-            // IsPanelActive.Value = false;
+            IsPanelActive.Value = false;
+        }
+
+        public override void OnCloseButtonClicked()
+        {
+            Debug.LogWarning("OnCloseButtonClicked callback in use action VIEW MODEL");
             Debug.LogWarning(OnCompleteUseActionCallback + " ????? ");
             OnCompleteUseActionCallback?.Invoke();
         }

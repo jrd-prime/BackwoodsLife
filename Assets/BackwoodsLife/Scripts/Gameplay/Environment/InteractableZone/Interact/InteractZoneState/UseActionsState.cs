@@ -73,13 +73,17 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
 
             Debug.LogWarning("Action selected: " + _selectedUseActionViewModel.Description);
             _useActionsPanelUI.Hide();
+            
+            Debug.LogWarning(_selectedUseActionViewModel + " ???? ");
             _selectedUseActionViewModel.Activate(_itemConfig, _onCompleteUseActionCallback);
         }
 
         private void OnCompleteUseActionCallback()
         {
+            Debug.LogWarning("Use action complete");
             Assert.IsNotNull(_selectedUseActionViewModel, "_selectedUseAction is null");
             _selectedUseActionViewModel.Deactivate();
+            Debug.LogWarning("use actions panel = " + _useActionsPanelUI);
             _useActionsPanelUI.Show();
         }
 

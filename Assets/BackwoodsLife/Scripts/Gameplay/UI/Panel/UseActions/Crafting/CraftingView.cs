@@ -1,4 +1,4 @@
-﻿using System;
+﻿using R3;
 using UnityEngine;
 using UnityEngine.UIElements;
 using NotImplementedException = System.NotImplementedException;
@@ -9,41 +9,68 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
     {
         [SerializeField] private VisualTreeAsset requiredItemTemplate;
 
+        //TODO add items list template
+        private Label _processTitle;
+        private VisualElement _infoIcon;
+        private Label _infoHead;
+        private Label _infoDesc;
+        private VisualElement _requiredItems;
+        private VisualElement _scrollContainer;
+
         protected override void InitializeElementsRefs()
         {
+            ViewModel.InfoPanelData.Subscribe(SetInfoPanelData).AddTo(Disposables);
+            ViewModel.ItemsPanelData.Subscribe(SetItemsPanelData).AddTo(Disposables);
+            ViewModel.ProcessPanelData.Subscribe(SetProcessPanelData).AddTo(Disposables);
+
             Panel = mainTemplate.Instantiate();
 
             var container = Panel.Q<VisualElement>("crafting-container");
 
             // Info
             var info = container.Q<VisualElement>("craft-info");
-            var infoIcon = info.Q<VisualElement>("icon");
-            var infoHead = info.Q<Label>("head");
-            var infoDesc = info.Q<Label>("desc");
-            var requiredItems = info.Q<VisualElement>("req-list-container");
+            _infoIcon = info.Q<VisualElement>("icon");
+            _infoHead = info.Q<Label>("head");
+            _infoDesc = info.Q<Label>("desc");
+            _requiredItems = info.Q<VisualElement>("req-list-container");
 
             // List
             var items = container.Q<VisualElement>("craft-list");
-            var scrollContainer = items.Q<VisualElement>("unity-content-container");
+            _scrollContainer = items.Q<VisualElement>("unity-content-container");
 
             // Process
             var process = container.Q<VisualElement>("craft-process");
+            _processTitle = process.Q<Label>("title");
         }
 
-        protected override void Show(bool s)
+        private void SetInfoPanelData(CraftingInfoPanelData craftingInfoPanelData)
         {
-            Debug.LogWarning("show = " + s);
-            if (!s) return;
-            if (Panel == null) throw new NullReferenceException("Panel is null");
-            UIFrameController.ShowMainPopUpWindowWithScroll(Panel);
-            // UIFrameController.ShowMainPopUpWindow(templateContainer);
-            Debug.LogWarning("<color=green>" + ViewModel.Description + "</color>");
+            _infoHead.text = craftingInfoPanelData.Title;
+            _infoDesc.text = craftingInfoPanelData.Description;
+            _infoIcon.style.backgroundImage = new StyleBackground(craftingInfoPanelData.Icon);
+        }
+
+        private void SetItemsPanelData(CraftingItemsPanelData craftingItemData)
+        {
+            foreach (var item in craftingItemData.Items)
+            {
+                var itemElement = requiredItemTemplate.Instantiate();
+                itemElement.style.backgroundImage = new StyleBackground(item.Icon);
+                _scrollContainer.Add(itemElement);
+            }
+        }
+
+
+        private void SetProcessPanelData(CraftingProcessPanelData craftingProcessPanelData)
+        {
+            _processTitle.text = "Crafting process";
         }
 
         protected override void OnCloseButtonClicked()
         {
-            Debug.LogWarning("OnCloseButtonClicked callback in use action view");
-            ViewModel.Deactivate();
+            base.OnCloseButtonClicked();
+
+            Debug.LogWarning("Close button clicked. View");
         }
     }
 }

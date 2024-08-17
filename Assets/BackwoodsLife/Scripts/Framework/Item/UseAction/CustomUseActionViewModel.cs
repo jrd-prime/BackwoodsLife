@@ -25,7 +25,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
         public abstract string Description { get; }
         public abstract void Activate(SUseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback);
         public abstract void Deactivate();
-
+        public abstract void OnCloseButtonClicked();
         public void SetMainTemplate(VisualTreeAsset mainTemplate) => MainTemplate = mainTemplate;
 
         public static IUseActionViewModel CreateUseAction(EUseType useType)

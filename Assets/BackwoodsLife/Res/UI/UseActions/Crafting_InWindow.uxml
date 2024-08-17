@@ -19,7 +19,9 @@
             <ui:VisualElement name="craft-list" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; top: 100px; right: 162px; background-color: rgba(73, 164, 160, 0.13);">
                 <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
             </ui:VisualElement>
-            <ui:VisualElement name="craft-process" style="flex-grow: 1; position: absolute; top: 0; right: 0; bottom: 0; width: 150px; background-color: rgba(0, 0, 0, 0.13);" />
+            <ui:VisualElement name="craft-process" style="flex-grow: 1; position: absolute; top: 0; right: 0; bottom: 0; width: 150px; background-color: rgba(0, 0, 0, 0.13);">
+                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -38,15 +38,29 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 
         private CraftingItemsPanelData GetItemsPanelData(SWorldItemConfig worldItemConfig)
         {
+
+            foreach (var VARIABLE in worldItemConfig.)
+            {
+                
+            }
+            
+            
             return new CraftingItemsPanelData
             {
                 Items = new List<CraftingItemData>()
+                {
+                    new CraftingItemData
+                    {
+                     
+                    }
+                    
+                }
             };
         }
 
         private CraftingInfoPanelData GetInfoPanelData(SWorldItemConfig worldItemConfig)
         {
-            return new CraftingInfoPanelData { Title = "crafting title", Description = "crafting description" };
+            return new CraftingInfoPanelData { Title = worldItemConfig.itemName, Description = "crafting description" };
         }
     }
 }

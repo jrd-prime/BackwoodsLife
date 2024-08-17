@@ -62,7 +62,11 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions
             _frame.ShowIn(EPopUpSubFrame.Left, _cachedPanel);
         }
 
-        public void Hide() => _frame?.Hide();
+        public void Hide()
+        {
+            Debug.LogWarning("Hide use actions panel");
+            _frame?.Hide();
+        }
 
         public void HideAndRemove()
         {

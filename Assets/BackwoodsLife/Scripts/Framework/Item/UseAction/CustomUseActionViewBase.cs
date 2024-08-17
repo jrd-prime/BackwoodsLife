@@ -37,9 +37,9 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
             UIFrameController = uiFrameController;
         }
 
-
         private void Awake()
         {
+            Debug.LogWarning("Custom use action view AWAKE: " + ViewModel.Description);
             _frame = UIFrameController.GetPopUpWindowFrame();
             UIFrameController.OnCloseButtonClicked += OnCloseButtonClicked;
 
@@ -56,20 +56,39 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
                 })
                 .AddTo(Disposables);
 
+            
+            
             ViewModel.SetMainTemplate(mainTemplate);
 
             InitializeElementsRefs();
         }
-
-
 
         private void FillDescription(PanelDescriptionData panelDescriptionData)
         {
             _frame.SetDescription(panelDescriptionData);
         }
 
+        protected void Show(bool s)
+        {
+            Debug.LogWarning("show = " + s);
+            if (!s) return;
+            if (Panel == null) throw new NullReferenceException("Panel is null");
+            UIFrameController.ShowMainPopUpWindowWithScroll(Panel);
+            // UIFrameController.ShowMainPopUpWindow(templateContainer);
+            Debug.LogWarning("<color=green>" + ViewModel.Description + "</color>");
+        }
 
-        protected abstract void Show(bool s);
-        protected abstract void OnCloseButtonClicked();
+        protected virtual void OnCloseButtonClicked()
+        {
+            Debug.LogWarning("OnCloseButtonClicked callback in use action VIEW");
+            Debug.LogWarning(ViewModel + " view model ");
+            ViewModel.OnCloseButtonClicked();
+        }
+
+        private void OnDestroy()
+        {
+            Disposables.Dispose();
+            UIFrameController.OnCloseButtonClicked -= OnCloseButtonClicked;
+        }
     }
 }
