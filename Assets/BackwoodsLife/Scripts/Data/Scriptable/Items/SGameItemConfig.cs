@@ -40,12 +40,6 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
     }
 
 
-    public enum ECraftingType
-    {
-        Cooking = 0,
-        Craft = 1
-    }
-
     [Serializable]
     public struct InventoryItemSetting
     {
@@ -55,12 +49,5 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
     public struct WarehouseItemSetting
     {
         [Range(1, 1000)] public int stackSize;
-    }
-
-    public enum EItemStorage
-    {
-        YouMustChoose = 0,
-        Warehouse = 1,
-        Inventory = 2
     }
 }

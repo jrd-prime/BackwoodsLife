@@ -55,6 +55,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             Debug.LogWarning(root);
             var fp = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Main);
 
+            fp.Clear();
             _closeBtn = root.Q<Button>("close");
 
             _closeBtn.clicked += CloseMainPopUpWindow;

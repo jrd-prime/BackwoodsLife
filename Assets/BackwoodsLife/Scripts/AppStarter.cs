@@ -6,6 +6,7 @@ using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.GameScene;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
+using BackwoodsLife.Scripts.Framework.Provider.Recipe;
 using Cysharp.Threading.Tasks;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
@@ -25,12 +26,14 @@ namespace BackwoodsLife.Scripts
         private ILoadingOperation _dbManager;
         private GameSceneManager _gameSceneManager;
         private GameDataManager _gameDataManager;
+        private IRecipeProvider _recipeProvider;
 
         [Inject]
         private void Construct(IObjectResolver container)
         {
             _loader = container.Resolve<ILoader>();
             _configManager = container.Resolve<IConfigManager>();
+            _recipeProvider = container.Resolve<IRecipeProvider>();
             _dbManager = container.Resolve<IDBManager>();
             _gameSceneManager = container.Resolve<GameSceneManager>();
             _audioManager = container.Resolve<IAudioManager>();
@@ -55,6 +58,7 @@ namespace BackwoodsLife.Scripts
 
             // Adding and initializing services
             _loader.AddServiceToInitialize(_configManager);
+            _loader.AddServiceToInitialize(_recipeProvider);
             _loader.AddServiceToInitialize(_audioManager);
             _loader.AddServiceToInitialize(_assetProvider);
             _loader.AddServiceToInitialize(_dbManager);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using BackwoodsLife.Scripts.Data.Common.Structs.Item;
 using BackwoodsLife.Scripts.Data.Common.Structs.Required;
 using BackwoodsLife.Scripts.Data.Const;
@@ -175,6 +176,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
     public struct UseAction
     {
         public EUseType useType;
+        public EProductionLevel useActionLevel;
     }
 
     public enum EUseType

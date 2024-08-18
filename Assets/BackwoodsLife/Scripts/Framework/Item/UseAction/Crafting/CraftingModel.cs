@@ -1,15 +1,24 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Framework.Provider.Recipe;
 using R3;
+using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 {
     public class CraftingModel : IUseActionModel<CraftingPanelData>, ICraftingReactive
     {
+        private IRecipeProvider _recipeProvider;
         public ReactiveProperty<PanelDescriptionData> DescriptionPanelData { get; } = new();
         public ReactiveProperty<CraftingInfoPanelData> InfoPanelData { get; } = new();
         public ReactiveProperty<CraftingItemsPanelData> ItemsPanelData { get; } = new();
         public ReactiveProperty<CraftingProcessPanelData> ProcessPanelData { get; } = new();
+
+        [Inject]
+        private void Construct(IRecipeProvider recipeProvider)
+        {
+            _recipeProvider = recipeProvider;
+        }
 
         public PanelDescriptionData GetDescriptionData(SWorldItemConfig worldItemConfig)
         {
@@ -38,23 +47,21 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 
         private CraftingItemsPanelData GetItemsPanelData(SWorldItemConfig worldItemConfig)
         {
+            // foreach (var VARIABLE in worldItemConfig.)
+            // {
+            // }
 
-            foreach (var VARIABLE in worldItemConfig.)
+            var List = new List<CraftingItemData>();
+
+            foreach (var recipe in _recipeProvider.GetAllRecipes())
             {
-                
+                List.Add(new CraftingItemData { Title = recipe.Value.recipeData.returnedItem.item.itemName });
             }
-            
-            
+
+
             return new CraftingItemsPanelData
             {
-                Items = new List<CraftingItemData>()
-                {
-                    new CraftingItemData
-                    {
-                     
-                    }
-                    
-                }
+                Items = List
             };
         }
 

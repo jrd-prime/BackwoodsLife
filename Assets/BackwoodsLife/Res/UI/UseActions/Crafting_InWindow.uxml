@@ -2,26 +2,25 @@
     <ui:Template name="req-item-template" src="project://database/Assets/BackwoodsLife/Res/UI/UseActions/req-item-template.uxml?fileID=9197481963319205126&amp;guid=c410b869b6ff423498af19476902f342&amp;type=3#req-item-template" />
     <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/build-panel.uss?fileID=7433441132597879392&amp;guid=a873d28cbeb18ef45aae7d638cad659f&amp;type=3#build-panel" />
     <Style src="project://database/Assets/BackwoodsLife/Res/UI/USS/in-window-panel.uss?fileID=7433441132597879392&amp;guid=01eb85a0cbd9db44489743b2cc0e50e9&amp;type=3#in-window-panel" />
-    <ui:VisualElement name="Crafting_InWindow" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
-        <ui:VisualElement name="crafting-container" style="flex-grow: 1; width: 402px; position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
-            <ui:VisualElement name="craft-info" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 150px; bottom: auto; height: 100px;">
-                <ui:VisualElement name="info" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; height: 60px;">
-                    <ui:VisualElement name="icon-head-container" style="flex-grow: 1; position: absolute; left: 0; top: 0; bottom: 0; width: 60px; height: 60px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-left-color: rgba(0, 0, 0, 0.13); border-right-color: rgba(0, 0, 0, 0.13); border-top-color: rgba(0, 0, 0, 0.13); border-bottom-color: rgba(0, 0, 0, 0.13);">
-                        <ui:VisualElement name="icon" style="flex-grow: 1; width: 32px; height: 32px; position: absolute; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-image: url(&quot;project://database/Assets/BackwoodsLife/Res/Images/Icons/Tool/knife-icon.png?fileID=21300000&amp;guid=f5cd43095f9e58f4c8fc8df42280139d&amp;type=3#knife-icon&quot;); left: 10px; top: 0; bottom: auto;" />
-                        <ui:Label tabindex="-1" text="not set" parse-escape-sequences="true" display-tooltip-when-elided="true" name="head" style="position: absolute; top: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 20px; font-size: 10px; width: 60px; align-items: center; -unity-text-align: middle-center;" />
-                    </ui:VisualElement>
-                    <ui:Label tabindex="-1" text="Not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set" parse-escape-sequences="true" display-tooltip-when-elided="true" name="desc" style="position: absolute; left: 72px; top: 0; right: 0; bottom: 0; margin-top: 0; margin-right: 12px; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 8px; white-space: normal; -unity-paragraph-spacing: 0; -unity-text-outline-width: 0; -unity-text-align: middle-left;" />
+    <ui:VisualElement name="crafting-container" style="flex-grow: 1; width: 402px; position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.47);">
+        <ui:VisualElement name="craft-info" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 150px; bottom: auto; height: 100px;">
+            <ui:VisualElement name="info" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; height: 60px;">
+                <ui:VisualElement name="icon-head-container" style="flex-grow: 1; position: absolute; left: 0; top: 0; bottom: 0; width: 60px; height: 60px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-left-color: rgba(0, 0, 0, 0.13); border-right-color: rgba(0, 0, 0, 0.13); border-top-color: rgba(0, 0, 0, 0.13); border-bottom-color: rgba(0, 0, 0, 0.13);">
+                    <ui:VisualElement name="icon" style="flex-grow: 1; width: 32px; height: 32px; position: absolute; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-image: url(&quot;project://database/Assets/BackwoodsLife/Res/Images/Icons/Tool/knife-icon.png?fileID=21300000&amp;guid=f5cd43095f9e58f4c8fc8df42280139d&amp;type=3#knife-icon&quot;); left: 10px; top: 0; bottom: auto;" />
+                    <ui:Label tabindex="-1" text="not set" parse-escape-sequences="true" display-tooltip-when-elided="true" name="head" style="position: absolute; top: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 20px; font-size: 10px; width: 60px; align-items: center; -unity-text-align: middle-center;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="req-list-container" style="flex-grow: 1; height: 32px; position: absolute; top: 60px; left: 0; right: 0; bottom: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; flex-direction: row; align-items: center; justify-content: center; align-self: center;">
-                    <ui:Instance template="req-item-template" name="req-item-template" />
-                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="Not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set not set" parse-escape-sequences="true" display-tooltip-when-elided="true" name="desc" style="position: absolute; left: 72px; top: 0; right: 0; bottom: 0; margin-top: 0; margin-right: 12px; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 8px; white-space: normal; -unity-paragraph-spacing: 0; -unity-text-outline-width: 0; -unity-text-align: middle-left;" />
             </ui:VisualElement>
-            <ui:VisualElement name="craft-list" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; top: 100px; right: 162px; background-color: rgba(73, 164, 160, 0.13);">
-                <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
+            <ui:VisualElement name="req-list-container" style="flex-grow: 1; height: 32px; position: absolute; top: 60px; left: 0; right: 0; bottom: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; flex-direction: row; align-items: center; justify-content: center; align-self: center;">
+                <ui:Instance template="req-item-template" name="req-item-template" />
             </ui:VisualElement>
-            <ui:VisualElement name="craft-process" style="flex-grow: 1; position: absolute; top: 0; right: 0; bottom: 0; width: 150px; background-color: rgba(0, 0, 0, 0.13);">
-                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" />
-            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="craft-list" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; top: 100px; right: 162px; background-color: rgba(73, 164, 160, 0.13);">
+            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" name="scrl" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+        </ui:VisualElement>
+        <ui:VisualElement name="craft-process" style="flex-grow: 1; position: absolute; top: 0; right: 0; bottom: 0; width: 150px; background-color: rgba(0, 0, 0, 0.13);">
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

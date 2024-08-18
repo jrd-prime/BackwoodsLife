@@ -1,9 +1,11 @@
-﻿using R3;
+﻿using BackwoodsLife.Scripts.Framework.Extensions;
+using BackwoodsLife.Scripts.Framework.Item.UseAction;
+using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
+using R3;
 using UnityEngine;
 using UnityEngine.UIElements;
-using NotImplementedException = System.NotImplementedException;
 
-namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
+namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
 {
     public class CraftingView : CustomUseActionViewBase<CraftingViewModel>
     {
@@ -36,7 +38,12 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 
             // List
             var items = container.Q<VisualElement>("craft-list");
-            _scrollContainer = items.Q<VisualElement>("unity-content-container");
+            items.ToAbsolute();
+            items.style.backgroundColor = new StyleColor(new Color(0.7f, 0.1f, 0.6f, 1f));
+
+            _scrollContainer = items.Q<ScrollView>("scrl").Q<VisualElement>("unity-content-container");
+
+            _scrollContainer.style.backgroundColor = new StyleColor(new Color(0.5f, 0.5f, 0.5f, 1f));
 
             // Process
             var process = container.Q<VisualElement>("craft-process");
@@ -54,7 +61,10 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
         {
             foreach (var item in craftingItemData.Items)
             {
+                Debug.LogWarning(item);
+
                 var itemElement = requiredItemTemplate.Instantiate();
+                itemElement.Q<Label>("head").text = item.Title;
                 itemElement.style.backgroundImage = new StyleBackground(item.Icon);
                 _scrollContainer.Add(itemElement);
             }

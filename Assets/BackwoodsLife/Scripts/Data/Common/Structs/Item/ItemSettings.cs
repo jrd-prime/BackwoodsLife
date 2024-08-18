@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using BackwoodsLife.Scripts.Data.Common.Enums.Items;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Data.Common.Structs.Item
 {
     [Serializable]
     public struct CraftItemSetting<T> where T : SGameItemConfig
     {
-        public ECraftingType craftingType;
+        [FormerlySerializedAs("craftingType")] public EProductionType productionType;
         [Range(30, 10800)] public int craftingTime; // 30sec => 3h
         public List<ItemDataWithConfig<T>> recipeForOneItem;
     }

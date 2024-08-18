@@ -13,6 +13,7 @@ using BackwoodsLife.Scripts.Framework.Manager.GameData;
 using BackwoodsLife.Scripts.Framework.Manager.Input;
 using BackwoodsLife.Scripts.Framework.Manager.SaveLoad;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
+using BackwoodsLife.Scripts.Framework.Provider.Recipe;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
@@ -69,6 +70,7 @@ namespace BackwoodsLife.Scripts.Framework.Scope
             // Services
             builder.Register<ConfigManager>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register(typeof(AssetProvider), Lifetime.Singleton).As<IAssetProvider>();
+            builder.Register(typeof(RecipeProvider), Lifetime.Singleton).As<IRecipeProvider>();
             builder.Register(typeof(DBManager), Lifetime.Singleton).As<IDBManager>();
             builder.Register(typeof(DataBase), Lifetime.Singleton).As<IDataBase>();
             builder.Register(typeof(SaveAndLoadManager), Lifetime.Singleton).As<ISaveAndLoadManager>();

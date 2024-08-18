@@ -49,3 +49,10 @@ MonoBehaviour:
     placeItems:
     - config: {fileID: 11400000, guid: 369ee61514a13e84a8242ba0356f0891, type: 2}
     - config: {fileID: 11400000, guid: 8b58d836a6945e14ca26c812e491f824, type: 2}
+  recipeItemsList:
+    recipeSimpleList:
+    - recipe: {fileID: 11400000, guid: f49b17309e5c63b4a942f9d27fee5727, type: 2}
+    recipeAdvancedList:
+    - recipe: {fileID: 11400000, guid: 9a170a1ebd4422b4d93938f48ef6f25c, type: 2}
+    recipeExpertList:
+    - recipe: {fileID: 11400000, guid: cf8983e4f92321848bac451063bd1ac6, type: 2}

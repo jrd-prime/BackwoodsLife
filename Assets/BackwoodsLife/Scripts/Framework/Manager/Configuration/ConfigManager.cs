@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.Game;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items.World;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items.Recipe;
 using BackwoodsLife.Scripts.Data.Scriptable.Settings;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -15,6 +16,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
         public string Description => "Config Manager";
         public Dictionary<Type, object> ConfigsCache { get; private set; }
         public Dictionary<string, SItemConfig> ItemsConfigCache { get; } = new();
+        public Dictionary<string, SRecipe> RecipesConfigCache { get; } = new();
 
         private SMainConfig _mainConfig;
 
@@ -48,6 +50,16 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
             AddToItemsCache(_mainConfig.WorldItemsList.placeItems);
             AddToItemsCache(_mainConfig.WorldItemsList.collectableItems);
             AddToItemsCache(_mainConfig.WorldItemsList.buildingItems);
+
+            AddToRecipesCache(_mainConfig.recipeItemsList.recipeSimpleList);
+            AddToRecipesCache(_mainConfig.recipeItemsList.recipeAdvancedList);
+            AddToRecipesCache(_mainConfig.recipeItemsList.recipeExpertList);
+        }
+
+        private void AddToRecipesCache<T>(List<CustomRecipe<T>> items) where T : SRecipe
+        {
+            foreach (var item in items)
+                RecipesConfigCache.Add(item.recipe.recipeData.returnedItem.item.itemName, item.recipe);
         }
 
         private void AddToItemsCache<T>(List<CustomItemConfig<T>> items) where T : SItemConfig
@@ -69,6 +81,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
         {
             return ConfigsCache[typeof(T)] as T;
         }
+
+        public RecipeItemsList GetRecipeItemsList() => _mainConfig.recipeItemsList;
 
         public T GetItemConfig<T>(string elementTypeName) where T : SItemConfig
         {
