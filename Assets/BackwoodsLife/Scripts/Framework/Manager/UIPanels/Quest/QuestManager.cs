@@ -7,18 +7,17 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
-using CompositeDisposable = R3.CompositeDisposable;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.Quest
 {
     public class QuestManager : IInitializable
     {
+        public List<QuestConfig> Quests { get; } = new(); //TODO remove
+
         private UIButtonsController _uiButtonsController;
-        private readonly CompositeDisposable _disposable = new();
         private UIFrameController _uiFrameController;
         private PanelUIController _panelUIController;
-
-        public List<QuestConfig> Quests { get; set; } = new(); //TODO remove>
+        private readonly CompositeDisposable _disposable = new();
 
         [Inject]
         private void Construct(UIFrameController uiFrameController, UIButtonsController uiButtonsController,
@@ -28,7 +27,6 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.Quest
             _uiFrameController = uiFrameController;
             _panelUIController = panelUIController;
         }
-
 
         public void Initialize()
         {
@@ -49,8 +47,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.Quest
             Quests.Add(new QuestConfig { id = 15, title = "Collect: Cooked fish ", });
             Quests.Add(new QuestConfig { id = 16, title = "Eat cooked fish", });
             Quests.Add(new QuestConfig { id = 17, title = "Sleep - energy restore x2", });
-
-
+            
             _uiButtonsController.QuestButtonClicked
                 .Subscribe(_ => { QuestButtonClicked(); })
                 .AddTo(_disposable);
@@ -59,19 +56,16 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.Quest
         private void QuestButtonClicked()
         {
             Debug.LogWarning("Quest clicked");
-            
             _uiFrameController.ShowMainPopUpWindowWithScroll(FillInWindowQuests());
         }
 
         private TemplateContainer FillInWindowQuests()
         {
             var controller = _panelUIController.GetController<QuestPanelUI>();
-
             var uiTemplate = controller.GetTemplateFor("InWindow");
             var templateContainer = uiTemplate.Instantiate();
 
             templateContainer.ToAbsolute();
-
 
             var questItemTemplate = controller.GetTemplateFor("QuestItem");
             var scrollView = templateContainer.Q<ScrollView>("iwp-scroll-view")
@@ -86,9 +80,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.Quest
                 scrollView.Add(questItem);
             }
 
-
             return templateContainer;
         }
     }
-
 }

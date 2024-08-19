@@ -6,7 +6,10 @@ using UnityEngine.UIElements;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 {
-    public class FramePopUpWindow : UIFrameView<EMainPopUpSubFrame>, IUIFrame
+    /// <summary>
+    /// Фрейм, содержащий основное окно в котором есть панели: desc-container и main-container. И кнопку закрытия окна
+    /// </summary>
+    public class PopUpWindowFrame : UIFrameView<EMainPopUpSubFrame>, IUIFrame
     {
         private Label title;
 
@@ -21,8 +24,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             SubFrames[EMainPopUpSubFrame.Root] = Root;
             SubFrames[EMainPopUpSubFrame.Description] = desc;
             SubFrames[EMainPopUpSubFrame.Main] = main;
-
-
+            
             title = desc.Q<Label>("head-label");
         }
 

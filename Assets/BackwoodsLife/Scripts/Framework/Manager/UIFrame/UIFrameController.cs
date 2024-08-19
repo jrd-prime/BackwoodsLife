@@ -1,11 +1,12 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
+using BackwoodsLife.Scripts.Framework.Item.UseAction;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
-
 {
     [RequireComponent(typeof(UIDocument))]
     public class UIFrameController : MonoBehaviour
@@ -13,10 +14,12 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
         [SerializeField] private VisualTreeAsset uiFrameAsset;
         [SerializeField] private FrameMain frameMainAsset;
         [SerializeField] private FramePopUp framePopUpAsset;
-        [SerializeField] private FramePopUpWindow framePopUpWindow;
+
+        [FormerlySerializedAs("popUpWindowFrame")] [FormerlySerializedAs("framePopUpWindow")] [SerializeField]
+        private PopUpWindowFrame popUpWindow;
 
         public Action OnCloseButtonClicked;
-        
+
         private VisualElement _mu;
         private VisualElement _pu;
         private UIDocument uiDocument;
@@ -33,46 +36,41 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             uiDocument = GetComponent<UIDocument>();
         }
 
-        // TODO generic
-        public IUIFrame GetFrame(EUIFrame frame)
+        public void ShowPopUpWindow(PanelDescriptionData panelDescriptionData, TemplateContainer filledContent)
         {
-            return frame switch
-            {
-                EUIFrame.Main => frameMainAsset,
-                EUIFrame.PopUp => framePopUpAsset,
-                EUIFrame.MainPopUpWindow => framePopUpWindow,
-                _ => throw new ArgumentOutOfRangeException(nameof(frame), frame, null)
-            };
+            popUpWindow.Show();
         }
 
-        public FramePopUp GetPopUpFrame() => framePopUpAsset;
+        public void HidePopUpWindow() => popUpWindow.Hide();
+
+
         public FrameMain GetMainFrame() => frameMainAsset;
-        public FramePopUpWindow GetPopUpWindowFrame() => framePopUpWindow;
+        public FramePopUp GetPopUpFrame() => framePopUpAsset;
 
         public void ShowMainPopUpWindowWithScroll(TemplateContainer instantiate)
         {
-            var root = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Root);
+            var root = popUpWindow.GetSubFrame1(EMainPopUpSubFrame.Root);
             Debug.LogWarning(root);
-            var fp = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Main);
+            var fp = popUpWindow.GetSubFrame1(EMainPopUpSubFrame.Main);
 
             _closeBtn = root.Q<Button>("close");
 
             _closeBtn.clicked += CloseMainPopUpWindow;
 
             fp.Add(instantiate);
-            framePopUpWindow.Show();
+            popUpWindow.Show();
         }
 
         private void CloseMainPopUpWindow()
         {
             OnCloseButtonClicked.Invoke();
-            framePopUpWindow.Hide();
+            popUpWindow.Hide();
             _closeBtn.clicked -= CloseMainPopUpWindow;
         }
 
         public void ShowMainPopUpWindow(TemplateContainer instantiate)
         {
-            var fp = framePopUpWindow.GetSubFrame1(EMainPopUpSubFrame.Description);
+            var fp = popUpWindow.GetSubFrame1(EMainPopUpSubFrame.Description);
             var ap = fp.Q<VisualElement>("in-window-container");
 
             _closeBtn = fp.Q<Button>("close");
@@ -80,7 +78,10 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             _closeBtn.clicked += CloseMainPopUpWindow;
 
             ap.Add(instantiate);
-            framePopUpWindow.Show();
+            popUpWindow.Show();
         }
+
+        public void SetDescriptionToPopUpWindow(PanelDescriptionData panelDescriptionData) =>
+            popUpWindow.SetDescription(panelDescriptionData);
     }
 }

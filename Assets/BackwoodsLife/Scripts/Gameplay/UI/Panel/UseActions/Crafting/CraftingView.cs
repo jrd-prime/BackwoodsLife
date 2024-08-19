@@ -17,7 +17,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
         private Label _infoHead;
         private Label _infoDesc;
         private VisualElement _requiredItems;
-        private VisualElement _scrollContainer;
+        private VisualElement _itemsContainer;
 
         protected override void InitializeElementsRefs()
         {
@@ -26,6 +26,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
             ViewModel.ProcessPanelData.Subscribe(SetProcessPanelData).AddTo(Disposables);
 
             Panel = mainTemplate.Instantiate();
+            Panel.ToAbsolute();
 
             var container = Panel.Q<VisualElement>("crafting-container");
 
@@ -38,12 +39,11 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
 
             // List
             var items = container.Q<VisualElement>("craft-list");
-            items.ToAbsolute();
-            items.style.backgroundColor = new StyleColor(new Color(0.7f, 0.1f, 0.6f, 1f));
 
-            _scrollContainer = items.Q<ScrollView>("scrl").Q<VisualElement>("unity-content-container");
+            _itemsContainer = items.Q<VisualElement>("items-container");
+            _itemsContainer.Clear();
+            // _itemsContainer.style.backgroundColor = new StyleColor(new Color(1, 1, 1, 1));
 
-            _scrollContainer.style.backgroundColor = new StyleColor(new Color(0.5f, 0.5f, 0.5f, 1f));
 
             // Process
             var process = container.Q<VisualElement>("craft-process");
@@ -52,6 +52,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
 
         private void SetInfoPanelData(CraftingInfoPanelData craftingInfoPanelData)
         {
+            Debug.LogWarning("SetInfoPanelData");
             _infoHead.text = craftingInfoPanelData.Title;
             _infoDesc.text = craftingInfoPanelData.Description;
             _infoIcon.style.backgroundImage = new StyleBackground(craftingInfoPanelData.Icon);
@@ -59,20 +60,54 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
 
         private void SetItemsPanelData(CraftingItemsPanelData craftingItemData)
         {
+            Debug.LogWarning("SetItemsPanelData");
             foreach (var item in craftingItemData.Items)
             {
                 Debug.LogWarning(item);
 
                 var itemElement = requiredItemTemplate.Instantiate();
+                itemElement.style.marginBottom = new StyleLength(20f);
+                itemElement.style.marginLeft = new StyleLength(20f);
+                itemElement.style.marginRight = new StyleLength(20f);
+                itemElement.style.marginTop = new StyleLength(20f);
                 itemElement.Q<Label>("head").text = item.Title;
                 itemElement.style.backgroundImage = new StyleBackground(item.Icon);
-                _scrollContainer.Add(itemElement);
+                _itemsContainer.Add(itemElement);
+            }
+
+            foreach (var item in craftingItemData.Items)
+            {
+                Debug.LogWarning(item);
+
+                var itemElement = requiredItemTemplate.Instantiate();
+                itemElement.style.marginBottom = new StyleLength(20f);
+                itemElement.style.marginLeft = new StyleLength(20f);
+                itemElement.style.marginRight = new StyleLength(20f);
+                itemElement.style.marginTop = new StyleLength(20f);
+                itemElement.Q<Label>("head").text = item.Title;
+                itemElement.style.backgroundImage = new StyleBackground(item.Icon);
+                _itemsContainer.Add(itemElement);
+            }
+
+            foreach (var item in craftingItemData.Items)
+            {
+                Debug.LogWarning(item);
+
+                var itemElement = requiredItemTemplate.Instantiate();
+                itemElement.style.marginBottom = new StyleLength(20f);
+                itemElement.style.marginLeft = new StyleLength(20f);
+                itemElement.style.marginRight = new StyleLength(20f);
+                itemElement.style.marginTop = new StyleLength(20f);
+                itemElement.Q<Label>("head").text = item.Title;
+                itemElement.style.backgroundImage = new StyleBackground(item.Icon);
+                _itemsContainer.Add(itemElement);
             }
         }
 
 
         private void SetProcessPanelData(CraftingProcessPanelData craftingProcessPanelData)
         {
+            Debug.LogWarning("SetProcessPanelData");
             _processTitle.text = "Crafting process";
         }
 

@@ -1,17 +1,13 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
-using BackwoodsLife.Scripts.Gameplay.UI;
 using R3;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction
 {
-    public abstract class UseActionViewBase : UIView, IUseActionView
-    {
-    }
-
     public abstract class CustomUseActionViewBase<TViewModel> : UseActionViewBase
         where TViewModel : UseActionViewModelBase
     {
@@ -23,11 +19,9 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
         protected TViewModel ViewModel;
         protected UIFrameController UIFrameController;
         protected TemplateContainer Panel;
+        protected readonly CompositeDisposable Disposables = new();
 
         protected abstract void InitializeElementsRefs();
-
-        private FramePopUpWindow _frame;
-        protected readonly CompositeDisposable Disposables = new();
 
         [Inject]
         private void Construct(TViewModel viewModel, UIFrameController uiFrameController)
@@ -39,12 +33,14 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
 
         private void Awake()
         {
-            Debug.LogWarning("Custom use action view AWAKE: " + ViewModel.Description);
-            _frame = UIFrameController.GetPopUpWindowFrame();
+            Assert.IsNotNull(ViewModel, "ViewModel is null");
+            Assert.IsNotNull(UIFrameController, "UIFrameController is null");
+
             UIFrameController.OnCloseButtonClicked += OnCloseButtonClicked;
 
-            ViewModel.IsPanelActive.Skip(1)
-                .Subscribe(x => Show(x))
+            ViewModel.IsPanelActive
+                .Skip(1)
+                .Subscribe(Show)
                 .AddTo(Disposables);
 
             ViewModel.DescriptionPanelData
@@ -52,20 +48,11 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
                 .Subscribe(x =>
                 {
                     Debug.LogWarning("<color=green>Use action view base. Desc panel</color>");
-                    FillDescription(x);
+                    UIFrameController.SetDescriptionToPopUpWindow(x);
                 })
                 .AddTo(Disposables);
 
-            
-            
-            ViewModel.SetMainTemplate(mainTemplate);
-
             InitializeElementsRefs();
-        }
-
-        private void FillDescription(PanelDescriptionData panelDescriptionData)
-        {
-            _frame.SetDescription(panelDescriptionData);
         }
 
         protected void Show(bool s)
@@ -74,14 +61,12 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
             if (!s) return;
             if (Panel == null) throw new NullReferenceException("Panel is null");
             UIFrameController.ShowMainPopUpWindowWithScroll(Panel);
-            // UIFrameController.ShowMainPopUpWindow(templateContainer);
             Debug.LogWarning("<color=green>" + ViewModel.Description + "</color>");
         }
 
         protected virtual void OnCloseButtonClicked()
         {
             Debug.LogWarning("OnCloseButtonClicked callback in use action VIEW");
-            Debug.LogWarning(ViewModel + " view model ");
             ViewModel.OnCloseButtonClicked();
         }
 
