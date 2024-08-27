@@ -3169,6 +3169,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 6864131748059341059, guid: ee9c4332412fe3949a5bca16f60611c7,
         type: 3}
+      propertyPath: recipeTemplate
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: e108a1a97aead214592d3106c24879e9,
+        type: 3}
+    - target: {fileID: 6864131748059341059, guid: ee9c4332412fe3949a5bca16f60611c7,
+        type: 3}
       propertyPath: requiredItemTemplate
       value: 
       objectReference: {fileID: 9197481963319205126, guid: c410b869b6ff423498af19476902f342,

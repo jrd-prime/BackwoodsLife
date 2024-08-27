@@ -3,6 +3,7 @@ using BackwoodsLife.Scripts.Framework.Item.UseAction;
 using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
 using R3;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 
 namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
@@ -10,6 +11,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
     public class CraftingView : CustomUseActionViewBase<CraftingViewModel>
     {
         [SerializeField] private VisualTreeAsset requiredItemTemplate;
+        [SerializeField] private VisualTreeAsset recipeTemplate;
 
         //TODO add items list template
         private Label _processTitle;
@@ -21,12 +23,16 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
 
         protected override void InitializeElementsRefs()
         {
+            Assert.IsNotNull(requiredItemTemplate, "requiredItemTemplate is null");
+            Assert.IsNotNull(recipeTemplate, "recipeTemplate is null");
+
             ViewModel.InfoPanelData.Subscribe(SetInfoPanelData).AddTo(Disposables);
             ViewModel.ItemsPanelData.Subscribe(SetItemsPanelData).AddTo(Disposables);
             ViewModel.ProcessPanelData.Subscribe(SetProcessPanelData).AddTo(Disposables);
 
             Panel = mainTemplate.Instantiate();
             Panel.ToAbsolute();
+
 
             var container = Panel.Q<VisualElement>("crafting-container");
 
@@ -61,46 +67,22 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
         private void SetItemsPanelData(CraftingItemsPanelData craftingItemData)
         {
             Debug.LogWarning("SetItemsPanelData");
-            foreach (var item in craftingItemData.Items)
+
+            for (int i = 0; i < 4; i++)
             {
-                Debug.LogWarning(item);
+                foreach (var item in craftingItemData.Items)
+                {
+                    Debug.LogWarning(item);
 
-                var itemElement = requiredItemTemplate.Instantiate();
-                itemElement.style.marginBottom = new StyleLength(20f);
-                itemElement.style.marginLeft = new StyleLength(20f);
-                itemElement.style.marginRight = new StyleLength(20f);
-                itemElement.style.marginTop = new StyleLength(20f);
-                itemElement.Q<Label>("head").text = item.Title;
-                itemElement.style.backgroundImage = new StyleBackground(item.Icon);
-                _itemsContainer.Add(itemElement);
-            }
-
-            foreach (var item in craftingItemData.Items)
-            {
-                Debug.LogWarning(item);
-
-                var itemElement = requiredItemTemplate.Instantiate();
-                itemElement.style.marginBottom = new StyleLength(20f);
-                itemElement.style.marginLeft = new StyleLength(20f);
-                itemElement.style.marginRight = new StyleLength(20f);
-                itemElement.style.marginTop = new StyleLength(20f);
-                itemElement.Q<Label>("head").text = item.Title;
-                itemElement.style.backgroundImage = new StyleBackground(item.Icon);
-                _itemsContainer.Add(itemElement);
-            }
-
-            foreach (var item in craftingItemData.Items)
-            {
-                Debug.LogWarning(item);
-
-                var itemElement = requiredItemTemplate.Instantiate();
-                itemElement.style.marginBottom = new StyleLength(20f);
-                itemElement.style.marginLeft = new StyleLength(20f);
-                itemElement.style.marginRight = new StyleLength(20f);
-                itemElement.style.marginTop = new StyleLength(20f);
-                itemElement.Q<Label>("head").text = item.Title;
-                itemElement.style.backgroundImage = new StyleBackground(item.Icon);
-                _itemsContainer.Add(itemElement);
+                    var itemElement = recipeTemplate.Instantiate();
+                    // itemElement.style.marginBottom = new StyleLength(20f);
+                    // itemElement.style.marginLeft = new StyleLength(20f);
+                    // itemElement.style.marginRight = new StyleLength(20f);
+                    // itemElement.style.marginTop = new StyleLength(20f);
+                    itemElement.Q<Label>("head").text = item.Title;
+                    itemElement.style.backgroundImage = new StyleBackground(item.Icon);
+                    _itemsContainer.Add(itemElement);
+                }
             }
         }
 
