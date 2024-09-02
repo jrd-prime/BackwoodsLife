@@ -47,18 +47,13 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 
         private CraftingItemsPanelData GetItemsPanelData(SWorldItemConfig worldItemConfig)
         {
-            // foreach (var VARIABLE in worldItemConfig.)
-            // {
-            // }
-
             var List = new List<CraftingItemData>();
 
             foreach (var recipe in _recipeProvider.GetAllRecipes())
             {
                 List.Add(new CraftingItemData { Title = recipe.Value.recipeData.returnedItem.item.itemName });
             }
-
-
+            
             return new CraftingItemsPanelData
             {
                 Items = List

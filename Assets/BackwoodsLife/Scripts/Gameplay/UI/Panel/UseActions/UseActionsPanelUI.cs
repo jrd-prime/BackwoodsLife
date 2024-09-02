@@ -75,6 +75,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions
             _cachedPanel = null;
         }
 
+        //TODO DRY (CraftingView.cs)
         private void SubscribeButton(Action<UseAction> selectedUseActionCallback, UseAction useAction, Button button)
         {
             EventCallback<ClickEvent> callback = _ => { selectedUseActionCallback.Invoke(useAction); };
@@ -82,6 +83,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions
             _buttonsCacheTuple.Add((button, callback));
         }
 
+        //TODO DRY (CraftingView.cs)
         private void UnSubscribeButtons()
         {
             Debug.LogWarning("Unsubscribe buttons");

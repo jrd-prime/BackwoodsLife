@@ -1,11 +1,8 @@
 ﻿using System;
-using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
-using BackwoodsLife.Scripts.Framework.Item.UseAction.sort;
 using R3;
 using UnityEngine;
-using UnityEngine.UIElements;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction

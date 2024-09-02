@@ -1,9 +1,7 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
-using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 {
@@ -13,22 +11,28 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
         public ReactiveProperty<CraftingInfoPanelData> InfoPanelData => Model.InfoPanelData;
         public ReactiveProperty<CraftingItemsPanelData> ItemsPanelData => Model.ItemsPanelData;
         public ReactiveProperty<CraftingProcessPanelData> ProcessPanelData => Model.ProcessPanelData;
+        public Action<string> OnRecipeButtonClicked { get; private set; }
 
-        public async override void Activate(SUseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback)
+        public override async void Activate(SUseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback)
         {
             Debug.LogWarning($"Crafting action activated: {itemConfig.itemName}");
 
+            OnRecipeButtonClicked += RecipeButtonClicked;
             OnCompleteUseActionCallback = onCompleteUseActionCallback;
-
             // await UniTask.Delay(3333);
-
             Model.SetDataTo(itemConfig);
             IsPanelActive.Value = true;
+        }
+
+        private void RecipeButtonClicked(string obj)
+        {
+            Debug.LogWarning("RecipeButtonClicked callback in use action VIEW MODEL " + obj);
         }
 
         public override void Deactivate()
         {
             Debug.LogWarning("Crafting action deactivated");
+            OnRecipeButtonClicked -= RecipeButtonClicked;
             IsPanelActive.Value = false;
         }
 
