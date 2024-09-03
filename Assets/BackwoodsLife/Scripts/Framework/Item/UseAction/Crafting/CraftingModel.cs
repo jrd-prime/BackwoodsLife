@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Framework.Manager.Configuration;
+using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using BackwoodsLife.Scripts.Framework.Provider.Recipe;
 using R3;
 using VContainer;
@@ -9,15 +11,21 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
     public class CraftingModel : IUseActionModel<CraftingPanelData>, ICraftingReactive
     {
         private IRecipeProvider _recipeProvider;
+        private IConfigManager _configManager;
+        private IAssetProvider _assetProvider;
+
         public ReactiveProperty<PanelDescriptionData> DescriptionPanelData { get; } = new();
-        public ReactiveProperty<CraftingInfoPanelData> InfoPanelData { get; } = new();
+        public ReactiveProperty<RecipeInfoData> SelectedRecipePanelData { get; } = new();
         public ReactiveProperty<CraftingItemsPanelData> ItemsPanelData { get; } = new();
         public ReactiveProperty<CraftingProcessPanelData> ProcessPanelData { get; } = new();
 
         [Inject]
-        private void Construct(IRecipeProvider recipeProvider)
+        private void Construct(IRecipeProvider recipeProvider, IConfigManager configManager,
+            IAssetProvider assetProvider)
         {
             _recipeProvider = recipeProvider;
+            _configManager = configManager;
+            _assetProvider = assetProvider;
         }
 
         public PanelDescriptionData GetDescriptionData(SWorldItemConfig worldItemConfig)
@@ -33,7 +41,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
         public void SetDataTo(SWorldItemConfig worldItemConfig)
         {
             DescriptionPanelData.Value = GetDescriptionData(worldItemConfig);
-            InfoPanelData.Value = GetInfoPanelData(worldItemConfig);
+            SelectedRecipePanelData.Value = GetInfoPanelData(worldItemConfig);
             ItemsPanelData.Value = GetItemsPanelData(worldItemConfig);
             ProcessPanelData.Value = GetProcessPanelData(worldItemConfig);
         }
@@ -47,22 +55,40 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 
         private CraftingItemsPanelData GetItemsPanelData(SWorldItemConfig worldItemConfig)
         {
-            var List = new List<CraftingItemData>();
+            var list = new List<CraftingItemData>();
 
             foreach (var recipe in _recipeProvider.GetAllRecipes())
             {
-                List.Add(new CraftingItemData { Title = recipe.Value.recipeData.returnedItem.item.itemName });
+                list.Add(new CraftingItemData { Title = recipe.Value.recipeData.returnedItem.item.itemName });
             }
-            
+
             return new CraftingItemsPanelData
             {
-                Items = List
+                Items = list
             };
         }
 
-        private CraftingInfoPanelData GetInfoPanelData(SWorldItemConfig worldItemConfig)
+        private RecipeInfoData GetInfoPanelData(SWorldItemConfig worldItemConfig) =>
+            GetDataForRecipe(worldItemConfig.itemName);
+
+
+        public void SetSelectedRecipe(string recipeName) =>
+            SelectedRecipePanelData.Value = GetDataForRecipe(recipeName);
+
+
+        private RecipeInfoData GetDataForRecipe(string recipeName)
         {
-            return new CraftingInfoPanelData { Title = worldItemConfig.itemName, Description = "crafting description" };
+            var recipe = _recipeProvider.GetRecipeByName(recipeName);
+            var iconReference = _configManager.GetIconReference(recipe.recipeData.returnedItem.item.itemName);
+            var icon = _assetProvider.GetIconFromRef(iconReference);
+            
+            return new RecipeInfoData
+            {
+                Title = recipe.recipeData.returnedItem.item.itemName,
+                Description = recipe.recipeData.description,
+                Icon = icon,
+                Ingredients = recipe.recipeData.ingredients
+            };
         }
     }
 }

@@ -56,5 +56,14 @@ namespace BackwoodsLife.Scripts.Framework.Provider.Recipe
                 throw new KeyNotFoundException($"Recipe {elementTypeName} not found.");
             return recipe as T;
         }
+
+        public SRecipe GetRecipeByName(string recipeName)
+        {
+            _recipesLocalCache.TryGetValue(recipeName, out SRecipe recipe);
+            
+            if (recipe == null) throw new KeyNotFoundException($"Recipe data for: {recipeName} - not found.");
+            
+            return recipe;
+        }
     }
 }

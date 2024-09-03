@@ -12,5 +12,6 @@ namespace BackwoodsLife.Scripts.Framework.Provider.Recipe
         public IReadOnlyDictionary<string, SRecipeAdvanced> GetAllAdvancedRecipes();
         public IReadOnlyDictionary<string, SRecipeExpert> GetAllExpertRecipes();
         public T GetRecipe<T>(string elementTypeName) where T : SRecipe;
+        public SRecipe GetRecipeByName(string recipeName);
     }
 }

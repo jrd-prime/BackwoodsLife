@@ -30,7 +30,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
             Assert.IsNotNull(requiredItemTemplate, "requiredItemTemplate is null");
             Assert.IsNotNull(recipeTemplate, "recipeTemplate is null");
 
-            ViewModel.InfoPanelData.Subscribe(SetInfoPanelData).AddTo(Disposables);
+            ViewModel.SelectedRecipePanelData.Subscribe(SetInfoPanelData).AddTo(Disposables);
             ViewModel.ItemsPanelData.Subscribe(SetItemsPanelData).AddTo(Disposables);
             ViewModel.ProcessPanelData.Subscribe(SetProcessPanelData).AddTo(Disposables);
 
@@ -57,12 +57,12 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
             _processTitle = process.Q<Label>("title");
         }
 
-        private void SetInfoPanelData(CraftingInfoPanelData craftingInfoPanelData)
+        private void SetInfoPanelData(RecipeInfoData recipeInfoData)
         {
             Debug.LogWarning("SetInfoPanelData");
-            _infoHead.text = craftingInfoPanelData.Title;
-            _infoDesc.text = craftingInfoPanelData.Description;
-            _infoIcon.style.backgroundImage = new StyleBackground(craftingInfoPanelData.Icon);
+            _infoHead.text = recipeInfoData.Title;
+            _infoDesc.text = recipeInfoData.Description;
+            _infoIcon.style.backgroundImage = new StyleBackground(recipeInfoData.Icon);
         }
 
         private void SetItemsPanelData(CraftingItemsPanelData craftingItemData)

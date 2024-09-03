@@ -25,6 +25,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items.Recipe
     [Serializable]
     public struct ItemRecipeData
     {
+        public string description;
         public ItemDataWithConfig<SGameItemConfig> returnedItem;
         public List<ItemDataWithConfig<SGameItemConfig>> ingredients;
     }

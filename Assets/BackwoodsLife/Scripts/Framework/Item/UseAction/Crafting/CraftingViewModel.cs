@@ -8,7 +8,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
     public sealed class CraftingViewModel : CustomUseActionViewModel<CraftingModel>, ICraftingReactive
     {
         public override string Description => "Crafting";
-        public ReactiveProperty<CraftingInfoPanelData> InfoPanelData => Model.InfoPanelData;
+        public ReactiveProperty<RecipeInfoData> SelectedRecipePanelData => Model.SelectedRecipePanelData;
         public ReactiveProperty<CraftingItemsPanelData> ItemsPanelData => Model.ItemsPanelData;
         public ReactiveProperty<CraftingProcessPanelData> ProcessPanelData => Model.ProcessPanelData;
         public Action<string> OnRecipeButtonClicked { get; private set; }
@@ -24,9 +24,10 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
             IsPanelActive.Value = true;
         }
 
-        private void RecipeButtonClicked(string obj)
+        private void RecipeButtonClicked(string recipeName)
         {
-            Debug.LogWarning("RecipeButtonClicked callback in use action VIEW MODEL " + obj);
+            Debug.LogWarning("RecipeButtonClicked callback in use action VIEW MODEL " + recipeName);
+            Model.SetSelectedRecipe(recipeName);
         }
 
         public override void Deactivate()
@@ -39,7 +40,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
         public override void OnCloseButtonClicked()
         {
             Debug.LogWarning("OnCloseButtonClicked callback in use action VIEW MODEL");
-            Debug.LogWarning(OnCompleteUseActionCallback + " ????? ");
+            Debug.LogWarning("OnCompleteUseActionCallback: " + OnCompleteUseActionCallback);
             OnCompleteUseActionCallback?.Invoke();
         }
     }
