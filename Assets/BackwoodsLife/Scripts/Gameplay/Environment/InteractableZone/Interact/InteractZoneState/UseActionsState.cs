@@ -38,13 +38,12 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
             _useActionsPanelUI = container.Resolve<UseActionsPanelUI>();
         }
 
-        public UseActionsState(SUseAndUpgradeItem itemConfig,
-            Action<IInteractZoneState> interactZoneStateCallbackCallback)
+        public UseActionsState(SUseAndUpgradeItem itemConfig, Action<IInteractZoneState> interactZoneStateCallback)
         {
             Assert.IsNotNull(itemConfig, "itemConfig is null");
 
             _itemConfig = itemConfig;
-            _interactZoneStateCallback = interactZoneStateCallbackCallback;
+            _interactZoneStateCallback = interactZoneStateCallback;
             _selectedUseActionCallback += OnSelectedUseActionCallback;
             _onCompleteUseActionCallback += OnCompleteUseActionCallback;
         }
@@ -55,7 +54,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
         /// <param name="useAction"></param>
         private void OnSelectedUseActionCallback(UseAction useAction)
         {
-            Type t = useAction.useType switch
+            Type useActionType = useAction.useType switch
             {
                 // EUseType.Cooking => typeof(CookingActionViewModel),
                 // EUseType.PutItems => typeof(PutActionViewModel),
@@ -69,7 +68,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
             };
 
 
-            _selectedUseActionViewModel = _container.Resolve(t) as IUseActionViewModel;
+            _selectedUseActionViewModel = _container.Resolve(useActionType) as IUseActionViewModel;
             if (_selectedUseActionViewModel == null)
                 throw new NullReferenceException("Selected use action view model is null");
 
@@ -102,9 +101,6 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
             _useActionsPanelUI.CreateAndShow(ref useActionData, _selectedUseActionCallback);
         }
 
-        public void Exit()
-        {
-            _useActionsPanelUI.HideAndRemove();
-        }
+        public void Exit() => _useActionsPanelUI.HideAndRemove();
     }
 }

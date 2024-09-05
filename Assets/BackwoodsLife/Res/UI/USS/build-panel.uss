@@ -140,3 +140,83 @@
     flex-direction: row;
     font-size: 10px;
 }
+
+.crafting-btn {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 2px;
+    border-left-width: 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    flex-direction: row;
+    font-size: 9px;
+    background-color: rgb(111, 204, 140);
+    height: 30px;
+    border-bottom-color: rgb(66, 121, 83);
+    border-left-color: rgb(66, 121, 83);
+    border-right-color: rgb(66, 121, 83);
+    border-top-color: rgb(66, 121, 83);
+}
+
+.crafting-title {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 6px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 8px;
+}
+
+.crafting-time-container {
+    flex-grow: 1;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+    flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.5);
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-size: 8px;
+    width: 50px;
+}
+
+.crafting-time-icon {
+    flex-grow: 0;
+    width: 16px;
+    height: 16px;
+    background-image: url("project://database/Assets/BackwoodsLife/Res/Images/Icons/time-icon.png?fileID=21300000&guid=cd9ad196fb177a048973f8346ffd15b8&type=3#time-icon");
+    left: 0;
+    position: absolute;
+}
+
+.crafting-duration {
+    margin-top: 0;
+    margin-right: 4px;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    position: absolute;
+    right: 0;
+}

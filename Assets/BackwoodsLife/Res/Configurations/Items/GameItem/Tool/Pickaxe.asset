@@ -15,8 +15,8 @@ MonoBehaviour:
   itemName: Pickaxe
   shortDescription: 
   iconReference:
-    m_AssetGUID: f5cd43095f9e58f4c8fc8df42280139d
-    m_SubObjectName: knife-icon
+    m_AssetGUID: 9c3bacf8573ed444dbe96c7a43841fa6
+    m_SubObjectName: pickaxe-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
@@ -26,7 +26,7 @@ MonoBehaviour:
     stackSize: 0
   craftable: 0
   craftItemSetting:
-    craftingType: 0
+    productionType: 0
     craftingTime: 0
     recipeForOneItem: []
   canBuy: 1

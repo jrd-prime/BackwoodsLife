@@ -9,7 +9,7 @@ using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 {
-    public class CraftingModel : IUseActionModel<CraftingPanelData>, ICraftingReactive
+    public sealed class CraftingModel : IUseActionModel<CraftingPanelData>, ICraftingReactive
     {
         private IRecipeProvider _recipeProvider;
         private IConfigManager _configManager;
@@ -60,7 +60,12 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 
             foreach (var recipe in _recipeProvider.GetAllRecipes())
             {
-                list.Add(new CraftingItemData { Title = recipe.Value.recipeData.returnedItem.item.itemName });
+                list.Add(new CraftingItemData
+                {
+                    Title = recipe.Value.recipeData.returnedItem.item.itemName,
+                    Icon = _assetProvider.GetIconFromRef(
+                        _configManager.GetIconReference(recipe.Value.recipeData.returnedItem.item.itemName))
+                });
             }
 
             return new CraftingItemsPanelData

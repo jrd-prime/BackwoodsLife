@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 
 namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
 {
-    public class CraftingView : CustomUseActionViewBase<CraftingViewModel>
+    public sealed class CraftingView : CustomUseActionViewBase<CraftingViewModel>
     {
         [SerializeField] private VisualTreeAsset requiredItemTemplate;
         [SerializeField] private VisualTreeAsset recipeTemplate;
@@ -78,7 +78,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
                     // Debug.LogWarning("item = " + item);
                     var itemElement = recipeTemplate.Instantiate();
                     itemElement.Q<Label>("head").text = item.Title;
-                    itemElement.style.backgroundImage = new StyleBackground(item.Icon);
+                    itemElement.Q<VisualElement>("icon").style.backgroundImage = new StyleBackground(item.Icon);
                     _itemsContainer.Add(itemElement);
 
                     SubscribeButton(item.Title, itemElement.Q<Button>("recipe-btn-container"));
