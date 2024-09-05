@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Wood
   m_EditorClassIdentifier: 
   itemName: Wood
-  worldItemTypeName: 0
   shortDescription: 
   iconReference:
     m_AssetGUID: fd0264fd135d5fc4ba76a543b2a2d459
@@ -24,9 +23,12 @@ MonoBehaviour:
   gameItemType: 1
   itemStorage: 1
   warehouseItemSetting:
-    stackSize: 0
+    stackSize: 10
   craftable: 0
   craftItemSetting:
-    craftingType: 0
+    productionType: 0
     craftingTime: 0
     recipeForOneItem: []
+  canBuy: 0
+  buySetting:
+    price: 0

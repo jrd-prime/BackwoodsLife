@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bonfire
   m_EditorClassIdentifier: 
   itemName: Bonfire
-  shortDescription: 
+  shortDescription: The simplest types of food can be cooked over a campfire
   iconReference:
     m_AssetGUID: f7fc1d09f8686f44dbe66713466fc7af
     m_SubObjectName: bonfire-icon
@@ -27,8 +27,11 @@ MonoBehaviour:
   useConfig:
     useActions:
     - useType: 0
+      useActionLevel: 0
     - useType: 1
+      useActionLevel: 0
     - useType: 2
+      useActionLevel: 0
   upgradeConfig:
     upgradeLevels:
     - level: 1

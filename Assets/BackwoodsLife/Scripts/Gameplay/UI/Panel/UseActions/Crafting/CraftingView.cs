@@ -50,12 +50,14 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
             var items = container.Q<VisualElement>("craft-list");
 
             _itemsContainer = items.Q<VisualElement>("items-container");
-            _itemsContainer.Clear();
+            ClearRecipesContainer();
 
             // Process
             var process = container.Q<VisualElement>("craft-process");
             _processTitle = process.Q<Label>("title");
         }
+
+        private void ClearRecipesContainer() => _itemsContainer.Clear();
 
         private void SetInfoPanelData(RecipeInfoData recipeInfoData)
         {
@@ -67,12 +69,13 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
 
         private void SetItemsPanelData(CraftingItemsPanelData craftingItemData)
         {
+            ClearRecipesContainer();
             Debug.LogWarning("SetItemsPanelData");
             for (int i = 0; i < 4; i++)
             {
                 foreach (var item in craftingItemData.Items)
                 {
-                    Debug.LogWarning(item);
+                    // Debug.LogWarning("item = " + item);
                     var itemElement = recipeTemplate.Instantiate();
                     itemElement.Q<Label>("head").text = item.Title;
                     itemElement.style.backgroundImage = new StyleBackground(item.Icon);
@@ -100,6 +103,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
         //TODO DRY (UseActionsPanelUI.cs)
         private void SubscribeButton(string recipeName, Button button)
         {
+            Debug.LogWarning($"Subscribe button {recipeName} to {button.name}. VM : {ViewModel.OnRecipeButtonClicked}");
             EventCallback<ClickEvent> callback = _ => { ViewModel.OnRecipeButtonClicked.Invoke(recipeName); };
             button.RegisterCallback(callback);
             _buttonsCacheTuple.Add((button, callback));

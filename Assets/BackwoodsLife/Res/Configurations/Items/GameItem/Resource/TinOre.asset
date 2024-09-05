@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: TinOre
   m_EditorClassIdentifier: 
   itemName: TinOre
-  worldItemTypeName: 0
   shortDescription: 
   iconReference:
     m_AssetGUID: 142d9e91d38a45d4ea34d18e8f1777a2
@@ -24,9 +23,12 @@ MonoBehaviour:
   gameItemType: 1
   itemStorage: 1
   warehouseItemSetting:
-    stackSize: 0
+    stackSize: 20
   craftable: 0
   craftItemSetting:
-    craftingType: 0
+    productionType: 0
     craftingTime: 0
     recipeForOneItem: []
+  canBuy: 0
+  buySetting:
+    price: 0

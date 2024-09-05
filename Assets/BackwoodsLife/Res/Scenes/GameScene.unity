@@ -3574,6 +3574,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4933347532001613367, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: shopSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d8404f3cc2e61f94fa6aa81d7d57e9c1,
+        type: 3}
+    - target: {fileID: 4933347532001613367, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: questSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f2995998cedff544f85e4bd0a1d77a6e,
+        type: 3}
+    - target: {fileID: 4933347532001613367, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: skillsSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cd9ad196fb177a048973f8346ffd15b8,
+        type: 3}
+    - target: {fileID: 4933347532001613367, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: buildingsSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7a0fa2bf9d463124c954478b7fcd867e,
+        type: 3}
+    - target: {fileID: 4933347532001613367, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: inventorySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3f7242422ce6d794d81d5ea87de46a1c,
+        type: 3}
+    - target: {fileID: 4933347532001613367, guid: 5bdb41552563c30418f794d47bafa354,
+        type: 3}
+      propertyPath: warehouseSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 018b4f182028d1a4abe4d79030723229,
+        type: 3}
     - target: {fileID: 5290021915141809546, guid: 5bdb41552563c30418f794d47bafa354,
         type: 3}
       propertyPath: m_Name

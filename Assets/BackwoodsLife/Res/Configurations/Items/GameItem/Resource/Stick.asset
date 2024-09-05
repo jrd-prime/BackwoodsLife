@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Stick
   m_EditorClassIdentifier: 
   itemName: Stick
-  worldItemTypeName: 0
   shortDescription: 
   iconReference:
     m_AssetGUID: 1511e35934ea2444cba32f5ed2f1f5dc
@@ -24,9 +23,12 @@ MonoBehaviour:
   gameItemType: 1
   itemStorage: 1
   warehouseItemSetting:
-    stackSize: 0
+    stackSize: 20
   craftable: 0
   craftItemSetting:
-    craftingType: 0
+    productionType: 0
     craftingTime: 0
     recipeForOneItem: []
+  canBuy: 0
+  buySetting:
+    price: 0

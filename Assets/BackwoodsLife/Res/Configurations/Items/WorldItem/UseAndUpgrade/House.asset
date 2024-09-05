@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: House
   m_EditorClassIdentifier: 
   itemName: House
-  shortDescription: 
+  shortDescription: Here you can rest or create the simplest of tools
   iconReference:
     m_AssetGUID: 19c9549112dffb146a5e49e93d194902
     m_SubObjectName: tent-icon
@@ -27,7 +27,9 @@ MonoBehaviour:
   useConfig:
     useActions:
     - useType: 3
+      useActionLevel: 0
     - useType: 4
+      useActionLevel: 0
   upgradeConfig:
     upgradeLevels:
     - level: 1

@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
 using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Item.UseAction;
 using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
+using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -27,13 +27,15 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
         private readonly Action<UseAction> _selectedUseActionCallback;
         private IUseActionViewModel _selectedUseActionViewModel;
         private IObjectResolver _container;
+        private IAssetProvider _assetProvider;
 
         [Inject]
-        private void Construct(IObjectResolver container, UseActionsPanelUI useActionsPanelUI)
+        private void Construct(IObjectResolver container)
         {
             Debug.LogWarning("Use actions state construct");
             _container = container;
-            _useActionsPanelUI = useActionsPanelUI;
+            _assetProvider = _container.Resolve<IAssetProvider>();
+            _useActionsPanelUI = container.Resolve<UseActionsPanelUI>();
         }
 
         public UseActionsState(SUseAndUpgradeItem itemConfig,
@@ -73,10 +75,11 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
 
             Debug.LogWarning("Action selected: " + _selectedUseActionViewModel.Description);
             _useActionsPanelUI.Hide();
-            
+
             Debug.LogWarning(_selectedUseActionViewModel + " ???? ");
             _selectedUseActionViewModel.Activate(_itemConfig, _onCompleteUseActionCallback);
         }
+
 
         private void OnCompleteUseActionCallback()
         {
@@ -89,7 +92,14 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
 
         public void Enter(InteractZone interactZone)
         {
-            _useActionsPanelUI.CreateAndShow(_itemConfig.useConfig.useActions, _selectedUseActionCallback);
+            var useActionData = new ItemUseActionsData
+            {
+                Title = _itemConfig.itemName,
+                Description = _itemConfig.shortDescription,
+                Icon = _assetProvider.GetIconFromRef(_itemConfig.iconReference),
+                UseActions = _itemConfig.useConfig.useActions
+            };
+            _useActionsPanelUI.CreateAndShow(ref useActionData, _selectedUseActionCallback);
         }
 
         public void Exit()

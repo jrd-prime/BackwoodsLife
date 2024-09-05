@@ -1,6 +1,7 @@
 ﻿using System;
 using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
+using BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.InteractZoneState;
 using R3;
 using UnityEngine;
 using VContainer;

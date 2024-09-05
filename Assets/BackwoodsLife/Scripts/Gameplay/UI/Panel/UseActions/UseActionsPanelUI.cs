@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.UI;
 using BackwoodsLife.Scripts.Data.Scriptable.Items;
+using BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem;
 using BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom;
 using BackwoodsLife.Scripts.Framework.Item.UseAction;
 using BackwoodsLife.Scripts.Framework.Manager.UIFrame;
@@ -24,25 +25,33 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions
         private TemplateContainer _cachedPanel;
         private readonly List<(Button button, EventCallback<ClickEvent> callback)> _buttonsCacheTuple = new();
 
-        public void CreateAndShow(List<UseAction> useActionConfigs, Action<UseAction> selectedUseAction)
+        public void CreateAndShow(ref ItemUseActionsData itemUseActionsData, Action<UseAction> selectedUseAction)
         {
-            Assert.IsNotNull(useActionConfigs, "useActionConfigs is null");
             Assert.IsNotNull(selectedUseAction, "selectedUseActionCallback is null");
 
-            _cachedPanel = CreateAndFillPanel(useActionConfigs, selectedUseAction);
+            _cachedPanel = CreateAndFillPanel(ref itemUseActionsData, selectedUseAction);
             _frame = UIFrameController.GetPopUpFrame();
             _frame.ShowIn(EPopUpSubFrame.Left, _cachedPanel);
         }
 
-        private TemplateContainer CreateAndFillPanel(List<UseAction> useActionConfigs,
+        private TemplateContainer CreateAndFillPanel(ref ItemUseActionsData itemUseActionsData,
             Action<UseAction> selectedUseAction)
         {
             var panel = PanelTemplate.Instantiate();
 
+            var icon = panel.Q<VisualElement>("building-icon");
+            icon.style.backgroundImage = new StyleBackground(itemUseActionsData.Icon);
+
+            var title = panel.Q<Label>("building-name-label");
+            title.text = itemUseActionsData.Title;
+
+            var desc = panel.Q<Label>("building-description-label");
+            desc.text = itemUseActionsData.Description;
+
             var buttonsContainer = panel.Q<VisualElement>("btns-container");
             buttonsContainer.Clear();
 
-            foreach (var useAction in useActionConfigs)
+            foreach (var useAction in itemUseActionsData.UseActions)
             {
                 var buttonTemplate = btnTemplate.Instantiate();
                 buttonTemplate.Q<Label>("head").text = useAction.useType.ToString();
@@ -72,6 +81,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions
         {
             UnSubscribeButtons();
             _frame?.Hide();
+            _cachedPanel.Clear();
             _cachedPanel = null;
         }
 

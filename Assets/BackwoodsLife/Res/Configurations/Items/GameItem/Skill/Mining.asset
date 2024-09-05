@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Mining
   m_EditorClassIdentifier: 
   itemName: Mining
-  worldItemTypeName: 0
   shortDescription: 
   iconReference:
-    m_AssetGUID: 1511e35934ea2444cba32f5ed2f1f5dc
-    m_SubObjectName: stick-icon
+    m_AssetGUID: 9c3bacf8573ed444dbe96c7a43841fa6
+    m_SubObjectName: pickaxe-icon
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1

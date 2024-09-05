@@ -15,7 +15,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 
         public override async void Activate(SUseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback)
         {
-            Debug.LogWarning($"Crafting action activated: {itemConfig.itemName}");
+            Debug.LogWarning($"<color=red>Crafting action activated:</color> {itemConfig.itemName}");
 
             OnRecipeButtonClicked += RecipeButtonClicked;
             OnCompleteUseActionCallback = onCompleteUseActionCallback;
@@ -32,7 +32,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 
         public override void Deactivate()
         {
-            Debug.LogWarning("Crafting action deactivated");
+            Debug.LogWarning("<color=red>Crafting action deactivated</color>");
             OnRecipeButtonClicked -= RecipeButtonClicked;
             IsPanelActive.Value = false;
         }

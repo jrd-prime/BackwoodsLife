@@ -15,6 +15,10 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.UIButtons
         [SerializeField] private VisualTreeAsset uiButtonTemplate;
         [SerializeField] private Sprite questSprite; //TODO remove
         [SerializeField] private Sprite warehouseSprite; //TODO remove
+        [SerializeField] private Sprite shopSprite; //TODO remove
+        [SerializeField] private Sprite inventorySprite; //TODO remove
+        [SerializeField] private Sprite skillsSprite; //TODO remove
+        [SerializeField] private Sprite buildingsSprite; //TODO remove
 
         public Subject<Unit> QuestButtonClicked = new();
         public Subject<Unit> WarehouseButtonClicked = new();
@@ -60,10 +64,10 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.UIButtons
             {
                 EUIButton.Quest => new StyleBackground(questSprite),
                 EUIButton.Warehouse => new StyleBackground(warehouseSprite),
-                EUIButton.Shop => new StyleBackground(warehouseSprite),
-                EUIButton.Inventory => new StyleBackground(warehouseSprite),
-                EUIButton.Skills => new StyleBackground(warehouseSprite),
-                EUIButton.Buildings => new StyleBackground(warehouseSprite),
+                EUIButton.Shop => new StyleBackground(shopSprite),
+                EUIButton.Inventory => new StyleBackground(inventorySprite),
+                EUIButton.Skills => new StyleBackground(skillsSprite),
+                EUIButton.Buildings => new StyleBackground(buildingsSprite),
                 _ => throw new ArgumentOutOfRangeException(nameof(quest), quest, null)
             };
 

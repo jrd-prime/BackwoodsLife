@@ -4,6 +4,7 @@ using BackwoodsLife.Scripts.Framework.Manager.Configuration;
 using BackwoodsLife.Scripts.Framework.Provider.AssetProvider;
 using BackwoodsLife.Scripts.Framework.Provider.Recipe;
 using R3;
+using UnityEngine;
 using VContainer;
 
 namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
@@ -41,7 +42,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
         public void SetDataTo(SWorldItemConfig worldItemConfig)
         {
             DescriptionPanelData.Value = GetDescriptionData(worldItemConfig);
-            SelectedRecipePanelData.Value = GetInfoPanelData(worldItemConfig);
+            SelectedRecipePanelData.Value = GetDefaultInfoPanelData();
             ItemsPanelData.Value = GetItemsPanelData(worldItemConfig);
             ProcessPanelData.Value = GetProcessPanelData(worldItemConfig);
         }
@@ -68,8 +69,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
             };
         }
 
-        private RecipeInfoData GetInfoPanelData(SWorldItemConfig worldItemConfig) =>
-            GetDataForRecipe(worldItemConfig.itemName);
+        private RecipeInfoData GetDefaultInfoPanelData() => new RecipeInfoData { Title = "No recipe selected" };
 
 
         public void SetSelectedRecipe(string recipeName) =>
@@ -78,10 +78,12 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
 
         private RecipeInfoData GetDataForRecipe(string recipeName)
         {
+            Debug.LogWarning(recipeName + " recipe selected");
+
             var recipe = _recipeProvider.GetRecipeByName(recipeName);
             var iconReference = _configManager.GetIconReference(recipe.recipeData.returnedItem.item.itemName);
             var icon = _assetProvider.GetIconFromRef(iconReference);
-            
+
             return new RecipeInfoData
             {
                 Title = recipe.recipeData.returnedItem.item.itemName,

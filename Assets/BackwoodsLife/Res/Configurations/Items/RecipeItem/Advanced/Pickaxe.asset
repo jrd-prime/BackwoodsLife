@@ -15,6 +15,7 @@ MonoBehaviour:
   productionType: 1
   productionLevel: 1
   recipeData:
+    description: this is pickaxe description
     returnedItem:
       item: {fileID: 11400000, guid: 0d12ac1f2de4f1044941d256c96c5fec, type: 2}
       count: 1

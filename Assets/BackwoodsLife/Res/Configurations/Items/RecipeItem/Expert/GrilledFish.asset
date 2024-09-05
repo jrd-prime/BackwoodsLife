@@ -15,6 +15,7 @@ MonoBehaviour:
   productionType: 1
   productionLevel: 2
   recipeData:
+    description: 
     returnedItem:
       item: {fileID: 11400000, guid: de7b3d03ef337194c94f0b65d9ce0fa2, type: 2}
       count: 0
