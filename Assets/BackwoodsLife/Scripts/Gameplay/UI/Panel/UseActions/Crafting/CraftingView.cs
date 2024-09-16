@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Scriptable.Items;
+﻿using System.Collections.Generic;
 using BackwoodsLife.Scripts.Framework.Extensions;
 using BackwoodsLife.Scripts.Framework.Item.UseAction;
 using BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting;
@@ -91,8 +89,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
             Debug.LogWarning("SetProcessPanelData");
             _processTitle.text = "Crafting process";
         }
-
-
+        
         protected override void OnCloseButtonClicked()
         {
             base.OnCloseButtonClicked();

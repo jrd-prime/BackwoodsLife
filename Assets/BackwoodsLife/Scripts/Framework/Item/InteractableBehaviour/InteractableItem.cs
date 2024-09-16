@@ -29,11 +29,9 @@ namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour
         protected CharacterOverUI CharacterOverUIHolder;
         protected InteractItemInfoPanelUI InteractItemInfoPanelUI;
         protected GameDataManager GameDataManager;
-
-
+        
         protected Action<IInteractZoneState> InteractZoneCallback;
-
-
+        
         private void Awake()
         {
             var rootContext = FindObjectOfType<GameSceneContext>();
