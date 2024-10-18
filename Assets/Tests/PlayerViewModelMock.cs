@@ -34,7 +34,7 @@ namespace Tests
             _model.SetRotationSpeed(rotationSpeed);
         }
 
-        public async UniTask SetCollectableActionForAnimationAsync(EInteractAnimation interactAnimation)
+        public async UniTask SetCollectableActionForAnimationAsync(InteractAnimationType interactAnimationType)
         {
             throw new System.NotImplementedException();
         }

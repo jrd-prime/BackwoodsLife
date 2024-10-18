@@ -31,7 +31,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions
 
             _cachedPanel = CreateAndFillPanel(ref itemUseActionsData, selectedUseAction);
             _frame = UIFrameController.GetPopUpFrame();
-            _frame.ShowIn(EPopUpSubFrame.Left, _cachedPanel);
+            _frame.ShowIn(PopUpSubFrameType.Left, _cachedPanel);
         }
 
         private TemplateContainer CreateAndFillPanel(ref ItemUseActionsData itemUseActionsData,
@@ -68,7 +68,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions
         public void Show()
         {
             if (_cachedPanel == null) throw new NullReferenceException("Before show panel must be created");
-            _frame.ShowIn(EPopUpSubFrame.Left, _cachedPanel);
+            _frame.ShowIn(PopUpSubFrameType.Left, _cachedPanel);
         }
 
         public void Hide()

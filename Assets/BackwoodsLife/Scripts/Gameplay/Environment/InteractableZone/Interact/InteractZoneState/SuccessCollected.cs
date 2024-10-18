@@ -10,10 +10,10 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
     {
         public string StateDesc => "Success collected state";
         
-        private readonly List<ItemData> _processedItems;
+        private readonly List<ItemDto> _processedItems;
         private readonly CharacterOverUI _characterOverUIHolder;
 
-        public SuccessCollected(List<ItemData> processedItems, CharacterOverUI characterOverUIHolder)
+        public SuccessCollected(List<ItemDto> processedItems, CharacterOverUI characterOverUIHolder)
         {
             Assert.IsNotNull(processedItems, "processedItems is null");
             Assert.IsNotNull(characterOverUIHolder, "characterOverUIHolder is null");

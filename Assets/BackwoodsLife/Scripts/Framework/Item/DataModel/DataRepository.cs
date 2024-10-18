@@ -37,10 +37,10 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel
                 throw new KeyNotFoundException($"\"{name}\" not found in ItemsCache. Check config name or enum");
         }
 
-        public ItemData GetItem(string itemName)
+        public ItemDto GetItem(string itemName)
         {
             CheckItem(itemName);
-            return new ItemData { Name = itemName, Quantity = ItemsCache[itemName] };
+            return new ItemDto { Name = itemName, Quantity = ItemsCache[itemName] };
         }
 
         public int GetValue(string typeNameItemName)
@@ -49,7 +49,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel
             return ItemsCache[typeNameItemName];
         }
 
-        public bool IsEnough(Dictionary<SItemConfig, int> itemsDictionary)
+        public bool IsEnough(Dictionary<ItemSettings, int> itemsDictionary)
         {
             var result = true;
             foreach (var _ in itemsDictionary
@@ -62,7 +62,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel
             return ItemsCache.ContainsKey(itemName) && ItemsCache[itemName] >= count;
         }
 
-        public bool IsEnough(KeyValuePair<SItemConfig, int> valuePair)
+        public bool IsEnough(KeyValuePair<ItemSettings, int> valuePair)
         {
             return IsEnough(valuePair.Key.itemName, valuePair.Value);
         }

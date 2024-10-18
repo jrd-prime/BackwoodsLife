@@ -33,11 +33,11 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
         private GameDataManager _gameDataManager;
 
 
-        public Action<List<ItemData>> OnBuildButtonClicked1;
-        private Action<Dictionary<SItemConfig, int>> _buildZoneCallback;
-        private Dictionary<EItemData, Dictionary<SItemConfig, int>> _currentLevelConfig;
+        public Action<List<ItemDto>> OnBuildButtonClicked1;
+        private Action<Dictionary<ItemSettings, int>> _buildZoneCallback;
+        private Dictionary<ItemType, Dictionary<ItemSettings, int>> _currentLevelConfig;
 
-        private readonly List<ItemData> _tempItemsData = new();
+        private readonly List<ItemDto> _tempItemsData = new();
 
         [Inject]
         private void Construct(UIFrameController uiFrameController, BuildingPanelFiller buildingPanelFiller,
@@ -55,20 +55,20 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
             _buildButton = _buildingPanelElementsRef.BuildButton;
         }
 
-        public void ShowBuildingPanelFor(in SWorldItemConfig worldItemConfig)
+        public void ShowBuildingPanelFor(in WorldItemSettings worldItemSettings)
         {
             Debug.LogWarning("OnBuildZoneEnter");
 
 
-            if (!worldItemConfig.GetLevelReq(ELevel.Level_1, out _currentLevelConfig))
+            if (!worldItemSettings.GetLevelReq(LevelType.Level_1, out _currentLevelConfig))
                 throw new NullReferenceException(
-                    $"Level 1 not found in UpgradeCache. Check config: {worldItemConfig.itemName}");
+                    $"Level 1 not found in UpgradeCache. Check config: {worldItemSettings.itemName}");
 
             _tempItemsData.Clear();
 
-            foreach (var q in _currentLevelConfig[EItemData.Resource])
+            foreach (var q in _currentLevelConfig[ItemType.Resource])
             {
-                _tempItemsData.Add(new ItemData { Name = q.Key.itemName, Quantity = q.Value });
+                _tempItemsData.Add(new ItemDto { Name = q.Key.itemName, Quantity = q.Value });
             }
 
             _buildButton.clicked += OnBuildButtonClicked;
@@ -79,16 +79,16 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
 
             _buildButton.SetEnabled(isEnough);
 
-            _buildingPanelFiller.Fill(_currentLevelConfig, in _buildingPanelElementsRef, in worldItemConfig);
+            _buildingPanelFiller.Fill(_currentLevelConfig, in _buildingPanelElementsRef, in worldItemSettings);
 
             _framePopUpFrame = _uiFrameController.GetPopUpFrame();
-            _framePopUpFrame.ShowIn(EPopUpSubFrame.Left, in _buildingPanel);
+            _framePopUpFrame.ShowIn(PopUpSubFrameType.Left, in _buildingPanel);
         }
 
         public void HideBuildingPanel()
         {
             _buildButton.clicked -= OnBuildButtonClicked;
-            _framePopUpFrame?.HideIn(EPopUpSubFrame.Left, in _buildingPanel);
+            _framePopUpFrame?.HideIn(PopUpSubFrameType.Left, in _buildingPanel);
         }
 
         private void OnBuildButtonClicked() => OnBuildButtonClicked1?.Invoke(_tempItemsData);

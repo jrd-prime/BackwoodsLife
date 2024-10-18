@@ -75,7 +75,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.UIButtons
             btn.clicked += () => { onButtonClicked.OnNext(Unit.Default); };
 
 
-            _frameMainFrame.ShowIn(EMainSubFrame.Top, uiButton, false);
+            _frameMainFrame.ShowIn(MainSubFrameType.Top, uiButton, false);
         }
     }
 

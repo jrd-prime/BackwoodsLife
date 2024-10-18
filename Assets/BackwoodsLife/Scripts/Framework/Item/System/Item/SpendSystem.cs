@@ -5,7 +5,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.System.Item
 {
     public sealed class SpendSystem : ItemSystem, IItemSystem
     {
-        public bool Process(List<ItemData> itemsData)
+        public bool Process(List<ItemDto> itemsData)
         {
             foreach (var item in itemsData)
             {

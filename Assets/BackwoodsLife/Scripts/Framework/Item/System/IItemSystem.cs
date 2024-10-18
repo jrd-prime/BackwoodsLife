@@ -8,6 +8,6 @@ namespace BackwoodsLife.Scripts.Framework.Item.System
     /// </summary>
     public interface IItemSystem : IBaseSystem
     {
-        public bool Process(List<ItemData> itemsData);
+        public bool Process(List<ItemDto> itemsData);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BackwoodsLife.Scripts.Data.Common.Structs.Item;
+using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Data.Const;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem
         fileName = "UpgradeOnlyItem",
         menuName = SOPathName.WorldItemPath + "Upgrade Only Item",
         order = 1)]
-    public class SUpgradeOnlyItem : SWorldItemConfig
+    public class UpgradeOnlyItem : WorldItemSettings
     {
         [Title("Collectable")] [ReadOnly] public int retunedItemsCount;
         [ReadOnly] public int requiredItemsCount;

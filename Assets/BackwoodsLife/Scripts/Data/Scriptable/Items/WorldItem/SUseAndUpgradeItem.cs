@@ -10,7 +10,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem
         fileName = "UseAndUpgradeItem",
         menuName = SOPathName.WorldItemPath + "Use And Upgrade Item",
         order = 1)]
-    public class SUseAndUpgradeItem : SWorldItemConfig
+    public class UseAndUpgradeItem : WorldItemSettings
     {
         protected override void OnValidate()
         {

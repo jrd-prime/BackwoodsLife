@@ -26,7 +26,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Player
         public ReactiveProperty<bool> IsInAction { get; }
         public ReadOnlyReactiveProperty<bool> IsMoving { get; }
 
-        public UniTask SetCollectableActionForAnimationAsync(EInteractAnimation interactAnimation);
+        public UniTask SetCollectableActionForAnimationAsync(InteractAnimationType interactAnimationType);
         public void SetModelPosition(Vector3 rbPosition);
         public void SetModelRotation(Quaternion rbRotation);
     }

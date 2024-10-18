@@ -21,9 +21,9 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel
         }
 
         public bool Increase(string res, int amount) => Model.AddItem(res, amount);
-        public bool Increase(in List<ItemData> inventoryElements) => Model.AddItem(inventoryElements);
+        public bool Increase(in List<ItemDto> inventoryElements) => Model.AddItem(inventoryElements);
         public bool DecreaseResource(string objResourceType, int amount) => Model.RemoveItem(objResourceType, amount);
-        public bool DecreaseResource(in List<ItemData> inventoryElements) => Model.RemoveItem(inventoryElements);
+        public bool DecreaseResource(in List<ItemDto> inventoryElements) => Model.RemoveItem(inventoryElements);
 
         public void Initialize()
         {

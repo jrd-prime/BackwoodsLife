@@ -43,7 +43,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
             _disposables.Dispose();
         }
 
-        public async void ShowPopUpFor(List<ItemData> inventoryElements)
+        public async void ShowPopUpFor(List<ItemDto> inventoryElements)
         {
             foreach (var element in inventoryElements)
             {
@@ -72,7 +72,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.CharacterOverUI
             }
         }
 
-        public async void ShowPopUpForNotEnoughRequirements(List<ItemData> notEnoughRequirements)
+        public async void ShowPopUpForNotEnoughRequirements(List<ItemDto> notEnoughRequirements)
         {
             foreach (var element in notEnoughRequirements)
             {

@@ -15,7 +15,7 @@ using VContainer;
 namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour
 {
     public abstract class InteractableItem<TItemConfig, TInteractSystem, TEnumItemName> : InteractableItemBase
-        where TItemConfig : SWorldItemConfig
+        where TItemConfig : WorldItemSettings
         where TEnumItemName : Enum
         where TInteractSystem : class, IBaseSystem
     {

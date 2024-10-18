@@ -9,7 +9,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
     /// <summary>
     /// Фрейм, содержащий основное окно в котором есть панели: desc-container и main-container. И кнопку закрытия окна
     /// </summary>
-    public class PopUpWindowFrame : UIFrameView<EMainPopUpSubFrame>, IUIFrame
+    public class PopUpWindowFrame : UIFrameView<MainPopUpSubFrameType>, IUIFrame
     {
         private Label title;
 
@@ -21,9 +21,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             Assert.IsNotNull(desc, "Desc container in FramePopUpWindow is null");
             Assert.IsNotNull(main, "Main container in FramePopUpWindow is null");
 
-            SubFrames[EMainPopUpSubFrame.Root] = Root;
-            SubFrames[EMainPopUpSubFrame.Description] = desc;
-            SubFrames[EMainPopUpSubFrame.Main] = main;
+            SubFrames[MainPopUpSubFrameType.Root] = Root;
+            SubFrames[MainPopUpSubFrameType.Description] = desc;
+            SubFrames[MainPopUpSubFrameType.Main] = main;
             
             title = desc.Q<Label>("head-label");
         }

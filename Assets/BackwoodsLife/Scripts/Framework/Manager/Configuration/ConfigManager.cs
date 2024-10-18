@@ -15,7 +15,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
     {
         public string Description => "Config Manager";
         public Dictionary<Type, object> ConfigsCache { get; private set; }
-        public Dictionary<string, SItemConfig> ItemsConfigCache { get; } = new();
+        public Dictionary<string, ItemSettings> ItemsConfigCache { get; } = new();
         public Dictionary<string, SRecipe> RecipesConfigCache { get; } = new();
 
         private SMainConfig _mainConfig;
@@ -32,14 +32,14 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 
             {
                 // TODO refactor
-                _mainConfig.Check(_mainConfig.GameItemsList.resourceItems, typeof(EResource), "Resource");
-                _mainConfig.Check(_mainConfig.GameItemsList.foodItems, typeof(EFood), "Food");
-                _mainConfig.Check(_mainConfig.GameItemsList.toolItems, typeof(ETool), "Tool");
-                _mainConfig.Check(_mainConfig.GameItemsList.skillItems, typeof(ESkill), "Skill");
+                _mainConfig.Check(_mainConfig.GameItemsList.resourceItems, typeof(ResourceType), "Resource");
+                _mainConfig.Check(_mainConfig.GameItemsList.foodItems, typeof(FoodType), "Food");
+                _mainConfig.Check(_mainConfig.GameItemsList.toolItems, typeof(ToolType), "Tool");
+                _mainConfig.Check(_mainConfig.GameItemsList.skillItems, typeof(SkillType), "Skill");
 
-                _mainConfig.Check(_mainConfig.WorldItemsList.buildingItems, typeof(EUseAndUpgradeName), "Building");
-                _mainConfig.Check(_mainConfig.WorldItemsList.collectableItems, typeof(ECollectName), "Collectable");
-                _mainConfig.Check(_mainConfig.WorldItemsList.placeItems, typeof(EUseName), "Place");
+                _mainConfig.Check(_mainConfig.WorldItemsList.buildingItems, typeof(UsableAndUpgradableType), "Building");
+                _mainConfig.Check(_mainConfig.WorldItemsList.collectableItems, typeof(CollectableType), "Collectable");
+                _mainConfig.Check(_mainConfig.WorldItemsList.placeItems, typeof(UsableType), "Place");
             }
 
             //TODO refactor
@@ -62,7 +62,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
                 RecipesConfigCache.Add(item.recipe.recipeData.returnedItem.item.itemName, item.recipe);
         }
 
-        private void AddToItemsCache<T>(List<CustomItemConfig<T>> items) where T : SItemConfig
+        private void AddToItemsCache<T>(List<CustomItemConfig<T>> items) where T : ItemSettings
         {
             foreach (var item in items) ItemsConfigCache.Add(item.config.itemName, item.config);
         }
@@ -74,7 +74,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 
         public AssetReferenceTexture2D GetIconReference(string elementTypeName)
         {
-            return GetItemConfig<SItemConfig>(elementTypeName).iconReference;
+            return GetItemConfig<ItemSettings>(elementTypeName).iconReference;
         }
 
         public T GetConfig<T>() where T : ScriptableObject
@@ -84,7 +84,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.Configuration
 
         public RecipeItemsList GetRecipeItemsList() => _mainConfig.recipeItemsList;
 
-        public T GetItemConfig<T>(string elementTypeName) where T : SItemConfig
+        public T GetItemConfig<T>(string elementTypeName) where T : ItemSettings
         {
             // Debug.LogWarning($"GetItemConfig {elementTypeName} / {typeof(T)}");
             if (!ItemsConfigCache.ContainsKey(elementTypeName))

@@ -29,9 +29,9 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
             _assetProvider = assetProvider;
         }
 
-        public PanelDescriptionData GetDescriptionData(SWorldItemConfig worldItemConfig)
+        public PanelDescriptionData GetDescriptionData(WorldItemSettings worldItemSettings)
         {
-            return new PanelDescriptionData { Title = worldItemConfig.itemName, Description = "crafting description" };
+            return new PanelDescriptionData { Title = worldItemSettings.itemName, Description = "crafting description" };
         }
 
         public CraftingPanelData GetMainPanelData()
@@ -39,22 +39,22 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
             return new CraftingPanelData();
         }
 
-        public void SetDataTo(SWorldItemConfig worldItemConfig)
+        public void SetDataTo(WorldItemSettings worldItemSettings)
         {
-            DescriptionPanelData.Value = GetDescriptionData(worldItemConfig);
+            DescriptionPanelData.Value = GetDescriptionData(worldItemSettings);
             SelectedRecipePanelData.Value = GetDefaultInfoPanelData();
-            ItemsPanelData.Value = GetItemsPanelData(worldItemConfig);
-            ProcessPanelData.Value = GetProcessPanelData(worldItemConfig);
+            ItemsPanelData.Value = GetItemsPanelData(worldItemSettings);
+            ProcessPanelData.Value = GetProcessPanelData(worldItemSettings);
         }
 
-        private CraftingProcessPanelData GetProcessPanelData(SWorldItemConfig worldItemConfig)
+        private CraftingProcessPanelData GetProcessPanelData(WorldItemSettings worldItemSettings)
         {
             return new CraftingProcessPanelData
             {
             };
         }
 
-        private CraftingItemsPanelData GetItemsPanelData(SWorldItemConfig worldItemConfig)
+        private CraftingItemsPanelData GetItemsPanelData(WorldItemSettings worldItemSettings)
         {
             var list = new List<CraftingItemData>();
 

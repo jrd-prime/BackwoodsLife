@@ -12,7 +12,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom
     /// Обработка интерактабл объекта, который можно использовать и улучшать.
     /// Вызывет состояние "Use actions state" у триггер зоны
     /// </summary>
-    public class UsableAndUpgradeable : InteractableItem<SUseAndUpgradeItem, UseAndUpgradeSystem, EUseAndUpgradeName>
+    public class UsableAndUpgradeable : InteractableItem<UseAndUpgradeItem, UseAndUpgradeSystem, UsableAndUpgradableType>
     {
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.UseAndUpgrade;
 

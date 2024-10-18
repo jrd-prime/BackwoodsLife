@@ -13,7 +13,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel.Tool
 
             // TODO load saved data and initialize
 
-            List<Type> list = new() { typeof(ETool) };
+            List<Type> list = new() { typeof(ToolType) };
 
             // Init to zero
             foreach (var name in list.SelectMany(Enum.GetNames))

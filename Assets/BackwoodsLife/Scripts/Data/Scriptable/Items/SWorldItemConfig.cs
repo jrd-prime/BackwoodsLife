@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using BackwoodsLife.Scripts.Data.Common.Enums;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items;
-using BackwoodsLife.Scripts.Data.Common.Structs.Item;
-using BackwoodsLife.Scripts.Data.Common.Structs.Required;
+using BackwoodsLife.Scripts.Data.Common.Structs;
 using BackwoodsLife.Scripts.Data.Const;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Data.Scriptable.Items
 {
@@ -20,12 +20,12 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
         fileName = "New world item config",
         menuName = SOPathName.WorldItemPath + "New World Item",
         order = 1)]
-    public class SWorldItemConfig : SItemConfig
+    public class WorldItemSettings : ItemSettings
     {
         [Title("World Item Config")] [ReadOnly]
         public EInteractTypes interactTypes;
 
-        [Title("Interact Animation Setup")] public EInteractAnimation interactAnimation;
+        [FormerlySerializedAs("interactAnimation")] [Title("Interact Animation Setup")] public InteractAnimationType interactAnimationType;
 
         [Title("World Position Setup")] public bool fixedPosition;
         [ShowIf("@fixedPosition")] public Vector3 fixedPositionValue;
@@ -39,18 +39,18 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
         [Title("Upgrade Setup")]
         public UpgradeConfig upgradeConfig;
 
-        private Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>> _reqForUpgradeCache;
+        private Dictionary<LevelType, Dictionary<ItemType, Dictionary<ItemSettings, int>>> _reqForUpgradeCache;
 
         /// <summary>
         /// Dictionary(Level, Dictionary(Req item type, Dictionary(Req type, Req value)))
         /// </summary>
-        public Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>> UpgradeCache =>
+        public Dictionary<LevelType, Dictionary<ItemType, Dictionary<ItemSettings, int>>> UpgradeCache =>
             InitReqForUpgradeCache();
 
         protected override void OnValidate()
         {
             base.OnValidate();
-            Assert.IsTrue(interactAnimation != EInteractAnimation.NotSet,
+            Assert.IsTrue(interactAnimationType != InteractAnimationType.NotSet,
                 $"InteractType is not set. World item config: {name}");
             Assert.IsTrue(iconReference.RuntimeKeyIsValid(), $"Icon asset ref is not set. World item config: {name}");
 
@@ -65,15 +65,15 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
 
             foreach (var upgradeLevel in upgradeConfig.upgradeLevels)
             {
-                if (upgradeLevel.reqForUpgrade.resource.Count > 5)
+                if (upgradeLevel.reqForUpgradeDto.resource.Count > 5)
                     throw new Exception(
-                        $"{name} Resource requirements for upgrade level {upgradeLevel.level} is too much. Max 5 resources!");
+                        $"{name} Resource requirements for upgrade level {upgradeLevel.levelType} is too much. Max 5 resources!");
 
-                if (upgradeLevel.reqForUpgrade.building.Count > 3 ||
-                    upgradeLevel.reqForUpgrade.skill.Count > 3 ||
-                    upgradeLevel.reqForUpgrade.tool.Count > 3)
+                if (upgradeLevel.reqForUpgradeDto.building.Count > 3 ||
+                    upgradeLevel.reqForUpgradeDto.skill.Count > 3 ||
+                    upgradeLevel.reqForUpgradeDto.tool.Count > 3)
                     throw new Exception(
-                        $"{name} Building/Tool/Skill requirements for upgrade level {upgradeLevel.level} is too much. Max 3 per type!");
+                        $"{name} Building/Tool/Skill requirements for upgrade level {upgradeLevel.levelType} is too much. Max 3 per type!");
             }
 
             _reqForUpgradeCache = null;
@@ -86,7 +86,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
             _reqForUpgradeCache.Clear();
         }
 
-        private Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>> InitReqForUpgradeCache()
+        private Dictionary<LevelType, Dictionary<ItemType, Dictionary<ItemSettings, int>>> InitReqForUpgradeCache()
         {
 #if UNITY_EDITOR
             _reqForUpgradeCache = null;
@@ -94,31 +94,31 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
             if (_reqForUpgradeCache is { Count: > 0 }) return _reqForUpgradeCache;
 
             Debug.LogWarning("Init cache " + name);
-            _reqForUpgradeCache = new Dictionary<ELevel, Dictionary<EItemData, Dictionary<SItemConfig, int>>>();
+            _reqForUpgradeCache = new Dictionary<LevelType, Dictionary<ItemType, Dictionary<ItemSettings, int>>>();
 
             foreach (var level in upgradeConfig.upgradeLevels)
             {
-                var levelDict = new Dictionary<EItemData, Dictionary<SItemConfig, int>>();
-                _reqForUpgradeCache.Add(level.level, levelDict);
+                var levelDict = new Dictionary<ItemType, Dictionary<ItemSettings, int>>();
+                _reqForUpgradeCache.Add(level.levelType, levelDict);
 
-                AddToDictReqForUpgradeFor(level.reqForUpgrade.resource, EItemData.Resource, in levelDict);
-                AddToDictReqForUpgradeFor(level.reqForUpgrade.building, EItemData.Building, in levelDict);
-                AddToDictReqForUpgradeFor(level.reqForUpgrade.tool, EItemData.Tool, in levelDict);
-                AddToDictReqForUpgradeFor(level.reqForUpgrade.skill, EItemData.Skill, in levelDict);
+                AddToDictReqForUpgradeFor(level.reqForUpgradeDto.resource, ItemType.Resource, in levelDict);
+                AddToDictReqForUpgradeFor(level.reqForUpgradeDto.building, ItemType.Building, in levelDict);
+                AddToDictReqForUpgradeFor(level.reqForUpgradeDto.tool, ItemType.Tool, in levelDict);
+                AddToDictReqForUpgradeFor(level.reqForUpgradeDto.skill, ItemType.Skill, in levelDict);
             }
 
             return _reqForUpgradeCache;
         }
 
-        private void AddToDictReqForUpgradeFor<T>(List<CustomRequirement<T>> res, EItemData eItemData,
-            in Dictionary<EItemData, Dictionary<SItemConfig, int>> dict) where T : SItemConfig
+        private void AddToDictReqForUpgradeFor<T>(List<RequiredItemSettings<T>> res, ItemType itemType,
+            in Dictionary<ItemType, Dictionary<ItemSettings, int>> dict) where T : ItemSettings
         {
             if (res.Count == 0) return;
-            dict.Add(eItemData,
-                res.ToDictionary<CustomRequirement<T>, SItemConfig, int>(re => re.typeName, re => re.value));
+            dict.Add(itemType,
+                res.ToDictionary<RequiredItemSettings<T>, ItemSettings, int>(re => re.itemSettings, re => re.value));
         }
 
-        public bool GetLevelReq(ELevel level1, out Dictionary<EItemData, Dictionary<SItemConfig, int>> level)
+        public bool GetLevelReq(LevelType level1, out Dictionary<ItemType, Dictionary<ItemSettings, int>> level)
         {
             if (UpgradeCache.ContainsKey(level1))
             {
@@ -133,17 +133,17 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
 
     public static class ConfigsExtensions
     {
-        public static UpgradeLevel GetLevelRequirements(this SWorldItemConfig config, ELevel level)
+        public static UpgradeLevel GetLevelRequirements(this WorldItemSettings settings, LevelType levelType)
         {
-            Debug.LogWarning($"find level: {level}");
+            Debug.LogWarning($"find level: {levelType}");
 
-            var levels = config.upgradeConfig.upgradeLevels
-                .Where(upgradeLevel => upgradeLevel.level == level)
+            var levels = settings.upgradeConfig.upgradeLevels
+                .Where(upgradeLevel => upgradeLevel.levelType == levelType)
                 .ToArray();
 
             if (levels.Length == 1) return levels[0];
 
-            throw new NullReferenceException($"{config.name} doesn't contain level {level}");
+            throw new NullReferenceException($"{settings.name} doesn't contain level {levelType}");
         }
     }
 
@@ -154,12 +154,12 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
 
         public AssetReferenceGameObject GetLevelPrefabRef(int level)
         {
-            return upgradeLevels.Find(x => (int)x.level == level).levelPrefabReference;
+            return upgradeLevels.Find(x => (int)x.levelType == level).levelPrefabReference;
         }
 
-        public UpgradeLevel GetLevel(ELevel level)
+        public UpgradeLevel GetLevel(LevelType levelType)
         {
-            return upgradeLevels.Find(x => x.level == level);
+            return upgradeLevels.Find(x => x.levelType == levelType);
         }
     }
 
@@ -176,7 +176,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
     public struct UseAction
     {
         public EUseType useType;
-        public EProductionLevel useActionLevel;
+        [FormerlySerializedAs("useActionLevel")] public ProductionLevelType useActionLevelType;
     }
 
     public enum EUseType
@@ -195,7 +195,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items
     public struct CollectConfig
     {
         public List<ItemDataWithConfigAndRange> returnedItems;
-        public RequirementForCollect requirementForCollect;
+        [FormerlySerializedAs("requirementForCollectDto")] [FormerlySerializedAs("requirementForCollect")] public RequiredForCollectDto requiredForCollectDto;
     }
 
     public enum EInteractTypes

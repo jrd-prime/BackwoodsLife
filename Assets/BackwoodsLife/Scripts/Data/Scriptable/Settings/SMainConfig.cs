@@ -31,17 +31,17 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Settings
 
         private void OnValidate()
         {
-            Check(GameItemsList.resourceItems, typeof(EResource), "Resource");
-            Check(GameItemsList.foodItems, typeof(EFood), "Food");
-            Check(GameItemsList.toolItems, typeof(ETool), "Tool");
-            Check(GameItemsList.skillItems, typeof(ESkill), "Skill");
+            Check(GameItemsList.resourceItems, typeof(ResourceType), "Resource");
+            Check(GameItemsList.foodItems, typeof(FoodType), "Food");
+            Check(GameItemsList.toolItems, typeof(ToolType), "Tool");
+            Check(GameItemsList.skillItems, typeof(SkillType), "Skill");
 
-            Check(WorldItemsList.buildingItems, typeof(EUseAndUpgradeName), "Building");
-            Check(WorldItemsList.collectableItems, typeof(ECollectName), "Collectable");
-            Check(WorldItemsList.placeItems, typeof(EUseName), "Place");
+            Check(WorldItemsList.buildingItems, typeof(UsableAndUpgradableType), "Building");
+            Check(WorldItemsList.collectableItems, typeof(CollectableType), "Collectable");
+            Check(WorldItemsList.placeItems, typeof(UsableType), "Place");
         }
 
-        public void Check<T>(List<CustomItemConfig<T>> resourceItems, Type type, string id) where T : SItemConfig
+        public void Check<T>(List<CustomItemConfig<T>> resourceItems, Type type, string id) where T : ItemSettings
         {
             var count = Enum.GetNames(type).Length;
 
@@ -70,22 +70,22 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Settings
     [Serializable]
     public struct WorldItemsList
     {
-        public List<CustomItemConfig<SUseAndUpgradeItem>> buildingItems;
-        public List<CustomItemConfig<SCollectableItem>> collectableItems;
-        public List<CustomItemConfig<SUseOnlyItem>> placeItems;
+        public List<CustomItemConfig<UseAndUpgradeItem>> buildingItems;
+        public List<CustomItemConfig<CollectableItem>> collectableItems;
+        public List<CustomItemConfig<UseOnlyItem>> placeItems;
     }
 
     [Serializable]
     public struct GameItemsList
     {
-        public List<CustomItemConfig<SResourceItem>> resourceItems;
-        public List<CustomItemConfig<SToolItem>> toolItems;
-        public List<CustomItemConfig<SSkillItem>> skillItems;
-        public List<CustomItemConfig<SFoodItem>> foodItems;
+        public List<CustomItemConfig<ResourceItem>> resourceItems;
+        public List<CustomItemConfig<ToolItem>> toolItems;
+        public List<CustomItemConfig<SkillItem>> skillItems;
+        public List<CustomItemConfig<FoodItem>> foodItems;
     }
 
     [Serializable]
-    public struct CustomItemConfig<T> where T : SItemConfig
+    public struct CustomItemConfig<T> where T : ItemSettings
     {
         public T config;
     }

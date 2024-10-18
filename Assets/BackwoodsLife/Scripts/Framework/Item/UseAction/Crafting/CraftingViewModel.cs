@@ -13,7 +13,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction.Crafting
         public ReactiveProperty<CraftingProcessPanelData> ProcessPanelData => Model.ProcessPanelData;
         public Action<string> OnRecipeButtonClicked { get; private set; }
 
-        public override async void Activate(SUseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback)
+        public override async void Activate(UseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback)
         {
             Debug.LogWarning($"<color=red>Crafting action activated:</color> {itemConfig.itemName}");
 

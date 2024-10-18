@@ -10,7 +10,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items.WorldItem
         fileName = "UseOnlyItem",
         menuName = SOPathName.WorldItemPath + "Use Only Item",
         order = 1)]
-    public class SUseOnlyItem : SWorldItemConfig
+    public class UseOnlyItem : WorldItemSettings
     {
         protected override void OnValidate()
         {

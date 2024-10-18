@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 {
-    public class FrameMain : UIFrameView<EMainSubFrame>, IUIFrame
+    public class FrameMain : UIFrameView<MainSubFrameType>, IUIFrame
     {
         private const string TopFrameName = "top";
         private const string LeftFrameName = "left";
@@ -13,9 +13,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 
         protected override void InitializeSubFramesReference()
         {
-            SubFrames[EMainSubFrame.Top] = Root.Q<VisualElement>(TopFrameName);
-            SubFrames[EMainSubFrame.Left] = Root.Q<VisualElement>(LeftFrameName);
-            SubFrames[EMainSubFrame.Right] = Root.Q<VisualElement>(RightFrameName);
+            SubFrames[MainSubFrameType.Top] = Root.Q<VisualElement>(TopFrameName);
+            SubFrames[MainSubFrameType.Left] = Root.Q<VisualElement>(LeftFrameName);
+            SubFrames[MainSubFrameType.Right] = Root.Q<VisualElement>(RightFrameName);
 
             foreach (var subFrame in SubFrames)
             {
@@ -23,9 +23,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             }
         }
 
-        public void ShowIn(EMainSubFrame subFrameName, in TemplateContainer visualTemplate, bool clear = true)
+        public void ShowIn(MainSubFrameType subFrameTypeName, in TemplateContainer visualTemplate, bool clear = true)
         {
-            var subFrame = GetSubFrame1(subFrameName);
+            var subFrame = GetSubFrame1(subFrameTypeName);
             if (clear) subFrame.Clear();
 
             subFrame.Add(visualTemplate);
@@ -33,9 +33,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
             Show();
         }
 
-        public void HideIn(EMainSubFrame subFrameName, in TemplateContainer buildingPanel)
+        public void HideIn(MainSubFrameType subFrameTypeName, in TemplateContainer buildingPanel)
         {
-            var subFrame = GetSubFrame1(subFrameName);
+            var subFrame = GetSubFrame1(subFrameTypeName);
 
             subFrame.Remove(buildingPanel);
         }

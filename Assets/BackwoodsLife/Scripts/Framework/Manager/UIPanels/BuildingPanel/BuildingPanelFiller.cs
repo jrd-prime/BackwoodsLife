@@ -42,15 +42,15 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
             _tools = _gameDataManager.tools;
         }
 
-        public void Fill(Dictionary<EItemData, Dictionary<SItemConfig, int>> level,
+        public void Fill(Dictionary<ItemType, Dictionary<ItemSettings, int>> level,
             in BuildingPanelElementsRef buildingPanelElementsRef,
-            in SWorldItemConfig itemConfig)
+            in WorldItemSettings itemSettings)
         {
             _panelRef = buildingPanelElementsRef;
-            _panelRef.NameRef.text = itemConfig.name;
-            _panelRef.DescriptionRef.text = itemConfig.shortDescription;
+            _panelRef.NameRef.text = itemSettings.name;
+            _panelRef.DescriptionRef.text = itemSettings.shortDescription;
 
-            LoadAndSetIcon(_panelRef.IconRef, itemConfig.iconReference);
+            LoadAndSetIcon(_panelRef.IconRef, itemSettings.iconReference);
 
             _panelRef.ResourceContainer.Clear();
             _panelRef.OtherContainer.Clear();
@@ -59,12 +59,12 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
             {
                 switch (levelData.Key)
                 {
-                    case EItemData.Resource:
+                    case ItemType.Resource:
                         FillReqForResources(levelData.Value);
                         break;
-                    case EItemData.Building:
-                    case EItemData.Skill:
-                    case EItemData.Tool:
+                    case ItemType.Building:
+                    case ItemType.Skill:
+                    case ItemType.Tool:
                         FillReqForOther(levelData.Key, levelData.Value);
                         break;
                     default:
@@ -73,7 +73,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
             }
         }
 
-        private void FillReqForResources(Dictionary<SItemConfig, int> levValue)
+        private void FillReqForResources(Dictionary<ItemSettings, int> levValue)
         {
             foreach (var pair in levValue)
             {
@@ -82,12 +82,12 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
                 var label = resourceContainer.Q<Label>(_panelRef.ReqResItemCountLabelName);
                 var isEnough = resourceContainer.Q<VisualElement>(_panelRef.ReqResIsEnoughIconContainerName);
 
-                SetIsEnoughIcon(isEnough, EItemData.Resource,
-                    new Dictionary<SItemConfig, int> { { pair.Key, pair.Value } });
+                SetIsEnoughIcon(isEnough, ItemType.Resource,
+                    new Dictionary<ItemSettings, int> { { pair.Key, pair.Value } });
 
                 LoadAndSetIcon(icon, pair.Key.iconReference);
 
-                SetText(label, ReqStatText(EItemData.Resource, pair.Key.itemName, pair.Value));
+                SetText(label, ReqStatText(ItemType.Resource, pair.Key.itemName, pair.Value));
 
                 _panelRef.ResourceContainer.Add(resourceContainer);
             }
@@ -102,27 +102,27 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
             iconHolder.style.backgroundImage = new StyleBackground(icon);
         }
 
-        private string ReqStatText(EItemData itemDataType, string itemName, int reqValue)
+        private string ReqStatText(ItemType itemTypeType, string itemName, int reqValue)
         {
-            var itemData = ChooseDataHolder(itemDataType).GetItem(itemName);
+            var itemData = ChooseDataHolder(itemTypeType).GetItem(itemName);
             return itemData.Quantity < reqValue
                 ? $"{itemData.Quantity}/{reqValue}"
                 : $"{reqValue}/{reqValue}";
         }
 
-        private void FillReqForOther(EItemData itemDataType, Dictionary<SItemConfig, int> itemDictionary)
+        private void FillReqForOther(ItemType itemTypeType, Dictionary<ItemSettings, int> itemDictionary)
         {
             // Create type template (Building, Skill, Tool)
             var typeTemplate = _panelRef.OtherTypeTemplate.Instantiate();
 
             // Set type name
-            typeTemplate.Q<Label>(_panelRef.OtherTypeHeadLabelName).text = GetReqTypeHead(itemDataType);
+            typeTemplate.Q<Label>(_panelRef.OtherTypeHeadLabelName).text = GetReqTypeHead(itemTypeType);
 
             // Find sub container
             var subContainer = typeTemplate.Q<VisualElement>(_panelRef.OtherSubContainer);
             var isEnough = typeTemplate.Q<VisualElement>(_panelRef.ReqResIsEnoughIconContainerName);
 
-            SetIsEnoughIcon(isEnough, itemDataType, itemDictionary);
+            SetIsEnoughIcon(isEnough, itemTypeType, itemDictionary);
 
             // Fill sub container
             foreach (var i in itemDictionary)
@@ -131,7 +131,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
 
                 itemTemplate.Q<Label>(_panelRef.OtherItemLabelName).text = i.Key.name;
                 itemTemplate.Q<Label>(_panelRef.OtherItemCountLabelName).text =
-                    ReqStatText(itemDataType, i.Key.name, i.Value);
+                    ReqStatText(itemTypeType, i.Key.name, i.Value);
 
                 subContainer.Add(itemTemplate);
             }
@@ -139,8 +139,8 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
             _panelRef.OtherContainer.Add(typeTemplate);
         }
 
-        private void SetIsEnoughIcon(VisualElement iconHolder, EItemData itemDataType,
-            Dictionary<SItemConfig, int> itemDictionary)
+        private void SetIsEnoughIcon(VisualElement iconHolder, ItemType itemTypeType,
+            Dictionary<ItemSettings, int> itemDictionary)
         {
             foreach (var i in itemDictionary)
             {
@@ -153,33 +153,33 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIPanels.BuildingPanel
 
             // Debug.LogWarning($"is enough = {ChooseDataHolder(itemDataType).IsEnough(itemDictionary)}");
 
-            LoadAndSetIcon(iconHolder, ChooseDataHolder(itemDataType).IsEnough(itemDictionary)
+            LoadAndSetIcon(iconHolder, ChooseDataHolder(itemTypeType).IsEnough(itemDictionary)
                 ? _panelRef.CheckIcon
                 : _panelRef.CrossIcon);
         }
 
-        private IDataRepository ChooseDataHolder(EItemData itemDataType)
+        private IDataRepository ChooseDataHolder(ItemType itemTypeType)
         {
-            return itemDataType switch
+            return itemTypeType switch
             {
-                EItemData.Resource => _warehouseItem,
-                EItemData.Building => _buildings,
-                EItemData.Skill => _skills,
-                EItemData.Tool => _tools,
-                _ => throw new ArgumentOutOfRangeException(nameof(itemDataType), itemDataType, null)
+                ItemType.Resource => _warehouseItem,
+                ItemType.Building => _buildings,
+                ItemType.Skill => _skills,
+                ItemType.Tool => _tools,
+                _ => throw new ArgumentOutOfRangeException(nameof(itemTypeType), itemTypeType, null)
             };
         }
 
 
-        private string GetReqTypeHead(EItemData itemDataType)
+        private string GetReqTypeHead(ItemType itemTypeType)
         {
-            return itemDataType switch
+            return itemTypeType switch
             {
-                EItemData.Resource => "Resource",
-                EItemData.Building => "Building",
-                EItemData.Skill => "Skill",
-                EItemData.Tool => "Tool",
-                _ => throw new ArgumentOutOfRangeException(nameof(itemDataType), itemDataType, null)
+                ItemType.Resource => "Resource",
+                ItemType.Building => "Building",
+                ItemType.Skill => "Skill",
+                ItemType.Tool => "Tool",
+                _ => throw new ArgumentOutOfRangeException(nameof(itemTypeType), itemTypeType, null)
             };
         }
     }

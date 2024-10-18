@@ -13,7 +13,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel.Skill
 
             // TODO load saved data and initialize
 
-            List<Type> list = new() { typeof(ESkill) };
+            List<Type> list = new() { typeof(SkillType) };
 
             // Init to zero
             foreach (var name in list.SelectMany(Enum.GetNames))

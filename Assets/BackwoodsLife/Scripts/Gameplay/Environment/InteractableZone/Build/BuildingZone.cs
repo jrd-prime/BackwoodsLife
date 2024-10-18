@@ -19,7 +19,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Build
 {
     public sealed class BuildingZone : MonoBehaviour, IDisposable
     {
-        [SerializeField] private SUseAndUpgradeItem itemConfigForBuild;
+        [SerializeField] private UseAndUpgradeItem itemConfigForBuild;
 
         private IPlayerViewModel _playerViewModel;
         private BuildSystem _buildSystem;
@@ -30,7 +30,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Build
         private bool _isMoving;
         private bool _isInTriggerZone;
 
-        private Action<string, ELevel> _onBuildComplete;
+        private Action<string, LevelType> _onBuildComplete;
         private GameDataManager _gameDataManager;
 
         [Inject]
@@ -57,11 +57,11 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Build
             _onBuildComplete += OnBuildComplete;
         }
 
-        private void OnBuildComplete(string buildingName, ELevel levelId)
+        private void OnBuildComplete(string buildingName, LevelType levelTypeId)
         {
-            Debug.LogWarning($"OnBuildComplete: {buildingName} levelId: {levelId}");
+            Debug.LogWarning($"OnBuildComplete: {buildingName} levelId: {levelTypeId}");
 
-            _gameDataManager.buildings.Update(buildingName, (int)levelId);
+            _gameDataManager.buildings.Update(buildingName, (int)levelTypeId);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -92,7 +92,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Build
         }
 
 
-        private void BuildButtonClicked(List<ItemData> itemsForSpendData)
+        private void BuildButtonClicked(List<ItemDto> itemsForSpendData)
         {
             Assert.IsNotNull(itemsForSpendData, "ItemsData is null!");
 
@@ -101,7 +101,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Build
             BuildZoneInteractionFinished();
 
             _spendSystem.Process(itemsForSpendData);
-            _buildSystem.BuildAsync(itemConfigForBuild, ELevel.Level_1, OnBuildComplete);
+            _buildSystem.BuildAsync(itemConfigForBuild, LevelType.Level_1, OnBuildComplete);
         }
 
         private void BuildZoneInteractionFinished()

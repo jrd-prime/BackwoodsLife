@@ -9,7 +9,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel.Warehouse
     {
         public override void Initialize()
         {
-            List<Type> list = new() { typeof(EResource), typeof(EFood) };
+            List<Type> list = new() { typeof(ResourceType), typeof(FoodType) };
 
             // Init to zero
             foreach (var name in list.SelectMany(Enum.GetNames))

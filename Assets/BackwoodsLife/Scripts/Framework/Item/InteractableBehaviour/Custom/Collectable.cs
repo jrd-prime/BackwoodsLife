@@ -16,7 +16,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom
     /// <summary>
     /// Предмет, который находится в игровом мире и который можно собрать. Растения, руда, деревья и т.д.
     /// </summary>
-    public abstract class Collectable : InteractableItem<SCollectableItem, CollectSystem, ECollectName>
+    public abstract class Collectable : InteractableItem<CollectableItem, CollectSystem, CollectableType>
     {
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.Collect;
 
@@ -37,14 +37,14 @@ namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom
         private async void StartCollect()
         {
             Debug.LogWarning($"{WorldItemConfig.itemName} Starting collect");
-            await PlayerViewModel.SetCollectableActionForAnimationAsync(WorldItemConfig.interactAnimation);
-            var processedItems = new List<ItemData>();
+            await PlayerViewModel.SetCollectableActionForAnimationAsync(WorldItemConfig.interactAnimationType);
+            var processedItems = new List<ItemDto>();
 
             foreach (var item in WorldItemConfig.collectConfig.returnedItems)
             {
-                var itemAmount = RandomCollector.GetRandom(item.range.min, item.range.max);
+                var itemAmount = RandomCollector.GetRandom(item.rangeDto.min, item.rangeDto.max);
 
-                processedItems.Add(new ItemData { Name = item.item.itemName, Quantity = itemAmount });
+                processedItems.Add(new ItemDto { Name = item.item.itemName, Quantity = itemAmount });
             }
 
             var systemResult = CurrentInteractableSystem.Process(processedItems);
@@ -60,9 +60,9 @@ namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom
             Debug.LogWarning($"{WorldItemConfig.itemName} Checking requirements");
 
             var notEnoughRequirements =
-                GameDataManager.CheckRequirementsForCollect(WorldItemConfig.collectConfig.requirementForCollect);
+                GameDataManager.CheckRequirementsForCollect(WorldItemConfig.collectConfig.requiredForCollectDto);
 
-            if (GameDataManager.IsEnoughForCollect(WorldItemConfig.collectConfig.requirementForCollect)) return true;
+            if (GameDataManager.IsEnoughForCollect(WorldItemConfig.collectConfig.requiredForCollectDto)) return true;
 
             InteractZoneCallback.Invoke(new NotEnoughForCollect(WorldItemConfig, InteractItemInfoPanelUI));
             return false;

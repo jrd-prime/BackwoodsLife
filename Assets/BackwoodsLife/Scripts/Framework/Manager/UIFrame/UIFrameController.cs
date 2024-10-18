@@ -49,9 +49,9 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 
         public void ShowMainPopUpWindowWithScroll(TemplateContainer instantiate)
         {
-            var root = popUpWindow.GetSubFrame1(EMainPopUpSubFrame.Root);
+            var root = popUpWindow.GetSubFrame1(MainPopUpSubFrameType.Root);
             Debug.LogWarning(root);
-            var fp = popUpWindow.GetSubFrame1(EMainPopUpSubFrame.Main);
+            var fp = popUpWindow.GetSubFrame1(MainPopUpSubFrameType.Main);
 
             _closeBtn = root.Q<Button>("close");
 
@@ -70,7 +70,7 @@ namespace BackwoodsLife.Scripts.Framework.Manager.UIFrame
 
         public void ShowMainPopUpWindow(TemplateContainer instantiate)
         {
-            var fp = popUpWindow.GetSubFrame1(EMainPopUpSubFrame.Description);
+            var fp = popUpWindow.GetSubFrame1(MainPopUpSubFrameType.Description);
             var ap = fp.Q<VisualElement>("in-window-container");
 
             _closeBtn = fp.Q<Button>("close");

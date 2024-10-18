@@ -12,7 +12,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel.Building
             ItemsCache = new Dictionary<string, int>();
 
             // TODO load saved data and initialize
-            List<Type> list = new() { typeof(EUseAndUpgradeName) };
+            List<Type> list = new() { typeof(UsableAndUpgradableType) };
 
             // Init to zero
             foreach (var name in list.SelectMany(Enum.GetNames))

@@ -39,11 +39,11 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
             _itemInfoPanel.ToAbsolute();
         }
 
-        public void ShowNotEnoughPanelFor(SCollectableItem itemConfig)
+        public void ShowNotEnoughPanelFor(CollectableItem itemConfig)
         {
             var notEnoughRequirements =
                 _gameDataManager.CheckRequirementsForCollect(itemConfig.collectConfig
-                    .requirementForCollect); //TODO refact this sh*t
+                    .requiredForCollectDto); //TODO refact this sh*t
 
             _itemInfoPanel.Q<Label>("panel-name-label").text = itemConfig.itemName;
 
@@ -66,13 +66,13 @@ namespace BackwoodsLife.Scripts.Gameplay.UI
             }
 
             _framePopUpFrame = _uiFrameController.GetPopUpFrame();
-            _framePopUpFrame.ShowIn(EPopUpSubFrame.Left, in _itemInfoPanel);
+            _framePopUpFrame.ShowIn(PopUpSubFrameType.Left, in _itemInfoPanel);
         }
 
         public void HidePanel()
         {
             _itemInfoPanel.Q<VisualElement>(ReqOtherContainer).Clear();
-            _framePopUpFrame?.HideIn(EPopUpSubFrame.Left, in _itemInfoPanel);
+            _framePopUpFrame?.HideIn(PopUpSubFrameType.Left, in _itemInfoPanel);
         }
 
 

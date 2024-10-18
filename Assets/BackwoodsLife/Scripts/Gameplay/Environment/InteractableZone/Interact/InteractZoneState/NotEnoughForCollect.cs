@@ -9,12 +9,12 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
     public class NotEnoughForCollect : IInteractZoneState
     {
         public string StateDesc => "Not enough for collect state";
-        private readonly SCollectableItem _notEnoughRequirements;
+        private readonly CollectableItem _notEnoughRequirements;
         private readonly CharacterOverUI _characterOverUIHolder;
         private readonly InteractItemInfoPanelUI _interactItemInfoPanelUI;
 
 
-        public NotEnoughForCollect(SCollectableItem notEnoughRequirements,
+        public NotEnoughForCollect(CollectableItem notEnoughRequirements,
             InteractItemInfoPanelUI interactItemInfoPanelUI)
         {
             Assert.IsNotNull(notEnoughRequirements, "notEnoughRequirements is null");

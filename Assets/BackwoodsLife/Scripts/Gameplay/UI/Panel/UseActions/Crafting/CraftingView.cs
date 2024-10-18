@@ -49,7 +49,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
 
             _itemsContainer = items.Q<VisualElement>("items-container");
             ClearRecipesContainer();
-
+            
             // Process
             var process = container.Q<VisualElement>("craft-process");
             _processTitle = process.Q<Label>("title");
@@ -89,7 +89,7 @@ namespace BackwoodsLife.Scripts.Gameplay.UI.Panel.UseActions.Crafting
             Debug.LogWarning("SetProcessPanelData");
             _processTitle.text = "Crafting process";
         }
-        
+
         protected override void OnCloseButtonClicked()
         {
             base.OnCloseButtonClicked();

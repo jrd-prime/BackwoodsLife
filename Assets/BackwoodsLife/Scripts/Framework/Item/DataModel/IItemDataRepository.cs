@@ -14,9 +14,9 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel
     public interface IItemDataRepository : IDataRepository
     {
         public bool AddItem(string itemName, int quantity);
-        public bool AddItem(in List<ItemData> itemsData);
+        public bool AddItem(in List<ItemDto> itemsData);
         public bool RemoveItem(string itemName, int quantity);
-        public bool RemoveItem(List<ItemData> itemsData);
+        public bool RemoveItem(List<ItemDto> itemsData);
     }
 
 
@@ -26,11 +26,11 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel
         public IReadOnlyDictionary<string, int> GetCacheData();
         public void SetItemsToInitialization(Dictionary<string, int> initItems);
 
-        public ItemData GetItem(string itemName);
+        public ItemDto GetItem(string itemName);
 
-        public bool IsEnough(Dictionary<SItemConfig, int> itemsDictionary);
+        public bool IsEnough(Dictionary<ItemSettings, int> itemsDictionary);
         public bool IsEnough(string itemName, int count);
-        public bool IsEnough(KeyValuePair<SItemConfig, int> valuePair);
+        public bool IsEnough(KeyValuePair<ItemSettings, int> valuePair);
         public int GetValue(string typeNameItemName);
     }
 }

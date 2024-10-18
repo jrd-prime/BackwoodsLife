@@ -23,7 +23,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
         private Action _onCompleteUseActionCallback;
 
         private UseActionsPanelUI _useActionsPanelUI;
-        private readonly SUseAndUpgradeItem _itemConfig;
+        private readonly UseAndUpgradeItem _itemConfig;
         private readonly Action<UseAction> _selectedUseActionCallback;
         private IUseActionViewModel _selectedUseActionViewModel;
         private IObjectResolver _container;
@@ -38,7 +38,7 @@ namespace BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.I
             _useActionsPanelUI = container.Resolve<UseActionsPanelUI>();
         }
 
-        public UseActionsState(SUseAndUpgradeItem itemConfig, Action<IInteractZoneState> interactZoneStateCallback)
+        public UseActionsState(UseAndUpgradeItem itemConfig, Action<IInteractZoneState> interactZoneStateCallback)
         {
             Assert.IsNotNull(itemConfig, "itemConfig is null");
 

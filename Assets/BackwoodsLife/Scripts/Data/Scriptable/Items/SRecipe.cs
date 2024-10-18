@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using BackwoodsLife.Scripts.Data.Common.Enums.Items;
-using BackwoodsLife.Scripts.Data.Common.Structs.Item;
+using BackwoodsLife.Scripts.Data.Common.Structs;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 namespace BackwoodsLife.Scripts.Data.Scriptable.Items.Recipe
 {
     public class SRecipe : ScriptableObject
     {
-        public EProductionType productionType;
-        [ReadOnly] public EProductionLevel productionLevel;
+        public ProductionType productionType;
+        [FormerlySerializedAs("productionLevel")] [ReadOnly] public ProductionLevelType productionLevelType;
         public ItemRecipeData recipeData;
 
         protected virtual void OnValidate()
@@ -26,7 +27,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items.Recipe
     public struct ItemRecipeData
     {
         public string description;
-        public ItemDataWithConfig<SGameItemConfig> returnedItem;
-        public List<ItemDataWithConfig<SGameItemConfig>> ingredients;
+        public ItemDataWithConfig<GameItemSettings> returnedItem;
+        public List<ItemDataWithConfig<GameItemSettings>> ingredients;
     }
 }

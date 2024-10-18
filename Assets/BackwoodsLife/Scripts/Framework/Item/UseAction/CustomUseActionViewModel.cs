@@ -16,7 +16,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.UseAction
         protected Action OnCompleteUseActionCallback;
 
         public abstract string Description { get; }
-        public abstract void Activate(SUseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback);
+        public abstract void Activate(UseAndUpgradeItem itemConfig, Action onCompleteUseActionCallback);
         public abstract void Deactivate();
         public abstract void OnCloseButtonClicked();
     }

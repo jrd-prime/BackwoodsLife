@@ -7,7 +7,7 @@ using BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.Inter
 
 namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom
 {
-    public class Upgradeable : InteractableItem<SUpgradeOnlyItem, UpgradeSystem, EUpgradeName>
+    public class Upgradeable : InteractableItem<UpgradeOnlyItem, UpgradeSystem, UpgradableType>
     {
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.Upgrade;
 

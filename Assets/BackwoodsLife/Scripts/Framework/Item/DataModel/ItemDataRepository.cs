@@ -23,7 +23,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel
             return true;
         }
 
-        public bool AddItem(in List<ItemData> itemsData)
+        public bool AddItem(in List<ItemDto> itemsData)
         {
             foreach (var itemData in itemsData)
             {
@@ -55,7 +55,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel
             return true;
         }
 
-        public bool RemoveItem(List<ItemData> itemsData)
+        public bool RemoveItem(List<ItemDto> itemsData)
         {
             foreach (var itemData in itemsData)
             {

@@ -14,7 +14,7 @@ namespace BackwoodsLife.Scripts.Data.Scriptable.Items.Recipe
         protected override void OnValidate()
         {
             base.OnValidate();
-            productionLevel = EProductionLevel.Advanced;
+            productionLevelType = ProductionLevelType.Advanced;
         }
     }
 }

@@ -7,7 +7,7 @@ using BackwoodsLife.Scripts.Gameplay.Environment.InteractableZone.Interact.Inter
 
 namespace BackwoodsLife.Scripts.Framework.Item.InteractableBehaviour.Custom
 {
-    public class Usable : InteractableItem<SUseOnlyItem, UseSystem, EUseName>
+    public class Usable : InteractableItem<UseOnlyItem, UseSystem, UsableType>
     {
         public override EInteractTypes interactType { get; protected set; } = EInteractTypes.Use;
 

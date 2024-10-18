@@ -12,7 +12,7 @@ namespace BackwoodsLife.Scripts.Framework.Item.DataModel.Warehouse
     {
         protected override Dictionary<string, int> GetOnLoadItemsAndValues()
         {
-            return (from type in new List<Type> { typeof(EResource), typeof(EFood) }
+            return (from type in new List<Type> { typeof(ResourceType), typeof(FoodType) }
                     from name in Enum.GetNames(type)
                     where name != "None"
                     select name)

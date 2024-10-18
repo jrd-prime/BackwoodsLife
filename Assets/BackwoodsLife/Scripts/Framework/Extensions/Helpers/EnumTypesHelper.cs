@@ -6,7 +6,7 @@ namespace BackwoodsLife.Scripts.Framework.Extensions.Helpers
 {
     public static class EnumTypesHelper
     {
-        private static readonly List<Type> List = new() { typeof(EResource), typeof(EFood), typeof(ETool) };
+        private static readonly List<Type> List = new() { typeof(ResourceType), typeof(FoodType), typeof(ToolType) };
 
         public static List<string> GetNamesForInventory()
         {

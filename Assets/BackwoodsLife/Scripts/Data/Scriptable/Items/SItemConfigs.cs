@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 
 namespace BackwoodsLife.Scripts.Data.Scriptable.Items
 {
-    public abstract class SItemConfig : ScriptableObject
+    public abstract class ItemSettings : ScriptableObject
     {
         [Title("Item Config")] [ReadOnly] public string itemName;
         public string shortDescription;
